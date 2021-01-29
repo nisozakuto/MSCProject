@@ -13,8 +13,20 @@ const colors = {
 
 const magicButton = document.getElementById("getResult");
 const myimageBox = document.getElementsByClassName("imageBox");
+let myLength = document.getElementById("length");
+let length = 100;
 
-let length = 30;
+myLength.addEventListener("change", () => {
+  changeSize();
+});
+
+function changeSize() {
+  length = myLength.value;
+  console.log("Changethe size", length);
+  console.log(`${length}px`);
+  myimageBox[0].setAttribute("style", `width:${length}px`);
+}
+
 let myString =
   "523453553235645235543675435564444424552454533353353553534524544355435245534322333323243233232333454344354424323322335424522334334343345553445466335463633552365322336335536556444535334344334342254524434253424522355452432545444443445244422433545252245453543343343462344465245342236324444325443445352233";
 let myArray = [];
