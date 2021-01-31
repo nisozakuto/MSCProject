@@ -12,8 +12,9 @@ const colors = {
 };
 
 const magicButton = document.getElementById("getResult");
-const myimageBox = document.getElementsByClassName("imageBox");
+// const myimageBox = document.getElementsByClassName("imageBox");
 let myLength = document.getElementById("length");
+const resultsBox = document.getElementsByClassName("results");
 let length = 100;
 
 myLength.addEventListener("change", () => {
@@ -33,20 +34,66 @@ let myArray = [];
 
 function stringToArray(txt) {
   myArray = myString.split("");
-}
-
-function createAPixel(color) {
-  console.log(colors[color]);
-  const pixel = document.createElement("div");
-  pixel.classList.add("myPixel");
-  pixel.style.backgroundColor = colors[color];
-
-  myimageBox[0].appendChild(pixel);
+  return myArray;
 }
 
 function getResult() {
-  stringToArray(myString);
-  for (let i = 0; i < myArray.length; i++) {
-    createAPixel(myArray[i]);
+  stringToArray();
+  console.log("get result clicked", myArray.length);
+
+  while (length < myArray.length / 2) {
+    let i = 0;
+    console.log("while");
+    length += 10;
+    const dynamicImageBox = document.createElement("div");
+    dynamicImageBox.classList.add();
+    dynamicImageBox.id = "imageBox";
+    // container.appendChild(dynamicImageBox);
+    resultsBox[0].appendChild(dynamicImageBox);
+    createImage(i);
   }
 }
+
+function createImage(count) {
+  myimageBox[0].innerHTML = "";
+  stringToArray(myString);
+  for (let i = 0; i < myArray.length; i++) {
+    createAPixel(myArray[i], count);
+  }
+}
+
+// const appndButton = document.getElementById("appendButton");
+let myarticle = document.getElementById("article");
+function createAPixel(color) {
+  // console.log("create newImage");
+}
+let myWidth = 100;
+function append() {
+  let count = 1;
+  while (count < 10) {
+    console.log("create newImage", count);
+    let newImage = document.createElement("div");
+    newImage.classList.add("newImage");
+    newImage.style.width = myWidth + "px";
+    resultsBox[0].appendChild(newImage);
+
+    for (let i = 0; i < myArray.length; i++) {
+      // console.log("for newImage");
+      // createAPixel(myArray[i]);
+      const pixel = document.createElement("div");
+      pixel.classList.add("myPixel");
+      // console.log(colors[myArray[i]]);
+      pixel.style.backgroundColor = colors[myArray[i]];
+      newImage.appendChild(pixel);
+    }
+    myWidth += 10;
+
+    count++;
+  }
+}
+
+function init() {
+  stringToArray();
+}
+
+init();
