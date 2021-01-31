@@ -29,3 +29,20 @@ body{
     height: 10px;
     background-color: black;
 }
+
+.colorSet{
+    border:1px black solid;
+    min-width: 400px;
+    width: 600px;
+    display: flex;   
+    justify-content: center;
+    flex-wrap: wrap; 
+
+}
+.colorSettingBox{
+    border:1px black solid;
+    width: 100px;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
