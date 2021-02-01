@@ -1,19 +1,23 @@
 html{
-    background-color: gray;
+    background-color: #ffffff;
 }
 
 body{
+    height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
 }
 
 .container{
+    
     width: 70vw;
-    background-color: white;
+    background-color: #efefef;
 }
-
+h1{
+    text-align: center;
+    text-transform: uppercase;
+}
 #imageBox{
     width: 300px;
     height: 100px;
@@ -28,7 +32,6 @@ body{
 }
 
 .colorSet{
-    border:1px rgb(56, 39, 39) solid;
     min-width: 400px;
     width: 70vw;
     display: flex; 

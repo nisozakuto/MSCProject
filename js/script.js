@@ -99,6 +99,7 @@ function getColors() {
 }
 
 let color = [];
+
 function setColor() {
   let colorName = document.getElementById("colorsDropdown").value;
   let myColorPicker = document.getElementById("colorPicker").value;
