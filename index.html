@@ -13,14 +13,20 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <!--[if lt IE 7]>
-      <p class="browsehappy">
-        You are using an <strong>outdated</strong> browser. Please
-        <a href="#">upgrade your browser</a> to improve your experience.
-      </p>
-    <![endif]-->
     <div class="container">
       <h1>String to Image</h1>
+      
+      <section>
+        <div class="decisioning">
+          <input type="radio" id="singleColor" name="singleColor" value="singleColor">
+          <label for="singleColor">Single Color</label><br>
+          <input type="radio" id="rangeOfColor" name="rangeOfColor" value="rangeOfColor">
+          <label for="rangeOfColor">Range of Color</label><br>
+        </div>
+        <div class="numbers"></div>
+        <div class="addANewColor"> Color number <input/> <button type="submit">Add a new color</button></div>
+      </section>
+
       <div class="colorSet">
           <div class="colorSettingBox"><p>Color 0</p> <div class="currentColor"><p>Current Color:</p><div class="box showColor0" id="color0"></div></div> <div class="setColor"> </div></div>
           <div class="colorSettingBox"><p>Color 1</p> <div class="currentColor"><p>Current Color:</p><div class="box showColor1" id="color1"></div></div> <div class="setColor"> </div></div>
@@ -51,8 +57,8 @@
       <form>
         <label>Enter your string here</label>
         <input type="number" id="string" name="string"/></br>
-        <label>Length: </label>
-        <input type="number" id="length" name="length" value="300"/></br>
+        <textarea></textarea>
+
       </form>
       <button onclick="getResult()" id="getResult" type="submit"> Button </button>
       <article id="article">

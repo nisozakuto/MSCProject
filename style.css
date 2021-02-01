@@ -86,3 +86,43 @@ article{
 #color7{ background-color: #D2D2D2}
 #color8{ background-color: #E0E0E0}
 #color9{ background-color: #FFFFFF}
+
+
+
+.colorDiv{
+    background-color: rosybrown;
+    width: 100vw;
+}
+
+section{
+    display: flex;
+    flex-direction: column;
+}
+
+.decisioning{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-bottom:1em;
+}
+
+.numbers{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#chooseColorNumber{
+    display: flex;
+    align-self: center;
+    margin-bottom: 1em;
+    margin:1em;
+}
+
+#chooseColorNumber2{
+    display: flex;
+    align-self: center;
+    margin-bottom: 1em;
+    margin:1em;
+
+}
