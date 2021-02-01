@@ -1,6 +1,5 @@
 html{
     background-color: gray;
-
 }
 
 body{
@@ -15,9 +14,7 @@ body{
     background-color: white;
 }
 
-
 #imageBox{
-    /* background-color: firebrick; */
     width: 300px;
     height: 100px;
     display: flex;
@@ -28,21 +25,25 @@ body{
 .myPixel{
     width: 5px;
     height: 5px;
-    background-color: black;
 }
 
 .colorSet{
-    border:1px black solid;
+    border:1px rgb(56, 39, 39) solid;
     min-width: 400px;
-    width: 600px;
-    display: flex;   
+    width: 70vw;
+    display: flex; 
+    flex-direction: row;  
     justify-content: center;
     flex-wrap: wrap; 
-
 }
+
+.colorSettingBox p{
+    margin: 4px;
+}
+
 .colorSettingBox{
     border:1px black solid;
-    width: 100px;
+    width: 150px;
     align-items: center;
     display: flex;
     flex-direction: column;
@@ -50,14 +51,35 @@ body{
 
 article{
     display: flex;
-    /* flex-direction: row; */
 }
 
 .newImage{
     width: 300px;
-    /* height: 100px; */
     display: flex;
     flex-wrap: wrap;
     margin: 30px;
  margin:30px   
 }
+
+.currentColor{
+    display: flex;
+    flex-direction: row;
+}
+
+.box{
+    border: 1px solid black;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+}
+
+#color0{ background-color: #000000}
+#color1{ background-color: #202020}
+#color2{ background-color: #404040}
+#color3{ background-color: #606060}
+#color4{ background-color: #808080}
+#color5{ background-color: #A0A0A0}
+#color6{ background-color: #C0C0C0}
+#color7{ background-color: #D2D2D2}
+#color8{ background-color: #E0E0E0}
+#color9{ background-color: #FFFFFF}

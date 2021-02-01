@@ -22,17 +22,32 @@
     <div class="container">
       <h1>String to Image</h1>
       <div class="colorSet">
-          <div class="colorSettingBox color0"><p>Set Color 0</p> <div class="currentColor">Current Color:</div> <div class="setColor"> <button>Set</button> </div></div>
-          <div class="colorSettingBox color1"><p>Set Color 1</p> <div class="currentColor">Current Color:</div> <div class="setColor"> <button>Set</button> </div></div>
-          <div class="colorSettingBox color2"><p>Set Color 2</p> <div class="currentColor">Current Color:</div> <div class="setColor"> <button>Set</button> </div></div>
-          <div class="colorSettingBox color3"><p>Set Color 3</p> <div class="currentColor">Current Color:</div> <div class="setColor"> <button>Set</button> </div></div>
-          <div class="colorSettingBox color4"><p>Set Color 4</p> <div class="currentColor">Current Color:</div> <div class="setColor"> <button>Set</button> </div></div>
-          <div class="colorSettingBox color5"><p>Set Color 5</p> <div class="currentColor">Current Color:</div> <div class="setColor"> <button>Set</button> </div></div>
-          <div class="colorSettingBox color6"><p>Set Color 6</p> <div class="currentColor">Current Color:</div> <div class="setColor"> <button>Set</button> </div></div>
-          <div class="colorSettingBox color7"><p>Set Color 7</p> <div class="currentColor">Current Color:</div> <div class="setColor"> <button>Set</button> </div></div>
-          <div class="colorSettingBox color8"><p>Set Color 8</p> <div class="currentColor">Current Color:</div> <div class="setColor"> <button>Set</button> </div></div>
-          <div class="colorSettingBox color9"><p>Set Color 9</p> <div class="currentColor">Current Color:</div> <div class="setColor"> <button>Set</button> </div></div>
+          <div class="colorSettingBox"><p>Color 0</p> <div class="currentColor"><p id="color0">Current Color:</p><div class="box showColor0" id="currentColorDiv"></div></div> <div class="setColor"> </div></div>
+          <div class="colorSettingBox"><p>Color 1</p> <div class="currentColor"><p id="color1">Current Color:</p><div class="box showColor1" id="currentColorDiv"></div></div> <div class="setColor"> </div></div>
+          <div class="colorSettingBox"><p>Color 2</p> <div class="currentColor"><p id="color2">Current Color:</p><div class="box showColor2" id="currentColorDiv"></div></div> <div class="setColor"> </div></div>
+          <div class="colorSettingBox"><p>Color 3</p> <div class="currentColor"><p id="color3">Current Color:</p><div class="box showColor3" id="currentColorDiv"></div></div> <div class="setColor"> </div></div>
+          <div class="colorSettingBox"><p>Color 4</p> <div class="currentColor"><p id="color4">Current Color:</p><div class="box showColor4" id="currentColorDiv"></div></div> <div class="setColor"> </div></div>
+          <div class="colorSettingBox"><p>Color 5</p> <div class="currentColor"><p id="color5">Current Color:</p><div class="box showColor5" id="currentColorDiv"></div></div> <div class="setColor"> </div></div>
+          <div class="colorSettingBox"><p>Color 6</p> <div class="currentColor"><p id="color6">Current Color:</p><div class="box showColor6" id="currentColorDiv"></div></div> <div class="setColor"> </div></div>
+          <div class="colorSettingBox"><p>Color 7</p> <div class="currentColor"><p id="color7">Current Color:</p><div class="box showColor7" id="currentColorDiv"></div></div> <div class="setColor"> </div></div>
+          <div class="colorSettingBox"><p>Color 8</p> <div class="currentColor"><p id="color8">Current Color:</p><div class="box showColor8" id="currentColorDiv"></div></div> <div class="setColor"> </div></div>
+          <div class="colorSettingBox"><p>Color 9</p> <div class="currentColor"><p id="color9">Current Color:</p><div class="box showColor9" id="currentColorDiv"></div></div> <div class="setColor"> </div></div>
       </div>
+      <input id="colorPicker" value="#3399FF80" data-jscolor="{}">
+      <select name="colorsDropdown" id="colorsDropdown">
+        <option value="Color0">Color 0</option>
+        <option value="Color1">Color 1</option>
+        <option value="Color2">Color 2</option>
+        <option value="Color3">Color 3</option>
+        <option value="Color4">Color 4</option>
+        <option value="Color5">Color 5</option>
+        <option value="Color6">Color 6</option>
+        <option value="Color7">Color 7</option>
+        <option value="Color8">Color 8</option>
+        <option value="Color9">Color 9</option>
+      </select>
+      <button onclick="setColor()" id="setColor" type="submit">Set color</button>
+
       <form>
         <label>Enter your string here</label>
         <input type="number" id="string" name="string"/></br>
@@ -48,6 +63,8 @@
       </aside>
       </div>
     </div>
-    <script src="script.js" async defer></script>
+    <script src="js/script.js" async defer></script>
+    <script src="js/jscolor.js"></script>
+
   </body>
 </html>
