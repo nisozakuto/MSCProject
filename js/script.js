@@ -7,29 +7,36 @@ let colors = [];
 let myWidth = 100;
 
 const userscolors = document.getElementById("userscolors");
-
-function intiateColors() {
-  for (let i = 0; i < 1000; i++) {
-    colors[i] = i;
-  }
-}
+const colorPicker = document.getElementById("colorPicker");
 
 function addAColor() {
+  //This is coming from the input
+  const chosenColorNumber = document.getElementById("colorNumber");
+
+  if (!colors[chosenColorNumber.value])
+    colors[chosenColorNumber.value] = colorPicker.value;
+  else {
+    alert("this exists");
+    //Deal with this later to add CHANGE feature
+    return;
+  }
+
   const definedColor = document.createElement("div");
+  //this needs to change in the future
   definedColor.id = myString;
   userscolors.append(definedColor);
 
+  //Creating to p
   const myColorNamelabel = document.createElement("p");
   myColorNamelabel.innerText = "Color number:";
   definedColor.append(myColorNamelabel);
 
-  const chooseColorHex = document.getElementById("chooseColorNumber");
-  //This is coming from the dropdown
-  console.log(chooseColorHex);
-  colors[chooseColorHex[0].value] = colorPicker.value;
+  console.log("====", chosenColorNumber.value);
+
+  // console.log(colors[chosenColorNumber.value]);
   // myColorNamelabel.style.background = colorPicker.value;
   myColorNamelabel.innerText +=
-    " " + colorPicker.value + " and the color: " + chooseColorHex[0].value;
+    " " + colorPicker.value + " and the color: " + chosenColorNumber.value;
 
   const colorDiv = document.createElement("div");
   // colorDiv.style.borderRadius = "50";
@@ -129,7 +136,6 @@ rangeOfColorRadio.addEventListener("click", () => {
 
 function init() {
   createDropdown();
-  if (colors.length == 0) intiateColors();
   singleColorRadio.checked = true;
 }
 
