@@ -24,49 +24,31 @@
           <label for="rangeOfColor">Range of Color</label><br>
         </div>
         <div class="numbers"></div>
-        <div class="addANewColor"> Color number <input/> <button type="submit">Add a new color</button></div>
+
+        <div class="addANewColor"> 
+          <input id="colorPicker" value="#0028FFFF" data-jscolor="{}">
+          <input id="colorNumber" value="1" >
+          <button onclick="addAColor()" type="submit">Add a new color</button>
+        </div>
+
+        <div id="userscolors">
+
+        </div>
+
       </section>
 
-      <div class="colorSet">
-          <div class="colorSettingBox"><p>Color 0</p> <div class="currentColor"><p>Current Color:</p><div class="box showColor0" id="color0"></div></div> <div class="setColor"> </div></div>
-          <div class="colorSettingBox"><p>Color 1</p> <div class="currentColor"><p>Current Color:</p><div class="box showColor1" id="color1"></div></div> <div class="setColor"> </div></div>
-          <div class="colorSettingBox"><p>Color 2</p> <div class="currentColor"><p>Current Color:</p><div class="box showColor2" id="color2"></div></div> <div class="setColor"> </div></div>
-          <div class="colorSettingBox"><p>Color 3</p> <div class="currentColor"><p>Current Color:</p><div class="box showColor3" id="color3"></div></div> <div class="setColor"> </div></div>
-          <div class="colorSettingBox"><p>Color 4</p> <div class="currentColor"><p>Current Color:</p><div class="box showColor4" id="color4"></div></div> <div class="setColor"> </div></div>
-          <div class="colorSettingBox"><p>Color 5</p> <div class="currentColor"><p>Current Color:</p><div class="box showColor5" id="color5"></div></div> <div class="setColor"> </div></div>
-          <div class="colorSettingBox"><p>Color 6</p> <div class="currentColor"><p>Current Color:</p><div class="box showColor6" id="color6"></div></div> <div class="setColor"> </div></div>
-          <div class="colorSettingBox"><p>Color 7</p> <div class="currentColor"><p>Current Color:</p><div class="box showColor7" id="color7"></div></div> <div class="setColor"> </div></div>
-          <div class="colorSettingBox"><p>Color 8</p> <div class="currentColor"><p>Current Color:</p><div class="box showColor8" id="color8"></div></div> <div class="setColor"> </div></div>
-          <div class="colorSettingBox"><p>Color 9</p> <div class="currentColor"><p>Current Color:</p><div class="box showColor9" id="color9"></div></div> <div class="setColor"> </div></div>
-      </div>
-      <input id="colorPicker" value="#3399FF80" data-jscolor="{}">
-      <select name="colorsDropdown" id="colorsDropdown">
-        <option value="Color0">Color 0</option>
-        <option value="Color1">Color 1</option>
-        <option value="Color2">Color 2</option>
-        <option value="Color3">Color 3</option>
-        <option value="Color4">Color 4</option>
-        <option value="Color5">Color 5</option>
-        <option value="Color6">Color 6</option>
-        <option value="Color7">Color 7</option>
-        <option value="Color8">Color 8</option>
-        <option value="Color9">Color 9</option>
-      </select>
-      <button onclick="setColor()" id="setColor" type="submit">Set color</button>
+      <section>
+        <h2>Your colors</h2>
+      </section>
 
       <form>
         <label>Enter your string here</label>
-        <input type="number" id="string" name="string"/></br>
-        <textarea></textarea>
-
+        <textarea type="number" id="string" name="string"></textarea>
       </form>
-      <button onclick="getResult()" id="getResult" type="submit"> Button </button>
+
       <article id="article">
-        <button onclick="append()" id="appendButton" type="submit">Test Button </button>
+        <button  id="appendButton" type="submit">Roll </button>
       </article>
-      <aside class="results">
-        <div class="imageBox" id="imageBox">
-      </aside>
       </div>
     </div>
     <script src="js/script.js" async defer></script>
