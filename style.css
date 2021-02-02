@@ -26,6 +26,13 @@ h1,h2{
 
 article{
     display: flex;
+    flex-direction: column;
+}
+
+.imagePrint{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100px;
 }
 
 section{

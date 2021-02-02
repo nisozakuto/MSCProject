@@ -3,11 +3,65 @@ let myString = "niso";
 let myArray = [];
 let colors = [];
 //"523453553235645235543675435564444424552454533353353553534524544355435245534322333323243233232333454344354424323322335424522334334343345553445466335463633552365322336335536556444535334344334342254524434253424522355452432545444443445244422433545252245453543343343462344465245342236324444325443445352233";
+let myCode;
+let myCodeArray = [];
 
 let myWidth = 100;
 
 const userscolors = document.getElementById("userscolors");
 const colorPicker = document.getElementById("colorPicker");
+const string = document.getElementById("string");
+const myArticleArea = document.getElementById("article");
+const imagePrint = document.getElementsByClassName("imagePrint");
+
+// function readTheNumber(number) {
+//   if (number == 0) return "zero";
+//   else if (number == 1) return "one";
+//   else if (number == 2) return "two";
+//   else if (number == 3) return "three";
+//   else if (number == 4) return "four";
+//   else if (number == 5) return "five";
+//   else if (number == 6) return "six";
+//   else if (number == 7) return "seven";
+//   else if (number == 8) return "eight";
+//   else if (number == 9) return "nine";
+//   else if (number == 10) return "ten";
+//   //Continue....
+// }
+
+function breakString() {
+  code = document.getElementById("string").value;
+  console.log(code);
+  myCodeArray = code.split(/\n/);
+  console.log(myCodeArray);
+}
+function createPixel(c) {
+  const Pixel = document.createElement("div");
+  Pixel.classList.add("myPixel");
+  // console.log(readTheNumber(c));
+  Pixel.style.backgroundColor = colors[c];
+  imagePrint[0].appendChild(Pixel);
+}
+
+function createPicture() {
+  console.log("Creating the picture");
+  //If 0 doesnt have color skip 0
+  for (let i = 0; i < myCodeArray.length; i++) {
+    if (myCodeArray[i] == 0 && colors[0] == null) {
+      console.log("0 spotted skipping", i);
+    } else {
+      console.log("Creating pixel");
+      createPixel(myCodeArray[i]);
+    }
+  }
+  console.log("checking the myCodeArray", myCodeArray);
+}
+
+function roll() {
+  console.log("LETS ROLL");
+  breakString();
+  createPicture();
+}
 
 function addAColor() {
   //This is coming from the input
