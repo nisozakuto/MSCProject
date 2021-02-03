@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { SketchPicker } from "react-color";
+import { ChromePicker } from "react-color";
 
 export default class Body extends Component {
   constructor() {
@@ -9,6 +9,8 @@ export default class Body extends Component {
       isAddingRange: false,
       colorToAdd: "",
       background: "#fff",
+      colors: [],
+      number: "",
     };
   }
 
@@ -32,52 +34,72 @@ export default class Body extends Component {
 
   colorNumberChangeHandler = (event) => {
     this.setState({
+      number: event.target.value,
+    });
+  };
+
+  colorHexChangeHandler = (event) => {
+    this.setState({
       colorToAdd: event.target.value,
     });
   };
   colorSetSubmitHandler = (event) => {
     event.preventDefault();
+    this.setState({ [this.state.number]: this.state.colorToAdd });
+    console.log("your number", this.state.number);
     console.log("Submitting color:", this.state.colorToAdd);
   };
 
   downloadImage = () => {
     console.log("clicked");
-    html2canvas(document.querySelector("#capture")).then((canvas) => {
-      document.body.appendChild(canvas);
-    });
+    // html2canvas(document.querySelector("#capture")).then((canvas) => {
+    //   document.body.appendChild(canvas);
+    // });
     const myCanvas = document.querySelector("canvas");
   };
   render() {
     return (
       <div className="container">
         <h1>String2Image</h1>
-        <h3>Do you want to add one color or a range?</h3>
-        <button onClick={this.addingOneColor}>One</button>
-        <button onClick={this.addingRangeColor}>Two</button>
+        <section>
+          <h3>Do you want to add one color or a range?</h3>
+          <button onClick={this.addingOneColor}>One</button>
+          <button onClick={this.addingRangeColor}>Two</button>
 
-        <p>isAddingColor: {String(this.state.isAddingColor)}</p>
-        <p>isAddingRange: {String(this.state.isAddingRange)}</p>
+          <p>isAddingColor: {String(this.state.isAddingColor)}</p>
+          <p>isAddingRange: {String(this.state.isAddingRange)}</p>
+        </section>
 
-        <form onSubmit={this.colorSetSubmitHandler}>
-          {this.state.isAddingColor ? (
-            <>
-              <p>Choose color number</p>
-              <input
-                id="colorNumber"
-                type="number"
-                placeholder="Enter the color number you want to set"
-                onChange={this.colorNumberChangeHandler}
-              />
-              <SketchPicker
-                color={this.state.background}
-                onChangeComplete={this.handleChangeComplete}
-              />
-            </>
-          ) : (
-            <></>
-          )}
-          {this.state.isAddingRange ? <p>Choose range of colors</p> : <></>}
-        </form>
+        <section>
+          <form onSubmit={this.colorSetSubmitHandler}>
+            <ChromePicker
+              color={this.state.background}
+              onChangeComplete={this.handleChangeComplete}
+            />
+            {this.state.isAddingColor ? (
+              <>
+                <p>Choose color number</p>
+
+                <input
+                  id="colorHex"
+                  type="colorNumber"
+                  placeholder="Enter the color number you want to set"
+                  onChange={this.colorNumberChangeHandler}
+                />
+                <input
+                  id="colorHex"
+                  placeholder="Enter the colorHex"
+                  onChange={this.colorHexChangeHandler}
+                />
+                <input type="submit" value="Add Color" />
+              </>
+            ) : (
+              <></>
+            )}
+            {this.state.isAddingRange ? <p>Choose range of colors</p> : <></>}
+          </form>
+        </section>
+
         {/* <div id="capture">
           <h4>Hello world!</h4>
           <button onClick={this.downloadImage}>downloadImage</button>
