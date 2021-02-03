@@ -7,16 +7,13 @@ export default class Body extends Component {
     this.state = {
       isAddingColor: true,
       isAddingRange: false,
-      colorToAdd: "",
       background: "#fff",
       colors: [],
-      number: "",
       string: "",
     };
   }
 
-  handleTextAreaChange = (event) => {
-    // this.setState({ string: event.target.value });
+  handleChange = (event) => {
     this.setState({ [event.target.name]: event.target.value });
   };
 
@@ -38,24 +35,11 @@ export default class Body extends Component {
     });
   };
 
-  colorNumberChangeHandler = (event) => {
-    this.setState({ [event.target.name]: event.target.value });
-
-    // this.setState({
-    //   number: event.target.value,
-    // });
-  };
-
-  colorHexChangeHandler = (event) => {
-    this.setState({
-      colorToAdd: event.target.value,
-    });
-  };
   colorSetSubmitHandler = (event) => {
     event.preventDefault();
-    this.setState({ [this.state.number]: this.state.colorToAdd });
-    console.log("your number", this.state.number);
-    console.log("Submitting color:", this.state.colorToAdd);
+    this.setState({ [this.state.colorNumber]: this.state.colorHex });
+    console.log("your number", this.state.colorNumber);
+    console.log("Submitting color:", this.state.colorHex);
   };
 
   downloadImage = () => {
@@ -91,7 +75,7 @@ export default class Body extends Component {
                 <textarea
                   name="string"
                   value={this.state.string}
-                  onChange={this.handleTextAreaChange}
+                  onChange={this.handleChange}
                 />
 
                 <p>Choose color number</p>
@@ -101,13 +85,13 @@ export default class Body extends Component {
                   type="colorNumber"
                   name="colorNumber"
                   placeholder="Enter the color number you want to set"
-                  onChange={this.colorNumberChangeHandler}
+                  onChange={this.handleChange}
                 />
                 <input
                   id="colorHex"
                   name="colorHex"
                   placeholder="Enter the colorHex"
-                  onChange={this.colorHexChangeHandler}
+                  onChange={this.handleChange}
                 />
                 <input type="submit" value="Add Color" />
               </>
