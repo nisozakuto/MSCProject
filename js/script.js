@@ -25,7 +25,7 @@ function createPixel(c) {
   const Pixel = document.createElement("div");
   Pixel.classList.add("myPixel");
   // console.log(readTheNumber(c));
-
+  console.log(colors[c]);
   Pixel.style.backgroundColor = colors[c];
   imagePrint[0].appendChild(Pixel);
 }
@@ -50,7 +50,8 @@ function colorDeclarationCheck() {
     }
     if (colors[myCodeArray[i]] == undefined) {
       colorsObj[myCodeArray[i]] = 0;
-      canUCreate = false;
+      //TURN THIS ON TO STOP CREATING PICTURES WITH MISSING PIXELS
+      // canUCreate = false;
     }
   }
 
@@ -64,8 +65,6 @@ function colorDeclarationCheck() {
 
 function roll() {
   console.log("LETS ROLL");
-  //IF missing one or more colors dont run
-
   breakString();
   colorDeclarationCheck();
   if (canUCreate) createPicture();
