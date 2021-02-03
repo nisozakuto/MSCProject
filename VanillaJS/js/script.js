@@ -63,12 +63,24 @@ function colorDeclarationCheck() {
   if (missingColors.length > 0) alert(`Missing colors are: ${missingColors}`);
 }
 
+function createDownloadImageButton() {
+  const downlaodButton = document.createElement("button");
+  downlaodButton.addEventListener("click", () => {
+    console.log("button clicked");
+    imagePrint[0].toBlob(document.getElementById('my-node'))
+    .then(function(blob) {
+      window.saveAs(blob, 'my-node.png');
+    });
+})
+
 function roll() {
   console.log("LETS ROLL");
   breakString();
   colorDeclarationCheck();
-  if (canUCreate) createPicture();
-  else alert("Missing declaration of colors");
+  if (canUCreate) {
+    createPicture();
+    createDownloadImageButton();
+  } else alert("Missing declaration of colors");
 }
 
 function addAColor() {
