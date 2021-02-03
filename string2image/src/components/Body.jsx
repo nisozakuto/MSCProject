@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import html2canvas from "html2canvas";
+import { SketchPicker } from "react-color";
 
 export default class Body extends Component {
   constructor() {
@@ -8,8 +8,13 @@ export default class Body extends Component {
       isAddingColor: true,
       isAddingRange: false,
       colorToAdd: "",
+      background: "#fff",
     };
   }
+
+  handleChangeComplete = (color) => {
+    this.setState({ background: color.hex });
+  };
 
   addingOneColor = () => {
     this.setState({
@@ -63,7 +68,10 @@ export default class Body extends Component {
                 placeholder="Enter the color number you want to set"
                 onChange={this.colorNumberChangeHandler}
               />
-              <input id="colorPicker" value="#0028FFFF" data-jscolor="{}" />
+              <SketchPicker
+                color={this.state.background}
+                onChangeComplete={this.handleChangeComplete}
+              />
             </>
           ) : (
             <></>
