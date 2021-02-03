@@ -7,6 +7,7 @@ export default class Body extends Component {
     this.state = {
       isAddingColor: true,
       isAddingRange: false,
+      colorToAdd: "",
     };
   }
 
@@ -22,6 +23,16 @@ export default class Body extends Component {
       isAddingColor: false,
       isAddingRange: true,
     });
+  };
+
+  colorNumberChangeHandler = (event) => {
+    this.setState({
+      colorToAdd: event.target.value,
+    });
+  };
+  colorSetSubmitHandler = (event) => {
+    event.preventDefault();
+    console.log("Submitting color:", this.state.colorToAdd);
   };
 
   downloadImage = () => {
@@ -41,6 +52,24 @@ export default class Body extends Component {
 
         <p>isAddingColor: {String(this.state.isAddingColor)}</p>
         <p>isAddingRange: {String(this.state.isAddingRange)}</p>
+
+        <form onSubmit={this.colorSetSubmitHandler}>
+          {this.state.isAddingColor ? (
+            <>
+              <p>Choose color number</p>
+              <input
+                id="colorNumber"
+                type="number"
+                placeholder="Enter the color number you want to set"
+                onChange={this.colorNumberChangeHandler}
+              />
+              <input id="colorPicker" value="#0028FFFF" data-jscolor="{}" />
+            </>
+          ) : (
+            <></>
+          )}
+          {this.state.isAddingRange ? <p>Choose range of colors</p> : <></>}
+        </form>
         {/* <div id="capture">
           <h4>Hello world!</h4>
           <button onClick={this.downloadImage}>downloadImage</button>
