@@ -11,8 +11,14 @@ export default class Body extends Component {
       background: "#fff",
       colors: [],
       number: "",
+      string: "",
     };
   }
+
+  handleTextAreaChange = (event) => {
+    // this.setState({ string: event.target.value });
+    this.setState({ [event.target.name]: event.target.value });
+  };
 
   handleChangeComplete = (color) => {
     this.setState({ background: color.hex });
@@ -33,9 +39,11 @@ export default class Body extends Component {
   };
 
   colorNumberChangeHandler = (event) => {
-    this.setState({
-      number: event.target.value,
-    });
+    this.setState({ [event.target.name]: event.target.value });
+
+    // this.setState({
+    //   number: event.target.value,
+    // });
   };
 
   colorHexChangeHandler = (event) => {
@@ -70,6 +78,8 @@ export default class Body extends Component {
           <p>isAddingRange: {String(this.state.isAddingRange)}</p>
         </section>
 
+        <section></section>
+
         <section>
           <form onSubmit={this.colorSetSubmitHandler}>
             <ChromePicker
@@ -78,16 +88,24 @@ export default class Body extends Component {
             />
             {this.state.isAddingColor ? (
               <>
+                <textarea
+                  name="string"
+                  value={this.state.string}
+                  onChange={this.handleTextAreaChange}
+                />
+
                 <p>Choose color number</p>
 
                 <input
                   id="colorHex"
                   type="colorNumber"
+                  name="colorNumber"
                   placeholder="Enter the color number you want to set"
                   onChange={this.colorNumberChangeHandler}
                 />
                 <input
                   id="colorHex"
+                  name="colorHex"
                   placeholder="Enter the colorHex"
                   onChange={this.colorHexChangeHandler}
                 />
@@ -99,6 +117,8 @@ export default class Body extends Component {
             {this.state.isAddingRange ? <p>Choose range of colors</p> : <></>}
           </form>
         </section>
+
+        <section className="results"></section>
 
         {/* <div id="capture">
           <h4>Hello world!</h4>
