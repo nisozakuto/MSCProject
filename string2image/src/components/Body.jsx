@@ -10,8 +10,11 @@ export default class Body extends Component {
       background: "#fff",
       colors: [],
       string: "",
+      strings: [],
     };
   }
+
+  componentDidMount = () => {};
 
   handleChange = (event) => {
     this.setState({ [event.target.name]: event.target.value });
@@ -35,11 +38,35 @@ export default class Body extends Component {
     });
   };
 
+  createPixel = () => {
+    // const rootElement = document.getElementById("results");
+    // const element = React.createElement("div", null, "Hello World");
+    // ReactDOM.render(element, rootElement);
+  };
+
+  createImage = () => {
+    console.log("test");
+    this.createPixel();
+  };
+
+  createPixels = () => {
+    this.state.strings.map((pixel) => {
+      console.log("creating");
+      <div id="pixel">{pixel}</div>;
+    });
+  };
+
   colorSetSubmitHandler = (event) => {
     event.preventDefault();
-    this.setState({ [this.state.colorNumber]: this.state.colorHex });
+    const stringClean = this.state.string.split("\n");
+    this.setState({
+      [this.state.colorNumber]: this.state.colorHex,
+      strings: stringClean,
+    });
     console.log("your number", this.state.colorNumber);
     console.log("Submitting color:", this.state.colorHex);
+    // this.createImage();
+    this.createPixels();
   };
 
   downloadImage = () => {
@@ -102,7 +129,17 @@ export default class Body extends Component {
           </form>
         </section>
 
-        <section className="results"></section>
+        <section className="results" id="results">
+          {this.state.strings.length ? (
+            this.state.strings.map((pixel) => {
+              console.log("creating");
+
+              return <div id="pixel">{pixel}</div>;
+            })
+          ) : (
+            <p>smt will come here</p>
+          )}
+        </section>
 
         {/* <div id="capture">
           <h4>Hello world!</h4>

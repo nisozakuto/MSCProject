@@ -11,3 +11,12 @@ color:#000;
   flex-direction: column;
   align-items: center;
 }
+
+section{
+  border: 1px solid black;
+}
+
+.pixel{
+  width: 5px;
+  height: 5px;
+}
