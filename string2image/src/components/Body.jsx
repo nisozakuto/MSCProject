@@ -49,13 +49,6 @@ export default class Body extends Component {
     this.createPixel();
   };
 
-  createPixels = () => {
-    this.state.strings.map((pixel) => {
-      console.log("creating");
-      <div id="pixel">{pixel}</div>;
-    });
-  };
-
   colorSetSubmitHandler = (event) => {
     event.preventDefault();
     const stringClean = this.state.string.split("\n");
@@ -65,8 +58,6 @@ export default class Body extends Component {
     });
     console.log("your number", this.state.colorNumber);
     console.log("Submitting color:", this.state.colorHex);
-    // this.createImage();
-    this.createPixels();
   };
 
   downloadImage = () => {
@@ -132,9 +123,14 @@ export default class Body extends Component {
         <section className="results" id="results">
           {this.state.strings.length ? (
             this.state.strings.map((pixel) => {
-              console.log("creating");
-
-              return <div id="pixel">{pixel}</div>;
+              //   console.log("creating");
+              console.log(this.state[pixel]);
+              return (
+                <div
+                  id="pixel"
+                  style={{ backgroundColor: this.state[pixel] }}
+                ></div>
+              );
             })
           ) : (
             <p>smt will come here</p>

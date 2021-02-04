@@ -16,7 +16,13 @@ section{
   border: 1px solid black;
 }
 
-.pixel{
+#pixel{
   width: 5px;
   height: 5px;
+}
+
+.results{
+  display: flex;
+  width: 300px;
+  flex-wrap: wrap;
 }
