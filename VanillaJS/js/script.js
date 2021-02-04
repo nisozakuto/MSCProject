@@ -22,6 +22,7 @@ function breakString() {
   myCodeArray = code.split(/\n/);
   console.log(myCodeArray);
 }
+
 function createPixel(c) {
   // const Pixel = document.createElement("div");
   // Pixel.classList.add("myPixel");
@@ -41,7 +42,7 @@ function createPicture() {
       console.log("0 spotted skipping", i);
     } else {
       console.log("Creating pixel");
-      createPixel(myCodeArray[i]);
+      // createPixel(myCodeArray[i]);
       const Pixel = document.createElement("div");
       Pixel.classList.add("myPixel");
       console.log(colors[myCodeArray[i]]);
