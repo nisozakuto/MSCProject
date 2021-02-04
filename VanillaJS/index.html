@@ -15,29 +15,37 @@
   <body>
     <div class="container">
       <h1>String to Image</h1>
-      
+
       <section>
         <div class="decisioning">
-          <input type="radio" id="singleColor" name="singleColor" value="singleColor">
-          <label for="singleColor">Single Color</label><br>
-          <input type="radio" id="rangeOfColor" name="rangeOfColor" value="rangeOfColor">
-          <label for="rangeOfColor">Range of Color</label><br>
+          <input
+            type="radio"
+            id="singleColor"
+            name="singleColor"
+            value="singleColor"
+          />
+          <label for="singleColor">Single Color</label><br />
+          <input
+            type="radio"
+            id="rangeOfColor"
+            name="rangeOfColor"
+            value="rangeOfColor"
+          />
+          <label for="rangeOfColor">Range of Color</label><br />
         </div>
-        
+
         <div class="numbers"></div>
 
-        <div class="addANewColor"> 
-          <input id="colorPicker" value="#0028FFFF" data-jscolor="{}">
-          <input id="colorNumber" type="number" value="1"  >
+        <div class="addANewColor">
+          <input id="colorPicker" value="#0028FFFF" data-jscolor="{}" />
+          <input id="colorNumber" type="number" value="1" />
           <button onclick="addAColor()" type="submit">Add a new color</button>
         </div>
       </section>
 
       <section>
         <h2>Your colors</h2>
-        <div id="userscolors">
-
-        </div>
+        <div id="userscolors"></div>
       </section>
 
       <form>
@@ -46,16 +54,32 @@
       </form>
 
       <article id="article">
-        <button  onclick="roll()" type="submit">Roll </button>
-        <div class="imagePrint"> 
-
-        </div>
+        <button onclick="roll()" type="submit">Roll</button>
+        <div class="imagePrint"></div>
       </article>
-      
-      </div>
+
+      <!-- <section>
+        <canvas
+          id="myCanvas"
+          width="300"
+          height="150"
+          style="border: 1px solid #d3d3d3"
+        >
+          Your browser does not support the HTML5 canvas tag.</canvas
+        >
+      </section>
+      <section>
+        <div class="canvas__container">
+          <canvas id="cnvs" class="canvas__canvas"></canvas>
+          <img src="" id="mirror" class="canvas__mirror" />
+        </div>
+        <a href="#" class="button" id="btn-download" download="my-file-name.png"
+          >Download</a
+        >
+      </section> -->
     </div>
-    <script src="js/script.js" async defer></script>
+    <script src="js/stringtoimage.js" async defer></script>
     <script src="js/jscolor.js"></script>
-  <footer>An MSC Webpage</footer>
+    <footer>An MSC Webpage</footer>
   </body>
 </html>

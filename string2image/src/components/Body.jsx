@@ -11,6 +11,9 @@ export default class Body extends Component {
       colors: [],
       string: "",
       strings: [],
+      lowend: "",
+      highend: "",
+      rangeArray: [],
     };
   }
 
@@ -38,11 +41,7 @@ export default class Body extends Component {
     });
   };
 
-  createPixel = () => {
-    // const rootElement = document.getElementById("results");
-    // const element = React.createElement("div", null, "Hello World");
-    // ReactDOM.render(element, rootElement);
-  };
+  createPixel = () => {};
 
   createImage = () => {
     console.log("test");
@@ -56,6 +55,11 @@ export default class Body extends Component {
       [this.state.colorNumber]: this.state.colorHex,
       strings: stringClean,
     });
+    for (let i = this.state.lowend; i < this.state.highend; i++) {
+      this.state.rangeArray.fill(0, i);
+    }
+    console.log(this.state.rangeArray);
+
     console.log("your number", this.state.colorNumber);
     console.log("Submitting color:", this.state.colorHex);
   };
@@ -111,6 +115,21 @@ export default class Body extends Component {
                   placeholder="Enter the colorHex"
                   onChange={this.handleChange}
                 />
+                <label>
+                  put the range
+                  <input
+                    id="howmany"
+                    name="lowend"
+                    placeholder="300"
+                    onChange={this.handleChange}
+                  />
+                  <input
+                    id="howmany"
+                    name="highend"
+                    placeholder="400"
+                    onChange={this.handleChange}
+                  />
+                </label>
                 <input type="submit" value="Add Color" />
               </>
             ) : (
