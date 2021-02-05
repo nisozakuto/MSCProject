@@ -39,24 +39,44 @@ function breakString() {
 }
 
 function createPicture(w) {
-  const picArea = document.createElement("div");
-  picArea.id = "picArea";
-  picArea.style.width = w + "px";
-  const imagePrint = document.getElementsByClassName("imagePrint");
-  imagePrint[0].append(picArea);
-  //   console.log("Creating the picture");
+  let j = 0;
+  var canvas = document.createElement("canvas");
+  canvas.style.width = "300";
+  canvas.style.height = "300";
+
+  var ctx = canvas.getContext("2d");
   for (let i = 0; i < myCodeArray.length; i++) {
-    if (myCodeArray[i] == 0 && colors[0] == null) {
-      //   console.log("0 spotted skipping", i);
+    ctx.fillStyle = colors[myCodeArray[i]];
+    if (i % w == 0) {
+      j = j + 5;
+      k = 0;
     } else {
-      //   console.log("Creating pixel");
-      const Pixel = document.createElement("div");
-      Pixel.classList.add("myPixel");
-      //   console.log(colors[myCodeArray[i]]);
-      Pixel.style.backgroundColor = colors[myCodeArray[i]];
-      picArea.appendChild(Pixel);
+      k++;
     }
+    ctx.fillRect(k, j, 5, 5);
   }
+  const imagePrint = document.getElementsByClassName("imagePrint");
+  imagePrint[0].append(canvas);
+
+  //   const picArea = document.createElement("div");
+  //   picArea.id = "picArea";
+  //   picArea.style.width = w + "px";
+  //   const imagePrint = document.getElementsByClassName("imagePrint");
+  //   imagePrint[0].append(picArea);
+  //   //   console.log("Creating the picture");
+  //   for (let i = 0; i < myCodeArray.length; i++) {
+  //     if (myCodeArray[i] == 0 && colors[0] == null) {
+  //       //   console.log("0 spotted skipping", i);
+  //     } else {
+  //       //   console.log("Creating pixel");
+  //       const Pixel = document.createElement("div");
+  //       Pixel.classList.add("myPixel");
+  //       //   console.log(colors[myCodeArray[i]]);
+  //       Pixel.style.backgroundColor = colors[myCodeArray[i]];
+  //       picArea.appendChild(Pixel);
+  //     }
+  //   }
+
   //   console.log("checking the myCodeArray", myCodeArray);
 }
 
@@ -65,6 +85,11 @@ function roll() {
   breakString();
   //   colorDeclarationCheck();
   //   createPicture();
+
+  //   for (let i = 100; i < 330; i = i + 5) {
+  //     createPicture(i);
+  //   }
+
   for (let i = 100; i < 330; i++) {
     createPicture(i);
   }

@@ -32,6 +32,7 @@ article{
 .imagePrint{
     display: flex;
     flex-wrap: wrap;
+    flex-direction: column;
     /* width: 100px; */
 }
 
