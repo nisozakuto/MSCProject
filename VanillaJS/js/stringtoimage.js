@@ -54,9 +54,10 @@ function addAColor() {
 }
 
 function addARangeOfColor() {
-  let firstNumber = document.getElementById("colorNumber").value;
+  let firstNumber = document.getElementById("colorNumber1").value;
   let secondNumber = document.getElementById("colorNumber2").value;
 
+  console.log(firstNumber, secondNumber);
   if (firstNumber >= secondNumber) {
     alert("Second number must be bigger than the first one");
   } else {
