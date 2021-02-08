@@ -3,9 +3,9 @@ const userscolors = document.getElementById("userscolors");
 let colors = [];
 let myCodeArray = [],
   pixelSize = 10;
+let canIAddTheRange = true;
 
 function addingTheColor(number1, hex, number2) {
-  let canIAddTheRange = true;
   if (number2 == undefined) {
     console.log("adding only one number");
     if (!colors[number1]) colors[number1] = hex;
@@ -16,7 +16,9 @@ function addingTheColor(number1, hex, number2) {
     }
   } else {
     for (number1; number1 <= number2; number1++) {
-      if (colors[number1]) canIAddTheRange = false;
+      if (colors[number1] != undefined) {
+        canIAddTheRange = false;
+      }
     }
     if (canIAddTheRange)
       for (number1; number1 <= number2; number1++) {
@@ -61,10 +63,13 @@ function addARangeOfColor() {
   if (firstNumber >= secondNumber) {
     alert("Second number must be bigger than the first one");
   } else {
-    addingTheColor(firstNumber, secondNumber, colorPicker.value);
-  }
-  for (firstNumber; firstNumber <= secondNumber; firstNumber++) {
-    createDOMForTheColor(firstNumber, colorPicker.value);
+    for (firstNumber; firstNumber <= secondNumber; firstNumber++) {
+      console.log(canIAddTheRange);
+      addingTheColor(firstNumber, colorPicker.value, secondNumber);
+      console.log(canIAddTheRange);
+      if (canIAddTheRange) createDOMForTheColor(firstNumber, colorPicker.value);
+      console.log(canIAddTheRange);
+    }
   }
 }
 
