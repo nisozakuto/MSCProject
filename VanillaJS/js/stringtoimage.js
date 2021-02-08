@@ -2,27 +2,32 @@ let myString = "niso";
 const userscolors = document.getElementById("userscolors");
 let colors = [];
 let myCodeArray = [],
-  pixelSize = 10;
+  pixelSize = 5;
 let canIAddTheRange = true;
+let canIAddThisSingle = true;
 
 function addingTheColor(number1, hex, number2) {
   if (number2 == undefined) {
     console.log("adding only one number");
-    if (!colors[number1]) colors[number1] = hex;
-    else {
+    if (!colors[number1]) {
+      colors[number1] = hex;
+    } else {
       alert("this exists");
+      canIAddThisSingle = false;
       //Deal with this later to add CHANGE feature
       return;
     }
-  } else {
-    for (number1; number1 <= number2; number1++) {
-      if (colors[number1] != undefined) {
+  } else if (number2) {
+    console.log("number2 is corretc");
+    for (let i = number1; i <= number2; i++) {
+      if (colors[i] != undefined) {
         canIAddTheRange = false;
       }
     }
     if (canIAddTheRange)
-      for (number1; number1 <= number2; number1++) {
-        colors[number1] = hex;
+      for (let i = number1; i <= number2; i++) {
+        console.log("ekleniyor", i);
+        colors[i] = hex;
       }
   }
 }
@@ -52,27 +57,27 @@ function addAColor() {
   chosenColorNumber = chosenColorNumber.value;
 
   addingTheColor(chosenColorNumber, colorPicker.value);
-  createDOMForTheColor(chosenColorNumber, colorPicker.value);
+  if (canIAddTheRange)
+    createDOMForTheColor(chosenColorNumber, colorPicker.value);
 }
-
+//RANGE OF COLOR START
 function addARangeOfColor() {
   let firstNumber = document.getElementById("colorNumber1").value;
   let secondNumber = document.getElementById("colorNumber2").value;
 
   console.log(firstNumber, secondNumber);
   if (firstNumber >= secondNumber) {
+    console.log(firstNumber, secondNumber, firstNumber >= secondNumber);
     alert("Second number must be bigger than the first one");
-  } else {
+  } else if (secondNumber > firstNumber) {
+    console.log("Lets add");
     for (firstNumber; firstNumber <= secondNumber; firstNumber++) {
-      console.log(canIAddTheRange);
       addingTheColor(firstNumber, colorPicker.value, secondNumber);
-      console.log(canIAddTheRange);
       if (canIAddTheRange) createDOMForTheColor(firstNumber, colorPicker.value);
-      console.log(canIAddTheRange);
     }
   }
 }
-
+//RANGE OF COLOR END
 function breakString() {
   let code = document.getElementById("string").value;
   myCodeArray = code.split(/\n/);
@@ -84,7 +89,7 @@ function createPicture(rowLength) {
     column = 0;
 
   var canvas = document.createElement("canvas");
-  canvas.style.width = "300px";
+  canvas.style.width = "600px";
   // canvas.style.width = STRING'S_LENGTH;
 
   canvas.style.border = "1px solid black";
@@ -99,6 +104,7 @@ function createPicture(rowLength) {
   for (let i = 1; i < myCodeArray.length + 1; i++) {
     ctx.fillStyle = colors[myCodeArray[i]];
     ctx.fillRect(line, column, pixelSize, pixelSize);
+
     line += pixelSize;
     if (i >= rowLength && i % rowLength == 0) {
       column += pixelSize;
@@ -145,7 +151,6 @@ function createPicture(rowLength) {
   //       picArea.appendChild(Pixel);
   //     }
   //   }
-
   //   console.log("checking the myCodeArray", myCodeArray);
 }
 
@@ -153,7 +158,6 @@ function roll() {
   console.log("LETS ROLL");
   breakString();
   //   colorDeclarationCheck();
-
   let rowLength = Math.round(Math.sqrt(myCodeArray.length));
   let stringLength = document.getElementById("stringLength");
   stringLength.innerText = `String's length is ${myCodeArray.length}`;
@@ -179,9 +183,7 @@ function roll() {
 }
 
 function save() {
-  if (localStorage.getItem("colors")) {
-    localStorage.setItem("colors", JSON.stringify(colors));
-  } else localStorage.setItem("colors", JSON.stringify(colors));
+  localStorage.setItem("colors", JSON.stringify(colors));
 }
 
 function getColorsFromStorage() {
