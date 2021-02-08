@@ -14,7 +14,7 @@
       <button onclick="save()">Save</button>
       <button onclick="getColorsFromStorage()">Get</button>
       <p id="stringLength">String's length is</p>
-      <section>
+      <section id="addColorSection">
         <div class="decisioning">
           <input
             type="radio"
@@ -35,10 +35,18 @@
         <div class="numbers"></div>
 
         <div class="addANewColor">
-          <input id="colorPicker" value="#0028FFFF" data-jscolor="{}" />
           <input id="colorNumber" type="number" value="1" />
           <button onclick="addAColor()" type="submit">Add a new color</button>
         </div>
+
+        <div class="addARangeOfColors">
+          <input id="colorNumber" type="number" value="1" />
+          <input id="colorNumber2" type="number" value="1" />
+          <button onclick="addARangeOfColor()" type="submit">
+            Add a new color
+          </button>
+        </div>
+        <input id="colorPicker" value="#0028FFFF" data-jscolor="{}" />
       </section>
 
       <section>

@@ -4,18 +4,28 @@ let colors = [];
 let myCodeArray = [],
   pixelSize = 10;
 
-function addAColor() {
-  console.log("========== Adding a color ==========");
-  let chosenColorNumber = document.getElementById("colorNumber");
-  chosenColorNumber = chosenColorNumber.value;
-
-  if (!colors[chosenColorNumber]) colors[chosenColorNumber] = colorPicker.value;
-  else {
-    alert("this exists");
-    //Deal with this later to add CHANGE feature
-    return;
+function addingTheColor(number1, hex, number2) {
+  let canIAddTheRange = true;
+  if (number2 == undefined) {
+    console.log("adding only one number");
+    if (!colors[number1]) colors[number1] = hex;
+    else {
+      alert("this exists");
+      //Deal with this later to add CHANGE feature
+      return;
+    }
+  } else {
+    for (number1; number1 <= number2; number1++) {
+      if (colors[number1]) canIAddTheRange = false;
+    }
+    if (canIAddTheRange)
+      for (number1; number1 <= number2; number1++) {
+        colors[number1] = hex;
+      }
   }
+}
 
+function createDOMForTheColor(number1, colorPickerValue) {
   const definedColor = document.createElement("div");
   //CHANGE myString
   definedColor.id = myString;
@@ -25,13 +35,36 @@ function addAColor() {
   myColorNamelabel.innerText = "Color number:";
   definedColor.append(myColorNamelabel);
   myColorNamelabel.innerText +=
-    " " + colorPicker.value + " and the color: " + chosenColorNumber;
+    " " + colorPickerValue + " and the color: " + number1;
 
   const colorDiv = document.createElement("div");
-  colorDiv.style.backgroundColor = colorPicker.value;
+  colorDiv.style.backgroundColor = colorPickerValue;
   colorDiv.style.width = "20px";
   colorDiv.style.height = "20px";
   definedColor.append(colorDiv);
+}
+
+function addAColor() {
+  console.log("========== Adding a color ==========");
+  let chosenColorNumber = document.getElementById("colorNumber");
+  chosenColorNumber = chosenColorNumber.value;
+
+  addingTheColor(chosenColorNumber, colorPicker.value);
+  createDOMForTheColor(chosenColorNumber, colorPicker.value);
+}
+
+function addARangeOfColor() {
+  let firstNumber = document.getElementById("colorNumber").value;
+  let secondNumber = document.getElementById("colorNumber2").value;
+
+  if (firstNumber >= secondNumber) {
+    alert("Second number must be bigger than the first one");
+  } else {
+    addingTheColor(firstNumber, secondNumber, colorPicker.value);
+  }
+  for (firstNumber; firstNumber <= secondNumber; firstNumber++) {
+    createDOMForTheColor(firstNumber, colorPicker.value);
+  }
 }
 
 function breakString() {
@@ -172,6 +205,39 @@ function getColorsFromStorage() {
   }
 }
 
-function init() {}
+//RADIO BUTTONS START
+const singleColor = document.getElementById("singleColor");
+const rangeColor = document.getElementById("rangeOfColor");
+
+singleColor.addEventListener("click", () => {
+  if (rangeColor) {
+    rangeColor.checked = false;
+  }
+  if (document.getElementsByClassName("addARangeOfColors")) {
+    document.getElementsByClassName("addARangeOfColors")[0].style.display =
+      "none";
+  }
+  document.getElementsByClassName("addANewColor")[0].style.display = "";
+});
+
+rangeColor.addEventListener("click", () => {
+  if (singleColor) {
+    singleColor.checked = false;
+  }
+
+  if (document.getElementsByClassName("addANewColor")) {
+    document.getElementsByClassName("addANewColor")[0].style.display = "none";
+  }
+  document.getElementsByClassName("addARangeOfColors")[0].style.display = "";
+});
+//RADIO BUTTONS END
+
+function init() {
+  singleColor.checked = true;
+  if (document.getElementsByClassName("addARangeOfColors")) {
+    document.getElementsByClassName("addARangeOfColors")[0].style.display =
+      "none";
+  }
+}
 
 init();
