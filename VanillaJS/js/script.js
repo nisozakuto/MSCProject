@@ -26,7 +26,7 @@ function breakString() {
 function createPixel(c) {
   // const Pixel = document.createElement("div");
   // Pixel.classList.add("myPixel");
-  // // console.log(readTheNumber(c));
+  // console.log(readTheNumber(c));
   // console.log(colors[c]);
   // Pixel.style.backgroundColor = colors[c];
   // imagePrint[0].appendChild(Pixel);
