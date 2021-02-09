@@ -14,61 +14,67 @@
         <h1>String to Image</h1>
       </header>
       <section id="inputsSection">
-        <aside id="addColorSection"> 
-            <div class="decisioning">
-              <input
-                type="radio"
-                id="singleColor"
-                name="singleColor"
-                value="singleColor"
-              />
-              <label for="singleColor">Single Color</label><br />
-              <input
-                type="radio"
-                id="rangeOfColor"
-                name="rangeOfColor"
-                value="rangeOfColor"
-              />
-              <label for="rangeOfColor">Range of Color</label><br />
+        <aside id="addColorSection">
+          <div class="decisioning">
+            <input
+              type="radio"
+              id="singleColor"
+              name="singleColor"
+              value="singleColor"
+            />
+            <label for="singleColor">Single Color</label><br />
+            <input
+              type="radio"
+              id="rangeOfColor"
+              name="rangeOfColor"
+              value="rangeOfColor"
+            />
+            <label for="rangeOfColor">Range of Color</label><br />
+          </div>
+
+          <div id="colorSelection">
+            <input id="colorPicker" value="#0028FFFF" data-jscolor="{}" />
+
+            <div class="addANewColor">
+              <input id="colorNumber" type="number" value="1" />
+              <button onclick="addAColor()" type="submit">Add</button>
             </div>
-        <div class="addANewColor">
-          <input id="colorNumber" type="number" value="1" />
-          <button onclick="addAColor()" type="submit">Add a new color</button>
+
+            <div class="addARangeOfColors">
+              <input id="colorNumber1" type="number" value="1" />
+              <input id="colorNumber2" type="number" value="1" />
+              <button onclick="addARangeOfColor()" type="submit">Add</button>
+            </div>
+          </div>
+        </aside>
+
+        <div id="formAside">
+          <form>
+            <label>Enter your string here</label>
+            <textarea type="number" id="string" name="string"></textarea>
+          </form>
+          <aside id="infoAndSave">
+            <h4 id="stringLength">String's length is</h4>
+
+            <p>
+              Save your current color selection or get your saved color
+              selection
+            </p>
+            <button onclick="save()">Save</button>
+            <button onclick="getColorsFromStorage()">Get</button>
+          </aside>
         </div>
 
-        <div class="addARangeOfColors">
-          <input id="colorNumber1" type="number" value="1" />
-          <input id="colorNumber2" type="number" value="1" />
-          <button onclick="addARangeOfColor()" type="submit">
-            Add a new color
-          </button>
-        </div>
-        <input id="colorPicker" value="#0028FFFF" data-jscolor="{}" />
-      
-        </aside>
-        <aside id="addColorSection"> 
-          <button onclick="save()">Save</button>
-          <button onclick="getColorsFromStorage()">Get</button>
-          <p id="stringLength">String's length is</p>
-        </aside>
+        <button id="roll" onclick="roll()" type="submit">Roll</button>
       </section>
-    
       <!-- <div class="numbers"></div> -->
-
-      </section>
 
       <section>
         <h2>Your colors</h2>
         <div id="userscolors"></div>
       </section>
 
-      <form>
-        <label>Enter your string here</label>
-        <textarea type="number" id="string" name="string"></textarea>
-      </form>
-
       <article id="article">
-        <button onclick="roll()" type="submit">Roll</button>
         <div class="imagePrint"></div>
       </article>
     </div>

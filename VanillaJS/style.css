@@ -61,16 +61,19 @@ body{
 }
 
 .container{
-    width: 80vw;
+    width: 90vw;
     background-color: #efefef;
 }
 
 header h1{
-
-}
-h2{
+    font-size: 2em;
+    text-transform: capitalize;
     text-align: center;
-    text-transform: uppercase;
+}
+
+h2{
+    font-size: 1.5em;
+    text-align: center;
 }
 
 .myPixel{
@@ -98,33 +101,81 @@ section{
 }
 
 #inputsSection aside{
-    flex-grow: 1;
-    border: 1px solid rebeccapurple;
+ 
 }
 
 /* inputsSection STARTS */
 #inputsSection{
     display: flex;
-    flex-direction: row;
-    /* flex: 1 1 0px; */
+    flex-direction: column;
 }
 /* inputsSection ENDS */
 
 /* addingColorAside STARTS*/
 #addColorSection{
-    
+    border-bottom: 1px solid black ;
+    padding:  1em 0;
 }
 
 .decisioning{
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    /* justify-content: center; */
     margin-bottom:1em;
 }
-#colorNumber1, #colorNumber2{
+#colorNumber1, #colorNumber2, #colorNumber{
     width: 72px;    
 }
 /* addingColorAside ENDS */
+
+
+/* colorSelection STARTS */
+#colorSelection{
+    display: flex;
+    flex-direction: row;
+}
+/* colorSelection ENDS */
+
+
+
+/* FORM STARTS */
+#formAside
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+}
+
+form textarea{
+    width: 10em;
+    height: 15em;
+    min-height: 140px;
+    max-width: 350px;
+}
+/* form ENDS */
+
+
+/* infoAndSave */
+#infoAndSave{
+    max-width:200px
+}
+#infoAndSave p {
+    padding: 30px 0 20px 0;
+}
+/* infoAndSave */
+
+
+/* ROLLBUTTON */
+#roll{
+    width: 200px;
+    margin: 0 auto;
+}
+/* ROLLBUTTON */
 
 .numbers{
     display: flex;
@@ -158,6 +209,7 @@ section{
     justify-content: space-between;
     align-items: center;
     width: fit-content;
+    padding: 2px 0;
 }
 
 #niso p{
@@ -166,11 +218,9 @@ section{
 }
 
 #userscolors{
-    width: 400px;
     display: flex;
     flex-direction: column;
     align-items: center;
-
 }
 
 
