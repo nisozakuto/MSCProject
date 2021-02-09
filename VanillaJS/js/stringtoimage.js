@@ -240,6 +240,13 @@ rangeColor.addEventListener("click", () => {
 });
 //RADIO BUTTONS END
 
+const textArea = document.querySelector("textarea");
+textArea.addEventListener("input", (event) => {
+  breakString();
+
+  stringLength.innerText = `String's Length is: ${myCodeArray.length}`;
+});
+
 function init() {
   singleColor.checked = true;
   if (document.getElementsByClassName("addARangeOfColors")) {
