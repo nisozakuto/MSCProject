@@ -10,30 +10,27 @@
   </head>
   <body>
     <div class="container">
-      <h1>String to Image</h1>
-      <button onclick="save()">Save</button>
-      <button onclick="getColorsFromStorage()">Get</button>
-      <p id="stringLength">String's length is</p>
-      <section id="addColorSection">
-        <div class="decisioning">
-          <input
-            type="radio"
-            id="singleColor"
-            name="singleColor"
-            value="singleColor"
-          />
-          <label for="singleColor">Single Color</label><br />
-          <input
-            type="radio"
-            id="rangeOfColor"
-            name="rangeOfColor"
-            value="rangeOfColor"
-          />
-          <label for="rangeOfColor">Range of Color</label><br />
-        </div>
-
-        <div class="numbers"></div>
-
+      <header>
+        <h1>String to Image</h1>
+      </header>
+      <section id="inputsSection">
+        <aside id="addColorSection"> 
+            <div class="decisioning">
+              <input
+                type="radio"
+                id="singleColor"
+                name="singleColor"
+                value="singleColor"
+              />
+              <label for="singleColor">Single Color</label><br />
+              <input
+                type="radio"
+                id="rangeOfColor"
+                name="rangeOfColor"
+                value="rangeOfColor"
+              />
+              <label for="rangeOfColor">Range of Color</label><br />
+            </div>
         <div class="addANewColor">
           <input id="colorNumber" type="number" value="1" />
           <button onclick="addAColor()" type="submit">Add a new color</button>
@@ -47,6 +44,17 @@
           </button>
         </div>
         <input id="colorPicker" value="#0028FFFF" data-jscolor="{}" />
+      
+        </aside>
+        <aside id="addColorSection"> 
+          <button onclick="save()">Save</button>
+          <button onclick="getColorsFromStorage()">Get</button>
+          <p id="stringLength">String's length is</p>
+        </aside>
+      </section>
+    
+      <!-- <div class="numbers"></div> -->
+
       </section>
 
       <section>
