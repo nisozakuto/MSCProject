@@ -23,15 +23,6 @@ function breakString() {
   console.log(myCodeArray);
 }
 
-function createPixel(c) {
-  // const Pixel = document.createElement("div");
-  // Pixel.classList.add("myPixel");
-  // console.log(readTheNumber(c));
-  // console.log(colors[c]);
-  // Pixel.style.backgroundColor = colors[c];
-  // imagePrint[0].appendChild(Pixel);
-}
-
 function createPicture() {
   const picArea = document.createElement("div");
   picArea.id = "picArea";
@@ -41,13 +32,10 @@ function createPicture() {
     if (myCodeArray[i] == 0 && colors[0] == null) {
       console.log("0 spotted skipping", i);
     } else {
-      console.log("Creating pixel");
-      // createPixel(myCodeArray[i]);
       const Pixel = document.createElement("div");
       Pixel.classList.add("myPixel");
       console.log(colors[myCodeArray[i]]);
       Pixel.style.backgroundColor = colors[myCodeArray[i]];
-      // picArea.appendChild(Pixel);
     }
   }
   console.log("checking the myCodeArray", myCodeArray);
@@ -79,7 +67,6 @@ function roll() {
   colorDeclarationCheck();
   if (canUCreate) {
     createPicture();
-    // for (let i = myWidth; i < 310; i + 5) {}
     for (let i = 300; i < 330; i + 5) {}
   } else alert("Missing declaration of colors");
 }
@@ -108,7 +95,6 @@ function addAColor() {
   definedColor.append(myColorNamelabel);
   console.log("====", colorValue);
   // console.log(colors[chosenColorNumber.value]);
-  // myColorNamelabel.style.background = colorPicker.value;
   myColorNamelabel.innerText +=
     " " + colorPicker.value + " and the color: " + colorValue;
 
@@ -147,33 +133,3 @@ function init() {
 }
 
 init();
-
-// var cnvs = document.getElementById("cnvs"),
-//   ctx = cnvs.getContext("2d"),
-//   mirror = document.getElementById("mirror");
-
-// cnvs.width = mirror.width = window.innerWidth;
-// cnvs.height = mirror.height = window.innerHeight;
-
-// mirror.addEventListener("contextmenu", function (e) {});
-
-// mirror.addEventListener("contextmenu", function (e) {
-//   var dataURL = canvas.toDataURL("image/png");
-//   mirror.src = dataURL;
-// });
-
-// var button = document.getElementById("btn-download");
-// button.addEventListener("click", function (e) {
-//   var dataURL = canvas.toDataURL("image/png");
-//   button.href = dataURL;
-// });
-
-// var c = document.getElementById("myCanvas");
-// var ctx = c.getContext("2d");
-// ctx.fillStyle = "red";
-// ctx.fillRect(10, 10, 5, 5);
-
-// function copy() {
-//   var imgData = ctx.getImageData(10, 10, 50, 50);
-//   ctx.putImageData(imgData, 10, 70);
-// }
