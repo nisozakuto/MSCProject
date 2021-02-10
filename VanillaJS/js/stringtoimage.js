@@ -243,9 +243,28 @@ rangeColor.addEventListener("click", () => {
 const textArea = document.querySelector("textarea");
 textArea.addEventListener("input", (event) => {
   breakString();
-
   stringLength.innerText = `String's Length is: ${myCodeArray.length}`;
 });
+
+function download() {
+  let dButton = document.getElementById("downloadButton");
+  console.log(document.querySelector("canvas").toDataURL("image/png"));
+  dButton.href = document.querySelector("canvas").toDataURL("image/png");
+  dButton.download = "mypainting.png";
+}
+
+var link = document.createElement("a");
+link.innerHTML = "Download image";
+link.addEventListener(
+  "click",
+  function (ev) {
+    // console.log(document.getElementById("thecanvas"));
+    link.href = document.querySelector("canvas").toDataURL("image/png");
+    link.download = "mypainting.png";
+  },
+  false
+);
+document.getElementById("article").append(link);
 
 function init() {
   singleColor.checked = true;
