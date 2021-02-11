@@ -2,7 +2,7 @@ let myString = "niso";
 const userscolors = document.getElementById("userscolors");
 let colors = [];
 let myCodeArray = [],
-  pixelSize = 5;
+  pixelSize = 1;
 let canIAddTheRange = true;
 let canIAddThisSingle = true;
 
@@ -53,19 +53,23 @@ function createDOMForTheColor(number1, colorPickerValue) {
 
 function addAColor() {
   console.log("========== Adding a color ==========");
-  let chosenColorNumber = document.getElementById("colorNumber");
-  chosenColorNumber = chosenColorNumber.value;
+  let chosenColorNumber = parseInt(
+    document.getElementById("colorNumber").value,
+    10
+  );
 
   addingTheColor(chosenColorNumber, colorPicker.value);
   if (canIAddTheRange)
     createDOMForTheColor(chosenColorNumber, colorPicker.value);
 }
+
 //RANGE OF COLOR START
 function addARangeOfColor() {
-  let firstNumber = document.getElementById("colorNumber1").value;
-  let secondNumber = document.getElementById("colorNumber2").value;
-
-  console.log(firstNumber, secondNumber);
+  let firstNumber = parseInt(document.getElementById("colorNumber1").value, 10);
+  let secondNumber = parseInt(
+    document.getElementById("colorNumber2").value,
+    10
+  );
   if (firstNumber >= secondNumber) {
     console.log(firstNumber, secondNumber, firstNumber >= secondNumber);
     alert("Second number must be bigger than the first one");
