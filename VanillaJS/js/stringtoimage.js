@@ -51,7 +51,7 @@ function createDOMForTheColor(number1, colorPickerValue) {
   colorDiv.style.height = "20px";
   definedColor.append(colorDiv);
 }
-
+// ADD A COLOR
 function addAColor() {
   console.log("========== Adding a color ==========");
   let chosenColorNumber = parseInt(
@@ -60,9 +60,11 @@ function addAColor() {
   );
 
   addingTheColor(chosenColorNumber, colorPicker.value);
-  if (canIAddTheRange)
+  if (canIAddThisSingle) {
     createDOMForTheColor(chosenColorNumber, colorPicker.value);
+  }
 }
+// ADD A COLOR FINISHED
 
 //RANGE OF COLOR START
 function addARangeOfColor() {
@@ -228,6 +230,27 @@ linkText.addEventListener("click", () => {
     }, 1300);
   });
 });
+
+// RANGE SET
+function setRangeWidth() {
+  let startWidth = document.getElementById("startWidth");
+  let endWidth = document.getElementById("endWidth");
+  let setWidthText = document.getElementById("setWidthText");
+  let startWidthValue = parseInt(startWidth.value, 10),
+    endWidthValue = parseInt(endWidth.value, 10);
+
+  console.log(startWidthValue, endWidthValue);
+  if (startWidthValue > endWidthValue) {
+    alert("Start width can not be greater than end width");
+
+    startWidthValue = endWidthValue;
+  } else {
+    console.log("+++", startWidthValue, endWidthValue);
+    setWidthText.innerText = `Set width is between ${startWidthValue} - ${endWidthValue}`;
+  }
+}
+
+// RANGE SET FINISHED
 
 document.getElementById("userscolors").append(linkText);
 
