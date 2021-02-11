@@ -33,6 +33,7 @@ function addingTheColor(number1, hex, number2) {
 }
 
 function createDOMForTheColor(number1, colorPickerValue) {
+  console.log("adding to dom");
   const definedColor = document.createElement("div");
   //CHANGE myString
   definedColor.id = myString;
@@ -76,12 +77,16 @@ function addARangeOfColor() {
   } else if (secondNumber > firstNumber) {
     console.log("Lets add");
     for (firstNumber; firstNumber <= secondNumber; firstNumber++) {
-      addingTheColor(firstNumber, colorPicker.value, secondNumber);
-      if (canIAddTheRange) createDOMForTheColor(firstNumber, colorPicker.value);
+      addingTheColor(firstNumber, colorPicker.value);
+      if (canIAddTheRange) {
+        createDOMForTheColor(firstNumber, colorPicker.value);
+        console.log(firstNumber, "firstNumber");
+      }
     }
   }
 }
 //RANGE OF COLOR END
+
 function breakString() {
   let code = document.getElementById("string").value;
   myCodeArray = code.split(/\n/);
