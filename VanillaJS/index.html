@@ -36,15 +36,29 @@
             <input id="colorPicker" value="#0028FFFF" data-jscolor="{}" />
 
             <div class="addANewColor">
-              <input id="colorNumber" type="number" value="1" />
+              <input id="colorNumber" type="number" value="1" min="0" />
               <button onclick="addAColor()" type="submit">Add</button>
             </div>
 
             <div class="addARangeOfColors">
-              <input id="colorNumber1" type="number" value="1" />
-              <input id="colorNumber2" type="number" value="1" />
-              <button onclick="addARangeOfColor()" type="submit">Add</button>
+              <input id="colorNumber1" type="number" value="1" min="0" />
+              <input id="colorNumber2" type="number" value="1" min="0" />
             </div>
+          </div>
+        </aside>
+        <aside id="widthSelection">
+          <div>
+            <h3>Range section</h3>
+            <label>Start Width</label>
+            <input id="startWidth" type="number" value="100" min="100" />
+            <label>End Width</label>
+            <input id="endWidth" type="number" value="100" min="100" />
+            <button onclick="setRangeWidth()" type="submit">
+              Set Width Range
+            </button>
+          </div>
+          <div>
+            <p id="setWidthText">width</p>
           </div>
         </aside>
 
@@ -55,7 +69,6 @@
           </form>
           <aside id="infoAndSave">
             <h4 id="stringLength">String's length is</h4>
-
             <p>
               Save your current color selection or get your saved color
               selection
@@ -65,7 +78,7 @@
           </aside>
         </div>
 
-        <button id="roll" onclick="roll()" type="submit">Roll</button>
+        <button id="roll" onclick="roll()" type="submit">Create Images</button>
       </section>
 
       <section>

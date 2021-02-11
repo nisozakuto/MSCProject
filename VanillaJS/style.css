@@ -60,7 +60,7 @@ body{
 }
 
 .container{
-    height: 97vh;
+    min-height: 97vh;
 
     width: 90vw;
     background-color: #efefef;
@@ -129,6 +129,13 @@ section{
 }
 /* addingColorAside ENDS */
 
+#widthSelection{
+    border: 1px solid black;
+    padding: 1em 0.5em;
+}
+/* widthSelection STARTS */
+
+/* widthSelection ENDS */
 
 /* colorSelection STARTS */
 #colorSelection{
