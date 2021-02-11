@@ -1,10 +1,14 @@
-let myString = "niso";
 const userscolors = document.getElementById("userscolors");
-let colors = [];
-let myCodeArray = [],
-  pixelSize = 1;
-let canIAddTheRange = true;
-let canIAddThisSingle = true;
+let colors = [],
+  myCodeArray = [],
+  myString = "niso",
+  pixelSize = 2,
+  canIAddTheRange = true,
+  canIAddThisSingle = true,
+  startWidthValue,
+  endWidthValue,
+  isPassedRange = false,
+  isThereString = false;
 
 function addingTheColor(number1, hex, number2) {
   if (number2 == undefined) {
@@ -123,15 +127,20 @@ function createPicture(rowLength) {
 }
 
 function roll() {
-  console.log("LETS ROLL");
-  breakString();
-  //   colorDeclarationCheck();
-  let rowLength = Math.round(Math.sqrt(myCodeArray.length));
-  let stringLength = document.getElementById("stringLength");
-  stringLength.innerText = `String's length is ${myCodeArray.length}`;
+  //First Check is passed range
+  if (isPassedRange && isThereString) {
+    console.log("LETS ROLL");
+    breakString();
+    //   colorDeclarationCheck();
+    let rowLength = Math.round(Math.sqrt(myCodeArray.length));
+    let stringLength = document.getElementById("stringLength");
+    stringLength.innerText = `String's length is ${myCodeArray.length}`;
 
-  for (let index = 17; index < 47; index++) {
-    createPicture(index);
+    for (let index = startWidthValue; index < endWidthValue; index++) {
+      createPicture(index);
+    }
+  } else {
+    alert("set the Range and enter an input");
   }
 }
 
@@ -197,6 +206,7 @@ const textArea = document.querySelector("textarea");
 textArea.addEventListener("input", (event) => {
   breakString();
   stringLength.innerText = `String's Length is: ${myCodeArray.length}`;
+  if (myCodeArray.length > 0) isThereString = true;
 });
 
 var linkText = document.createElement("button");
@@ -230,26 +240,25 @@ linkText.addEventListener("click", () => {
     }, 1300);
   });
 });
-
 // RANGE SET
 function setRangeWidth() {
   let startWidth = document.getElementById("startWidth");
   let endWidth = document.getElementById("endWidth");
   let setWidthText = document.getElementById("setWidthText");
-  let startWidthValue = parseInt(startWidth.value, 10),
-    endWidthValue = parseInt(endWidth.value, 10);
+  (startWidthValue = parseInt(startWidth.value, 10)),
+    (endWidthValue = parseInt(endWidth.value, 10));
 
   console.log(startWidthValue, endWidthValue);
-  if (startWidthValue > endWidthValue) {
-    alert("Start width can not be greater than end width");
-
+  if (startWidthValue >= endWidthValue) {
+    alert("Start width can not be greater or equal than end width");
     startWidthValue = endWidthValue;
+    return (isPassedRange = false);
   } else {
     console.log("+++", startWidthValue, endWidthValue);
     setWidthText.innerText = `Set width is between ${startWidthValue} - ${endWidthValue}`;
+    return (isPassedRange = true);
   }
 }
-
 // RANGE SET FINISHED
 
 document.getElementById("userscolors").append(linkText);
