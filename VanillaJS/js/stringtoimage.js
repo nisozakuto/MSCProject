@@ -99,12 +99,7 @@ function createPicture(rowLength) {
   canvas.style.border = "1px solid black";
   var ctx = canvas.getContext("2d");
 
-  // for (color of colors) {
-  //   // console.log(color);
-  // }
-
   //ADDING PIXELS
-  // console.log("rowLength", rowLength);
   for (let i = 1; i < myCodeArray.length + 1; i++) {
     ctx.fillStyle = colors[myCodeArray[i]];
     ctx.fillRect(line, column, pixelSize, pixelSize);
@@ -116,46 +111,8 @@ function createPicture(rowLength) {
     }
   }
 
-  // ctx.fillStyle = "ff0000";
-  // ctx.fillRect(5, 10, 5, 5);
-  // ctx.fillStyle = "green";
-  // ctx.fillRect(10, 5, 5, 5);
-  // ctx.fillStyle = "pink";
-  // ctx.fillRect(10, 10, 5, 5);
-
-  //   for (let i = 0; i < myCodeArray.length; i++) {
-  //     ctx.fillStyle = colors[myCodeArray[i]];
-  //     if (i % w == 0) {
-  //       j = j + 5;
-  //       k = 0;
-  //     } else {
-  //       k++;
-  //     }
-  //     ctx.fillRect(k, j, 5, 5);
-  //   }
-
   const imagePrint = document.getElementsByClassName("imagePrint");
   imagePrint[0].append(canvas);
-
-  //   const picArea = document.createElement("div");
-  //   picArea.id = "picArea";
-  //   picArea.style.width = w + "px";
-  //   const imagePrint = document.getElementsByClassName("imagePrint");
-  //   imagePrint[0].append(picArea);
-  //   //   console.log("Creating the picture");
-  //   for (let i = 0; i < myCodeArray.length; i++) {
-  //     if (myCodeArray[i] == 0 && colors[0] == null) {
-  //       //   console.log("0 spotted skipping", i);
-  //     } else {
-  //       //   console.log("Creating pixel");
-  //       const Pixel = document.createElement("div");
-  //       Pixel.classList.add("myPixel");
-  //       //   console.log(colors[myCodeArray[i]]);
-  //       Pixel.style.backgroundColor = colors[myCodeArray[i]];
-  //       picArea.appendChild(Pixel);
-  //     }
-  //   }
-  //   console.log("checking the myCodeArray", myCodeArray);
 }
 
 function roll() {
@@ -169,20 +126,6 @@ function roll() {
   for (let index = 17; index < 47; index++) {
     createPicture(index);
   }
-
-  // for (rowLength; rowLength < rowLength + 10; rowLength += pixelSize) {
-  //   console.log("for");
-  //   createPicture(rowLength);
-  // }
-
-  // for (let i = 100; i < 330; i++) {
-  //   createPicture(i);
-  // }
-  //   if (canUCreate) {
-  //     createPicture();
-  //     // for (let i = myWidth; i < 310; i + 5) {}
-  //     for (let i = 300; i < 330; i + 5) {}
-  //   } else console.log("MISSING COLORS.");
 }
 
 function save() {
@@ -249,30 +192,13 @@ textArea.addEventListener("input", (event) => {
   stringLength.innerText = `String's Length is: ${myCodeArray.length}`;
 });
 
-var linkText = document.createElement("a");
+var linkText = document.createElement("button");
 linkText.innerHTML = "Download image";
 let count = 0;
 
 linkText.addEventListener("click", () => {
   console.log("clicked");
   let mycanvas = document.querySelectorAll("canvas");
-  // setTimeout(() => {
-  //   var a = document.createElement("a");
-  //   a.href = mycanvas[count].toDataURL("image/png");
-  //   a.target = "_parent";
-  //   if ("download" in a) {
-  //     a.download = mycanvas.toDataURL("image/png");
-  //   }
-  //   (document.body || document.documentElement).appendChild(a);
-  //   if (a.click) {
-  //     a.click(); // The click method is supported by most browsers.
-  //   }
-  //   a.parentNode.removeChild(a);
-  // }, 1000);
-
-  // mycanvas.forEach((canvas, index) => {
-  //   console.log(canvas, index);
-  // });
 
   console.log("Hety", mycanvas);
   mycanvas.forEach((canvas, index) => {
@@ -297,44 +223,6 @@ linkText.addEventListener("click", () => {
     }, 1300);
   });
 });
-
-//   for (let count = 0; count < mycanvas.length; ) {
-//     console.log("for", count);
-//     setTimeout(() => {
-//       mycanvas[count].toDataURL("image/png");
-//       let link;
-//       link.href = mycanvas[count].toDataURL("image/png");
-//       link.download = "mypainting" + count + ".png";
-//       link.click();
-//       count++;
-//     }, 1000);
-//   }
-// });
-
-// linkText.addEventListener(
-//   "click",
-//   function (ev) {
-//     let mycanvas = document.querySelectorAll("canvas");
-
-//     console.log(mycanvas.length);
-//     c = 0;
-//     for (canvas of mycanvas) {
-//       console.log("Count", c);
-//       c++;
-//       console.log(canvas.toDataURL("image/png"));
-//       let link;
-//       link.href = canvas.toDataURL("image/png");
-//       console.log(link.href);
-//       link.download = "mypainting" + c + ".png";
-//       link.click();
-
-//       // let myLink = link.getAttribute("href");
-//       // window.open(myLink, "_blank");
-//     }
-//   },
-//   false
-// );
-// link.addEventListener("click");
 
 document.getElementById("userscolors").append(linkText);
 
