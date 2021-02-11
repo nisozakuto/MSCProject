@@ -100,7 +100,7 @@ function createPicture(rowLength) {
   // }
 
   //ADDING PIXELS
-  console.log("rowLength", rowLength);
+  // console.log("rowLength", rowLength);
   for (let i = 1; i < myCodeArray.length + 1; i++) {
     ctx.fillStyle = colors[myCodeArray[i]];
     ctx.fillRect(line, column, pixelSize, pixelSize);
@@ -161,7 +161,6 @@ function roll() {
   let rowLength = Math.round(Math.sqrt(myCodeArray.length));
   let stringLength = document.getElementById("stringLength");
   stringLength.innerText = `String's length is ${myCodeArray.length}`;
-  console.log("forTest", rowLength);
 
   for (let index = 17; index < 47; index++) {
     createPicture(index);
@@ -246,25 +245,94 @@ textArea.addEventListener("input", (event) => {
   stringLength.innerText = `String's Length is: ${myCodeArray.length}`;
 });
 
-function download() {
-  let dButton = document.getElementById("downloadButton");
-  console.log(document.querySelector("canvas").toDataURL("image/png"));
-  dButton.href = document.querySelector("canvas").toDataURL("image/png");
-  dButton.download = "mypainting.png";
-}
+var linkText = document.createElement("a");
+linkText.innerHTML = "Download image";
+let count = 0;
 
-var link = document.createElement("a");
-link.innerHTML = "Download image";
-link.addEventListener(
-  "click",
-  function (ev) {
-    // console.log(document.getElementById("thecanvas"));
-    link.href = document.querySelector("canvas").toDataURL("image/png");
-    link.download = "mypainting.png";
-  },
-  false
-);
-document.getElementById("article").append(link);
+linkText.addEventListener("click", () => {
+  console.log("clicked");
+  let mycanvas = document.querySelectorAll("canvas");
+  // setTimeout(() => {
+  //   var a = document.createElement("a");
+  //   a.href = mycanvas[count].toDataURL("image/png");
+  //   a.target = "_parent";
+  //   if ("download" in a) {
+  //     a.download = mycanvas.toDataURL("image/png");
+  //   }
+  //   (document.body || document.documentElement).appendChild(a);
+  //   if (a.click) {
+  //     a.click(); // The click method is supported by most browsers.
+  //   }
+  //   a.parentNode.removeChild(a);
+  // }, 1000);
+
+  // mycanvas.forEach((canvas, index) => {
+  //   console.log(canvas, index);
+  // });
+
+  console.log("Hety", mycanvas);
+  mycanvas.forEach((canvas, index) => {
+    var downloadUrl = canvas.toDataURL("image/png");
+    console.log("Hety", canvas);
+
+    setTimeout(function () {
+      var a = document.createElement("a");
+      a.href = downloadUrl;
+      a.target = "_parent";
+      if ("download" in a) {
+        a.download = downloadUrl;
+      }
+
+      (document.body || document.documentElement).appendChild(a);
+      if (a.click) {
+        a.click(); // The click method is supported by most browsers.
+      }
+      console.log(count);
+      a.parentNode.removeChild(a);
+      count++;
+    }, 1300);
+  });
+});
+
+//   for (let count = 0; count < mycanvas.length; ) {
+//     console.log("for", count);
+//     setTimeout(() => {
+//       mycanvas[count].toDataURL("image/png");
+//       let link;
+//       link.href = mycanvas[count].toDataURL("image/png");
+//       link.download = "mypainting" + count + ".png";
+//       link.click();
+//       count++;
+//     }, 1000);
+//   }
+// });
+
+// linkText.addEventListener(
+//   "click",
+//   function (ev) {
+//     let mycanvas = document.querySelectorAll("canvas");
+
+//     console.log(mycanvas.length);
+//     c = 0;
+//     for (canvas of mycanvas) {
+//       console.log("Count", c);
+//       c++;
+//       console.log(canvas.toDataURL("image/png"));
+//       let link;
+//       link.href = canvas.toDataURL("image/png");
+//       console.log(link.href);
+//       link.download = "mypainting" + c + ".png";
+//       link.click();
+
+//       // let myLink = link.getAttribute("href");
+//       // window.open(myLink, "_blank");
+//     }
+//   },
+//   false
+// );
+// link.addEventListener("click");
+
+document.getElementById("userscolors").append(linkText);
 
 function init() {
   singleColor.checked = true;
