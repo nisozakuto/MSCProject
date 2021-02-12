@@ -2,13 +2,18 @@ const userscolors = document.getElementById("userscolors");
 let colors = [],
   myCodeArray = [],
   myString = "niso",
-  pixelSize = 2,
+  pixelSize = 1,
   canIAddTheRange = true,
   canIAddThisSingle = true,
   startWidthValue,
   endWidthValue,
   isPassedRange = false,
   isThereString = false;
+
+function clearResults() {
+  alert("Clearing the results");
+  document.getElementsByClassName("imagePrint")[0].innerHTML = "";
+}
 
 function addingTheColor(number1, hex, number2) {
   if (number2 == undefined) {
@@ -55,6 +60,7 @@ function createDOMForTheColor(number1, colorPickerValue) {
   colorDiv.style.height = "20px";
   definedColor.append(colorDiv);
 }
+
 // ADD A COLOR
 function addAColor() {
   console.log("========== Adding a color ==========");
@@ -99,13 +105,12 @@ function breakString() {
 }
 
 function createPicture(rowLength) {
-  let currentColor;
   let line = 0,
     column = 0;
 
   var canvas = document.createElement("canvas");
-  canvas.style.width = "600px";
-  // canvas.style.width = STRING'S_LENGTH;
+  canvas.width = 1000;
+  canvas.height = 1000;
 
   canvas.style.border = "1px solid black";
   var ctx = canvas.getContext("2d");
@@ -114,19 +119,18 @@ function createPicture(rowLength) {
   for (let i = 1; i < myCodeArray.length + 1; i++) {
     ctx.fillStyle = colors[myCodeArray[i]];
     ctx.fillRect(line, column, pixelSize, pixelSize);
-
     line += pixelSize;
     if (i >= rowLength && i % rowLength == 0) {
       column += pixelSize;
       line = 0;
     }
   }
-
   const imagePrint = document.getElementsByClassName("imagePrint");
   imagePrint[0].append(canvas);
+  console.log("fininshed", rowLength);
 }
 
-function roll() {
+async function roll() {
   //First Check is passed range
   if (isPassedRange && isThereString) {
     console.log("LETS ROLL");
@@ -135,9 +139,12 @@ function roll() {
     let rowLength = Math.round(Math.sqrt(myCodeArray.length));
     let stringLength = document.getElementById("stringLength");
     stringLength.innerText = `String's length is ${myCodeArray.length}`;
+    let progressBar = document.getElementById("progressBar");
 
     for (let index = startWidthValue; index < endWidthValue; index++) {
       createPicture(index);
+      progressBar.value = 100 / ((endWidthValue - startWidthValue) / index);
+      console.log(index, "loading");
     }
   } else {
     alert("set the Range and enter an input");
