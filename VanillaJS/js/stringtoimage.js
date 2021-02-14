@@ -24,8 +24,9 @@ function clearResults() {
 }
 
 function addingTheColor(number1, hex, number2) {
+  console.log("add the color");
   if (number2 == undefined) {
-    console.log("adding only one number");
+    // Adding only one color
     if (!colors[number1]) {
       colors[number1] = hex;
     } else {
@@ -35,7 +36,8 @@ function addingTheColor(number1, hex, number2) {
       return;
     }
   } else if (number2) {
-    console.log("number2 is corretc");
+    canIAddTheRange = true;
+    // Adding a range of colors
     for (let i = number1; i <= number2; i++) {
       if (colors[i] != undefined) {
         canIAddTheRange = false;
@@ -81,6 +83,24 @@ function addARangeOfColor() {
     alert("Second number must be bigger than the first one");
   } else if (secondNumber > firstNumber) {
     console.log("Lets add");
+
+    // for (firstNumber; firstNumber <= secondNumber; firstNumber++) {
+    //   console.log(colors[firstNumber]);
+
+    //   // if (colors[firstNumber]) {
+    //   //   alert(`${firstNumber} is already added to your colors`);
+    //   //   return;
+    //   // }
+    // }
+    for (let i = firstNumber; i < secondNumber; i++) {
+      console.log(i);
+      if (colors[i] != undefined) {
+        console.log(i, "is not undefined. ", colors[i]);
+        alert(`${i} is already added to your colors`);
+        return;
+      }
+    }
+
     for (firstNumber; firstNumber <= secondNumber; firstNumber++) {
       addingTheColor(firstNumber, colorPicker.value);
       if (canIAddTheRange) {
@@ -94,17 +114,18 @@ function addARangeOfColor() {
 
 // ADD A COLOR
 function addAColor() {
-  if ((document.getElementById("rangeOfColor").checked = false)) {
+  if (singleColor.checked == true) {
     console.log("========== Adding a color ==========");
     let chosenColorNumber = parseInt(
       document.getElementById("colorNumber1").value,
       10
     );
-    addingTheColor(chosenColorNumber, colorPicker.value);
-    if (canIAddThisSingle) {
+    if (canIAddThisSingle && !colors[chosenColorNumber]) {
+      addingTheColor(chosenColorNumber, colorPicker.value);
       createDOMForTheColor(chosenColorNumber, colorPicker.value);
     }
-  } else {
+  } else if (rangeColor.checked == true) {
+    console.log("add a range");
     addARangeOfColor();
   }
 }
@@ -198,14 +219,14 @@ const singleColor = document.getElementById("singleColor");
 const rangeColor = document.getElementById("rangeOfColor");
 
 singleColor.addEventListener("click", () => {
-  if (rangeColor) {
+  if ((rangeColor.checked = true)) {
     rangeColor.checked = false;
   }
   document.getElementById("colorNumber2").disabled = true;
 });
 
 rangeColor.addEventListener("click", () => {
-  if (singleColor) {
+  if ((singleColor.checked = true)) {
     singleColor.checked = false;
   }
   document.getElementById("colorNumber2").disabled = false;
