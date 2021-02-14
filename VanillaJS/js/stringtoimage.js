@@ -1,3 +1,5 @@
+//https://www.geeksforgeeks.org/how-to-show-page-loading-div-until-the-page-has-finished-loading/
+
 const userscolors = document.getElementById("userscolors");
 let colors = [],
   myCodeArray = [],
@@ -61,21 +63,6 @@ function createDOMForTheColor(number1, colorPickerValue) {
   definedColor.append(colorDiv);
 }
 
-// ADD A COLOR
-function addAColor() {
-  console.log("========== Adding a color ==========");
-  let chosenColorNumber = parseInt(
-    document.getElementById("colorNumber").value,
-    10
-  );
-
-  addingTheColor(chosenColorNumber, colorPicker.value);
-  if (canIAddThisSingle) {
-    createDOMForTheColor(chosenColorNumber, colorPicker.value);
-  }
-}
-// ADD A COLOR FINISHED
-
 //RANGE OF COLOR START
 function addARangeOfColor() {
   let firstNumber = parseInt(document.getElementById("colorNumber1").value, 10);
@@ -98,6 +85,24 @@ function addARangeOfColor() {
   }
 }
 //RANGE OF COLOR END
+
+// ADD A COLOR
+function addAColor() {
+  if ((document.getElementById("rangeOfColor").checked = false)) {
+    console.log("========== Adding a color ==========");
+    let chosenColorNumber = parseInt(
+      document.getElementById("colorNumber1").value,
+      10
+    );
+    addingTheColor(chosenColorNumber, colorPicker.value);
+    if (canIAddThisSingle) {
+      createDOMForTheColor(chosenColorNumber, colorPicker.value);
+    }
+  } else {
+    addARangeOfColor();
+  }
+}
+// ADD A COLOR FINISHED
 
 function breakString() {
   let code = document.getElementById("string").value;
@@ -190,11 +195,12 @@ singleColor.addEventListener("click", () => {
   if (rangeColor) {
     rangeColor.checked = false;
   }
-  if (document.getElementsByClassName("addARangeOfColors")) {
-    document.getElementsByClassName("addARangeOfColors")[0].style.display =
-      "none";
-  }
-  document.getElementsByClassName("addANewColor")[0].style.display = "";
+  // if (document.getElementsByClassName("addARangeOfColors")) {
+  //   document.getElementsByClassName("addARangeOfColors")[0].style.display =
+  //     "none";
+  // }
+  // document.getElementsByClassName("addANewColor")[0].style.display = "";
+  document.getElementById("colorNumber2").disabled = true;
 });
 
 rangeColor.addEventListener("click", () => {
@@ -202,10 +208,11 @@ rangeColor.addEventListener("click", () => {
     singleColor.checked = false;
   }
 
-  if (document.getElementsByClassName("addANewColor")) {
-    document.getElementsByClassName("addANewColor")[0].style.display = "none";
-  }
-  document.getElementsByClassName("addARangeOfColors")[0].style.display = "";
+  // if (document.getElementsByClassName("addANewColor")) {
+  //   document.getElementsByClassName("addANewColor")[0].style.display = "none";
+  // }
+  // document.getElementsByClassName("addARangeOfColors")[0].style.display = "";
+  document.getElementById("colorNumber2").disabled = false;
 });
 //RADIO BUTTONS END
 
@@ -272,10 +279,12 @@ document.getElementById("userscolors").append(linkText);
 
 function init() {
   singleColor.checked = true;
-  if (document.getElementsByClassName("addARangeOfColors")) {
-    document.getElementsByClassName("addARangeOfColors")[0].style.display =
-      "none";
-  }
+  document.getElementById("colorNumber2").disabled = true;
+
+  // if (document.getElementsByClassName("addARangeOfColors")) {
+  //   document.getElementsByClassName("addARangeOfColors")[0].style.display =
+  //     "none";
+  // }
 }
 
 init();

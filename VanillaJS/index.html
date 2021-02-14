@@ -13,9 +13,10 @@
       <header>
         <h1>String to Image</h1>
       </header>
+      <!-- Inputs come here -->
       <section id="inputsSection">
-        <aside id="addColorSection">
-          <div id="colors">
+        <div id="inputDiv1">
+          <aside id="addColorSection" class="center">
             <div class="decisioning">
               <input
                 type="radio"
@@ -36,24 +37,25 @@
               <input id="colorPicker" value="#0028FFFF" data-jscolor="{}" />
 
               <div class="addANewColor">
-                <input id="colorNumber" type="number" value="1" min="0" />
+                <!-- <input id="colorNumber" type="number" value="1" min="0" /> -->
+                <input id="colorNumber1" type="number" value="1" min="0" />
+                <input id="colorNumber2" type="number" value="1" min="0" />
                 <button onclick="addAColor()" type="submit">Add</button>
               </div>
 
-              <div class="addARangeOfColors">
+              <!-- <div class="addARangeOfColors">
                 <input id="colorNumber1" type="number" value="1" min="0" />
                 <input id="colorNumber2" type="number" value="1" min="0" />
-              </div>
+                <button onclick="addARangeOfColor()" type="submit">Add</button>
+              </div> -->
             </div>
-          </div>
-        </aside>
-        <aside>
-          <input type="checkbox"/>
-          <label for="inverse">Inverse the image</label>
-        </aside>
-      </aside>
-        <aside id="widthSelection">
-          <div>
+            <div id="inverseCheckbox">
+              <input type="checkbox" />
+              <label for="inverse">Inverse the image</label>
+            </div>
+          </aside>
+
+          <aside id="widthSelection" class="center">
             <h3>Range section</h3>
             <label>Start Width</label>
             <input id="startWidth" type="number" value="100" min="100" />
@@ -62,37 +64,43 @@
             <button onclick="setRangeWidth()" type="submit">
               Set Width Range
             </button>
-          </div>
-          <div>
             <p id="setWidthText">width</p>
-          </div>
-        </aside>
-
-        <div id="formAside">
-          <form>
-            <label>Enter your string here</label>
-            <textarea type="number" id="string" name="string"></textarea>
-          </form>
-          <aside id="infoAndSave">
-            <h4 id="stringLength">String's length is</h4>
-            <p>
-              Save your current color selection or get your saved color
-              selection
-            </p>
-            <button onclick="save()">Save</button>
-            <button onclick="getColorsFromStorage()">Get</button>
           </aside>
         </div>
+
+        <div id="inputDiv2">
+          <aside id="formAside" class="center">
+            <form>
+              <label>Enter your string here</label>
+              <textarea type="number" id="string" name="string"></textarea>
+            </form>
+            <div id="infoAndSave">
+              <h4 id="stringLength">String's length is</h4>
+              <p>
+                Save your current color selection or get your saved color
+                selection
+              </p>
+              <button onclick="save()">Save</button>
+              <button onclick="getColorsFromStorage()">Get</button>
+            </div>
+          </aside>
+        </div>
+
+        <div>
+          <h2>Your colors</h2>
+          <div id="userscolors"></div>
+        </div>
+      </section>
+
+      <section id="buttonsSection" class="center">
         <progress id="progressBar" max="100" value="0"></progress>
         <button id="roll" onclick="roll()" type="submit">Create Images</button>
         <button id="clear" onclick="clearResults()" type="submit">Clear</button>
       </section>
 
-      <section>
-        <h2>Your colors</h2>
-        <div id="userscolors"></div>
-      </section>
+      <!-- Colors Section -->
 
+      <!-- Results will come here -->
       <article id="article">
         <div class="imagePrint"></div>
       </article>
@@ -100,6 +108,6 @@
 
     <script src="js/stringtoimage.js" async defer></script>
     <script src="js/jscolor.js"></script>
-    <footer>An MSC Webpage</footer>
+    <footer class="center">An MSC Webpage</footer>
   </body>
 </html>

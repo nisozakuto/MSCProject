@@ -53,17 +53,11 @@ html{
     background-color: #ffffff;
 }
 
-body{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
 .container{
     min-height: 97vh;
-
     width: 90vw;
     background-color: #efefef;
+    margin: 0 auto;
 }
 
 header h1{
@@ -76,6 +70,7 @@ h2{
     font-size: 1.5em;
     text-align: center;
 }
+
 
 .myPixel{
     width: 5px;
@@ -101,40 +96,50 @@ section{
     border-bottom: 1px solid seashell;
 }
 
-#inputsSection aside{
- 
-}
-
 /* inputsSection STARTS */
 #inputsSection{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
 }
+
+#inputDiv1, #inputDiv2{
+    min-width: 33%;
+    /* border-right: 1px solid;
+    border-left:1px solid;
+    border-color: black; */
+}
+
+#inverseCheckbox{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
 /* inputsSection ENDS */
 
 /* addingColorAside STARTS*/
 #addColorSection{
-    border-bottom: 1px solid black ;
-    padding:  1em 0;
+
 }
 
 .decisioning{
     display: flex;
     flex-direction: row;
-    /* justify-content: center; */
     margin-bottom:1em;
 }
+
 #colorNumber1, #colorNumber2, #colorNumber{
     width: 72px;    
 }
 /* addingColorAside ENDS */
 
-#widthSelection{
-    border: 1px solid black;
-    padding: 1em 0.5em;
-}
 /* widthSelection STARTS */
-
+#widthSelection{
+    padding: 1em 0.5em;  
+}
+#widthSelection input{    
+    
+}
 /* widthSelection ENDS */
 
 /* colorSelection STARTS */
@@ -145,13 +150,13 @@ section{
 /* colorSelection ENDS */
 
 
-
 /* FORM STARTS */
-#formAside
-{
+#formAside{}
+
+.center{
     display: flex;
-    flex-direction: row;
-    justify-content: space-around;
+    flex-direction: column;
+    align-items: center;    
 }
 
 form{
@@ -171,15 +176,18 @@ form textarea{
 /* infoAndSave */
 #infoAndSave{
     max-width:200px
+
 }
 #infoAndSave p {
     padding: 30px 0 20px 0;
 }
 /* infoAndSave */
 
-
-
 /* PROGRESS */
+#progressBar{
+    margin: 1em auto;
+}
+
 progress[value] {
     -webkit-appearance: none;
    appearance: none;
@@ -248,6 +256,12 @@ progress[value] {
 }
 /* ROLLBUTTON */
 
+
+
+#buttonsSection{
+
+}
+
 .numbers{
     display: flex;
     flex-direction: row;
@@ -281,6 +295,7 @@ progress[value] {
     align-items: center;
     width: fit-content;
     padding: 2px 0;
+   
 }
 
 #niso p{
