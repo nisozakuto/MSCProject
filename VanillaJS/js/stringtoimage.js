@@ -16,6 +16,7 @@ let colors = [],
 const getColorsFromStorageButton = document.getElementById(
   "getColorsFromStorage"
 );
+const createImagesButton = document.getElementById("roll");
 
 function clearResults() {
   alert("Clearing the results");
@@ -145,7 +146,6 @@ async function roll() {
   if (isPassedRange && isThereString) {
     console.log("LETS ROLL");
     breakString();
-    //   colorDeclarationCheck();
     let rowLength = Math.round(Math.sqrt(myCodeArray.length));
     let stringLength = document.getElementById("stringLength");
     stringLength.innerText = `String's length is ${myCodeArray.length}`;
@@ -201,11 +201,6 @@ singleColor.addEventListener("click", () => {
   if (rangeColor) {
     rangeColor.checked = false;
   }
-  // if (document.getElementsByClassName("addARangeOfColors")) {
-  //   document.getElementsByClassName("addARangeOfColors")[0].style.display =
-  //     "none";
-  // }
-  // document.getElementsByClassName("addANewColor")[0].style.display = "";
   document.getElementById("colorNumber2").disabled = true;
 });
 
@@ -213,11 +208,6 @@ rangeColor.addEventListener("click", () => {
   if (singleColor) {
     singleColor.checked = false;
   }
-
-  // if (document.getElementsByClassName("addANewColor")) {
-  //   document.getElementsByClassName("addANewColor")[0].style.display = "none";
-  // }
-  // document.getElementsByClassName("addARangeOfColors")[0].style.display = "";
   document.getElementById("colorNumber2").disabled = false;
 });
 //RADIO BUTTONS END
@@ -230,7 +220,8 @@ textArea.addEventListener("input", (event) => {
 });
 
 var linkText = document.createElement("button");
-linkText.innerHTML = "Download image";
+linkText.innerHTML = "Download Image(s)";
+linkText.id = "linkText";
 let count = 0;
 
 linkText.addEventListener("click", () => {
@@ -295,11 +286,6 @@ getColorsFromStorageButton.addEventListener("click", () => {
 function init() {
   singleColor.checked = true;
   document.getElementById("colorNumber2").disabled = true;
-
-  // if (document.getElementsByClassName("addARangeOfColors")) {
-  //   document.getElementsByClassName("addARangeOfColors")[0].style.display =
-  //     "none";
-  // }
 }
 
 init();

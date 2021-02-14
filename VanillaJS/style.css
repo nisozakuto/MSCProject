@@ -263,8 +263,9 @@ progress[value]::-webkit-progress-value::after {
 /* PROGRESS */
 
 /* ROLLBUTTON AND CLEAR */
-#roll, #clear{
-    width: 200px;
+#roll, #clear, #linkText{
+    width: 72px;
+    height: 72px;
     margin: 0 auto;
     margin-bottom: 10px;
 }
@@ -318,11 +319,8 @@ progress[value]::-webkit-progress-value::after {
     flex-direction: column;
 }
 
-#userscolors button{
-    width: 200px;
-    height: 3em;
-    margin: 0 auto;
-    /* background-color:#576E9A;     */
+#linkText{
+    margin: 0 auto; 
 }
 
 canvas{
