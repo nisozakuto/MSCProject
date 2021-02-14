@@ -10,7 +10,12 @@ let colors = [],
   startWidthValue,
   endWidthValue,
   isPassedRange = false,
-  isThereString = false;
+  isThereString = false,
+  isSavedColorsLoaded = false;
+
+const getColorsFromStorageButton = document.getElementById(
+  "getColorsFromStorage"
+);
 
 function clearResults() {
   alert("Clearing the results");
@@ -161,6 +166,7 @@ function save() {
 }
 
 function getColorsFromStorage() {
+  isSavedColorsLoaded = true;
   colors = localStorage.getItem("colors");
   colors = JSON.parse(colors);
   console.log(colors);
@@ -276,6 +282,15 @@ function setRangeWidth() {
 // RANGE SET FINISHED
 
 document.getElementById("userscolors").append(linkText);
+
+getColorsFromStorageButton.addEventListener("click", () => {
+  if (!isSavedColorsLoaded) {
+    getColorsFromStorage();
+  }
+  if (isSavedColorsLoaded) {
+    getColorsFromStorageButton.disabled = true;
+  }
+});
 
 function init() {
   singleColor.checked = true;

@@ -55,9 +55,14 @@ html{
 
 .container{
     min-height: 97vh;
-    width: 90vw;
-    background-color: #efefef;
     margin: 0 auto;
+}
+
+header{
+padding:1em 0 2em 0;
+	-webkit-box-shadow: 0 4px 6px -6px black;
+	   -moz-box-shadow: 0 4px 6px -6px black;
+	        box-shadow: 0 4px 6px -6px black;
 }
 
 header h1{
@@ -71,6 +76,13 @@ h2{
     text-align: center;
 }
 
+h3{
+    font-size: 1.4em;
+}
+
+h4{
+    font-size: 1.3em;
+}
 
 .myPixel{
     width: 5px;
@@ -80,6 +92,7 @@ h2{
 article{
     display: flex;
     flex-direction: column;
+    margin: 0 3em ;
 }
 
 .imagePrint{
@@ -92,12 +105,14 @@ article{
 section{
     display: flex;
     flex-direction: column;
-    padding-bottom: 40px;
-    border-bottom: 1px solid seashell;
+    padding-bottom: 40px; 
 }
 
 /* inputsSection STARTS */
 #inputsSection{
+    padding-top: 2em;
+    width: 90vw;
+    margin: 0 auto;
     display: flex;
     flex-direction: row;
 }
@@ -114,7 +129,6 @@ section{
     flex-direction: row;
     justify-content: center;
 }
-
 /* inputsSection ENDS */
 
 /* addingColorAside STARTS*/
@@ -196,13 +210,13 @@ progress[value] {
     margin:3em;
   }
 
-  progress[value]::-webkit-progress-bar {
+progress[value]::-webkit-progress-bar {
     background-color: #eee;
     border-radius: 2px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
   }
 
-  progress[value]::-webkit-progress-value {
+progress[value]::-webkit-progress-value {
     background-image:
          -webkit-linear-gradient(-45deg, 
                                  transparent 33%, rgba(0, 0, 0, .1) 33%, 
@@ -216,14 +230,14 @@ progress[value] {
       background-size: 35px 20px, 100% 100%, 100% 100%;
   }
 
-  progress[value]::-webkit-progress-value::before {
+progress[value]::-webkit-progress-value::before {
     content: '80%';
     position: absolute;
     right: 0;
     top: -125%;
   }
 
-  progress[value]::-webkit-progress-value::after {
+progress[value]::-webkit-progress-value::after {
     content: '';
     width: 6px;
     height: 6px;
@@ -234,11 +248,11 @@ progress[value] {
     background-color: white;
   }
 
-  @-webkit-keyframes animate-stripes {
+@-webkit-keyframes animate-stripes {
     100% { background-position: -100px 0px; }
  }
  
- @keyframes animate-stripes {
+@keyframes animate-stripes {
     100% { background-position: -100px 0px; }
  }
  -webkit-animation: animate-stripes 5s linear infinite;
@@ -256,11 +270,7 @@ progress[value] {
 }
 /* ROLLBUTTON */
 
-
-
-#buttonsSection{
-
-}
+#buttonsSection{}
 
 .numbers{
     display: flex;
@@ -306,33 +316,37 @@ progress[value] {
 #userscolors{
     display: flex;
     flex-direction: column;
-    align-items: center;
 }
 
+#userscolors button{
+    width: 200px;
+    height: 3em;
+    margin: 0 auto;
+    /* background-color:#576E9A;     */
+}
 
 canvas{
     margin-bottom: 10px;
 }
-
 
 .canvas__container { 
     height: 100%; 
     position: relative; 
     width: 100%; 
   } 
-  .canvas__canvas { 
+.canvas__canvas { 
     height: 100%; 
     position: relative; 
     width: 100%; 
     z-index: 1; 
-  } 
-  .canvas__mirror { 
+} 
+.canvas__mirror { 
     height: 100%; 
     left: 0; 
     position: absolute; 
     top: 0; 
     width: 100%;  
-  } 
+} 
 
 #picArea{
     display: flex;
@@ -340,4 +354,4 @@ canvas{
     margin: 10px;
     width: 1000px;
     border: 1px solid red;
-  }
+}
