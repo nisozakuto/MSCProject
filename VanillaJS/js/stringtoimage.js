@@ -83,15 +83,6 @@ function addARangeOfColor() {
     alert("Second number must be bigger than the first one");
   } else if (secondNumber > firstNumber) {
     console.log("Lets add");
-
-    // for (firstNumber; firstNumber <= secondNumber; firstNumber++) {
-    //   console.log(colors[firstNumber]);
-
-    //   // if (colors[firstNumber]) {
-    //   //   alert(`${firstNumber} is already added to your colors`);
-    //   //   return;
-    //   // }
-    // }
     for (let i = firstNumber; i < secondNumber; i++) {
       console.log(i);
       if (colors[i] != undefined) {
