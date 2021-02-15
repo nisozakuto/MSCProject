@@ -11,7 +11,8 @@ let colors = [],
   endWidthValue,
   isPassedRange = false,
   isThereString = false,
-  isSavedColorsLoaded = false;
+  isSavedColorsLoaded = false,
+  isWidthSet = false;
 
 const getColorsFromStorageButton = document.getElementById(
   "getColorsFromStorage"
@@ -153,7 +154,7 @@ function createPicture(rowLength) {
   console.log("fininshed", rowLength);
 }
 
-async function roll() {
+function roll() {
   //First Check is passed range
   if (isPassedRange && isThereString) {
     console.log("LETS ROLL");
@@ -164,17 +165,57 @@ async function roll() {
     let progressBar = document.getElementById("progressBar");
 
     for (let index = startWidthValue; index < endWidthValue; index++) {
+      console.log(startWidthValue, endWidthValue);
       createPicture(index);
-      progressBar.value = 100 / ((endWidthValue - startWidthValue) / index);
       console.log(index, "loading");
     }
   } else {
     alert("set the Range and enter an input");
   }
+  console.log(linkText);
+  linkText.disabled = false;
+  let resultAmount = endWidthValue - startWidthValue;
+
+  for (let i = 10; i < resultAmount; i = i + 10) {
+    let downloadButton = document.createElement("button");
+    document.getElementById("inputsSection").after(downloadButton);
+    downloadButton.innerText = ("Download Button for the ", i);
+
+    downloadButton.addEventListener("click", () => {
+      console.log("one of the buttons");
+      let mycanvas = document.querySelectorAll("canvas");
+      let index = i;
+      console.log(mycanvas);
+      console.log(mycanvas[i]);
+      console.log(mycanvas[i].toDataURL("image/png"));
+
+      console.log("i", i);
+      for (index; index < index + 10; index++) {
+        var downloadUrl = mycanvas[index].toDataURL("image/png");
+        var a = document.createElement("a");
+        a.href = downloadUrl;
+        a.target = "_parent";
+        if ("download" in a) {
+          a.download = "File_" + index;
+        }
+        (document.body || document.documentElement).appendChild(a);
+        if (a.click) {
+          a.click(); // The click method is supported by most browsers.
+        }
+        a.parentNode.removeChild(a);
+      }
+    });
+  }
 }
 
 function save() {
-  localStorage.setItem("colors", JSON.stringify(colors));
+  let result = confirm("Are you sure you want to save?");
+  if (result) {
+    if (colors.length == 0) alert("Please first add colors");
+    else localStorage.setItem("colors", JSON.stringify(colors));
+  } else {
+    console.log("Was not saved");
+  }
 }
 
 function getColorsFromStorage() {
@@ -231,7 +272,7 @@ textArea.addEventListener("input", (event) => {
   if (myCodeArray.length > 0) isThereString = true;
 });
 
-var linkText = document.createElement("button");
+let linkText = document.createElement("button");
 linkText.innerHTML = "Download Image(s)";
 linkText.id = "linkText";
 let count = 0;
@@ -279,6 +320,8 @@ function setRangeWidth() {
   } else {
     console.log("+++", startWidthValue, endWidthValue);
     setWidthText.innerText = `Set width is between ${startWidthValue} - ${endWidthValue}`;
+    isWidthSet = true;
+    createImagesButton.disabled = false;
     return (isPassedRange = true);
   }
 }
@@ -298,6 +341,8 @@ getColorsFromStorageButton.addEventListener("click", () => {
 function init() {
   singleColor.checked = true;
   document.getElementById("colorNumber2").disabled = true;
+  linkText.disabled = true;
+  createImagesButton.disabled = true;
 }
 
 init();

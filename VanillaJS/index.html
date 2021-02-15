@@ -67,24 +67,21 @@
               <label>Enter your string here</label>
               <textarea type="number" id="string" name="string"></textarea>
             </form>
-            <div id="infoAndSave">
-              <h4 id="stringLength">String's length is</h4>
-              <p>
-                Save your current color selection or get your saved color
-                selection
-              </p>
-              <button onclick="save()">Save</button>
-              <button
-                onclick="getColorsFromStorage()"
-                id="getColorsFromStorage"
-              >
-                Get
-              </button>
-            </div>
+            <h4 id="stringLength">String's length is</h4>
           </aside>
         </div>
 
         <div>
+          <div id="infoAndSave">
+            <p>
+              Save your current color selection or get your saved color
+              selection
+            </p>
+            <button onclick="save()">Save</button>
+            <button onclick="getColorsFromStorage()" id="getColorsFromStorage">
+              Get
+            </button>
+          </div>
           <h2>Your colors</h2>
           <div id="userscolors"></div>
         </div>
