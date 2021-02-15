@@ -12,7 +12,8 @@ let colors = [],
   isPassedRange = false,
   isThereString = false,
   isSavedColorsLoaded = false,
-  isWidthSet = false;
+  isWidthSet = false,
+  mycanvas;
 
 const getColorsFromStorageButton = document.getElementById(
   "getColorsFromStorage"
@@ -151,7 +152,6 @@ function createPicture(rowLength) {
   }
   const imagePrint = document.getElementsByClassName("imagePrint");
   imagePrint[0].append(canvas);
-  console.log("fininshed", rowLength);
 }
 
 function roll() {
@@ -165,9 +165,7 @@ function roll() {
     let progressBar = document.getElementById("progressBar");
 
     for (let index = startWidthValue; index < endWidthValue; index++) {
-      console.log(startWidthValue, endWidthValue);
       createPicture(index);
-      console.log(index, "loading");
     }
   } else {
     alert("set the Range and enter an input");
@@ -176,36 +174,36 @@ function roll() {
   linkText.disabled = false;
   let resultAmount = endWidthValue - startWidthValue;
 
-  for (let i = 10; i < resultAmount; i = i + 10) {
-    let downloadButton = document.createElement("button");
-    document.getElementById("inputsSection").after(downloadButton);
-    downloadButton.innerText = ("Download Button for the ", i);
+  setTimeout(() => {
+    mycanvas = document.querySelectorAll("canvas");
+    console.log(mycanvas);
+    for (let i = 0; i < resultAmount; i = i + 10) {
+      let downloadButton = document.createElement("button");
+      document.getElementById("inputsSection").after(downloadButton);
+      downloadButton.innerText = "Download " + i;
+      downloadButton.addEventListener("click", () => {
+        console.log("one of the buttons");
+        let index = i;
+        console.log(index, "index su");
 
-    downloadButton.addEventListener("click", () => {
-      console.log("one of the buttons");
-      let mycanvas = document.querySelectorAll("canvas");
-      let index = i;
-      console.log(mycanvas);
-      console.log(mycanvas[i]);
-      console.log(mycanvas[i].toDataURL("image/png"));
-
-      console.log("i", i);
-      for (index; index < index + 10; index++) {
-        var downloadUrl = mycanvas[index].toDataURL("image/png");
-        var a = document.createElement("a");
-        a.href = downloadUrl;
-        a.target = "_parent";
-        if ("download" in a) {
-          a.download = "File_" + index;
+        for (index; index < i + 10; index++) {
+          console.log(index, "index bu");
+          var downloadUrl = mycanvas[index].toDataURL("image/png");
+          var a = document.createElement("a");
+          a.href = downloadUrl;
+          a.target = "_parent";
+          if ("download" in a) {
+            a.download = "File_" + index;
+          }
+          (document.body || document.documentElement).appendChild(a);
+          if (a.click) {
+            a.click(); // The click method is supported by most browsers.
+          }
+          a.parentNode.removeChild(a);
         }
-        (document.body || document.documentElement).appendChild(a);
-        if (a.click) {
-          a.click(); // The click method is supported by most browsers.
-        }
-        a.parentNode.removeChild(a);
-      }
-    });
-  }
+      });
+    }
+  }, 3000);
 }
 
 function save() {
