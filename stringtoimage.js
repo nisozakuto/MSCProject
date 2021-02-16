@@ -134,7 +134,6 @@ function breakString() {
 }
 
 function createPicture(rowLength) {
-  console.log("ROW ", rowLength);
   var canvas = document.createElement("canvas");
   canvas.width = canvasWidth;
   canvas.height = canvasHeigth;
@@ -159,7 +158,6 @@ function createPicture(rowLength) {
       }
     }
   } else {
-    console.log("non-inverse creation");
     column = line = 0;
 
     canvas.style.border = "1px solid black";
@@ -167,8 +165,6 @@ function createPicture(rowLength) {
 
     //ADDING PIXELS
     for (let i = 1; i < myCodeArray.length + 1; i++) {
-      console.log("non-inverse", column, line, pixelSize, pixelSize);
-
       ctx.fillStyle = colors[myCodeArray[i]];
       ctx.fillRect(column, line, pixelSize, pixelSize);
       column += pixelSize;
@@ -198,16 +194,14 @@ function roll() {
       createPicture(index);
     }
 
-    console.log(linkText);
-    linkText.disabled = false;
     let resultAmount = endWidthValue - startWidthValue;
 
     setTimeout(() => {
       mycanvas = document.querySelectorAll("canvas");
       for (let i = 0; i < resultAmount; i = i + 10) {
         let downloadButton = document.createElement("button");
-        document.getElementById("inputsSection").after(downloadButton);
-        downloadButton.innerText = "Download " + i;
+        document.getElementById("buttonsSection").after(downloadButton);
+        downloadButton.innerText = `Download ${i} to ${i + 10}`;
         downloadButton.addEventListener("click", () => {
           console.log("one of the buttons");
           let index = i;
@@ -323,8 +317,6 @@ function setRangeWidth() {
 }
 // RANGE SET FINISHED
 
-document.getElementById("userscolors").append(linkText);
-
 getColorsFromStorageButton.addEventListener("click", () => {
   if (!isSavedColorsLoaded) {
     getColorsFromStorage();
@@ -341,7 +333,6 @@ checkbox.addEventListener("change", () => {
 function init() {
   singleColor.checked = true;
   document.getElementById("colorNumber2").disabled = true;
-  linkText.disabled = true;
   createImagesButton.disabled = true;
 }
 

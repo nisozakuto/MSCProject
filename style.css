@@ -111,11 +111,8 @@ article{
     flex-direction: row;
 }
 
-#inputDiv1, #inputDiv2{
+#inputDiv1, #inputDiv2, #inputDiv3{
     min-width: 33%;
-    /* border-right: 1px solid;
-    border-left:1px solid;
-    border-color: black; */
 }
 
 #inverseCheckbox{
@@ -285,7 +282,8 @@ progress[value]::-webkit-progress-value::after {
 }
 
 #colorPicker {
-    width: 100px
+    width: 100px;
+    max-height: 20px;
 }
 
 #chooseColorNumber{
