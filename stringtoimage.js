@@ -15,10 +15,15 @@ let colors = [],
   isSavedColorsLoaded = false,
   isWidthSet = false,
   isInverse = false,
+  deleteTheZeros = true,
+  amountOfZeros,
   mycanvas,
   canvasWidth = 1000, //DONT CHANGE THIS VALUE
   canvasHeigth = 1000, //DONT CHANGE THIS VALUE
   imageNumberForThePage;
+
+let indices;
+var idx;
 
 document.onreadystatechange = function () {
   if (document.readyState !== "complete") {
@@ -163,8 +168,25 @@ function addAColor() {
 // ADD A COLOR FINISHED
 
 function breakString() {
+  amountOfZeros = 0;
   let code = document.getElementById("string").value;
   myCodeArray = code.split(/\n/);
+
+  if (deleteTheZeros) {
+    for (var i = 0; i < myCodeArray.length; i++) {
+      console.log(myCodeArray[i], i);
+
+      if (myCodeArray[i] === "0") {
+        console.log(myCodeArray[i], i);
+        amountOfZeros++;
+        myCodeArray.splice(i, 1);
+        i--;
+      }
+    }
+  }
+  console.log(amountOfZeros);
+  document.getElementById("foundZeros").innerText +=
+    " " + parseInt(amountOfZeros);
 }
 
 function createPicture(rowLength) {
@@ -337,7 +359,7 @@ const textArea = document.querySelector("textarea");
 textArea.addEventListener("input", (event) => {
   breakString();
   stringLength.innerText = `String's Length is: ${myCodeArray.length}`;
-  if (myCodeArray.length > 0) isThereString = true;
+  if (myCodeArray.length >= 0) isThereString = true;
 });
 
 // RANGE SET
