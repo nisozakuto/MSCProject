@@ -329,6 +329,11 @@ canvas{
     margin-bottom: 10px;
 }
 
+#canvasH2{
+    text-align: center;
+    font-size: 1.5em;
+}
+
 .canvas__container { 
     height: 100%; 
     position: relative; 

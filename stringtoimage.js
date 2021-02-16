@@ -16,7 +16,8 @@ let colors = [],
   isInverse = false,
   mycanvas,
   canvasWidth = 1000, //DONT CHANGE THIS VALUE
-  canvasHeigth = 1000; //DONT CHANGE THIS VALUE
+  canvasHeigth = 1000, //DONT CHANGE THIS VALUE
+  imageNumberForThePage;
 
 document.onreadystatechange = function () {
   if (document.readyState !== "complete") {
@@ -144,7 +145,11 @@ function breakString() {
 }
 
 function createPicture(rowLength) {
-  var canvas = document.createElement("canvas");
+  let canvasNumberh2 = document.createElement("h2");
+  canvasNumberh2.innerText = `Image number: ${imageNumberForThePage}`;
+  canvasNumberh2.id = "canvasH2";
+
+  let canvas = document.createElement("canvas");
   canvas.width = canvasWidth;
   canvas.height = canvasHeigth;
   let line, column;
@@ -188,7 +193,9 @@ function createPicture(rowLength) {
 
   //These two lines are same for both inverse and normal
   const imagePrint = document.getElementsByClassName("imagePrint");
+  imagePrint[0].append(canvasNumberh2);
   imagePrint[0].append(canvas);
+
   document.querySelector("#loader").style.display = "none";
   document.querySelector("body").style.visibility = "visible";
 }
@@ -198,6 +205,7 @@ function roll() {
 
   if (isPassedRange && isThereString) {
     console.log("LETS ROLL");
+    imageNumberForThePage = 1;
     breakString();
     let stringLength = document.getElementById("stringLength");
     stringLength.innerText = `String's length is ${myCodeArray.length}`;
@@ -205,6 +213,7 @@ function roll() {
     for (let index = startWidthValue; index < endWidthValue; index++) {
       setTimeout(() => {
         createPicture(index);
+        imageNumberForThePage++;
       }, 1000);
     }
 
