@@ -140,7 +140,7 @@ function addARangeOfColor() {
         colorDiv.style.height = "20px";
         definedColor.append(colorDiv);
 
-        isRangeAdded = true;
+        // isRangeAdded = fas;
         // createDOMForTheColor(firstNumber, colorPicker.value);
       }
     }
