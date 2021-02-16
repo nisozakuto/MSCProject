@@ -6,7 +6,6 @@ let colors = [],
   myString = "niso",
   pixelSize = 1, //DONT CHANGE THIS VALUE
   canIAddTheRange = true,
-  isRangeAdded = false,
   canIAddThisSingle = true,
   countstartWidthValue,
   endWidthValue,
@@ -116,7 +115,7 @@ function addARangeOfColor() {
     }
 
     for (firstNumber; firstNumber <= secondNumber; firstNumber++) {
-      if (canIAddTheRange && !isRangeAdded) {
+      if (canIAddTheRange) {
         addingTheColor(firstNumber, colorPicker.value);
 
         const definedColor = document.createElement("div");
@@ -139,9 +138,6 @@ function addARangeOfColor() {
         colorDiv.style.width = "20px";
         colorDiv.style.height = "20px";
         definedColor.append(colorDiv);
-
-        // isRangeAdded = fas;
-        // createDOMForTheColor(firstNumber, colorPicker.value);
       }
     }
   }
