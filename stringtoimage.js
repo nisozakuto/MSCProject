@@ -19,7 +19,8 @@ let colors = [],
   mycanvas,
   canvasWidth = 1000, //DONT CHANGE THIS VALUE
   canvasHeigth = 1000, //DONT CHANGE THIS VALUE
-  imageNumberForThePage;
+  imageNumberForThePage,
+  isCountingZeros = false;
 
 let indices;
 var idx;
@@ -39,6 +40,7 @@ const getColorsFromStorageButton = document.getElementById(
 );
 const createImagesButton = document.getElementById("roll");
 const checkbox = document.getElementById("checkbox");
+const zeroStatus = document.getElementById("isCountingZeros");
 
 function clearResults() {
   alert("Clearing the results");
@@ -160,11 +162,23 @@ function addAColor() {
     console.log("add a range");
     addARangeOfColor();
   }
+  zeroCheck();
 }
 // ADD A COLOR FINISHED
 
+function zeroCheck() {
+  if (colors[0] == undefined) {
+    isCountingZeros = false;
+    zeroStatus.innerText = `Removing 0s from the list`;
+  } else {
+    isCountingZeros = true;
+    zeroStatus.innerText = `Keeping 0s in the list`;
+  }
+}
+
 function breakString() {
   amountOfZeros = 0;
+  zeroCheck();
   let code = document.getElementById("string").value;
   myCodeArray = code.split(/\n/);
 
@@ -181,8 +195,9 @@ function breakString() {
     }
   }
   console.log(amountOfZeros);
-  document.getElementById("foundZeros").innerText +=
-    " " + parseInt(amountOfZeros);
+  document.getElementById("foundZeros").innerText = `Found 0s: ${parseInt(
+    amountOfZeros
+  )}`;
 }
 
 function createPicture(rowLength) {
@@ -243,9 +258,9 @@ function createPicture(rowLength) {
 
 function roll() {
   //First Check is passed range
-
   if (isPassedRange && isThereString) {
     console.log("LETS ROLL");
+    zeroCheck();
     imageNumberForThePage = 1;
     breakString();
     let stringLength = document.getElementById("stringLength");
