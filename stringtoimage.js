@@ -279,13 +279,11 @@ function roll() {
       mycanvas = document.querySelectorAll("canvas");
       for (let i = 0; i < resultAmount; i = i + 10) {
         let downloadButton = document.createElement("button");
-        document.getElementById("buttonsSection").after(downloadButton);
-        downloadButton.innerText = `Download ${i} to ${i + 10}`;
+        document.getElementById("buttonsSection").append(downloadButton);
+        downloadButton.innerText = `Download ${i + 1} to ${i + 10}`;
         downloadButton.addEventListener("click", () => {
           console.log("one of the buttons");
           let index = i;
-          console.log(index, "index su");
-
           for (index; index < i + 10; index++) {
             console.log(index, "index bu");
             var downloadUrl = mycanvas[index].toDataURL("image/png");
