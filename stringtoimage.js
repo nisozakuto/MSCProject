@@ -157,7 +157,7 @@ function createPicture(rowLength) {
     var ctx = canvas.getContext("2d");
 
     // ADDING PIXELS
-    for (let i = 1; i < myCodeArray.length + 1; i++) {
+    for (let i = 0; i < myCodeArray.length; i++) {
       column -= pixelSize;
       ctx.fillStyle = colors[myCodeArray[i]];
       ctx.fillRect(column, line, pixelSize, pixelSize);
@@ -174,7 +174,7 @@ function createPicture(rowLength) {
     var ctx = canvas.getContext("2d");
 
     //ADDING PIXELS
-    for (let i = 1; i < myCodeArray.length + 1; i++) {
+    for (let i = 0; i < myCodeArray.length; i++) {
       ctx.fillStyle = colors[myCodeArray[i]];
       ctx.fillRect(column, line, pixelSize, pixelSize);
       column += pixelSize;
