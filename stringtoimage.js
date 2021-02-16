@@ -22,9 +22,6 @@ let colors = [],
   imageNumberForThePage,
   isCountingZeros = false;
 
-let indices;
-var idx;
-
 document.onreadystatechange = function () {
   if (document.readyState !== "complete") {
     document.querySelector("body").style.visibility = "hidden";
@@ -108,40 +105,30 @@ function addARangeOfColor() {
   } else if (secondNumber > firstNumber) {
     console.log("Lets add");
     for (let i = firstNumber; i <= secondNumber; i++) {
-      console.log(i);
       if (colors[i] != undefined) {
-        console.log(i, "is not undefined. ", colors[i]);
         alert(`${i} is already added to your colors`);
         return;
       }
     }
-
-    for (firstNumber; firstNumber <= secondNumber; firstNumber++) {
+    for (let i = firstNumber; i <= secondNumber; i++) {
       if (canIAddTheRange) {
-        addingTheColor(firstNumber, colorPicker.value);
-
-        const definedColor = document.createElement("div");
-        definedColor.id = myString;
-        userscolors.append(definedColor);
-
-        const myColorNamelabel = document.createElement("p");
-        myColorNamelabel.innerText = "Colors HEX are: ";
-        definedColor.append(myColorNamelabel);
-        myColorNamelabel.innerText +=
-          " " +
-          colorPicker.value +
-          " and the color: " +
-          firstNumber +
-          " " +
-          secondNumber;
-
-        const colorDiv = document.createElement("div");
-        colorDiv.style.backgroundColor = colorPicker.value;
-        colorDiv.style.width = "20px";
-        colorDiv.style.height = "20px";
-        definedColor.append(colorDiv);
+        addingTheColor(i, colorPicker.value);
       }
     }
+    const definedColor = document.createElement("div");
+    definedColor.id = myString;
+    userscolors.append(definedColor);
+
+    const myColorNamelabel = document.createElement("p");
+    myColorNamelabel.innerText = "Colors HEX are: ";
+    definedColor.append(myColorNamelabel);
+    myColorNamelabel.innerText += ` ${colorPicker.value} and the color: ${firstNumber} ${secondNumber}`;
+
+    const colorDiv = document.createElement("div");
+    colorDiv.style.backgroundColor = colorPicker.value;
+    colorDiv.style.width = "20px";
+    colorDiv.style.height = "20px";
+    definedColor.append(colorDiv);
   }
 }
 //RANGE OF COLOR END
@@ -157,6 +144,8 @@ function addAColor() {
     if (canIAddThisSingle && !colors[chosenColorNumber]) {
       addingTheColor(chosenColorNumber, colorPicker.value);
       createDOMForTheColor(chosenColorNumber, colorPicker.value);
+    } else {
+      alert("This color is already in your list");
     }
   } else if (rangeColor.checked == true) {
     console.log("add a range");
@@ -266,7 +255,7 @@ function roll() {
     let stringLength = document.getElementById("stringLength");
     stringLength.innerText = `String's length is ${myCodeArray.length}`;
 
-    for (let index = startWidthValue; index < endWidthValue; index++) {
+    for (let index = startWidthValue; index <= endWidthValue; index++) {
       setTimeout(() => {
         createPicture(index);
         imageNumberForThePage++;
@@ -321,7 +310,6 @@ function getColorsFromStorage() {
   isSavedColorsLoaded = true;
   colors = localStorage.getItem("colors");
   colors = JSON.parse(colors);
-  console.log(colors);
   if (colors) {
     for (let i = 0; i < colors.length; i++) {
       if (colors[i] != null) {
@@ -379,13 +367,11 @@ function setRangeWidth() {
   (startWidthValue = parseInt(startWidth.value, 10)),
     (endWidthValue = parseInt(endWidth.value, 10));
 
-  console.log(startWidthValue, endWidthValue);
   if (startWidthValue >= endWidthValue) {
     alert("Start width can not be greater or equal than end width");
     startWidthValue = endWidthValue;
     return (isPassedRange = false);
   } else {
-    console.log("+++", startWidthValue, endWidthValue);
     setWidthText.innerText = `Set width is between ${startWidthValue} - ${endWidthValue}`;
     isWidthSet = true;
     createImagesButton.disabled = false;

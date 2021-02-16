@@ -51,23 +51,25 @@
           </aside>
           <hr />
           <aside id="widthSelection" class="center">
-            <h3>Range section</h3>
-            <label>Start Width</label>
-            <input
-              id="startWidth"
-              type="number"
-              value="100"
-              min="50"
-              max="1000"
-            />
-            <label>End Width</label>
-            <input
-              id="endWidth"
-              type="number"
-              value="100"
-              min="50"
-              max="1000"
-            />
+            <h2>Range section</h2>
+            <div>
+              <label>Start Width</label>
+              <input
+                id="startWidth"
+                type="number"
+                value="100"
+                min="50"
+                max="1000"
+              />
+              <label>End Width</label>
+              <input
+                id="endWidth"
+                type="number"
+                value="100"
+                min="50"
+                max="1000"
+              />
+            </div>
             <button onclick="setRangeWidth()" type="submit">
               Set Width Range
             </button>
@@ -106,7 +108,6 @@
       </section>
 
       <section id="buttonsSection">
-        <!-- <progress id="progressBar" max="100" value="0"></progress> -->
         <aside id="mainButtons">
           <button id="roll" onclick="roll()" type="submit">
             Create Image(s)
@@ -114,6 +115,16 @@
           <button id="clear" onclick="clearResults()" type="submit">
             Clear
           </button>
+          <div>
+            <input type="number" value="1" />
+            <button
+              id="singleDownload"
+              onclick="singleDownload()"
+              type="submit"
+            >
+              Download
+            </button>
+          </div>
         </aside>
       </section>
 
