@@ -300,38 +300,6 @@ textArea.addEventListener("input", (event) => {
   if (myCodeArray.length > 0) isThereString = true;
 });
 
-let linkText = document.createElement("button");
-linkText.innerHTML = "Download Image(s)";
-linkText.id = "linkText";
-let count = 0;
-
-linkText.addEventListener("click", () => {
-  console.log("clicked");
-  let mycanvas = document.querySelectorAll("canvas");
-
-  console.log("Hety", mycanvas);
-  mycanvas.forEach((canvas, index) => {
-    var downloadUrl = canvas.toDataURL("image/png");
-    console.log("Hety", canvas);
-
-    setTimeout(function () {
-      var a = document.createElement("a");
-      a.href = downloadUrl;
-      a.target = "_parent";
-      if ("download" in a) {
-        a.download = downloadUrl;
-      }
-
-      (document.body || document.documentElement).appendChild(a);
-      if (a.click) {
-        a.click(); // The click method is supported by most browsers.
-      }
-      console.log(count);
-      a.parentNode.removeChild(a);
-      count++;
-    }, 1300);
-  });
-});
 // RANGE SET
 function setRangeWidth() {
   let startWidth = document.getElementById("startWidth");

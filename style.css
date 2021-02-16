@@ -102,12 +102,6 @@ article{
     /* width: 100px; */
 }
 
-section{
-    display: flex;
-    flex-direction: column;
-    padding-bottom: 40px; 
-}
-
 /* inputsSection STARTS */
 #inputsSection{
     padding-top: 2em;
