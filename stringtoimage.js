@@ -4,7 +4,7 @@ const userscolors = document.getElementById("userscolors");
 let colors = [],
   myCodeArray = [],
   myString = "niso",
-  pixelSize = 5,
+  pixelSize = 1, //DONT CHANGE THIS VALUE
   canIAddTheRange = true,
   canIAddThisSingle = true,
   startWidthValue,
@@ -14,7 +14,9 @@ let colors = [],
   isSavedColorsLoaded = false,
   isWidthSet = false,
   isInverse = false,
-  mycanvas;
+  mycanvas,
+  canvasWidth = 1000, //DONT CHANGE THIS VALUE
+  canvasHeigth = 1000; //DONT CHANGE THIS VALUE
 
 const getColorsFromStorageButton = document.getElementById(
   "getColorsFromStorage"
@@ -132,28 +134,45 @@ function breakString() {
 }
 
 function createPicture(rowLength) {
+  console.log("ROW ", rowLength);
+  var canvas = document.createElement("canvas");
+  canvas.width = canvasWidth;
+  canvas.height = canvasHeigth;
+  let line, column;
+
   if (isInverse) {
     console.log("inverse creation");
-    let line = 0,
-      column = 0;
+    (line = 0), (column = rowLength);
+
+    canvas.style.border = "1px solid black";
+    var ctx = canvas.getContext("2d");
+
+    // ADDING PIXELS
+    for (let i = 1; i < myCodeArray.length + 1; i++) {
+      column -= pixelSize;
+      ctx.fillStyle = colors[myCodeArray[i]];
+      ctx.fillRect(column, line, pixelSize, pixelSize);
+      console.log(column, line, pixelSize, pixelSize);
+      if (column <= 0) {
+        line += pixelSize;
+        column = rowLength;
+      }
+    }
   } else {
     console.log("non-inverse creation");
-
-    let line = 0,
-      column = 0;
-
-    var canvas = document.createElement("canvas");
-    canvas.width = 1000;
-    canvas.height = 1000;
+    column = line = 0;
 
     canvas.style.border = "1px solid black";
     var ctx = canvas.getContext("2d");
 
     //ADDING PIXELS
     for (let i = 1; i < myCodeArray.length + 1; i++) {
+      console.log("non-inverse", column, line, pixelSize, pixelSize);
+
       ctx.fillStyle = colors[myCodeArray[i]];
       ctx.fillRect(column, line, pixelSize, pixelSize);
       column += pixelSize;
+
       if (i >= rowLength && i % rowLength == 0) {
         line += pixelSize;
         column = 0;
@@ -185,7 +204,6 @@ function roll() {
 
     setTimeout(() => {
       mycanvas = document.querySelectorAll("canvas");
-      console.log(mycanvas);
       for (let i = 0; i < resultAmount; i = i + 10) {
         let downloadButton = document.createElement("button");
         document.getElementById("inputsSection").after(downloadButton);
