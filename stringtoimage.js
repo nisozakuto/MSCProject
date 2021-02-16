@@ -228,7 +228,7 @@ function roll() {
             a.href = downloadUrl;
             a.target = "_parent";
             if ("download" in a) {
-              a.download = "File_" + index;
+              a.download = "File_" + (index + 1);
             }
             (document.body || document.documentElement).appendChild(a);
             if (a.click) {
