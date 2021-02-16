@@ -7,7 +7,7 @@ let colors = [],
   pixelSize = 1, //DONT CHANGE THIS VALUE
   canIAddTheRange = true,
   canIAddThisSingle = true,
-  startWidthValue,
+  countstartWidthValue,
   endWidthValue,
   isPassedRange = false,
   isThereString = false,
@@ -17,6 +17,16 @@ let colors = [],
   mycanvas,
   canvasWidth = 1000, //DONT CHANGE THIS VALUE
   canvasHeigth = 1000; //DONT CHANGE THIS VALUE
+
+document.onreadystatechange = function () {
+  if (document.readyState !== "complete") {
+    document.querySelector("body").style.visibility = "hidden";
+    document.querySelector("#loader").style.visibility = "visible";
+  } else {
+    document.querySelector("#loader").style.display = "none";
+    document.querySelector("body").style.visibility = "visible";
+  }
+};
 
 const getColorsFromStorageButton = document.getElementById(
   "getColorsFromStorage"
@@ -179,19 +189,23 @@ function createPicture(rowLength) {
   //These two lines are same for both inverse and normal
   const imagePrint = document.getElementsByClassName("imagePrint");
   imagePrint[0].append(canvas);
+  document.querySelector("#loader").style.display = "none";
+  document.querySelector("body").style.visibility = "visible";
 }
 
 function roll() {
   //First Check is passed range
+
   if (isPassedRange && isThereString) {
     console.log("LETS ROLL");
     breakString();
-    let rowLength = Math.round(Math.sqrt(myCodeArray.length));
     let stringLength = document.getElementById("stringLength");
     stringLength.innerText = `String's length is ${myCodeArray.length}`;
 
     for (let index = startWidthValue; index < endWidthValue; index++) {
-      createPicture(index);
+      setTimeout(() => {
+        createPicture(index);
+      }, 1000);
     }
 
     let resultAmount = endWidthValue - startWidthValue;
