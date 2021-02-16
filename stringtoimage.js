@@ -4,7 +4,7 @@ const userscolors = document.getElementById("userscolors");
 let colors = [],
   myCodeArray = [],
   myString = "niso",
-  pixelSize = 1,
+  pixelSize = 5,
   canIAddTheRange = true,
   canIAddThisSingle = true,
   startWidthValue,
@@ -13,6 +13,7 @@ let colors = [],
   isThereString = false,
   isSavedColorsLoaded = false,
   isWidthSet = false,
+  isInverse = false,
   mycanvas;
 
 const getColorsFromStorageButton = document.getElementById(
@@ -131,26 +132,36 @@ function breakString() {
 }
 
 function createPicture(rowLength) {
-  let line = 0,
-    column = 0;
+  if (isInverse) {
+    console.log("inverse creation");
+    let line = 0,
+      column = 0;
+  } else {
+    console.log("non-inverse creation");
 
-  var canvas = document.createElement("canvas");
-  canvas.width = 1000;
-  canvas.height = 1000;
+    let line = 0,
+      column = 0;
 
-  canvas.style.border = "1px solid black";
-  var ctx = canvas.getContext("2d");
+    var canvas = document.createElement("canvas");
+    canvas.width = 1000;
+    canvas.height = 1000;
 
-  //ADDING PIXELS
-  for (let i = 1; i < myCodeArray.length + 1; i++) {
-    ctx.fillStyle = colors[myCodeArray[i]];
-    ctx.fillRect(line, column, pixelSize, pixelSize);
-    line += pixelSize;
-    if (i >= rowLength && i % rowLength == 0) {
+    canvas.style.border = "1px solid black";
+    var ctx = canvas.getContext("2d");
+
+    //ADDING PIXELS
+    for (let i = 1; i < myCodeArray.length + 1; i++) {
+      ctx.fillStyle = colors[myCodeArray[i]];
+      ctx.fillRect(column, line, pixelSize, pixelSize);
       column += pixelSize;
-      line = 0;
+      if (i >= rowLength && i % rowLength == 0) {
+        line += pixelSize;
+        column = 0;
+      }
     }
   }
+
+  //These two lines are same for both inverse and normal
   const imagePrint = document.getElementsByClassName("imagePrint");
   imagePrint[0].append(canvas);
 }
@@ -163,7 +174,6 @@ function roll() {
     let rowLength = Math.round(Math.sqrt(myCodeArray.length));
     let stringLength = document.getElementById("stringLength");
     stringLength.innerText = `String's length is ${myCodeArray.length}`;
-    let progressBar = document.getElementById("progressBar");
 
     for (let index = startWidthValue; index < endWidthValue; index++) {
       createPicture(index);
