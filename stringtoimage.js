@@ -6,6 +6,7 @@ let colors = [],
   myString = "niso",
   pixelSize = 1, //DONT CHANGE THIS VALUE
   canIAddTheRange = true,
+  isRangeAdded = false,
   canIAddThisSingle = true,
   countstartWidthValue,
   endWidthValue,
@@ -76,7 +77,7 @@ function createDOMForTheColor(number1, colorPickerValue) {
   userscolors.append(definedColor);
 
   const myColorNamelabel = document.createElement("p");
-  myColorNamelabel.innerText = "Color number:";
+  myColorNamelabel.innerText = "Colors HEX are:";
   definedColor.append(myColorNamelabel);
   myColorNamelabel.innerText +=
     " " + colorPickerValue + " and the color: " + number1;
@@ -100,7 +101,7 @@ function addARangeOfColor() {
     alert("Second number must be bigger than the first one");
   } else if (secondNumber > firstNumber) {
     console.log("Lets add");
-    for (let i = firstNumber; i < secondNumber; i++) {
+    for (let i = firstNumber; i <= secondNumber; i++) {
       console.log(i);
       if (colors[i] != undefined) {
         console.log(i, "is not undefined. ", colors[i]);
@@ -110,10 +111,32 @@ function addARangeOfColor() {
     }
 
     for (firstNumber; firstNumber <= secondNumber; firstNumber++) {
-      addingTheColor(firstNumber, colorPicker.value);
-      if (canIAddTheRange) {
-        createDOMForTheColor(firstNumber, colorPicker.value);
-        console.log(firstNumber, "firstNumber");
+      if (canIAddTheRange && !isRangeAdded) {
+        addingTheColor(firstNumber, colorPicker.value);
+
+        const definedColor = document.createElement("div");
+        definedColor.id = myString;
+        userscolors.append(definedColor);
+
+        const myColorNamelabel = document.createElement("p");
+        myColorNamelabel.innerText = "Colors HEX are: ";
+        definedColor.append(myColorNamelabel);
+        myColorNamelabel.innerText +=
+          " " +
+          colorPicker.value +
+          " and the color: " +
+          firstNumber +
+          " " +
+          secondNumber;
+
+        const colorDiv = document.createElement("div");
+        colorDiv.style.backgroundColor = colorPicker.value;
+        colorDiv.style.width = "20px";
+        colorDiv.style.height = "20px";
+        definedColor.append(colorDiv);
+
+        isRangeAdded = true;
+        // createDOMForTheColor(firstNumber, colorPicker.value);
       }
     }
   }
