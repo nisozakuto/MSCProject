@@ -173,17 +173,13 @@ function breakString() {
 
   if (deleteTheZeros) {
     for (var i = 0; i < myCodeArray.length; i++) {
-      console.log(myCodeArray[i], i);
-
       if (myCodeArray[i] === "0") {
-        console.log(myCodeArray[i], i);
         amountOfZeros++;
         myCodeArray.splice(i, 1);
         i--;
       }
     }
   }
-  console.log(amountOfZeros);
   document.getElementById("foundZeros").innerText = `Found 0s: ${parseInt(
     amountOfZeros
   )}`;
@@ -378,6 +374,25 @@ function setRangeWidth() {
     return (isPassedRange = true);
   }
 }
+function singleDownload() {
+  let canvasToDownload = document.getElementById("singleImageDownloadInput")
+    .value;
+  let myCanvases = document.querySelectorAll("canvas");
+
+  var downloadUrl = myCanvases[canvasToDownload - 1].toDataURL("image/png");
+  var a = document.createElement("a");
+  a.href = downloadUrl;
+  a.target = "_parent";
+  if ("download" in a) {
+    a.download = "File_" + canvasToDownload;
+  }
+  (document.body || document.documentElement).appendChild(a);
+  if (a.click) {
+    a.click(); // The click method is supported by most browsers.
+  }
+  a.parentNode.removeChild(a);
+}
+
 // RANGE SET FINISHED
 
 getColorsFromStorageButton.addEventListener("click", () => {
