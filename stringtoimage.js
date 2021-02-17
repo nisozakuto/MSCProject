@@ -187,7 +187,7 @@ function breakString() {
 
 function createPicture(rowLength) {
   let canvasNumberh2 = document.createElement("h2");
-  canvasNumberh2.innerText = `Image number: ${imageNumberForThePage}`;
+  canvasNumberh2.innerText = `Image number: ${imageNumberForThePage} & Width is: ${rowLength}`;
   canvasNumberh2.id = "canvasH2";
 
   let canvas = document.createElement("canvas");
