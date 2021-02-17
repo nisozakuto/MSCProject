@@ -94,6 +94,20 @@ function createDOMForTheColor(number1, colorPickerValue) {
   colorDiv.style.width = "20px";
   colorDiv.style.height = "20px";
   definedColor.append(colorDiv);
+
+  const deleteButton = document.createElement("button");
+  deleteButton.style.width = "20px";
+  deleteButton.style.height = "20px";
+  deleteButton.innerText = "X";
+  definedColor.append(deleteButton);
+
+  deleteButton.addEventListener("click", () => {
+    console.log("clickeddd");
+    alert(`${number1} is deleted`);
+    colors.splice(number1, 1);
+    definedColor.remove();
+    //Update saved colors array
+  });
 }
 
 //RANGE OF COLOR START
