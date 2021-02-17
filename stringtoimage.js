@@ -36,7 +36,7 @@ const getColorsFromStorageButton = document.getElementById(
   "getColorsFromStorage"
 );
 const createImagesButton = document.getElementById("roll");
-const checkbox = document.getElementById("checkbox");
+const inverseCheckbox = document.getElementById("checkbox");
 const zeroStatus = document.getElementById("isCountingZeros");
 
 function clearResults() {
@@ -207,7 +207,6 @@ function createPicture(rowLength) {
       column -= pixelSize;
       ctx.fillStyle = colors[myCodeArray[i]];
       ctx.fillRect(column, line, pixelSize, pixelSize);
-      console.log(column, line, pixelSize, pixelSize);
       if (column <= 0) {
         line += pixelSize;
         column = rowLength;
@@ -392,8 +391,12 @@ function singleDownload() {
   }
   a.parentNode.removeChild(a);
 }
-
 // RANGE SET FINISHED
+
+function checkInverse() {
+  if (inverseCheckbox.checked) isInverse = true;
+  else isInverse = false;
+}
 
 getColorsFromStorageButton.addEventListener("click", () => {
   if (!isSavedColorsLoaded) {
@@ -403,15 +406,17 @@ getColorsFromStorageButton.addEventListener("click", () => {
     getColorsFromStorageButton.disabled = true;
   }
 });
-checkbox.addEventListener("change", () => {
-  if (checkbox.checked) isInverse = true;
-  else isInverse = false;
+
+inverseCheckbox.addEventListener("change", () => {
+  checkInverse();
 });
 
 function init() {
+  inverseCheckbox.checked = true;
   singleColor.checked = true;
   document.getElementById("colorNumber2").disabled = true;
   createImagesButton.disabled = true;
+  checkInverse();
 }
 
 init();
