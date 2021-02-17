@@ -115,7 +115,7 @@ article{
     min-width: 33%;
 }
 
-#inverseCheckbox{
+.checkbox{
     display: flex;
     flex-direction: row;
     justify-content: center;

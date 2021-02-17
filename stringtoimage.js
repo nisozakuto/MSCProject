@@ -22,6 +22,10 @@ let colors = [],
   imageNumberForThePage,
   isCountingZeros = false;
 
+let startWidth = document.getElementById("startWidth");
+let endWidth = document.getElementById("endWidth");
+let setWidthText = document.getElementById("setWidthText");
+
 document.onreadystatechange = function () {
   if (document.readyState !== "complete") {
     document.querySelector("body").style.visibility = "hidden";
@@ -38,6 +42,7 @@ const getColorsFromStorageButton = document.getElementById(
 const createImagesButton = document.getElementById("roll");
 const inverseCheckbox = document.getElementById("checkbox");
 const zeroStatus = document.getElementById("isCountingZeros");
+const rangeSelection = document.getElementById("rangeSelection");
 
 function clearResults() {
   alert("Clearing the results");
@@ -73,7 +78,6 @@ function addingTheColor(number1, hex, number2) {
 }
 
 function createDOMForTheColor(number1, colorPickerValue) {
-  console.log("adding to dom");
   const definedColor = document.createElement("div");
   //CHANGE myString
   definedColor.id = myString;
@@ -258,7 +262,7 @@ function roll() {
     }
 
     let resultAmount = endWidthValue - startWidthValue;
-
+    let startWidthValueForDownload = startWidthValue;
     setTimeout(() => {
       mycanvas = document.querySelectorAll("canvas");
       for (let i = 0; i < resultAmount; i = i + 10) {
@@ -269,13 +273,15 @@ function roll() {
           console.log("one of the buttons");
           let index = i;
           for (index; index < i + 10; index++) {
-            console.log(index, "index bu");
             var downloadUrl = mycanvas[index].toDataURL("image/png");
             var a = document.createElement("a");
             a.href = downloadUrl;
             a.target = "_parent";
             if ("download" in a) {
-              a.download = "File_" + (index + 1);
+              a.download = `File_${
+                index + 1
+              }_Width:${startWidthValueForDownload}`;
+              startWidthValueForDownload++;
             }
             (document.body || document.documentElement).appendChild(a);
             if (a.click) {
@@ -356,21 +362,26 @@ textArea.addEventListener("input", (event) => {
 
 // RANGE SET
 function setRangeWidth() {
-  let startWidth = document.getElementById("startWidth");
-  let endWidth = document.getElementById("endWidth");
-  let setWidthText = document.getElementById("setWidthText");
-  (startWidthValue = parseInt(startWidth.value, 10)),
-    (endWidthValue = parseInt(endWidth.value, 10));
-
-  if (startWidthValue >= endWidthValue) {
-    alert("Start width can not be greater or equal than end width");
-    startWidthValue = endWidthValue;
-    return (isPassedRange = false);
-  } else {
-    setWidthText.innerText = `Set width is between ${startWidthValue} - ${endWidthValue}`;
+  startWidthValue = parseInt(startWidth.value, 10);
+  if (rangeSelection.checked) {
+    setWidthText.innerText = `Set width is ${startWidthValue}`;
+    endWidthValue = startWidthValue;
     isWidthSet = true;
     createImagesButton.disabled = false;
     return (isPassedRange = true);
+  } else {
+    endWidthValue = parseInt(endWidth.value, 10);
+
+    if (startWidthValue >= endWidthValue) {
+      alert("Start width can not be greater or equal than end width");
+      startWidthValue = endWidthValue;
+      return (isPassedRange = false);
+    } else {
+      setWidthText.innerText = `Set width is between ${startWidthValue} - ${endWidthValue}`;
+      isWidthSet = true;
+      createImagesButton.disabled = false;
+      return (isPassedRange = true);
+    }
   }
 }
 function singleDownload() {
@@ -398,6 +409,12 @@ function checkInverse() {
   else isInverse = false;
 }
 
+function checkRangeOrSinglePicture() {
+  if (rangeSelection.checked) {
+    endWidth.disabled = true;
+  } else endWidth.disabled = false;
+}
+
 getColorsFromStorageButton.addEventListener("click", () => {
   if (!isSavedColorsLoaded) {
     getColorsFromStorage();
@@ -405,6 +422,10 @@ getColorsFromStorageButton.addEventListener("click", () => {
   if (isSavedColorsLoaded) {
     getColorsFromStorageButton.disabled = true;
   }
+});
+
+rangeSelection.addEventListener("click", () => {
+  checkRangeOrSinglePicture();
 });
 
 inverseCheckbox.addEventListener("change", () => {

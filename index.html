@@ -44,7 +44,7 @@
                 <button onclick="addAColor()" type="submit">Add</button>
               </div>
             </div>
-            <div id="inverseCheckbox">
+            <div id="inverseCheckbox" class="checkbox">
               <input type="checkbox" id="checkbox" />
               <label for="inverse">Inverse the image</label>
             </div>
@@ -52,6 +52,12 @@
           <hr />
           <aside id="widthSelection" class="center">
             <h2>Range section</h2>
+            <div class="checkbox">
+              <input type="checkbox" id="rangeSelection" />
+              <label for="rangeSelection" id="rangeSelectionCheckbox"
+                >One picture</label
+              >
+            </div>
             <div>
               <label>Start Width</label>
               <input
@@ -98,9 +104,7 @@
               Download
             </button>
           </div>
-          <div>
-            <input type="file" />
-          </div>
+          <div></div>
         </div>
 
         <div id="inputDiv3">
