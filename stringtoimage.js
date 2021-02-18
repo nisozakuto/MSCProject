@@ -281,7 +281,9 @@ function roll() {
     let startWidthValueForDownload = startWidthValue;
     setTimeout(() => {
       mycanvas = document.querySelectorAll("canvas");
+      if (resultAmount == 0) resultAmount = 1;
       for (let i = 0; i < resultAmount; i = i + 10) {
+        console.log("here");
         let downloadButton = document.createElement("button");
         document.getElementById("downloadButtons").append(downloadButton);
         downloadButton.innerText = `Download ${i + 1} to ${i + 10}`;
@@ -376,7 +378,6 @@ function setRangeWidth() {
     return (isPassedRange = true);
   } else {
     endWidthValue = parseInt(endWidth.value, 10);
-
     if (startWidthValue >= endWidthValue) {
       alert("Start width can not be greater or equal than end width");
       startWidthValue = endWidthValue;
@@ -421,9 +422,11 @@ function checkRangeOrSinglePicture() {
 }
 
 textArea.addEventListener("input", (event) => {
-  breakString();
-  stringLength.innerText = `String's Length is: ${myCodeArray.length}`;
-  if (myCodeArray.length >= 0) isThereString = true;
+  setTimeout(() => {
+    breakString();
+    stringLength.innerText = `String's Length is: ${myCodeArray.length}`;
+    if (myCodeArray.length >= 0) isThereString = true;
+  }, 300);
 });
 
 getColorsFromStorageButton.addEventListener("click", () => {
