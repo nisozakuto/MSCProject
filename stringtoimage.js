@@ -24,7 +24,6 @@ let colors = [],
   isSavedColorsLoaded = false,
   isWidthSet = false,
   isInverse = false,
-  deleteTheZeros = true,
   amountOfZeros,
   mycanvas,
   canvasWidth = 1000, //DONT CHANGE THIS VALUE
@@ -107,6 +106,8 @@ function createDOMForTheColor(number1, colorPickerValue) {
     alert(`${number1} is deleted`);
     colors.splice(number1, 1);
     definedColor.remove();
+    colors.splice(number1, 1);
+
     //Update saved colors array
   });
 }
