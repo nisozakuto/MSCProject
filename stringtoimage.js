@@ -1,6 +1,16 @@
 //https://www.geeksforgeeks.org/how-to-show-page-loading-div-until-the-page-has-finished-loading/
-
 const userscolors = document.getElementById("userscolors");
+const getColorsFromStorageButton = document.getElementById(
+  "getColorsFromStorage"
+);
+const createImagesButton = document.getElementById("roll");
+const inverseCheckbox = document.getElementById("checkbox");
+const zeroStatus = document.getElementById("isCountingZeros");
+const rangeSelection = document.getElementById("rangeSelection");
+const textArea = document.querySelector("textarea");
+const singleColor = document.getElementById("singleColor");
+const rangeColor = document.getElementById("rangeOfColor");
+
 let colors = [],
   myCodeArray = [],
   myString = "niso",
@@ -20,11 +30,10 @@ let colors = [],
   canvasWidth = 1000, //DONT CHANGE THIS VALUE
   canvasHeigth = 1000, //DONT CHANGE THIS VALUE
   imageNumberForThePage,
-  isCountingZeros = false;
-
-let startWidth = document.getElementById("startWidth");
-let endWidth = document.getElementById("endWidth");
-let setWidthText = document.getElementById("setWidthText");
+  isCountingZeros = false,
+  startWidth = document.getElementById("startWidth"),
+  endWidth = document.getElementById("endWidth"),
+  setWidthText = document.getElementById("setWidthText");
 
 document.onreadystatechange = function () {
   if (document.readyState !== "complete") {
@@ -35,14 +44,6 @@ document.onreadystatechange = function () {
     document.querySelector("body").style.visibility = "visible";
   }
 };
-
-const getColorsFromStorageButton = document.getElementById(
-  "getColorsFromStorage"
-);
-const createImagesButton = document.getElementById("roll");
-const inverseCheckbox = document.getElementById("checkbox");
-const zeroStatus = document.getElementById("isCountingZeros");
-const rangeSelection = document.getElementById("rangeSelection");
 
 function clearResults() {
   alert("Clearing the results");
@@ -110,6 +111,17 @@ function createDOMForTheColor(number1, colorPickerValue) {
   });
 }
 
+function zeroCheck() {
+  if (colors[0] == undefined) {
+    isCountingZeros = false;
+    zeroStatus.innerText = `Removing 0s from the list`;
+  } else {
+    isCountingZeros = true;
+    zeroStatus.innerText = `Keeping 0s in the list`;
+    breakString();
+  }
+}
+
 //RANGE OF COLOR START
 function addARangeOfColor() {
   let firstNumber = parseInt(document.getElementById("colorNumber1").value, 10);
@@ -173,23 +185,12 @@ function addAColor() {
 }
 // ADD A COLOR FINISHED
 
-function zeroCheck() {
-  if (colors[0] == undefined) {
-    isCountingZeros = false;
-    zeroStatus.innerText = `Removing 0s from the list`;
-  } else {
-    isCountingZeros = true;
-    zeroStatus.innerText = `Keeping 0s in the list`;
-  }
-}
-
 function breakString() {
   amountOfZeros = 0;
-  zeroCheck();
   let code = document.getElementById("string").value;
   myCodeArray = code.split(/\n/);
 
-  if (deleteTheZeros) {
+  if (!isCountingZeros) {
     for (var i = 0; i < myCodeArray.length; i++) {
       if (myCodeArray[i] === "0") {
         amountOfZeros++;
@@ -264,7 +265,6 @@ function roll() {
     console.log("LETS ROLL");
     zeroCheck();
     imageNumberForThePage = 1;
-    breakString();
     let stringLength = document.getElementById("stringLength");
     stringLength.innerText = `String's length is ${myCodeArray.length}`;
 
@@ -349,9 +349,6 @@ function getColorsFromStorage() {
 }
 
 //RADIO BUTTONS START
-const singleColor = document.getElementById("singleColor");
-const rangeColor = document.getElementById("rangeOfColor");
-
 singleColor.addEventListener("click", () => {
   if ((rangeColor.checked = true)) {
     rangeColor.checked = false;
@@ -366,13 +363,6 @@ rangeColor.addEventListener("click", () => {
   document.getElementById("colorNumber2").disabled = false;
 });
 //RADIO BUTTONS END
-
-const textArea = document.querySelector("textarea");
-textArea.addEventListener("input", (event) => {
-  breakString();
-  stringLength.innerText = `String's Length is: ${myCodeArray.length}`;
-  if (myCodeArray.length >= 0) isThereString = true;
-});
 
 // RANGE SET
 function setRangeWidth() {
@@ -428,6 +418,12 @@ function checkRangeOrSinglePicture() {
     endWidth.disabled = true;
   } else endWidth.disabled = false;
 }
+
+textArea.addEventListener("input", (event) => {
+  breakString();
+  stringLength.innerText = `String's Length is: ${myCodeArray.length}`;
+  if (myCodeArray.length >= 0) isThereString = true;
+});
 
 getColorsFromStorageButton.addEventListener("click", () => {
   if (!isSavedColorsLoaded) {
