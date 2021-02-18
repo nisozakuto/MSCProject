@@ -205,10 +205,9 @@ form textarea{
 #buttonsSection{
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    /* justify-content: center; */
     margin: 0 auto;
-    width: 150px;
-    /* height: 90px; */
+    align-items: center;
 }
 
 #buttonsSection button{
@@ -220,6 +219,16 @@ form textarea{
 #mainButtons{
     display: flex;
 
+}
+
+#downloadButtons button{
+    width: auto;
+}
+
+#downloadButtons{
+display: flex;
+width: 80vw;
+justify-content: center;
 }
 
 .numbers{

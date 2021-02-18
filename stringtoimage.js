@@ -47,6 +47,7 @@ document.onreadystatechange = function () {
 function clearResults() {
   alert("Clearing the results");
   document.getElementsByClassName("imagePrint")[0].innerHTML = "";
+  document.getElementById("downloadButtons")[0].innerHTML = "";
 }
 
 function addingTheColor(number1, hex, number2) {
@@ -282,10 +283,9 @@ function roll() {
       mycanvas = document.querySelectorAll("canvas");
       for (let i = 0; i < resultAmount; i = i + 10) {
         let downloadButton = document.createElement("button");
-        document.getElementById("buttonsSection").append(downloadButton);
+        document.getElementById("downloadButtons").append(downloadButton);
         downloadButton.innerText = `Download ${i + 1} to ${i + 10}`;
         downloadButton.addEventListener("click", () => {
-          console.log("one of the buttons");
           let index = i;
           for (index; index < i + 10; index++) {
             var downloadUrl = mycanvas[index].toDataURL("image/png");
