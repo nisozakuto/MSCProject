@@ -43,28 +43,36 @@ document.onreadystatechange = function () {
     document.querySelector("body").style.visibility = "visible";
   }
 };
+function clearYourColorsDOM() {
+  document.getElementById("userscolors").innerText = "";
+}
 
 function clearResults() {
   alert("Clearing the results");
   document.getElementsByClassName("imagePrint")[0].innerHTML = "";
+  colors = [];
   if (document.getElementById("downloadButtons").innerHTML != undefined)
     document.getElementById("downloadButtons").innerHTML = "";
-  colors = [];
-  if (colors.length == 0) document.getElementById("userscolors").innerText = "";
+  clearYourColorsDOM();
+}
+
+function addColor(number1, hex) {
+  if (!colors[number1]) {
+    colors[number1] = hex;
+    return;
+  } else {
+    alert("this exists");
+    canIAddThisSingle = false;
+    //Deal with this later to add CHANGE feature
+    return;
+  }
 }
 
 function addingTheColor(number1, hex, number2) {
-  console.log("add the color");
+  console.log("add the color Func");
   if (number2 == undefined) {
     // Adding only one color
-    if (!colors[number1]) {
-      colors[number1] = hex;
-    } else {
-      alert("this exists");
-      canIAddThisSingle = false;
-      //Deal with this later to add CHANGE feature
-      return;
-    }
+    addColor(number1, hex);
   } else if (number2) {
     canIAddTheRange = true;
     // Adding a range of colors
@@ -76,14 +84,14 @@ function addingTheColor(number1, hex, number2) {
     if (canIAddTheRange)
       for (let i = number1; i <= number2; i++) {
         console.log("ekleniyor", i);
-        colors[i] = hex;
+        addColor(i, hex);
       }
   }
 }
 
 function createDOMForTheColor(number1, colorPickerValue) {
   const definedColor = document.createElement("div");
-  //CHANGE myString
+  //CHANGE myString in the future
   definedColor.id = myString;
   userscolors.append(definedColor);
 
@@ -108,9 +116,8 @@ function createDOMForTheColor(number1, colorPickerValue) {
   deleteButton.addEventListener("click", () => {
     console.log("clickeddd");
     alert(`${number1} is deleted`);
-    colors.splice(number1, 1);
+    colors[number1] = "";
     definedColor.remove();
-    colors.splice(number1, 1);
 
     //Update saved colors array
   });
@@ -145,25 +152,38 @@ function addARangeOfColor() {
         return;
       }
     }
-    for (let i = firstNumber; i <= secondNumber; i++) {
-      if (canIAddTheRange) {
+    if (canIAddTheRange) {
+      for (let i = firstNumber; i <= secondNumber; i++) {
         addingTheColor(i, colorPicker.value);
       }
+      const definedColor = document.createElement("div");
+      definedColor.id = myString;
+      userscolors.append(definedColor);
+
+      const myColorNamelabel = document.createElement("p");
+      myColorNamelabel.innerText = "Colors HEX are: ";
+      definedColor.append(myColorNamelabel);
+      myColorNamelabel.innerText += ` ${colorPicker.value} and the color: ${firstNumber} ${secondNumber}`;
+
+      const colorDiv = document.createElement("div");
+      colorDiv.style.backgroundColor = colorPicker.value;
+      colorDiv.style.width = "20px";
+      colorDiv.style.height = "20px";
+      definedColor.append(colorDiv);
     }
-    const definedColor = document.createElement("div");
-    definedColor.id = myString;
-    userscolors.append(definedColor);
+    // const deleteButton = document.createElement("button");
+    // deleteButton.style.width = "20px";
+    // deleteButton.style.height = "20px";
+    // deleteButton.innerText = "X";
+    // definedColor.append(deleteButton);
 
-    const myColorNamelabel = document.createElement("p");
-    myColorNamelabel.innerText = "Colors HEX are: ";
-    definedColor.append(myColorNamelabel);
-    myColorNamelabel.innerText += ` ${colorPicker.value} and the color: ${firstNumber} ${secondNumber}`;
-
-    const colorDiv = document.createElement("div");
-    colorDiv.style.backgroundColor = colorPicker.value;
-    colorDiv.style.width = "20px";
-    colorDiv.style.height = "20px";
-    definedColor.append(colorDiv);
+    // deleteButton.addEventListener("click", () => {
+    //   console.log("clickeddd");
+    //   alert(`${number1} is deleted`);
+    //   colors.splice(number1, 1);
+    //   definedColor.remove();
+    // });
+    //ADD A DELETE BUTTON HERE FOR A RANGE
   }
 }
 //RANGE OF COLOR END
@@ -350,11 +370,12 @@ function save() {
     console.log("Was not saved");
   }
 }
-
-function getColorsFromStorage() {
+function getColorsFunction() {
   isSavedColorsLoaded = true;
   colors = localStorage.getItem("colors");
   colors = JSON.parse(colors);
+  clearYourColorsDOM();
+
   if (colors) {
     for (let i = 0; i < colors.length; i++) {
       if (colors[i] != null) {
@@ -373,8 +394,35 @@ function getColorsFromStorage() {
         colorDiv.style.width = "20px";
         colorDiv.style.height = "20px";
         definedColor.append(colorDiv);
+
+        const deleteButton = document.createElement("button");
+        deleteButton.style.width = "20px";
+        deleteButton.style.height = "20px";
+        deleteButton.innerText = "X";
+        definedColor.append(deleteButton);
+
+        deleteButton.addEventListener("click", () => {
+          console.log("clickeddd");
+          alert(`${i} is deleted`);
+          colors[i] = "";
+          definedColor.remove();
+        });
       }
     }
+  }
+}
+function getColorsFromStorage() {
+  let result = true;
+  if (colors.length > 0) {
+    result = confirm("Do you want to overwrite your current colors?");
+  }
+  if (result && !isSavedColorsLoaded) {
+    getColorsFunction();
+  } else {
+    //DONT DO ANYTHING
+  }
+  if (isSavedColorsLoaded) {
+    getColorsFromStorageButton.disabled = true;
   }
 }
 
@@ -456,14 +504,14 @@ textArea.addEventListener("input", (event) => {
   }, 300);
 });
 
-getColorsFromStorageButton.addEventListener("click", () => {
-  if (!isSavedColorsLoaded) {
-    getColorsFromStorage();
-  }
-  if (isSavedColorsLoaded) {
-    getColorsFromStorageButton.disabled = true;
-  }
-});
+// getColorsFromStorageButton.addEventListener("click", () => {
+//   if (!isSavedColorsLoaded) {
+//     getColorsFromStorage();
+//   }
+//   if (isSavedColorsLoaded) {
+//     getColorsFromStorageButton.disabled = true;
+//   }
+// });
 
 rangeSelection.addEventListener("click", () => {
   checkRangeOrSinglePicture();
