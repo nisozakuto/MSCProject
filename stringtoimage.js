@@ -47,7 +47,10 @@ document.onreadystatechange = function () {
 function clearResults() {
   alert("Clearing the results");
   document.getElementsByClassName("imagePrint")[0].innerHTML = "";
-  document.getElementById("downloadButtons")[0].innerHTML = "";
+  if (document.getElementById("downloadButtons").innerHTML != undefined)
+    document.getElementById("downloadButtons").innerHTML = "";
+  colors = [];
+  if (colors.length == 0) document.getElementById("userscolors").innerText = "";
 }
 
 function addingTheColor(number1, hex, number2) {
