@@ -10,6 +10,7 @@ const rangeSelection = document.getElementById("rangeSelection");
 const textArea = document.querySelector("textarea");
 const singleColor = document.getElementById("singleColor");
 const rangeColor = document.getElementById("rangeOfColor");
+const statusText = document.getElementById("statusText");
 
 let colors = [],
   myCodeArray = [],
@@ -54,6 +55,7 @@ function clearResults() {
   if (document.getElementById("downloadButtons").innerHTML != undefined)
     document.getElementById("downloadButtons").innerHTML = "";
   clearYourColorsDOM();
+  statusText = "";
 }
 
 function addColor(number1, hex) {
@@ -189,35 +191,6 @@ function addARangeOfColor() {
         addingTheColor(i, colorPicker.value);
       }
       createDOMForTheColor(firstNumber, colorPicker.value, secondNumber);
-      console.log("createDOM fin");
-      // const deleteButton = document.createElement("button");
-      // deleteButton.style.width = "20px";
-      // deleteButton.style.height = "20px";
-      // deleteButton.innerText = "X";
-      // definedColor.append(deleteButton);
-
-      // deleteButton.addEventListener("click", () => {
-      //   console.log("clickeddd");
-      //   alert(`${number1} is deleted`);
-      //   colors.splice(number1, 1);
-      //   definedColor.remove();
-      // });
-      //ADD A DELETE BUTTON HERE FOR A RANGE
-
-      // const definedColor = document.createElement("div");
-      // definedColor.id = myString;
-      // userscolors.append(definedColor);
-
-      // const myColorNamelabel = document.createElement("p");
-      // myColorNamelabel.innerText = "Colors HEX are: ";
-      // definedColor.append(myColorNamelabel);
-      // myColorNamelabel.innerText += ` ${colorPicker.value} and the color: ${firstNumber} ${secondNumber}`;
-
-      // const colorDiv = document.createElement("div");
-      // colorDiv.style.backgroundColor = colorPicker.value;
-      // colorDiv.style.width = "20px";
-      // colorDiv.style.height = "20px";
-      // definedColor.append(colorDiv);
     }
   }
 }
@@ -332,6 +305,9 @@ function roll() {
       setTimeout(() => {
         createPicture(index);
         imageNumberForThePage++;
+        if (index < endWidthValue)
+          statusText.innerText = `Drawing pictures. Currently at ${index}`;
+        else statusText.innerText = `Finished`;
       }, 1000);
     }
 
@@ -538,15 +514,6 @@ textArea.addEventListener("input", (event) => {
     if (myCodeArray.length >= 0) isThereString = true;
   }, 300);
 });
-
-// getColorsFromStorageButton.addEventListener("click", () => {
-//   if (!isSavedColorsLoaded) {
-//     getColorsFromStorage();
-//   }
-//   if (isSavedColorsLoaded) {
-//     getColorsFromStorageButton.disabled = true;
-//   }
-// });
 
 rangeSelection.addEventListener("click", () => {
   checkRangeOrSinglePicture();
