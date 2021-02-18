@@ -283,7 +283,6 @@ function roll() {
       mycanvas = document.querySelectorAll("canvas");
       if (resultAmount == 0) resultAmount = 1;
       for (let i = 0; i < resultAmount; i = i + 10) {
-        console.log("here");
         let downloadButton = document.createElement("button");
         document.getElementById("downloadButtons").append(downloadButton);
         downloadButton.innerText = `Download ${i + 1} to ${i + 10}`;
@@ -313,6 +312,31 @@ function roll() {
     alert("set the Range and enter an input");
   }
 }
+
+const sleep = (milliseconds) => {
+  return new Promise((resolve) => setTimeout(resolve, milliseconds));
+};
+
+const tryme = async () => {
+  console.log("startttt");
+  mycanvas = document.querySelectorAll("canvas");
+  for (let index = 0; index < mycanvas.length; index++) {
+    console.log("for loop", index);
+    await sleep(1000);
+    var downloadUrl = mycanvas[index].toDataURL("image/png");
+    var a = document.createElement("a");
+    a.href = downloadUrl;
+    a.target = "_parent";
+    if ("download" in a) {
+      a.download = `File_${index + 1}`;
+    }
+    (document.body || document.documentElement).appendChild(a);
+    if (a.click) {
+      a.click(); // The click method is supported by most browsers.
+    }
+    a.parentNode.removeChild(a);
+  }
+};
 
 function save() {
   let result = confirm("Are you sure you want to save?");
