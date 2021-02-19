@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="./style.css" />
   </head>
-  <body>
+  <body onload="selectFunction()">
     <div class="container">
       <header>
         <h1>String to Image</h1>
@@ -89,10 +89,16 @@
               Save your current color selection or get your saved color
               selection
             </p>
-            <button onclick="save()">Save</button>
+            <select id="colorPrefs"></select>
+            <div>
+              <button onclick="colorPrefSaveButton()">Save Colors</button>
+              <button onclick="colorPrefLoadButton()">Load Colors</button>
+            </div>
+
+            <!-- <button onclick="save()">Save</button>
             <button onclick="getColorsFromStorage()" id="getColorsFromStorage">
               Get
-            </button>
+            </button> -->
           </div>
           <div>
             <p>Download only one image</p>

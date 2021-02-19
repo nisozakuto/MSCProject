@@ -11,6 +11,7 @@ const textArea = document.querySelector("textarea");
 const singleColor = document.getElementById("singleColor");
 const rangeColor = document.getElementById("rangeOfColor");
 const statusText = document.getElementById("statusText");
+const colorPrefSaveInput = document.getElementById("colorPrefInput");
 
 let colors = [],
   myCodeArray = [],
@@ -380,10 +381,12 @@ function save() {
     console.log("Was not saved");
   }
 }
-function getColorsFunction() {
+function getColorsFunction(number) {
+  console.log(number);
   isSavedColorsLoaded = true;
-  colors = localStorage.getItem("colors");
+  colors = localStorage.getItem(`colors_${number}`);
   colors = JSON.parse(colors);
+  console.log(colors);
   clearYourColorsDOM();
 
   if (colors) {
@@ -506,6 +509,215 @@ function checkRangeOrSinglePicture() {
     endWidth.disabled = true;
   } else endWidth.disabled = false;
 }
+
+function selectFunction() {
+  for (let index = 0; index < 30; index++) {
+    var option = "<option value='" + index + "'>Color " + index + "</option>";
+    option.value = `color_${index}`;
+    document.getElementById("colorPrefs").innerHTML += option;
+  }
+}
+
+function colorPrefLoadButton() {
+  colors = [];
+
+  let usersPref = document.getElementById("colorPrefs").value;
+  switch (usersPref) {
+    case "0":
+      getColorsFunction(0);
+      break;
+    case "1":
+      getColorsFunction(1);
+      break;
+    case "2":
+      getColorsFunction(2);
+      break;
+    case "3":
+      getColorsFunction(3);
+      break;
+    case "4":
+      getColorsFunction(4);
+      break;
+    case "5":
+      getColorsFunction(5);
+      break;
+    case "6":
+      getColorsFunction(6);
+      break;
+    case "7":
+      getColorsFunction(7);
+      break;
+    case "8":
+      getColorsFunction(8);
+      break;
+    case "9":
+      getColorsFunction(9);
+      break;
+    case "10":
+      getColorsFunction(10);
+      break;
+    case "11":
+      getColorsFunction(11);
+      break;
+    case "12":
+      getColorsFunction(12);
+      break;
+    case "13":
+      getColorsFunction(13);
+      break;
+    case "14":
+      getColorsFunction(14);
+      break;
+    case "15":
+      getColorsFunction(15);
+      break;
+    case "16":
+      getColorsFunction(16);
+      break;
+    case "17":
+      getColorsFunction(17);
+      break;
+    case "18":
+      getColorsFunction(18);
+      break;
+    case "19":
+      getColorsFunction(19);
+      break;
+    case "20":
+      getColorsFunction(20);
+      break;
+    case "21":
+      getColorsFunction(21);
+      break;
+    case "22":
+      getColorsFunction(22);
+      break;
+    case "23":
+      getColorsFunction(23);
+      break;
+    case "24":
+      getColorsFunction(24);
+      break;
+    case "25":
+      getColorsFunction(25);
+      break;
+    case "26":
+      getColorsFunction(26);
+      break;
+    case "27":
+      getColorsFunction(27);
+      break;
+    case "28":
+      getColorsFunction(28);
+      break;
+    case "29":
+      getColorsFunction(29);
+      break;
+  }
+}
+
+function colorPrefSaveButton() {
+  let usersPref = document.getElementById("colorPrefs").value;
+
+  switch (usersPref) {
+    case "0":
+      localStorage.setItem("colors_0", JSON.stringify(colors));
+      break;
+    case "1":
+      localStorage.setItem("colors_1", JSON.stringify(colors));
+      break;
+    case "2":
+      localStorage.setItem("colors_2", JSON.stringify(colors));
+      break;
+    case "3":
+      localStorage.setItem("colors_3", JSON.stringify(colors));
+      break;
+    case "4":
+      localStorage.setItem("colors_4", JSON.stringify(colors));
+      break;
+    case "5":
+      localStorage.setItem("colors_5", JSON.stringify(colors));
+      break;
+    case "6":
+      localStorage.setItem("colors_6", JSON.stringify(colors));
+      break;
+    case "7":
+      localStorage.setItem("colors_7", JSON.stringify(colors));
+      break;
+    case "8":
+      localStorage.setItem("colors_8", JSON.stringify(colors));
+      break;
+    case "9":
+      localStorage.setItem("colors_9", JSON.stringify(colors));
+      break;
+    case "10":
+      localStorage.setItem("colors_10", JSON.stringify(colors));
+      break;
+    case "11":
+      localStorage.setItem("colors_11", JSON.stringify(colors));
+      break;
+    case "12":
+      localStorage.setItem("colors_12", JSON.stringify(colors));
+      break;
+    case "13":
+      localStorage.setItem("colors_13", JSON.stringify(colors));
+      break;
+    case "14":
+      localStorage.setItem("colors_14", JSON.stringify(colors));
+      break;
+    case "15":
+      localStorage.setItem("colors_15", JSON.stringify(colors));
+      break;
+    case "16":
+      localStorage.setItem("colors_16", JSON.stringify(colors));
+      break;
+    case "17":
+      localStorage.setItem("colors_17", JSON.stringify(colors));
+      break;
+    case "18":
+      localStorage.setItem("colors_18", JSON.stringify(colors));
+      break;
+    case "19":
+      localStorage.setItem("colors_19", JSON.stringify(colors));
+      break;
+    case "20":
+      localStorage.setItem("colors_10", JSON.stringify(colors));
+      break;
+    case "21":
+      localStorage.setItem("colors_11", JSON.stringify(colors));
+      break;
+    case "22":
+      localStorage.setItem("colors_12", JSON.stringify(colors));
+      break;
+    case "23":
+      localStorage.setItem("colors_13", JSON.stringify(colors));
+      break;
+    case "24":
+      localStorage.setItem("colors_14", JSON.stringify(colors));
+      break;
+    case "25":
+      localStorage.setItem("colors_15", JSON.stringify(colors));
+      break;
+    case "26":
+      localStorage.setItem("colors_16", JSON.stringify(colors));
+      break;
+    case "27":
+      localStorage.setItem("colors_17", JSON.stringify(colors));
+      break;
+    case "28":
+      localStorage.setItem("colors_18", JSON.stringify(colors));
+      break;
+    case "29":
+      localStorage.setItem("colors_19", JSON.stringify(colors));
+      break;
+    default:
+      console.log("fell on default");
+  }
+}
+
+document.getElementById("colorPrefs").addEventListener("change", () => {
+  console.log("changed");
+});
 
 textArea.addEventListener("input", (event) => {
   setTimeout(() => {
