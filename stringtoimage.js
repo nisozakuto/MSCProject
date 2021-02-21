@@ -34,7 +34,8 @@ let colors = [],
   isCountingZeros = false,
   startWidth = document.getElementById("startWidth"),
   endWidth = document.getElementById("endWidth"),
-  setWidthText = document.getElementById("setWidthText");
+  setWidthText = document.getElementById("setWidthText"),
+  currentColorSet;
 
 document.onreadystatechange = function () {
   if (document.readyState !== "complete") {
@@ -60,7 +61,9 @@ function clearResults() {
 }
 
 function addColor(number1, hex) {
-  if (!colors[number1]) {
+  number1 = parseInt(number1, 10);
+  console.log(number1);
+  if (!colors[number1] || colors[number1] != null) {
     colors[number1] = hex;
     return;
   } else {
@@ -75,7 +78,7 @@ function addingTheColor(number1, hex, number2) {
   console.log("add the color Func", number2);
   if (number2 == undefined) {
     // Adding only one color
-    console.log("add one pic");
+    console.log("add one pic", number1);
     addColor(number1, hex);
   } else if (number2) {
     canIAddTheRange = true;
@@ -122,9 +125,9 @@ function createDOMForTheColor(number1, colorPickerValue, number2) {
     deleteButton.addEventListener("click", () => {
       console.log("clickeddd");
       alert(`${number1} is deleted`);
-      // colors[number1] = "";
-      delete colors[number1];
+      delete `colors_${document.getElementById("colorPrefs").value}`[number1];
       definedColor.remove();
+      colorPrefSaveButton();
     });
   } else if (rangeColor.checked == true) {
     const myColorNamelabel = document.createElement("p");
@@ -148,9 +151,11 @@ function createDOMForTheColor(number1, colorPickerValue, number2) {
       console.log("clickeddd", colors);
       alert(`${number1} to ${number2} is deleted`);
       for (let index = number1; index <= number2; index++) {
-        delete colors[index];
+        // delete colors[index];
+        delete `colors_${document.getElementById("colorPrefs").value}`[index];
       }
       definedColor.remove();
+      colorPrefSaveButton();
     });
   }
 }
@@ -205,7 +210,8 @@ function addAColor() {
       document.getElementById("colorNumber1").value,
       10
     );
-    if (canIAddThisSingle && !colors[chosenColorNumber]) {
+    // if (canIAddThisSingle && colors[chosenColorNumber]) {
+    if (canIAddThisSingle) {
       addingTheColor(chosenColorNumber, colorPicker.value);
       createDOMForTheColor(chosenColorNumber, colorPicker.value);
     } else {
@@ -384,8 +390,12 @@ function save() {
 function getColorsFunction(number) {
   console.log(number);
   isSavedColorsLoaded = true;
-  colors = localStorage.getItem(`colors_${number}`);
-  colors = JSON.parse(colors);
+  if (localStorage.getItem(`colors_${number}`) == null) {
+    colors.length = 0;
+  } else {
+    colors = localStorage.getItem(`colors_${number}`);
+    colors = JSON.parse(colors);
+  }
   console.log(colors);
   clearYourColorsDOM();
 
@@ -616,99 +626,133 @@ function colorPrefLoadButton() {
   }
 }
 
+function checkSaved(localColor) {}
+
 function colorPrefSaveButton() {
   let usersPref = document.getElementById("colorPrefs").value;
-
+  console.log("saved?");
   switch (usersPref) {
     case "0":
+      console.log("deleted");
       localStorage.setItem("colors_0", JSON.stringify(colors));
+      checkSaved(localStorage.getItem("colors_0"));
       break;
     case "1":
       localStorage.setItem("colors_1", JSON.stringify(colors));
+      checkSaved(localStorage.getItem("colors_1"));
       break;
     case "2":
       localStorage.setItem("colors_2", JSON.stringify(colors));
+      checkSaved(localStorage.getItem("colors_2"));
       break;
     case "3":
       localStorage.setItem("colors_3", JSON.stringify(colors));
+      checkSaved(localStorage.getItem("colors_3"));
       break;
     case "4":
       localStorage.setItem("colors_4", JSON.stringify(colors));
+      checkSaved(localStorage.getItem("colors_4"));
       break;
     case "5":
       localStorage.setItem("colors_5", JSON.stringify(colors));
+      checkSaved(localStorage.getItem("colors_5"));
       break;
     case "6":
       localStorage.setItem("colors_6", JSON.stringify(colors));
+      checkSaved(localStorage.getItem("colors_6"));
       break;
     case "7":
       localStorage.setItem("colors_7", JSON.stringify(colors));
+      checkSaved(localStorage.getItem("colors_7"));
       break;
     case "8":
       localStorage.setItem("colors_8", JSON.stringify(colors));
+      checkSaved(localStorage.getItem("colors_8"));
       break;
     case "9":
       localStorage.setItem("colors_9", JSON.stringify(colors));
+      checkSaved(localStorage.getItem("colors_9"));
       break;
     case "10":
       localStorage.setItem("colors_10", JSON.stringify(colors));
+      checkSaved(localStorage.getItem("colors_10"));
       break;
     case "11":
       localStorage.setItem("colors_11", JSON.stringify(colors));
+      checkSaved(localStorage.getItem("colors_11"));
       break;
     case "12":
       localStorage.setItem("colors_12", JSON.stringify(colors));
+      checkSaved(localStorage.getItem("colors_12"));
       break;
     case "13":
       localStorage.setItem("colors_13", JSON.stringify(colors));
+      checkSaved(localStorage.getItem("colors_13"));
       break;
     case "14":
       localStorage.setItem("colors_14", JSON.stringify(colors));
+      checkSaved(localStorage.getItem("colors_14"));
       break;
     case "15":
       localStorage.setItem("colors_15", JSON.stringify(colors));
+      checkSaved(localStorage.getItem("colors_15"));
       break;
     case "16":
       localStorage.setItem("colors_16", JSON.stringify(colors));
+      checkSaved(localStorage.getItem("colors_16"));
       break;
     case "17":
       localStorage.setItem("colors_17", JSON.stringify(colors));
+      checkSaved(localStorage.getItem("colors_17"));
       break;
     case "18":
       localStorage.setItem("colors_18", JSON.stringify(colors));
+      checkSaved(localStorage.getItem("colors_18"));
       break;
     case "19":
       localStorage.setItem("colors_19", JSON.stringify(colors));
+      checkSaved(localStorage.getItem("colors_19"));
       break;
     case "20":
       localStorage.setItem("colors_10", JSON.stringify(colors));
+      checkSaved(localStorage.getItem("colors_10"));
       break;
     case "21":
       localStorage.setItem("colors_11", JSON.stringify(colors));
+      checkSaved(localStorage.getItem("colors_11"));
       break;
     case "22":
       localStorage.setItem("colors_12", JSON.stringify(colors));
+      checkSaved(localStorage.getItem("colors_12"));
       break;
     case "23":
       localStorage.setItem("colors_13", JSON.stringify(colors));
+      checkSaved(localStorage.getItem("colors_13"));
       break;
     case "24":
       localStorage.setItem("colors_14", JSON.stringify(colors));
+      checkSaved(localStorage.getItem("colors_14"));
       break;
     case "25":
       localStorage.setItem("colors_15", JSON.stringify(colors));
+      checkSaved(localStorage.getItem("colors_15"));
       break;
     case "26":
       localStorage.setItem("colors_16", JSON.stringify(colors));
+      checkSaved(localStorage.getItem("colors_16"));
       break;
     case "27":
       localStorage.setItem("colors_17", JSON.stringify(colors));
+      checkSaved(localStorage.getItem("colors_17"));
       break;
     case "28":
       localStorage.setItem("colors_18", JSON.stringify(colors));
+      checkSaved(localStorage.getItem("colors_18"));
       break;
     case "29":
       localStorage.setItem("colors_19", JSON.stringify(colors));
+      checkSaved(localStorage.getItem("colors_19"));
+
       break;
     default:
       console.log("fell on default");
@@ -717,6 +761,7 @@ function colorPrefSaveButton() {
 
 document.getElementById("colorPrefs").addEventListener("change", () => {
   console.log("changed");
+  getColorsFunction(document.getElementById("colorPrefs").value);
 });
 
 textArea.addEventListener("input", (event) => {
@@ -741,6 +786,9 @@ function init() {
   document.getElementById("colorNumber2").disabled = true;
   createImagesButton.disabled = true;
   checkInverse();
+  if (localStorage.getItem("colors")) {
+    localStorage.setItem("colors", JSON.stringify(colors));
+  }
 }
 
 init();
