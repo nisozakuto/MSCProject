@@ -521,7 +521,7 @@ function checkRangeOrSinglePicture() {
 }
 
 function selectFunction() {
-  for (let index = 0; index < 30; index++) {
+  for (let index = 1; index <= 30; index++) {
     var option = "<option value='" + index + "'>Color " + index + "</option>";
     option.value = `color_${index}`;
     document.getElementById("colorPrefs").innerHTML += option;
