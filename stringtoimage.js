@@ -388,7 +388,7 @@ function save() {
   }
 }
 function getColorsFunction(number) {
-  console.log(number);
+  console.log("asdklj", number);
   isSavedColorsLoaded = true;
   if (localStorage.getItem(`colors_${number}`) == null) {
     colors.length = 0;
@@ -626,11 +626,8 @@ function colorPrefLoadButton() {
   }
 }
 
-function checkSaved(localColor) {}
-
 function colorPrefSaveButton() {
   let usersPref = document.getElementById("colorPrefs").value;
-  console.log("saved?");
   switch (usersPref) {
     case "0":
       console.log("deleted");
@@ -714,44 +711,47 @@ function colorPrefSaveButton() {
       checkSaved(localStorage.getItem("colors_19"));
       break;
     case "20":
-      localStorage.setItem("colors_10", JSON.stringify(colors));
-      checkSaved(localStorage.getItem("colors_10"));
+      localStorage.setItem("colors_20", JSON.stringify(colors));
+      checkSaved(localStorage.getItem("colors_20"));
       break;
     case "21":
-      localStorage.setItem("colors_11", JSON.stringify(colors));
-      checkSaved(localStorage.getItem("colors_11"));
+      localStorage.setItem("colors_21", JSON.stringify(colors));
+      checkSaved(localStorage.getItem("colors_21"));
       break;
     case "22":
-      localStorage.setItem("colors_12", JSON.stringify(colors));
-      checkSaved(localStorage.getItem("colors_12"));
+      localStorage.setItem("colors_22", JSON.stringify(colors));
+      checkSaved(localStorage.getItem("colors_22"));
       break;
     case "23":
-      localStorage.setItem("colors_13", JSON.stringify(colors));
-      checkSaved(localStorage.getItem("colors_13"));
+      localStorage.setItem("colors_23", JSON.stringify(colors));
+      checkSaved(localStorage.getItem("colors_23"));
       break;
     case "24":
-      localStorage.setItem("colors_14", JSON.stringify(colors));
-      checkSaved(localStorage.getItem("colors_14"));
+      localStorage.setItem("colors_24", JSON.stringify(colors));
+      checkSaved(localStorage.getItem("colors_24"));
       break;
     case "25":
-      localStorage.setItem("colors_15", JSON.stringify(colors));
-      checkSaved(localStorage.getItem("colors_15"));
+      localStorage.setItem("colors_25", JSON.stringify(colors));
+      checkSaved(localStorage.getItem("colors_25"));
       break;
     case "26":
-      localStorage.setItem("colors_16", JSON.stringify(colors));
-      checkSaved(localStorage.getItem("colors_16"));
+      localStorage.setItem("colors_26", JSON.stringify(colors));
+      checkSaved(localStorage.getItem("colors_26"));
       break;
     case "27":
-      localStorage.setItem("colors_17", JSON.stringify(colors));
-      checkSaved(localStorage.getItem("colors_17"));
+      localStorage.setItem("colors_27", JSON.stringify(colors));
+      checkSaved(localStorage.getItem("colors_27"));
       break;
     case "28":
-      localStorage.setItem("colors_18", JSON.stringify(colors));
-      checkSaved(localStorage.getItem("colors_18"));
+      localStorage.setItem("colors_28", JSON.stringify(colors));
+      checkSaved(localStorage.getItem("colors_28"));
       break;
     case "29":
-      localStorage.setItem("colors_19", JSON.stringify(colors));
-      checkSaved(localStorage.getItem("colors_19"));
+      localStorage.setItem("colors_29", JSON.stringify(colors));
+      checkSaved(localStorage.getItem("colors_29"));
+    case "30":
+      localStorage.setItem("colors_30", JSON.stringify(colors));
+      checkSaved(localStorage.getItem("colors_30"));
 
       break;
     default:
@@ -760,7 +760,7 @@ function colorPrefSaveButton() {
 }
 
 document.getElementById("colorPrefs").addEventListener("change", () => {
-  console.log("changed");
+  console.log("Color Pref Changed");
   getColorsFunction(document.getElementById("colorPrefs").value);
 });
 
@@ -789,6 +789,8 @@ function init() {
   if (localStorage.getItem("colors")) {
     localStorage.setItem("colors", JSON.stringify(colors));
   }
+  //Load Color1's colors
+  getColorsFunction(1);
 }
 
 init();
