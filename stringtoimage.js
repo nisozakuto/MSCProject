@@ -319,6 +319,7 @@ function downloadFunction(index, startWidthValueForDownload) {
 
 function roll() {
   //First Check is passed range
+  console.log(`isPassedRange${isPassedRange} isThereString${isThereString}`);
   if (isPassedRange && isThereString) {
     console.log("LETS ROLL");
     zeroCheck();
@@ -757,8 +758,14 @@ document.getElementById("colorPrefs").addEventListener("change", () => {
 textArea.addEventListener("input", (event) => {
   setTimeout(() => {
     breakString();
-    stringLength.innerText = `String's Length is: ${myCodeArray.length}`;
-    if (myCodeArray.length >= 0) isThereString = true;
+    if (myCodeArray.length >= 0) {
+      isThereString = true;
+      stringLength.innerText = `String's Length is: ${myCodeArray.length}`;
+    }
+    if (myCodeArray.length == 1 && myCodeArray[0] == "") {
+      stringLength.innerText = `String's Length is: 0`;
+      isThereString = false;
+    }
   }, 300);
 });
 
