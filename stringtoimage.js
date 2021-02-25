@@ -299,6 +299,21 @@ function createPicture(rowLength) {
   document.querySelector("body").style.visibility = "visible";
 }
 
+function downloadFunction(index, startWidthValueForDownload) {
+  var downloadUrl = mycanvas[index].toDataURL("image/png");
+  var a = document.createElement("a");
+  a.href = downloadUrl;
+  a.target = "_parent";
+  if ("download" in a) {
+    a.download = `File_${index + 1}_Width:${startWidthValueForDownload}`;
+  }
+  (document.body || document.documentElement).appendChild(a);
+  if (a.click) {
+    a.click(); // The click method is supported by most browsers.
+  }
+  a.parentNode.removeChild(a);
+}
+
 function roll() {
   //First Check is passed range
   if (isPassedRange && isThereString) {
@@ -330,21 +345,8 @@ function roll() {
         downloadButton.addEventListener("click", () => {
           let index = i;
           for (index; index < i + 10; index++) {
-            var downloadUrl = mycanvas[index].toDataURL("image/png");
-            var a = document.createElement("a");
-            a.href = downloadUrl;
-            a.target = "_parent";
-            if ("download" in a) {
-              a.download = `File_${
-                index + 1
-              }_Width:${startWidthValueForDownload}`;
-              startWidthValueForDownload++;
-            }
-            (document.body || document.documentElement).appendChild(a);
-            if (a.click) {
-              a.click(); // The click method is supported by most browsers.
-            }
-            a.parentNode.removeChild(a);
+            downloadFunction(index, startWidthValueForDownload);
+            startWidthValueForDownload++;
           }
         });
       }
@@ -360,21 +362,14 @@ const sleep = (milliseconds) => {
 
 const tryme = async () => {
   mycanvas = document.querySelectorAll("canvas");
+  let startWidthValueForDownload = startWidthValue;
+
   for (let index = 0; index < mycanvas.length; index++) {
-    console.log("for loop", index);
-    await sleep(1000);
-    var downloadUrl = mycanvas[index].toDataURL("image/png");
-    var a = document.createElement("a");
-    a.href = downloadUrl;
-    a.target = "_parent";
-    if ("download" in a) {
-      a.download = `File_${index + 1}`;
-    }
-    (document.body || document.documentElement).appendChild(a);
-    if (a.click) {
-      a.click(); // The click method is supported by most browsers.
-    }
-    a.parentNode.removeChild(a);
+    console.log("For-loop", index);
+    await sleep(400);
+    console.log(`Index${index}-Start Value${startWidthValueForDownload}`);
+    downloadFunction(index, startWidthValueForDownload);
+    startWidthValueForDownload++;
   }
 };
 
@@ -388,7 +383,7 @@ function save() {
   }
 }
 function getColorsFunction(number) {
-  console.log("asdklj", number);
+  console.log("Option Number: ", number);
   isSavedColorsLoaded = true;
   if (localStorage.getItem(`colors_${number}`) == null) {
     colors.length = 0;
@@ -469,6 +464,7 @@ rangeColor.addEventListener("click", () => {
 // RANGE SET
 function setRangeWidth() {
   startWidthValue = parseInt(startWidth.value, 10);
+  console.log(startWidthValue);
   if (rangeSelection.checked) {
     setWidthText.innerText = `Set width is ${startWidthValue}`;
     endWidthValue = startWidthValue;
@@ -490,22 +486,14 @@ function setRangeWidth() {
   }
 }
 function singleDownload() {
-  let canvasToDownload = document.getElementById("singleImageDownloadInput")
-    .value;
-  let myCanvases = document.querySelectorAll("canvas");
+  let canvasToDownload = parseInt(
+    document.getElementById("singleImageDownloadInput").value,
+    10
+  );
+  startWidthValue = parseInt(startWidthValue, 10);
+  console.log(`Index-Start Value${startWidthValue + canvasToDownload}`);
 
-  var downloadUrl = myCanvases[canvasToDownload - 1].toDataURL("image/png");
-  var a = document.createElement("a");
-  a.href = downloadUrl;
-  a.target = "_parent";
-  if ("download" in a) {
-    a.download = "File_" + canvasToDownload;
-  }
-  (document.body || document.documentElement).appendChild(a);
-  if (a.click) {
-    a.click(); // The click method is supported by most browsers.
-  }
-  a.parentNode.removeChild(a);
+  downloadFunction(canvasToDownload - 1, startWidthValue + canvasToDownload);
 }
 // RANGE SET FINISHED
 
@@ -625,6 +613,7 @@ function colorPrefLoadButton() {
       break;
   }
 }
+function checkSaved() {}
 
 function colorPrefSaveButton() {
   let usersPref = document.getElementById("colorPrefs").value;
