@@ -69,7 +69,6 @@ function addColor(number1, hex) {
   } else {
     alert("this exists");
     canIAddThisSingle = false;
-    //Deal with this later to add CHANGE feature
     return;
   }
 }
@@ -167,8 +166,8 @@ function zeroCheck() {
   } else {
     isCountingZeros = true;
     zeroStatus.innerText = `Keeping 0s in the list`;
-    breakString();
   }
+  breakString();
 }
 
 //RANGE OF COLOR START
@@ -230,6 +229,8 @@ function breakString() {
   let code = document.getElementById("string").value;
   myCodeArray = code.split(/\n/);
 
+  console.log("length,", myCodeArray);
+
   if (!isCountingZeros) {
     for (var i = 0; i < myCodeArray.length; i++) {
       if (myCodeArray[i] === "0") {
@@ -242,6 +243,8 @@ function breakString() {
   document.getElementById("foundZeros").innerText = `Found 0s: ${parseInt(
     amountOfZeros
   )}`;
+  let stringLength = document.getElementById("stringLength");
+  stringLength.innerText = `String's length is ${myCodeArray.length}`;
 }
 
 function createPicture(rowLength) {
@@ -320,8 +323,6 @@ function roll() {
     console.log("LETS ROLL");
     zeroCheck();
     imageNumberForThePage = 1;
-    let stringLength = document.getElementById("stringLength");
-    stringLength.innerText = `String's length is ${myCodeArray.length}`;
 
     for (let index = startWidthValue; index <= endWidthValue; index++) {
       setTimeout(() => {
