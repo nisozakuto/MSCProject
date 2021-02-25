@@ -151,7 +151,7 @@ function createDOMForTheColor(number1, colorPickerValue, number2) {
       console.log("clickeddd", colors);
       alert(`${number1} to ${number2} is deleted`);
       for (let index = number1; index <= number2; index++) {
-        // delete colors[index];
+        delete colors[index];
         delete `colors_${document.getElementById("colorPrefs").value}`[index];
       }
       definedColor.remove();
@@ -179,20 +179,16 @@ function addARangeOfColor() {
     10
   );
   if (firstNumber >= secondNumber) {
-    console.log(firstNumber, secondNumber, firstNumber >= secondNumber);
     alert("Second number must be bigger than the first one");
   } else if (secondNumber > firstNumber) {
-    console.log("Lets add");
+    console.log(`Lets add this range ${secondNumber} to ${firstNumber}`);
     for (let i = firstNumber; i <= secondNumber; i++) {
-      console.log(colors[i]);
       if (colors[i] != undefined) {
-        console.log(i, colors[i], "179");
         alert(`${i} is already added to your colors`);
         return;
       }
     }
     if (canIAddTheRange) {
-      console.log("sjaslk");
       for (let i = firstNumber; i <= secondNumber; i++) {
         addingTheColor(i, colorPicker.value);
       }
