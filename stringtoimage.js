@@ -229,8 +229,6 @@ function breakString() {
   let code = document.getElementById("string").value;
   myCodeArray = code.split(/\n/);
 
-  console.log("length,", myCodeArray);
-
   if (!isCountingZeros) {
     for (var i = 0; i < myCodeArray.length; i++) {
       if (myCodeArray[i] === "0") {
@@ -615,7 +613,6 @@ function colorPrefLoadButton() {
       break;
   }
 }
-function checkSaved() {}
 
 function colorPrefSaveButton() {
   let usersPref = document.getElementById("colorPrefs").value;
@@ -623,130 +620,98 @@ function colorPrefSaveButton() {
     case "0":
       console.log("deleted");
       localStorage.setItem("colors_0", JSON.stringify(colors));
-      checkSaved(localStorage.getItem("colors_0"));
       break;
     case "1":
       localStorage.setItem("colors_1", JSON.stringify(colors));
-      checkSaved(localStorage.getItem("colors_1"));
       break;
     case "2":
       localStorage.setItem("colors_2", JSON.stringify(colors));
-      checkSaved(localStorage.getItem("colors_2"));
       break;
     case "3":
       localStorage.setItem("colors_3", JSON.stringify(colors));
-      checkSaved(localStorage.getItem("colors_3"));
       break;
     case "4":
       localStorage.setItem("colors_4", JSON.stringify(colors));
-      checkSaved(localStorage.getItem("colors_4"));
       break;
     case "5":
       localStorage.setItem("colors_5", JSON.stringify(colors));
-      checkSaved(localStorage.getItem("colors_5"));
       break;
     case "6":
       localStorage.setItem("colors_6", JSON.stringify(colors));
-      checkSaved(localStorage.getItem("colors_6"));
       break;
     case "7":
       localStorage.setItem("colors_7", JSON.stringify(colors));
-      checkSaved(localStorage.getItem("colors_7"));
       break;
     case "8":
       localStorage.setItem("colors_8", JSON.stringify(colors));
-      checkSaved(localStorage.getItem("colors_8"));
       break;
     case "9":
       localStorage.setItem("colors_9", JSON.stringify(colors));
-      checkSaved(localStorage.getItem("colors_9"));
       break;
     case "10":
       localStorage.setItem("colors_10", JSON.stringify(colors));
-      checkSaved(localStorage.getItem("colors_10"));
       break;
     case "11":
       localStorage.setItem("colors_11", JSON.stringify(colors));
-      checkSaved(localStorage.getItem("colors_11"));
       break;
     case "12":
       localStorage.setItem("colors_12", JSON.stringify(colors));
-      checkSaved(localStorage.getItem("colors_12"));
       break;
     case "13":
       localStorage.setItem("colors_13", JSON.stringify(colors));
-      checkSaved(localStorage.getItem("colors_13"));
       break;
     case "14":
       localStorage.setItem("colors_14", JSON.stringify(colors));
-      checkSaved(localStorage.getItem("colors_14"));
       break;
     case "15":
       localStorage.setItem("colors_15", JSON.stringify(colors));
-      checkSaved(localStorage.getItem("colors_15"));
       break;
     case "16":
       localStorage.setItem("colors_16", JSON.stringify(colors));
-      checkSaved(localStorage.getItem("colors_16"));
       break;
     case "17":
       localStorage.setItem("colors_17", JSON.stringify(colors));
-      checkSaved(localStorage.getItem("colors_17"));
       break;
     case "18":
       localStorage.setItem("colors_18", JSON.stringify(colors));
-      checkSaved(localStorage.getItem("colors_18"));
       break;
     case "19":
       localStorage.setItem("colors_19", JSON.stringify(colors));
-      checkSaved(localStorage.getItem("colors_19"));
       break;
     case "20":
       localStorage.setItem("colors_20", JSON.stringify(colors));
-      checkSaved(localStorage.getItem("colors_20"));
       break;
     case "21":
       localStorage.setItem("colors_21", JSON.stringify(colors));
-      checkSaved(localStorage.getItem("colors_21"));
       break;
     case "22":
       localStorage.setItem("colors_22", JSON.stringify(colors));
-      checkSaved(localStorage.getItem("colors_22"));
       break;
     case "23":
       localStorage.setItem("colors_23", JSON.stringify(colors));
-      checkSaved(localStorage.getItem("colors_23"));
       break;
     case "24":
       localStorage.setItem("colors_24", JSON.stringify(colors));
-      checkSaved(localStorage.getItem("colors_24"));
       break;
     case "25":
       localStorage.setItem("colors_25", JSON.stringify(colors));
-      checkSaved(localStorage.getItem("colors_25"));
       break;
     case "26":
       localStorage.setItem("colors_26", JSON.stringify(colors));
-      checkSaved(localStorage.getItem("colors_26"));
       break;
     case "27":
       localStorage.setItem("colors_27", JSON.stringify(colors));
-      checkSaved(localStorage.getItem("colors_27"));
       break;
     case "28":
       localStorage.setItem("colors_28", JSON.stringify(colors));
-      checkSaved(localStorage.getItem("colors_28"));
       break;
     case "29":
       localStorage.setItem("colors_29", JSON.stringify(colors));
-      checkSaved(localStorage.getItem("colors_29"));
     case "30":
       localStorage.setItem("colors_30", JSON.stringify(colors));
-      checkSaved(localStorage.getItem("colors_30"));
-
       break;
     default:
-      console.log("fell on default");
+      console.log("Fell on default");
   }
 }
 
