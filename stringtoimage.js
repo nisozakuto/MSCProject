@@ -15,6 +15,7 @@ const colorPrefSaveInput = document.getElementById("colorPrefInput");
 
 let colors = [],
   myCodeArray = [],
+  colorNames = [],
   myString = "niso",
   pixelSize = 1, //DONT CHANGE THIS VALUE
   canIAddTheRange = true,
@@ -391,7 +392,6 @@ function getColorsFunction(number) {
     colors = localStorage.getItem(`colors_${number}`);
     colors = JSON.parse(colors);
   }
-  console.log(colors);
   clearYourColorsDOM();
 
   if (colors) {
@@ -513,6 +513,10 @@ function selectFunction() {
     var option = "<option value='" + index + "'>Color " + index + "</option>";
     option.value = `color_${index}`;
     document.getElementById("colorPrefs").innerHTML += option;
+    var colorNameOption =
+      "<option value='" + index + "'>Color Name" + index + "</option>";
+    option.value = `color_name_${index}`;
+    document.getElementById("colorNames").innerHTML += colorNameOption;
   }
 }
 
@@ -613,12 +617,40 @@ function colorPrefLoadButton() {
       break;
   }
 }
+function loadColorNames() {
+  const colorNamesOl = document.getElementById("colorNamesOl");
+  colorNamesOl.innerHTML = "";
+  colorNames.map((e, index) => {
+    if (index != 0 && e != null) {
+      const colorNameLi = document.createElement("li");
+      colorNameLi.innerText = `${index} - ${e}`;
+      colorNamesOl.append(colorNameLi);
+    }
+  });
+}
+
+function colorNameSaveButton() {
+  let colorName = document.getElementById("colorName").value;
+  let colorNameIndex = document.getElementById("colorNames").value;
+  let result = true;
+  if (colorNames[colorNameIndex]) {
+    result = confirm("You are about to override the name");
+  }
+  if (!result) {
+    return;
+  } else {
+    colorNames[colorNameIndex] = colorName;
+    console.log(typeof colorNames);
+
+    loadColorNames();
+  }
+  localStorage.setItem("colorNames", JSON.stringify(colorNames));
+}
 
 function colorPrefSaveButton() {
   let usersPref = document.getElementById("colorPrefs").value;
   switch (usersPref) {
     case "0":
-      console.log("deleted");
       localStorage.setItem("colors_0", JSON.stringify(colors));
       break;
     case "1":
@@ -707,6 +739,7 @@ function colorPrefSaveButton() {
       break;
     case "29":
       localStorage.setItem("colors_29", JSON.stringify(colors));
+      break;
     case "30":
       localStorage.setItem("colors_30", JSON.stringify(colors));
       break;
@@ -748,9 +781,19 @@ function init() {
   document.getElementById("colorNumber2").disabled = true;
   createImagesButton.disabled = true;
   checkInverse();
-  if (localStorage.getItem("colors")) {
-    localStorage.setItem("colors", JSON.stringify(colors));
+
+  if (localStorage.getItem("colorNames")) {
+    colorNames = localStorage.getItem("colorNames");
   }
+  if (typeof (colorNames == String)) colorNames = JSON.parse(colorNames);
+
+  loadColorNames();
+
+  //Not sure if this block is necessary
+  // if (localStorage.getItem("colors")) {
+  //   localStorage.setItem("colors", JSON.stringify(colors));
+  // }
+
   //Load Color1's colors
   getColorsFunction(1);
 }

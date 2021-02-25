@@ -89,10 +89,13 @@
               selection
             </p>
             <select id="colorPrefs"></select>
-            <div>
-              <button onclick="colorPrefSaveButton()">Save Colors</button>
-              <!-- <button onclick="colorPrefLoadButton()">Load Colors</button> -->
-            </div>
+            <button onclick="colorPrefSaveButton()">Save Colors</button>
+            <!-- <button onclick="colorPrefLoadButton()">Load Colors</button> -->
+            <hr />
+            <select id="colorNames"></select>
+            <input type="text" placeholder="Color Name" id="colorName" />
+            <button onclick="colorNameSaveButton()">Save Color Name</button>
+            <ol id="colorNamesOl"></ol>
           </div>
           <hr />
           <div>
@@ -108,7 +111,6 @@
             </button>
           </div>
           <hr />
-
           <div>
             <h3 id="statusText"></h3>
           </div>
