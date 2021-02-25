@@ -5,6 +5,7 @@ const getColorsFromStorageButton = document.getElementById(
 );
 const createImagesButton = document.getElementById("roll");
 const inverseCheckbox = document.getElementById("checkbox");
+const invertCheckbox = document.getElementById("checkboxForInvert");
 const zeroStatus = document.getElementById("isCountingZeros");
 const rangeSelection = document.getElementById("rangeSelection");
 const textArea = document.querySelector("textarea");
@@ -27,6 +28,7 @@ let colors = [],
   isSavedColorsLoaded = false,
   isWidthSet = false,
   isInverse = false,
+  isInvert = false,
   amountOfZeros,
   mycanvas,
   canvasWidth = 1000, //DONT CHANGE THIS VALUE
@@ -258,6 +260,7 @@ function createPicture(rowLength) {
 
     canvas.style.border = "1px solid black";
     var ctx = canvas.getContext("2d");
+    if (isInvert) ctx.filter = "invert(1)";
 
     // ADDING PIXELS
     for (let i = 0; i < myCodeArray.length; i++) {
@@ -292,7 +295,6 @@ function createPicture(rowLength) {
   const imagePrint = document.getElementsByClassName("imagePrint");
   imagePrint[0].append(canvasNumberh2);
   imagePrint[0].append(canvas);
-
   document.querySelector("#loader").style.display = "none";
   document.querySelector("body").style.visibility = "visible";
 }
@@ -496,6 +498,12 @@ function singleDownload() {
 function checkInverse() {
   if (inverseCheckbox.checked) isInverse = true;
   else isInverse = false;
+}
+
+function checkInvert() {
+  if (invertCheckbox.checked) {
+    isInvert = true;
+  } else isInvert = false;
 }
 
 function checkRangeOrSinglePicture() {
@@ -769,6 +777,10 @@ rangeSelection.addEventListener("click", () => {
 
 inverseCheckbox.addEventListener("change", () => {
   checkInverse();
+});
+
+invertCheckbox.addEventListener("change", () => {
+  checkInvert();
 });
 
 function init() {
