@@ -101,59 +101,60 @@ function addingTheColor(number1, hex, number2) {
   }
 }
 
+let definedColor, deleteButton;
+
+function pElement(colorPickerValue, number1, number2) {
+  const myColorNamelabel = document.createElement("p");
+  myColorNamelabel.innerText = "Color HEX is:";
+  definedColor.append(myColorNamelabel);
+  if (number2) {
+    myColorNamelabel.innerText += ` ${colorPickerValue} and the color: ${number1} to ${number2}`;
+  } else {
+    myColorNamelabel.innerText +=
+      " " + colorPickerValue + " and the color: " + number1;
+  }
+}
+
+function divColorIcon(colorPickerValue) {
+  const colorDiv = document.createElement("div");
+  colorDiv.style.backgroundColor = colorPickerValue;
+  colorDiv.style.width = "20px";
+  colorDiv.style.height = "20px";
+  definedColor.append(colorDiv);
+}
+
+function buttonDeleteButton() {
+  deleteButton = document.createElement("button");
+  deleteButton.style.width = "20px";
+  deleteButton.style.height = "20px";
+  deleteButton.innerText = "X";
+  definedColor.append(deleteButton);
+}
+
 function deleteFunction(index) {
   delete colors[index];
   delete `colors_${document.getElementById("colorPrefs").value}`[index];
 }
 
 function createDOMForTheColor(number1, colorPickerValue, number2) {
-  const definedColor = document.createElement("div");
+  definedColor = document.createElement("div");
   //CHANGE myString in the future
   definedColor.id = myString;
   userscolors.append(definedColor);
 
   if (singleColor.checked == true) {
-    const myColorNamelabel = document.createElement("p");
-    myColorNamelabel.innerText = "Colors HEX is:";
-    definedColor.append(myColorNamelabel);
-    myColorNamelabel.innerText +=
-      " " + colorPickerValue + " and the color: " + number1;
-
-    const colorDiv = document.createElement("div");
-    colorDiv.style.backgroundColor = colorPickerValue;
-    colorDiv.style.width = "20px";
-    colorDiv.style.height = "20px";
-    definedColor.append(colorDiv);
-
-    const deleteButton = document.createElement("button");
-    deleteButton.style.width = "20px";
-    deleteButton.style.height = "20px";
-    deleteButton.innerText = "X";
-    definedColor.append(deleteButton);
-
+    pElement(colorPickerValue, number1);
+    divColorIcon(colorPickerValue);
+    buttonDeleteButton();
     deleteButton.addEventListener("click", () => {
       deleteFunction(number1);
       definedColor.remove();
       colorPrefSaveButton();
     });
   } else if (rangeColor.checked == true) {
-    const myColorNamelabel = document.createElement("p");
-    myColorNamelabel.innerText = "Colors HEX are:";
-    definedColor.append(myColorNamelabel);
-    myColorNamelabel.innerText += ` ${colorPickerValue} and the color: ${number1} to ${number2}`;
-
-    const colorDiv = document.createElement("div");
-    colorDiv.style.backgroundColor = colorPickerValue;
-    colorDiv.style.width = "20px";
-    colorDiv.style.height = "20px";
-    definedColor.append(colorDiv);
-
-    const deleteButton = document.createElement("button");
-    deleteButton.style.width = "20px";
-    deleteButton.style.height = "20px";
-    deleteButton.innerText = "X";
-    definedColor.append(deleteButton);
-
+    pElement(colorPickerValue, number1, number2);
+    divColorIcon(colorPickerValue);
+    buttonDeleteButton();
     deleteButton.addEventListener("click", () => {
       for (let index = number1; index <= number2; index++) {
         deleteFunction(index);
@@ -397,26 +398,13 @@ function getColorsFunction(number) {
     for (let i = 0; i < colors.length; i++) {
       if (colors[i] != null) {
         //Try to use function instead of the repeating the same code
-        const definedColor = document.createElement("div");
+        definedColor = document.createElement("div");
         definedColor.id = myString;
         userscolors.append(definedColor);
 
-        const myColorNamelabel = document.createElement("p");
-        myColorNamelabel.innerText = "Color number:";
-        definedColor.append(myColorNamelabel);
-        myColorNamelabel.innerText += " " + colors[i] + " and the color: " + i;
-
-        const colorDiv = document.createElement("div");
-        colorDiv.style.backgroundColor = colors[i];
-        colorDiv.style.width = "20px";
-        colorDiv.style.height = "20px";
-        definedColor.append(colorDiv);
-
-        const deleteButton = document.createElement("button");
-        deleteButton.style.width = "20px";
-        deleteButton.style.height = "20px";
-        deleteButton.innerText = "X";
-        definedColor.append(deleteButton);
+        pElement(colors[i], i);
+        divColorIcon(colors[i]);
+        buttonDeleteButton();
 
         deleteButton.addEventListener("click", () => {
           deleteFunction(i);
@@ -426,6 +414,7 @@ function getColorsFunction(number) {
     }
   }
 }
+
 function getColorsFromStorage() {
   let result = true;
   if (colors.length > 0) {
