@@ -96,10 +96,9 @@ article{
 }
 
 .imagePrint{
-    display: flex;
+    /* display: flex;
     flex-wrap: wrap;
-    flex-direction: column;
-    /* width: 100px; */
+    flex-direction: column; */
 }
 
 /* inputsSection STARTS */

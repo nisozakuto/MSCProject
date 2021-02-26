@@ -31,8 +31,8 @@ let colors = [],
   isInvert = false,
   amountOfZeros,
   mycanvas,
-  canvasWidth = 1000, //DONT CHANGE THIS VALUE
-  canvasHeigth = 1000, //DONT CHANGE THIS VALUE
+  canvasWidth = 100, //DONT CHANGE THIS VALUE
+  canvasHeigth = 100, //DONT CHANGE THIS VALUE
   imageNumberForThePage,
   isCountingZeros = false,
   startWidth = document.getElementById("startWidth"),
@@ -248,12 +248,18 @@ function breakString() {
 
 function createPicture(rowLength) {
   let canvasNumberh2 = document.createElement("h2");
-  canvasNumberh2.innerText = `Image number: ${imageNumberForThePage} & Width is: ${rowLength}`;
+  canvasNumberh2.innerText = `Image number: ${imageNumberForThePage} & Width is: ${rowLength} & Height is: ${Math.round(
+    myCodeArray.length / rowLength
+  )}`;
   canvasNumberh2.id = "canvasH2";
 
   let canvas = document.createElement("canvas");
-  canvas.width = canvasWidth;
-  canvas.height = canvasHeigth;
+  // canvas.width = canvasWidth;
+  // canvas.height = canvasHeigth;
+
+  canvas.width = rowLength;
+  canvas.height = myCodeArray.length / rowLength;
+
   let line, column;
 
   if (isInverse) {
@@ -318,12 +324,13 @@ function downloadFunction(index, startWidthValueForDownload) {
 
 function roll() {
   //First Check is passed range
-  console.log(`isPassedRange${isPassedRange} isThereString${isThereString}`);
+  // console.log(`isPassedRange${isPassedRange} isThereString${isThereString}`);
   if (isPassedRange && isThereString) {
     console.log("LETS ROLL");
     zeroCheck();
     imageNumberForThePage = 1;
 
+    //Create pictures
     for (let index = startWidthValue; index <= endWidthValue; index++) {
       setTimeout(() => {
         createPicture(index);
@@ -334,6 +341,7 @@ function roll() {
       }, 1000);
     }
 
+    //Start creating download links
     let resultAmount = endWidthValue - startWidthValue;
     let startWidthValueForDownload = startWidthValue;
     setTimeout(() => {
@@ -383,6 +391,7 @@ function save() {
     console.log("Was not saved");
   }
 }
+
 function getColorsFunction(number) {
   console.log("Option Number: ", number);
   isSavedColorsLoaded = true;
@@ -470,6 +479,7 @@ function setRangeWidth() {
     }
   }
 }
+
 function singleDownload() {
   let canvasToDownload = parseInt(
     document.getElementById("singleImageDownloadInput").value,
@@ -607,6 +617,7 @@ function colorPrefLoadButton() {
       break;
   }
 }
+
 function loadColorNames() {
   const colorNamesOl = document.getElementById("colorNamesOl");
   colorNamesOl.innerHTML = "";
