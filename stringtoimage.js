@@ -53,10 +53,13 @@ function clearYourColorsDOM() {
   document.getElementById("userscolors").innerText = "";
 }
 
+function emtpyColors() {
+  colors = [];
+}
 function clearResults() {
   alert("Clearing the results");
   document.getElementsByClassName("imagePrint")[0].innerHTML = "";
-  colors = [];
+  emtpyColors;
   if (document.getElementById("downloadButtons").innerHTML != undefined)
     document.getElementById("downloadButtons").innerHTML = "";
   clearYourColorsDOM();
@@ -65,7 +68,6 @@ function clearResults() {
 
 function addColor(number1, hex) {
   number1 = parseInt(number1, 10);
-  console.log(number1);
   if (!colors[number1] || colors[number1] != null) {
     colors[number1] = hex;
     return;
@@ -99,6 +101,11 @@ function addingTheColor(number1, hex, number2) {
   }
 }
 
+function deleteFunction(index) {
+  delete colors[index];
+  delete `colors_${document.getElementById("colorPrefs").value}`[index];
+}
+
 function createDOMForTheColor(number1, colorPickerValue, number2) {
   const definedColor = document.createElement("div");
   //CHANGE myString in the future
@@ -125,9 +132,7 @@ function createDOMForTheColor(number1, colorPickerValue, number2) {
     definedColor.append(deleteButton);
 
     deleteButton.addEventListener("click", () => {
-      console.log("clickeddd");
-      alert(`${number1} is deleted`);
-      delete `colors_${document.getElementById("colorPrefs").value}`[number1];
+      deleteFunction(number1);
       definedColor.remove();
       colorPrefSaveButton();
     });
@@ -150,11 +155,8 @@ function createDOMForTheColor(number1, colorPickerValue, number2) {
     definedColor.append(deleteButton);
 
     deleteButton.addEventListener("click", () => {
-      console.log("clickeddd", colors);
-      alert(`${number1} to ${number2} is deleted`);
       for (let index = number1; index <= number2; index++) {
-        delete colors[index];
-        delete `colors_${document.getElementById("colorPrefs").value}`[index];
+        deleteFunction(index);
       }
       definedColor.remove();
       colorPrefSaveButton();
@@ -418,10 +420,7 @@ function getColorsFunction(number) {
         definedColor.append(deleteButton);
 
         deleteButton.addEventListener("click", () => {
-          console.log("clickeddd");
-          alert(`${i} is deleted`);
-          // colors[i] = "";
-          delete colors[i];
+          deleteFunction(i);
           definedColor.remove();
         });
       }
@@ -525,8 +524,7 @@ function selectFunction() {
 }
 
 function colorPrefLoadButton() {
-  colors = [];
-
+  emtpyColors();
   let usersPref = document.getElementById("colorPrefs").value;
   switch (usersPref) {
     case "0":
