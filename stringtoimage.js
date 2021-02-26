@@ -210,8 +210,7 @@ function addAColor() {
       document.getElementById("colorNumber1").value,
       10
     );
-    // if (canIAddThisSingle && colors[chosenColorNumber]) {
-    if (canIAddThisSingle) {
+    if (canIAddThisSingle && !colors[chosenColorNumber]) {
       addingTheColor(chosenColorNumber, colorPicker.value);
       createDOMForTheColor(chosenColorNumber, colorPicker.value);
     } else {
