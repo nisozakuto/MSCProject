@@ -39,7 +39,8 @@ let colors = [],
   endWidth = document.getElementById("endWidth"),
   setWidthText = document.getElementById("setWidthText"),
   currentColorSet,
-  myColors = {};
+  myColors = {},
+  imageHeight;
 
 document.onreadystatechange = function () {
   if (document.readyState !== "complete") {
@@ -340,6 +341,8 @@ function createPicture(rowLength) {
   imagePrint[0].append(canvas);
   document.querySelector("#loader").style.display = "none";
   document.querySelector("body").style.visibility = "visible";
+
+  return (imageHeight = Math.round(myCodeArray.length / rowLength));
 }
 
 function downloadFunction(index, startWidthValueForDownload) {
@@ -348,7 +351,9 @@ function downloadFunction(index, startWidthValueForDownload) {
   a.href = downloadUrl;
   a.target = "_parent";
   if ("download" in a) {
-    a.download = `File_${index + 1}_Width:${startWidthValueForDownload}`;
+    a.download = `File_${
+      index + 1
+    }_Width:${startWidthValueForDownload}_Height_${imageHeight}`;
   }
   (document.body || document.documentElement).appendChild(a);
   if (a.click) {
@@ -488,40 +493,6 @@ function getColorsFunction(number) {
       });
     }
   }
-
-  //After deleting a color colorPrefSaveButton();
-
-  // if (colors) {
-  //   for (let i = 0; i < colors.length; i++) {
-  //     if (colors[i] != null) {
-  //       //Try to use function instead of the repeating the same code
-
-  //       myColorNamelabel.innerText += " " + colors[i] + " and the color: " + i;
-  //       // divColorIcon(colors[i]);
-  //       let colorPickerValue = colors[i];
-  //       const colorDiv = document.createElement("div");
-  //       colorDiv.style.backgroundColor = colorPickerValue;
-  //       colorDiv.style.width = "20px";
-  //       colorDiv.style.height = "20px";
-  //       definedColor.append(colorDiv);
-  //       // buttonDeleteButton();
-  //       deleteButton = document.createElement("button");
-  //       deleteButton.style.width = "20px";
-  //       deleteButton.style.height = "20px";
-  //       deleteButton.innerText = "X";
-  //       deleteButton.id = "xButton";
-
-  //       definedColor.append(deleteButton);
-
-  //       deleteButton.addEventListener("click", () => {
-  //         // deleteFunction(i);
-  //         delete colors[i];
-  //         delete `colors_${document.getElementById("colorPrefs").value}`[i];
-  //         definedColor.remove();
-  //       });
-  //     }
-  //   }
-  // }
 }
 
 function getColorsFromStorage() {
