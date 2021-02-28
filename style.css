@@ -110,15 +110,22 @@ article{
     flex-direction: row;
 }
 
-#inputDiv1, #inputDiv2, #inputDiv3{
-    min-width: 33%;
+#inputDiv1, #inputDiv2, #inputDiv3, #inputDiv4{
+    min-width: 25%;
 }
 
 .checkbox{
     display: flex;
     flex-direction: row;
     justify-content: center;
+    margin: 0.7em 0  ;
 }
+
+#startEndWidth, #setWidthButton{
+    margin: 0.7em 0  ;
+}
+
+
 /* inputsSection ENDS */
 
 /* addingColorAside STARTS*/
@@ -278,8 +285,15 @@ justify-content: center;
     align-items: center;
     overflow: auto;
     height: 400px;
-
 }
+
+#xButton
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 
 #linkText{
     margin: 0 auto; 

@@ -450,9 +450,7 @@ function getColorsFunction(number) {
         definedColor.append(myColorNamelabel);
 
         myColorNamelabel.innerText += " " + colors[i] + " and the color: " + i;
-
         // divColorIcon(colors[i]);
-
         let colorPickerValue = colors[i];
         const colorDiv = document.createElement("div");
         colorDiv.style.backgroundColor = colorPickerValue;
@@ -464,6 +462,8 @@ function getColorsFunction(number) {
         deleteButton.style.width = "20px";
         deleteButton.style.height = "20px";
         deleteButton.innerText = "X";
+        deleteButton.id = "xButton";
+
         definedColor.append(deleteButton);
 
         deleteButton.addEventListener("click", () => {

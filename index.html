@@ -61,7 +61,7 @@
                 >One picture</label
               >
             </div>
-            <div>
+            <div id="startEndWidth">
               <label>Start Width</label>
               <input
                 id="startWidth"
@@ -79,12 +79,25 @@
                 max="1000"
               />
             </div>
-            <button onclick="setRangeWidth()" type="submit">
+            <button onclick="setRangeWidth()" type="submit" id="setWidthButton">
               Set Width Range
             </button>
             <p id="setWidthText">Set Width is:</p>
           </aside>
+
           <hr />
+
+          <div>
+            <h3 id="statusText"></h3>
+          </div>
+        </div>
+
+        <div id="inputDiv3">
+          <h2>Your colors</h2>
+          <div id="userscolors"></div>
+        </div>
+
+        <div id="inputDiv2">
           <div id="infoAndSave">
             <p>
               Save your current color selection or get your saved color
@@ -99,31 +112,9 @@
             <button onclick="colorNameSaveButton()">Save Color Name</button>
             <ol id="colorNamesOl"></ol>
           </div>
-          <hr />
-          <div>
-            <p>Download only one image</p>
-            <label>Image number</label>
-            <input type="number" value="1" id="singleImageDownloadInput" />
-            <button
-              id="singleDownload"
-              onclick="singleDownload()"
-              type="submit"
-            >
-              Download
-            </button>
-          </div>
-          <hr />
-          <div>
-            <h3 id="statusText"></h3>
-          </div>
         </div>
 
-        <div id="inputDiv3">
-          <h2>Your colors</h2>
-          <div id="userscolors"></div>
-        </div>
-
-        <div id="inputDiv2">
+        <div id="inputDiv4">
           <aside id="formAside" class="center">
             <form>
               <h2>String</h2>
@@ -147,6 +138,18 @@
           <button id="clear" onclick="clearResults()" type="submit">
             Clear
           </button>
+          <div>
+            <p>Download only one image</p>
+            <label>Image number</label>
+            <input type="number" value="1" id="singleImageDownloadInput" />
+            <button
+              id="singleDownload"
+              onclick="singleDownload()"
+              type="submit"
+            >
+              Download
+            </button>
+          </div>
         </aside>
         <aside id="downloadButtons"></aside>
       </section>
@@ -160,7 +163,7 @@
     <script src="./jscolor.js"></script>
     <script src="./stringtoimage.js" async defer></script>
     <footer class="center">
-      An MSC Webpage - Last updated 2/25/2021 11:00 PM
+      An MSC Webpage - Last updated 2/27/2021 10:00 PM
     </footer>
   </body>
 </html>
