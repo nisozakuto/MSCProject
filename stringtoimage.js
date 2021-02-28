@@ -435,13 +435,14 @@ function save() {
 function getColorsFunction(number) {
   myColors = {};
   isSavedColorsLoaded = true;
+  clearYourColorsDOM();
+
   if (localStorage.getItem(`colors_${number}`) == null) {
     colors.length = 0;
   } else {
     colors = localStorage.getItem(`colors_${number}`);
     colors = JSON.parse(colors);
   }
-  clearYourColorsDOM();
 
   colors.map((e, i) => {
     if (myColors[colors[i]]) {
@@ -867,11 +868,6 @@ function init() {
   }
 
   loadColorNames();
-
-  //Not sure if this block is necessary
-  // if (localStorage.getItem("colors")) {
-  //   localStorage.setItem("colors", JSON.stringify(colors));
-  // }
 
   //Load Color1's colors
   getColorsFunction(1);
