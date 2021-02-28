@@ -38,7 +38,8 @@ let colors = [],
   startWidth = document.getElementById("startWidth"),
   endWidth = document.getElementById("endWidth"),
   setWidthText = document.getElementById("setWidthText"),
-  currentColorSet;
+  currentColorSet,
+  myColors = {};
 
 document.onreadystatechange = function () {
   if (document.readyState !== "complete") {
@@ -107,6 +108,7 @@ function pElement(colorPickerValue, number1, number2) {
   const myColorNamelabel = document.createElement("p");
   myColorNamelabel.innerText = "Color HEX is:";
   definedColor.append(myColorNamelabel);
+
   if (number2) {
     myColorNamelabel.innerText += ` ${colorPickerValue} and the color: ${number1} to ${number2}`;
   } else {
@@ -426,7 +428,7 @@ function save() {
 }
 
 function getColorsFunction(number) {
-  console.log("Option Number: ", number);
+  myColors = {};
   isSavedColorsLoaded = true;
   if (localStorage.getItem(`colors_${number}`) == null) {
     colors.length = 0;
@@ -436,45 +438,90 @@ function getColorsFunction(number) {
   }
   clearYourColorsDOM();
 
-  if (colors) {
-    for (let i = 0; i < colors.length; i++) {
-      if (colors[i] != null) {
-        //Try to use function instead of the repeating the same code
-        const definedColor = document.createElement("div");
-        definedColor.id = myString;
-        userscolors.append(definedColor);
+  colors.map((e, i) => {
+    if (myColors[colors[i]]) {
+      myColors[colors[i]].push(i);
+    } else {
+      myColors[colors[i]] = [];
+      myColors[colors[i]].push(i);
+    }
+  });
 
-        // pElement(colors[i], i);
-        const myColorNamelabel = document.createElement("p");
-        myColorNamelabel.innerText = "Color HEX is:";
-        definedColor.append(myColorNamelabel);
+  for (let [key, value] of Object.entries(myColors)) {
+    if (key != "null") {
+      const definedColor = document.createElement("div");
+      definedColor.id = myString;
+      userscolors.append(definedColor);
 
-        myColorNamelabel.innerText += " " + colors[i] + " and the color: " + i;
-        // divColorIcon(colors[i]);
-        let colorPickerValue = colors[i];
-        const colorDiv = document.createElement("div");
-        colorDiv.style.backgroundColor = colorPickerValue;
-        colorDiv.style.width = "20px";
-        colorDiv.style.height = "20px";
-        definedColor.append(colorDiv);
-        // buttonDeleteButton();
-        deleteButton = document.createElement("button");
-        deleteButton.style.width = "20px";
-        deleteButton.style.height = "20px";
-        deleteButton.innerText = "X";
-        deleteButton.id = "xButton";
+      const myColorNamelabel = document.createElement("p");
+      myColorNamelabel.innerText = "Color HEX is:";
+      definedColor.append(myColorNamelabel);
 
-        definedColor.append(deleteButton);
+      myColorNamelabel.innerText += " " + key + " and the color: ";
+      myColors[key].map((e, i) => {
+        // console.log(e, i);
+        myColorNamelabel.innerText += ` ${e}`;
+      });
 
-        deleteButton.addEventListener("click", () => {
-          // deleteFunction(i);
-          delete colors[i];
-          delete `colors_${document.getElementById("colorPrefs").value}`[i];
-          definedColor.remove();
+      let colorPickerValue = key;
+
+      const colorDiv = document.createElement("div");
+      colorDiv.style.backgroundColor = colorPickerValue;
+      colorDiv.style.width = "20px";
+      colorDiv.style.height = "20px";
+      definedColor.append(colorDiv);
+
+      deleteButton = document.createElement("button");
+      deleteButton.style.width = "20px";
+      deleteButton.style.height = "20px";
+      deleteButton.innerText = "X";
+      deleteButton.id = "xButton";
+      definedColor.append(deleteButton);
+
+      deleteButton.addEventListener("click", () => {
+        myColors[key].map((e) => {
+          console.log(e);
+          colors[e] = null;
         });
-      }
+        colorPrefSaveButton();
+        definedColor.remove();
+      });
     }
   }
+
+  //After deleting a color colorPrefSaveButton();
+
+  // if (colors) {
+  //   for (let i = 0; i < colors.length; i++) {
+  //     if (colors[i] != null) {
+  //       //Try to use function instead of the repeating the same code
+
+  //       myColorNamelabel.innerText += " " + colors[i] + " and the color: " + i;
+  //       // divColorIcon(colors[i]);
+  //       let colorPickerValue = colors[i];
+  //       const colorDiv = document.createElement("div");
+  //       colorDiv.style.backgroundColor = colorPickerValue;
+  //       colorDiv.style.width = "20px";
+  //       colorDiv.style.height = "20px";
+  //       definedColor.append(colorDiv);
+  //       // buttonDeleteButton();
+  //       deleteButton = document.createElement("button");
+  //       deleteButton.style.width = "20px";
+  //       deleteButton.style.height = "20px";
+  //       deleteButton.innerText = "X";
+  //       deleteButton.id = "xButton";
+
+  //       definedColor.append(deleteButton);
+
+  //       deleteButton.addEventListener("click", () => {
+  //         // deleteFunction(i);
+  //         delete colors[i];
+  //         delete `colors_${document.getElementById("colorPrefs").value}`[i];
+  //         definedColor.remove();
+  //       });
+  //     }
+  //   }
+  // }
 }
 
 function getColorsFromStorage() {
@@ -843,7 +890,8 @@ function init() {
   if (localStorage.getItem("colorNames")) {
     colorNames = localStorage.getItem("colorNames");
   }
-  if (typeof (colorNames == String)) {
+  console.log(colorNames);
+  if (typeof (colorNames == String) && colorNames.length > 0) {
     colorNames = JSON.parse(colorNames);
   }
 
