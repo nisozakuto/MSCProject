@@ -40,7 +40,8 @@ let colors = [],
   setWidthText = document.getElementById("setWidthText"),
   currentColorSet,
   myColors = {},
-  imageHeight;
+  imageHeight,
+  iAmDone = false;
 
 document.onreadystatechange = function () {
   if (document.readyState !== "complete") {
@@ -51,8 +52,11 @@ document.onreadystatechange = function () {
     document.querySelector("body").style.visibility = "visible";
   }
 };
+
 function clearYourColorsDOM() {
   document.getElementById("userscolors").innerText = "";
+  iAmDone = false;
+  iAmDone.style.disabled = false;
 }
 
 function emtpyColors() {
@@ -299,7 +303,6 @@ function createPicture(rowLength) {
   let line, column;
 
   if (isInverse) {
-    console.log("inverse creation");
     (line = 0), (column = rowLength);
 
     canvas.style.border = "1px solid black";
@@ -384,22 +387,48 @@ function roll() {
     //Start creating download links
     let resultAmount = endWidthValue - startWidthValue;
     let startWidthValueForDownload = startWidthValue;
-    setTimeout(() => {
-      mycanvas = document.querySelectorAll("canvas");
-      if (resultAmount == 0) resultAmount = 1;
-      for (let i = 0; i < resultAmount; i = i + 10) {
-        let downloadButton = document.createElement("button");
-        document.getElementById("downloadButtons").append(downloadButton);
-        downloadButton.innerText = `Download ${i + 1} to ${i + 10}`;
-        downloadButton.addEventListener("click", () => {
-          let index = i;
-          for (index; index < i + 10; index++) {
-            downloadFunction(index, startWidthValueForDownload);
-            startWidthValueForDownload++;
-          }
-        });
+
+    const iAmDone = document.createElement("button");
+    iAmDone.innerText = "Create Links";
+    let mainButtons = document.getElementById("mainButtons");
+    iAmDone.addEventListener("click", () => {
+      if (iAmDone) {
+        mycanvas = document.querySelectorAll("canvas");
+        if (resultAmount == 0) resultAmount = 1;
+        for (let i = 0; i < resultAmount; i = i + 10) {
+          let downloadButton = document.createElement("button");
+          document.getElementById("downloadButtons").append(downloadButton);
+          downloadButton.innerText = `Download ${i + 1} to ${i + 10}`;
+          downloadButton.addEventListener("click", () => {
+            let index = i;
+            for (index; index < i + 10; index++) {
+              downloadFunction(index, startWidthValueForDownload);
+              startWidthValueForDownload++;
+            }
+          });
+        }
+        iAmDone = false;
+        iAmDone.style.disabled = true;
       }
-    }, 3000);
+    });
+    mainButtons.appendChild(iAmDone);
+
+    // setTimeout(() => {
+    //   mycanvas = document.querySelectorAll("canvas");
+    //   if (resultAmount == 0) resultAmount = 1;
+    //   for (let i = 0; i < resultAmount; i = i + 10) {
+    //     let downloadButton = document.createElement("button");
+    //     document.getElementById("downloadButtons").append(downloadButton);
+    //     downloadButton.innerText = `Download ${i + 1} to ${i + 10}`;
+    //     downloadButton.addEventListener("click", () => {
+    //       let index = i;
+    //       for (index; index < i + 10; index++) {
+    //         downloadFunction(index, startWidthValueForDownload);
+    //         startWidthValueForDownload++;
+    //       }
+    //     });
+    //   }
+    // }, 3000);
   } else {
     alert("set the Range and enter an input");
   }
