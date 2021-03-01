@@ -41,7 +41,7 @@ let colors = [],
   currentColorSet,
   myColors = {},
   imageHeight,
-  iAmDone = false;
+  iAmDone = true;
 
 document.onreadystatechange = function () {
   if (document.readyState !== "complete") {
@@ -55,8 +55,10 @@ document.onreadystatechange = function () {
 
 function clearYourColorsDOM() {
   document.getElementById("userscolors").innerText = "";
-  iAmDone = false;
-  iAmDone.style.disabled = false;
+  iAmDone = true;
+  if (document.getElementById("iAmDoneButton")) {
+    document.getElementById("iAmDoneButton").disabled = false;
+  }
 }
 
 function emtpyColors() {
@@ -388,11 +390,16 @@ function roll() {
     let resultAmount = endWidthValue - startWidthValue;
     let startWidthValueForDownload = startWidthValue;
 
-    const iAmDone = document.createElement("button");
-    iAmDone.innerText = "Create Links";
+    const iAmDoneButton = document.createElement("button");
+    iAmDoneButton.innerText = "Create Links";
+    iAmDoneButton.id = "iAmDoneButton";
     let mainButtons = document.getElementById("mainButtons");
-    iAmDone.addEventListener("click", () => {
+    console.log("done", iAmDone);
+    console.log("done", iAmDone);
+
+    iAmDoneButton.addEventListener("click", () => {
       if (iAmDone) {
+        console.log("disabled");
         mycanvas = document.querySelectorAll("canvas");
         if (resultAmount == 0) resultAmount = 1;
         for (let i = 0; i < resultAmount; i = i + 10) {
@@ -407,11 +414,10 @@ function roll() {
             }
           });
         }
-        iAmDone = false;
-        iAmDone.style.disabled = true;
+        document.getElementById("iAmDoneButton").disabled = true;
       }
     });
-    mainButtons.appendChild(iAmDone);
+    mainButtons.appendChild(iAmDoneButton);
 
     // setTimeout(() => {
     //   mycanvas = document.querySelectorAll("canvas");
