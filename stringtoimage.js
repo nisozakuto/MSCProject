@@ -390,35 +390,36 @@ function roll() {
     let resultAmount = endWidthValue - startWidthValue;
     let startWidthValueForDownload = startWidthValue;
 
-    const iAmDoneButton = document.createElement("button");
-    iAmDoneButton.innerText = "Create Links";
-    iAmDoneButton.id = "iAmDoneButton";
-    let mainButtons = document.getElementById("mainButtons");
-    console.log("done", iAmDone);
-    console.log("done", iAmDone);
+    if (!document.getElementById("iAmDoneButton")) {
+      const iAmDoneButton = document.createElement("button");
+      iAmDoneButton.innerText = "Create Links";
+      iAmDoneButton.id = "iAmDoneButton";
+      let mainButtons = document.getElementById("mainButtons");
+      console.log("done", iAmDone);
+      console.log("done", iAmDone);
 
-    iAmDoneButton.addEventListener("click", () => {
-      if (iAmDone) {
-        console.log("disabled");
-        mycanvas = document.querySelectorAll("canvas");
-        if (resultAmount == 0) resultAmount = 1;
-        for (let i = 0; i < resultAmount; i = i + 10) {
-          let downloadButton = document.createElement("button");
-          document.getElementById("downloadButtons").append(downloadButton);
-          downloadButton.innerText = `Download ${i + 1} to ${i + 10}`;
-          downloadButton.addEventListener("click", () => {
-            let index = i;
-            for (index; index < i + 10; index++) {
-              downloadFunction(index, startWidthValueForDownload);
-              startWidthValueForDownload++;
-            }
-          });
+      iAmDoneButton.addEventListener("click", () => {
+        if (iAmDone) {
+          console.log("disabled");
+          mycanvas = document.querySelectorAll("canvas");
+          if (resultAmount == 0) resultAmount = 1;
+          for (let i = 0; i < resultAmount; i = i + 10) {
+            let downloadButton = document.createElement("button");
+            document.getElementById("downloadButtons").append(downloadButton);
+            downloadButton.innerText = `Download ${i + 1} to ${i + 10}`;
+            downloadButton.addEventListener("click", () => {
+              let index = i;
+              for (index; index < i + 10; index++) {
+                downloadFunction(index, startWidthValueForDownload);
+                startWidthValueForDownload++;
+              }
+            });
+          }
+          document.getElementById("iAmDoneButton").disabled = true;
         }
-        document.getElementById("iAmDoneButton").disabled = true;
-      }
-    });
-    mainButtons.appendChild(iAmDoneButton);
-
+      });
+      mainButtons.appendChild(iAmDoneButton);
+    }
     // setTimeout(() => {
     //   mycanvas = document.querySelectorAll("canvas");
     //   if (resultAmount == 0) resultAmount = 1;
