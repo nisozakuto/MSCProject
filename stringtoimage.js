@@ -300,7 +300,7 @@ function createPicture(rowLength) {
   // canvas.height = canvasHeigth;
 
   canvas.width = rowLength;
-  canvas.height = myCodeArray.length / rowLength;
+  canvas.height = Math.ceil(myCodeArray.length / rowLength);
 
   let line, column;
 
