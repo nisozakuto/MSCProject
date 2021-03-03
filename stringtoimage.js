@@ -17,6 +17,7 @@ const colorPrefSaveInput = document.getElementById("colorPrefInput");
 let colors = [],
   myCodeArray = [],
   colorNames = [],
+  missingColors = [],
   myString = "niso",
   pixelSize = 1, //DONT CHANGE THIS VALUE
   canIAddTheRange = true,
@@ -29,6 +30,7 @@ let colors = [],
   isWidthSet = false,
   isInverse = false,
   isInvert = false,
+  isThereMissingColor = false,
   amountOfZeros,
   mycanvas,
   canvasWidth = 100, //DONT CHANGE THIS VALUE
@@ -286,6 +288,25 @@ function breakString() {
   )}`;
   let stringLength = document.getElementById("stringLength");
   stringLength.innerText = `String's length is ${myCodeArray.length}`;
+
+  let stringColorCheck = [];
+
+  for (color of myCodeArray) {
+    if (!stringColorCheck.includes(color)) {
+      stringColorCheck.push(color);
+    }
+  }
+  console.log(stringColorCheck, colors);
+  missingColors = [];
+  for (number of stringColorCheck) {
+    // number = parseInt(number, 10);
+    if (colors[number] == null) {
+      if (!missingColors.includes(number) && number.length > 0) {
+        missingColors.push(number);
+      }
+      isThereMissingColor = true;
+    }
+  }
 }
 
 function createPicture(rowLength) {
@@ -367,23 +388,60 @@ function downloadFunction(index, startWidthValueForDownload) {
   a.parentNode.removeChild(a);
 }
 
-function roll() {
+const sleep = (milliseconds) => {
+  return new Promise((resolve) => setTimeout(resolve, milliseconds));
+};
+
+const roll = async () => {
   //First Check is passed range
   // console.log(`isPassedRange${isPassedRange} isThereString${isThereString}`);
-  if (isPassedRange && isThereString) {
+
+  //Create a function to check the missing number 1)When string changes 2)When a color is added
+  //Adjust the isThereMissingColor Var
+  // if (isThereMissingColor) {
+  if (false) {
+    let missingColorsString = "";
+    for (missing of missingColors) {
+      console.log(missing);
+      missingColorsString += missing + ", ";
+      console.log(missingColorsString);
+    }
+    missingColorsString = missingColorsString.slice(
+      0,
+      missingColorsString.length - 1
+    );
+    console.log(
+      missingColorsString,
+      missingColorsString.slice(0, missingColorsString.length - 1)
+    );
+
+    alert(
+      `Missing colors are: ${missingColorsString.slice(
+        0,
+        missingColorsString.length - 1
+      )}`
+    );
+  } else if (isPassedRange && isThereString) {
     console.log("LETS ROLL");
     zeroCheck();
     imageNumberForThePage = 1;
 
     //Create pictures
     for (let index = startWidthValue; index <= endWidthValue; index++) {
-      setTimeout(() => {
-        createPicture(index);
-        imageNumberForThePage++;
-        if (index < endWidthValue)
-          statusText.innerText = `Drawing pictures. Currently at ${index}`;
-        else statusText.innerText = `Finished`;
-      }, 1000);
+      await sleep(400);
+      createPicture(index);
+      imageNumberForThePage++;
+      if (index < endWidthValue)
+        statusText.innerText = `Drawing pictures. Currently at ${index}`;
+      else statusText.innerText = `Finished`;
+
+      // setTimeout(() => {
+      //   createPicture(index);
+      //   imageNumberForThePage++;
+      //   if (index < endWidthValue)
+      //     statusText.innerText = `Drawing pictures. Currently at ${index}`;
+      //   else statusText.innerText = `Finished`;
+      // }, 1000);
     }
 
     //Start creating download links
@@ -420,29 +478,9 @@ function roll() {
       });
       mainButtons.appendChild(iAmDoneButton);
     }
-    // setTimeout(() => {
-    //   mycanvas = document.querySelectorAll("canvas");
-    //   if (resultAmount == 0) resultAmount = 1;
-    //   for (let i = 0; i < resultAmount; i = i + 10) {
-    //     let downloadButton = document.createElement("button");
-    //     document.getElementById("downloadButtons").append(downloadButton);
-    //     downloadButton.innerText = `Download ${i + 1} to ${i + 10}`;
-    //     downloadButton.addEventListener("click", () => {
-    //       let index = i;
-    //       for (index; index < i + 10; index++) {
-    //         downloadFunction(index, startWidthValueForDownload);
-    //         startWidthValueForDownload++;
-    //       }
-    //     });
-    //   }
-    // }, 3000);
   } else {
     alert("set the Range and enter an input");
   }
-}
-
-const sleep = (milliseconds) => {
-  return new Promise((resolve) => setTimeout(resolve, milliseconds));
 };
 
 const tryme = async () => {
