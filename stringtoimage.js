@@ -926,6 +926,25 @@ invertCheckbox.addEventListener("change", () => {
   checkInvert();
 });
 
+function lastUpdatedFunction() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      let repos = JSON.parse(this.responseText);
+      repos.forEach((repo) => {
+        if (repo.name == "MSCProject") {
+          document.querySelector(
+            "footer"
+          ).innerText = `An MSC Webpage - Last updated ${new Date(
+            repo.updated_at
+          )}`;
+        }
+      });
+    }
+  };
+  xhttp.open("GET", "https://api.github.com/users/nisozakuto/repos", true);
+  xhttp.send();
+}
 function init() {
   inverseCheckbox.checked = true;
   singleColor.checked = true;
@@ -945,6 +964,7 @@ function init() {
 
   //Load Color1's colors
   getColorsFunction(1);
+  lastUpdatedFunction();
 }
 
 init();
