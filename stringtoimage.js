@@ -309,7 +309,8 @@ function breakString() {
   }
 }
 
-const createPicture = async (rowLength) => {
+function createPicture(rowLength) {
+  // const createPicture = async (rowLength) => {
   let canvasNumberh2 = document.createElement("h2");
   canvasNumberh2.innerText = `Image number: ${imageNumberForThePage} & Width is: ${rowLength} & Height is: ${Math.round(
     myCodeArray.length / rowLength
@@ -373,7 +374,7 @@ const createPicture = async (rowLength) => {
   document.querySelector("body").style.visibility = "visible";
 
   return (imageHeight = Math.round(myCodeArray.length / rowLength));
-};
+}
 
 function downloadFunction(index, startWidthValueForDownload) {
   var downloadUrl = mycanvas[index].toDataURL("image/png");
