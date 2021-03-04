@@ -433,7 +433,7 @@ const roll = async () => {
 
     //Create pictures
     for (let index = startWidthValue; index <= endWidthValue; index++) {
-      await sleep(400);
+      // await sleep(50);
       createPicture(index);
       imageNumberForThePage++;
       if (index < endWidthValue)
