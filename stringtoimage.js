@@ -330,7 +330,9 @@ function createPicture(rowLength) {
 
     canvas.style.border = "1px solid black";
     var ctx = canvas.getContext("2d");
-    if (isInvert) ctx.filter = "invert(1)";
+    if (isInvert) {
+      ctx.filter = "invert(1)";
+    }
 
     // ADDING PIXELS
     for (let i = 0; i < myCodeArray.length; i++) {
@@ -346,7 +348,9 @@ function createPicture(rowLength) {
     column = line = 0;
     canvas.style.border = "1px solid black";
     var ctx = canvas.getContext("2d");
-    if (isInvert) ctx.filter = "invert(1)";
+    if (isInvert) {
+      ctx.filter = "invert(1)";
+    }
 
     //ADDING PIXELS
     for (let i = 0; i < myCodeArray.length; i++) {
