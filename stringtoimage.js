@@ -397,6 +397,7 @@ const roll = async () => {
   //Create a function to check the missing number 1)When string changes 2)When a color is added
   //Adjust the isThereMissingColor Var
   // if (isThereMissingColor) {
+  checkIsThereString();
 
   if (false) {
     let missingColorsString = "";
@@ -420,6 +421,11 @@ const roll = async () => {
         missingColorsString.length - 1
       )}`
     );
+  }
+  if (!isPassedRange) {
+    alert("Set the range");
+  } else if (!isThereString) {
+    alert("There is no string");
   } else if (isPassedRange && isThereString) {
     console.log("LETS ROLL");
     zeroCheck();
@@ -476,7 +482,7 @@ const roll = async () => {
       mainButtons.appendChild(iAmDoneButton);
     }
   } else {
-    alert("set the Range and enter an input");
+    alert("Speak with the developer");
   }
 };
 
