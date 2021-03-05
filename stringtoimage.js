@@ -127,22 +127,6 @@ function pElement(colorPickerValue, number1, number2) {
   }
 }
 
-function divColorIcon(colorPickerValue) {
-  const colorDiv = document.createElement("div");
-  colorDiv.style.backgroundColor = colorPickerValue;
-  colorDiv.style.width = "20px";
-  colorDiv.style.height = "20px";
-  definedColor.append(colorDiv);
-}
-
-function buttonDeleteButton() {
-  deleteButton = document.createElement("button");
-  deleteButton.style.width = "20px";
-  deleteButton.style.height = "20px";
-  deleteButton.innerText = "X";
-  definedColor.append(deleteButton);
-}
-
 function createDOMForTheColor(number1, colorPickerValue, number2) {
   const definedColor = document.createElement("div");
   //CHANGE myString in the future
@@ -159,24 +143,22 @@ function createDOMForTheColor(number1, colorPickerValue, number2) {
     myColorNamelabel.innerText +=
       " " + colorPickerValue + " and the color: " + number1;
 
-    // divColorIcon(colorPickerValue);
     const colorDiv = document.createElement("div");
     colorDiv.style.backgroundColor = colorPickerValue;
     colorDiv.style.width = "20px";
     colorDiv.style.height = "20px";
     definedColor.append(colorDiv);
-    // buttonDeleteButton();
     deleteButton = document.createElement("button");
     deleteButton.style.width = "20px";
     deleteButton.style.height = "20px";
     deleteButton.innerText = "X";
     definedColor.append(deleteButton);
     deleteButton.addEventListener("click", () => {
-      // deleteFunction(number1);
       delete colors[number1];
       delete `colors_${document.getElementById("colorPrefs").value}`[number1];
       definedColor.remove();
       colorPrefSaveButton();
+      zeroCheck();
     });
   } else if (rangeColor.checked == true) {
     // pElement(colorPickerValue, number1, number2);
@@ -186,13 +168,11 @@ function createDOMForTheColor(number1, colorPickerValue, number2) {
 
     myColorNamelabel.innerText += ` ${colorPickerValue} and the color: ${number1} to ${number2}`;
 
-    // divColorIcon(colorPickerValue);
     const colorDiv = document.createElement("div");
     colorDiv.style.backgroundColor = colorPickerValue;
     colorDiv.style.width = "20px";
     colorDiv.style.height = "20px";
     definedColor.append(colorDiv);
-    // buttonDeleteButton();
     deleteButton = document.createElement("button");
     deleteButton.style.width = "20px";
     deleteButton.style.height = "20px";
@@ -200,17 +180,18 @@ function createDOMForTheColor(number1, colorPickerValue, number2) {
     definedColor.append(deleteButton);
     deleteButton.addEventListener("click", () => {
       for (let index = number1; index <= number2; index++) {
-        // deleteFunction(index);
         delete colors[index];
         delete `colors_${document.getElementById("colorPrefs").value}`[index];
       }
       definedColor.remove();
       colorPrefSaveButton();
+      zeroCheck();
     });
   }
 }
 
 function zeroCheck() {
+  console.log("Zero Check");
   if (colors[0] == undefined) {
     isCountingZeros = false;
     zeroStatus.innerText = `Removing 0s from the list`;
@@ -288,10 +269,6 @@ function breakString() {
 
 function calcImageHeight(stringLength, rowLength) {
   imageHeight = Math.ceil(stringLength / rowLength);
-  console.log(
-    `StringLength: ${stringLength} RowLength ${rowLength}, imageHeight ${imageHeight}`
-  );
-
   return imageHeight;
 }
 
@@ -427,7 +404,6 @@ const roll = async () => {
   } else if (!isThereString) {
     alert("There is no string");
   } else if (isPassedRange && isThereString) {
-    console.log("LETS ROLL");
     zeroCheck();
     imageNumberForThePage = 1;
 
@@ -491,9 +467,7 @@ const tryme = async () => {
   let startWidthValueForDownload = startWidthValue;
 
   for (let index = 0; index < mycanvas.length; index++) {
-    console.log("For-loop", index);
     await sleep(400);
-    console.log(`Index${index}-Start Value${startWidthValueForDownload}`);
     downloadFunction(index, startWidthValueForDownload);
     startWidthValueForDownload++;
   }
@@ -505,7 +479,6 @@ function save() {
     if (colors.length == 0) alert("Please first add colors");
     else localStorage.setItem("colors", JSON.stringify(colors));
   } else {
-    console.log("Was not saved");
   }
 }
 
@@ -567,6 +540,7 @@ function getColorsFunction(number) {
         });
         colorPrefSaveButton();
         definedColor.remove();
+        zeroCheck();
       });
     }
   }
@@ -606,7 +580,6 @@ rangeColor.addEventListener("click", () => {
 // RANGE SET
 function setRangeWidth() {
   startWidthValue = parseInt(startWidth.value, 10);
-  console.log(startWidthValue);
   if (rangeSelection.checked) {
     setWidthText.innerText = `Set width is ${startWidthValue}`;
     endWidthValue = startWidthValue;
@@ -634,8 +607,6 @@ function singleDownload() {
     10
   );
   startWidthValue = parseInt(startWidthValue, 10);
-  console.log(`Index-Start Value${startWidthValue + canvasToDownload}`);
-
   downloadFunction(canvasToDownload - 1, startWidthValue + canvasToDownload);
 }
 // RANGE SET FINISHED
@@ -789,8 +760,6 @@ function colorNameSaveButton() {
     return;
   } else {
     colorNames[colorNameIndex] = colorName;
-    console.log(typeof colorNames);
-
     loadColorNames();
   }
   localStorage.setItem("colorNames", JSON.stringify(colorNames));
@@ -902,14 +871,19 @@ document.getElementById("colorPrefs").addEventListener("change", () => {
   getColorsFunction(document.getElementById("colorPrefs").value);
 });
 
+function setStringLengthText(length) {
+  let stringLength = document.getElementById("stringLength");
+  stringLength.innerText = `String's length: ${length}`;
+}
+
 textArea.addEventListener("input", (event) => {
   setTimeout(() => {
     breakString();
     document.getElementById("foundZeros").innerText = `Found 0s: ${parseInt(
       amountOfZeros
     )}`;
-    let stringLength = document.getElementById("stringLength");
-    stringLength.innerText = `String's length is ${myCodeArray.length}`;
+
+    setStringLengthText(myCodeArray.length);
 
     let stringColorCheck = [];
 
@@ -932,10 +906,10 @@ textArea.addEventListener("input", (event) => {
     checkIsThereString();
     if (isThereString) {
       checkIsThereString();
-      stringLength.innerText = `String's Length is: ${myCodeArray.length}`;
+      setStringLengthText(myCodeArray.length);
     }
     if (!isThereString) {
-      stringLength.innerText = `String's Length is: 0`;
+      setStringLengthText(0);
     }
   }, 300);
 });
