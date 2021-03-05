@@ -454,11 +454,6 @@ const roll = async () => {
             downloadButton.addEventListener("click", () => {
               let index = i;
               for (index; index < i + 10; index++) {
-                console.log("index: ", index);
-                console.log(
-                  "startWidthValueForDownload: ",
-                  startWidthValueForDownload
-                );
                 downloadFunction(index, startWidthValueForDownload);
                 startWidthValueForDownload++;
               }
