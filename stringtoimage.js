@@ -66,6 +66,7 @@ function clearYourColorsDOM() {
 function emtpyColors() {
   colors = [];
 }
+
 function clearResults() {
   alert("Clearing the results");
   document.getElementsByClassName("imagePrint")[0].innerHTML = "";
@@ -312,7 +313,7 @@ function breakString() {
 function createPicture(rowLength) {
   // const createPicture = async (rowLength) => {
   let canvasNumberh2 = document.createElement("h2");
-  canvasNumberh2.innerText = `Image number: ${imageNumberForThePage} & Width is: ${rowLength} & Height is: ${Math.round(
+  canvasNumberh2.innerText = `Image number: ${imageNumberForThePage} & Width is: ${rowLength} & Height is: ${Math.ceil(
     myCodeArray.length / rowLength
   )}`;
   canvasNumberh2.id = "canvasH2";
@@ -373,7 +374,7 @@ function createPicture(rowLength) {
   document.querySelector("#loader").style.display = "none";
   document.querySelector("body").style.visibility = "visible";
 
-  return (imageHeight = Math.round(myCodeArray.length / rowLength));
+  return (imageHeight = Math.ceil(myCodeArray.length / rowLength));
 }
 
 function downloadFunction(index, startWidthValueForDownload) {
@@ -433,7 +434,7 @@ const roll = async () => {
 
     //Create pictures
     for (let index = startWidthValue; index <= endWidthValue; index++) {
-      // await sleep(50);
+      await sleep(50);
       createPicture(index);
       imageNumberForThePage++;
       if (index < endWidthValue)
