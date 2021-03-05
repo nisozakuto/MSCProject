@@ -273,7 +273,7 @@ function calcImageHeight(stringLength, rowLength) {
   return imageHeight;
 }
 
-function createPicture(rowLength) {
+const createPicture = async (rowLength) => {
   // const createPicture = async (rowLength) => {
   calcImageHeight(myCodeArray.length, rowLength);
   let canvasNumberh2 = document.createElement("h2");
@@ -337,7 +337,7 @@ function createPicture(rowLength) {
   imagePrint[0].append(canvas);
   document.querySelector("#loader").style.display = "none";
   document.querySelector("body").style.visibility = "visible";
-}
+};
 
 function downloadFunction(index, startWidthValueForDownload) {
   calcImageHeight(myCodeArray.length, startWidthValueForDownload);
