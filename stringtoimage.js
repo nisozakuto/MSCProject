@@ -265,6 +265,7 @@ function breakString() {
       }
     }
   }
+  setStringLengthText(myCodeArray.length);
 }
 
 function calcImageHeight(stringLength, rowLength) {
