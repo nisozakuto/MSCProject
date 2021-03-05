@@ -284,30 +284,6 @@ function breakString() {
       }
     }
   }
-  document.getElementById("foundZeros").innerText = `Found 0s: ${parseInt(
-    amountOfZeros
-  )}`;
-  let stringLength = document.getElementById("stringLength");
-  stringLength.innerText = `String's length is ${myCodeArray.length}`;
-
-  let stringColorCheck = [];
-
-  for (color of myCodeArray) {
-    if (!stringColorCheck.includes(color)) {
-      stringColorCheck.push(color);
-    }
-  }
-  console.log(stringColorCheck, colors);
-  missingColors = [];
-  for (number of stringColorCheck) {
-    // number = parseInt(number, 10);
-    if (colors[number] == null) {
-      if (!missingColors.includes(number) && number.length > 0) {
-        missingColors.push(number);
-      }
-      isThereMissingColor = true;
-    }
-  }
 }
 
 function calcImageHeight(stringLength, rowLength) {
@@ -405,6 +381,15 @@ const sleep = (milliseconds) => {
   return new Promise((resolve) => setTimeout(resolve, milliseconds));
 };
 
+function checkIsThereString() {
+  if (myCodeArray.length >= 0) {
+    isThereString = true;
+  }
+  if (myCodeArray.length == 1 && myCodeArray[0] == "") {
+    isThereString = false;
+  }
+}
+
 const roll = async () => {
   //First Check is passed range
   // console.log(`isPassedRange${isPassedRange} isThereString${isThereString}`);
@@ -412,6 +397,7 @@ const roll = async () => {
   //Create a function to check the missing number 1)When string changes 2)When a color is added
   //Adjust the isThereMissingColor Var
   // if (isThereMissingColor) {
+
   if (false) {
     let missingColorsString = "";
     for (missing of missingColors) {
@@ -913,13 +899,37 @@ document.getElementById("colorPrefs").addEventListener("change", () => {
 textArea.addEventListener("input", (event) => {
   setTimeout(() => {
     breakString();
-    if (myCodeArray.length >= 0) {
-      isThereString = true;
+    document.getElementById("foundZeros").innerText = `Found 0s: ${parseInt(
+      amountOfZeros
+    )}`;
+    let stringLength = document.getElementById("stringLength");
+    stringLength.innerText = `String's length is ${myCodeArray.length}`;
+
+    let stringColorCheck = [];
+
+    for (color of myCodeArray) {
+      if (!stringColorCheck.includes(color)) {
+        stringColorCheck.push(color);
+      }
+    }
+    console.log(stringColorCheck, colors);
+    missingColors = [];
+    for (number of stringColorCheck) {
+      // number = parseInt(number, 10);
+      if (colors[number] == null) {
+        if (!missingColors.includes(number) && number.length > 0) {
+          missingColors.push(number);
+        }
+        isThereMissingColor = true;
+      }
+    }
+    checkIsThereString();
+    if (isThereString) {
+      checkIsThereString();
       stringLength.innerText = `String's Length is: ${myCodeArray.length}`;
     }
-    if (myCodeArray.length == 1 && myCodeArray[0] == "") {
+    if (!isThereString) {
       stringLength.innerText = `String's Length is: 0`;
-      isThereString = false;
     }
   }, 300);
 });
