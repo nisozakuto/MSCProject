@@ -310,12 +310,20 @@ function breakString() {
   }
 }
 
+function calcImageHeight(stringLength, rowLength) {
+  imageHeight = Math.ceil(stringLength / rowLength);
+  console.log(
+    `StringLength: ${stringLength} RowLength ${rowLength}, imageHeight ${imageHeight}`
+  );
+
+  return imageHeight;
+}
+
 function createPicture(rowLength) {
   // const createPicture = async (rowLength) => {
+  calcImageHeight(myCodeArray.length, rowLength);
   let canvasNumberh2 = document.createElement("h2");
-  canvasNumberh2.innerText = `Image number: ${imageNumberForThePage} & Width is: ${rowLength} & Height is: ${Math.ceil(
-    myCodeArray.length / rowLength
-  )}`;
+  canvasNumberh2.innerText = `Image number: ${imageNumberForThePage} & Width is: ${rowLength} & Height is: ${imageHeight}`;
   canvasNumberh2.id = "canvasH2";
 
   let canvas = document.createElement("canvas");
@@ -323,7 +331,7 @@ function createPicture(rowLength) {
   // canvas.height = canvasHeigth;
 
   canvas.width = rowLength;
-  canvas.height = Math.ceil(myCodeArray.length / rowLength);
+  canvas.height = imageHeight;
 
   let line, column;
 
@@ -373,11 +381,10 @@ function createPicture(rowLength) {
   imagePrint[0].append(canvas);
   document.querySelector("#loader").style.display = "none";
   document.querySelector("body").style.visibility = "visible";
-
-  return (imageHeight = Math.ceil(myCodeArray.length / rowLength));
 }
 
 function downloadFunction(index, startWidthValueForDownload) {
+  calcImageHeight(myCodeArray.length, startWidthValueForDownload);
   var downloadUrl = mycanvas[index].toDataURL("image/png");
   var a = document.createElement("a");
   a.href = downloadUrl;
@@ -459,8 +466,6 @@ const roll = async () => {
       iAmDoneButton.innerText = "Create Links";
       iAmDoneButton.id = "iAmDoneButton";
       let mainButtons = document.getElementById("mainButtons");
-      console.log("done", iAmDone);
-      console.log("done", iAmDone);
 
       iAmDoneButton.addEventListener("click", () => {
         if (iAmDone) {
@@ -545,7 +550,6 @@ function getColorsFunction(number) {
 
       myColorNamelabel.innerText += " " + key + " and the color: ";
       myColors[key].map((e, i) => {
-        // console.log(e, i);
         myColorNamelabel.innerText += ` ${e}`;
       });
 
