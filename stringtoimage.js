@@ -300,7 +300,7 @@ const createPicture = async (rowLength) => {
 
     // ADDING PIXELS
     for (let i = 0; i < myCodeArray.length; i++) {
-      await sleep(50);
+      // await sleep(50);
       column -= pixelSize;
       ctx.fillStyle = colors[myCodeArray[i]];
       ctx.fillRect(column, line, pixelSize, pixelSize);
