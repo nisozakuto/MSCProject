@@ -340,6 +340,8 @@ const createPicture = async (rowLength) => {
 };
 
 function downloadFunction(index, startWidthValueForDownload) {
+  console.log(index);
+  getMyCanvasFunction();
   calcImageHeight(myCodeArray.length, startWidthValueForDownload);
   var downloadUrl = mycanvas[index].toDataURL("image/png");
   var a = document.createElement("a");
@@ -368,6 +370,9 @@ function checkIsThereString() {
   if (myCodeArray.length == 1 && myCodeArray[0] == "") {
     isThereString = false;
   }
+}
+function getMyCanvasFunction() {
+  mycanvas = document.querySelectorAll("canvas");
 }
 
 const roll = async () => {
@@ -440,8 +445,7 @@ const roll = async () => {
 
       iAmDoneButton.addEventListener("click", () => {
         if (iAmDone) {
-          console.log("disabled");
-          mycanvas = document.querySelectorAll("canvas");
+          getMyCanvasFunction();
           if (resultAmount == 0) resultAmount = 1;
           for (let i = 0; i < resultAmount; i = i + 10) {
             let downloadButton = document.createElement("button");
@@ -450,11 +454,18 @@ const roll = async () => {
             downloadButton.addEventListener("click", () => {
               let index = i;
               for (index; index < i + 10; index++) {
+                console.log("index: ", index);
+                console.log(
+                  "startWidthValueForDownload: ",
+                  startWidthValueForDownload
+                );
                 downloadFunction(index, startWidthValueForDownload);
                 startWidthValueForDownload++;
               }
+              downloadButton.disabled = true;
             });
           }
+          //Set the width to default:
           document.getElementById("iAmDoneButton").disabled = true;
         }
       });
@@ -466,7 +477,7 @@ const roll = async () => {
 };
 
 const tryme = async () => {
-  mycanvas = document.querySelectorAll("canvas");
+  getMyCanvasFunction();
   let startWidthValueForDownload = startWidthValue;
 
   for (let index = 0; index < mycanvas.length; index++) {
@@ -610,7 +621,13 @@ function singleDownload() {
     10
   );
   startWidthValue = parseInt(startWidthValue, 10);
-  downloadFunction(canvasToDownload - 1, startWidthValue + canvasToDownload);
+  console.log("HERE", startWidthValue + canvasToDownload);
+  //canvasToDownload-1 to start the download File from 1 instead of 0
+  //
+  downloadFunction(
+    canvasToDownload - 1,
+    startWidthValue + canvasToDownload - 1
+  );
 }
 // RANGE SET FINISHED
 
