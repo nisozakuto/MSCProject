@@ -43,7 +43,8 @@ let colors = [],
   currentColorSet,
   myColors = {},
   imageHeight,
-  iAmDone = true;
+  iAmDone = true,
+  stringColorCheck = [];
 
 document.onreadystatechange = function () {
   if (document.readyState !== "complete") {
@@ -65,6 +66,20 @@ function clearYourColorsDOM() {
 
 function emtpyColors() {
   colors = [];
+}
+
+function missingColorFunction() {
+  console.log(stringColorCheck);
+  missingColors = [];
+  for (number of stringColorCheck) {
+    if (colors[number] == null) {
+      if (!missingColors.includes(number) && number.length > 0) {
+        missingColors.push(number);
+      }
+      isThereMissingColor = true;
+    }
+  }
+  if (missingColors.length == 0) isThereMissingColor = false;
 }
 
 function clearResults() {
@@ -159,6 +174,7 @@ function createDOMForTheColor(number1, colorPickerValue, number2) {
       definedColor.remove();
       colorPrefSaveButton();
       zeroCheck();
+      missingColorFunction();
     });
   } else if (rangeColor.checked == true) {
     // pElement(colorPickerValue, number1, number2);
@@ -186,6 +202,7 @@ function createDOMForTheColor(number1, colorPickerValue, number2) {
       definedColor.remove();
       colorPrefSaveButton();
       zeroCheck();
+      missingColorFunction();
     });
   }
 }
@@ -248,6 +265,7 @@ function addAColor() {
     addARangeOfColor();
   }
   zeroCheck();
+  missingColorFunction();
 }
 // ADD A COLOR FINISHED
 
@@ -384,7 +402,7 @@ const roll = async () => {
   // if (isThereMissingColor) {
   checkIsThereString();
 
-  if (false) {
+  if (isThereMissingColor) {
     let missingColorsString = "";
     for (missing of missingColors) {
       console.log(missing);
@@ -399,13 +417,14 @@ const roll = async () => {
       missingColorsString,
       missingColorsString.slice(0, missingColorsString.length - 1)
     );
-
     alert(
       `Missing colors are: ${missingColorsString.slice(
         0,
         missingColorsString.length - 1
       )}`
     );
+    return;
+    // alert("There is a missing, color: ", missingColorsString);
   }
   if (!isPassedRange) {
     alert("Set the range");
@@ -550,6 +569,7 @@ function getColorsFunction(number) {
         colorPrefSaveButton();
         definedColor.remove();
         zeroCheck();
+        missingColorFunction();
       });
     }
   }
@@ -711,7 +731,7 @@ textArea.addEventListener("input", (event) => {
 
     setStringLengthText(myCodeArray.length);
 
-    let stringColorCheck = [];
+    stringColorCheck = [];
 
     for (color of myCodeArray) {
       if (!stringColorCheck.includes(color)) {
@@ -719,16 +739,9 @@ textArea.addEventListener("input", (event) => {
       }
     }
     console.log(stringColorCheck, colors);
-    missingColors = [];
-    for (number of stringColorCheck) {
-      // number = parseInt(number, 10);
-      if (colors[number] == null) {
-        if (!missingColors.includes(number) && number.length > 0) {
-          missingColors.push(number);
-        }
-        isThereMissingColor = true;
-      }
-    }
+
+    missingColorFunction();
+
     checkIsThereString();
     if (isThereString) {
       checkIsThereString();
