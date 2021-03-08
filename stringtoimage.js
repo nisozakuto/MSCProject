@@ -655,14 +655,6 @@ function selectFunction() {
   }
 }
 
-function colorPrefLoadButton() {
-  emtpyColors();
-  let usersPref = document.getElementById("colorPrefs").value;
-  if (usersPref < 30 && usersPref > 0) {
-    getColorsFunction(usersPref);
-  }
-}
-
 function loadColorNames() {
   const colorNamesOl = document.getElementById("colorNamesOl");
   colorNamesOl.innerHTML = "";
@@ -693,102 +685,10 @@ function colorNameSaveButton() {
 
 function colorPrefSaveButton() {
   let usersPref = document.getElementById("colorPrefs").value;
-  switch (usersPref) {
-    case "0":
-      localStorage.setItem("colors_0", JSON.stringify(colors));
-      break;
-    case "1":
-      localStorage.setItem("colors_1", JSON.stringify(colors));
-      break;
-    case "2":
-      localStorage.setItem("colors_2", JSON.stringify(colors));
-      break;
-    case "3":
-      localStorage.setItem("colors_3", JSON.stringify(colors));
-      break;
-    case "4":
-      localStorage.setItem("colors_4", JSON.stringify(colors));
-      break;
-    case "5":
-      localStorage.setItem("colors_5", JSON.stringify(colors));
-      break;
-    case "6":
-      localStorage.setItem("colors_6", JSON.stringify(colors));
-      break;
-    case "7":
-      localStorage.setItem("colors_7", JSON.stringify(colors));
-      break;
-    case "8":
-      localStorage.setItem("colors_8", JSON.stringify(colors));
-      break;
-    case "9":
-      localStorage.setItem("colors_9", JSON.stringify(colors));
-      break;
-    case "10":
-      localStorage.setItem("colors_10", JSON.stringify(colors));
-      break;
-    case "11":
-      localStorage.setItem("colors_11", JSON.stringify(colors));
-      break;
-    case "12":
-      localStorage.setItem("colors_12", JSON.stringify(colors));
-      break;
-    case "13":
-      localStorage.setItem("colors_13", JSON.stringify(colors));
-      break;
-    case "14":
-      localStorage.setItem("colors_14", JSON.stringify(colors));
-      break;
-    case "15":
-      localStorage.setItem("colors_15", JSON.stringify(colors));
-      break;
-    case "16":
-      localStorage.setItem("colors_16", JSON.stringify(colors));
-      break;
-    case "17":
-      localStorage.setItem("colors_17", JSON.stringify(colors));
-      break;
-    case "18":
-      localStorage.setItem("colors_18", JSON.stringify(colors));
-      break;
-    case "19":
-      localStorage.setItem("colors_19", JSON.stringify(colors));
-      break;
-    case "20":
-      localStorage.setItem("colors_20", JSON.stringify(colors));
-      break;
-    case "21":
-      localStorage.setItem("colors_21", JSON.stringify(colors));
-      break;
-    case "22":
-      localStorage.setItem("colors_22", JSON.stringify(colors));
-      break;
-    case "23":
-      localStorage.setItem("colors_23", JSON.stringify(colors));
-      break;
-    case "24":
-      localStorage.setItem("colors_24", JSON.stringify(colors));
-      break;
-    case "25":
-      localStorage.setItem("colors_25", JSON.stringify(colors));
-      break;
-    case "26":
-      localStorage.setItem("colors_26", JSON.stringify(colors));
-      break;
-    case "27":
-      localStorage.setItem("colors_27", JSON.stringify(colors));
-      break;
-    case "28":
-      localStorage.setItem("colors_28", JSON.stringify(colors));
-      break;
-    case "29":
-      localStorage.setItem("colors_29", JSON.stringify(colors));
-      break;
-    case "30":
-      localStorage.setItem("colors_30", JSON.stringify(colors));
-      break;
-    default:
-      console.log("Fell on default");
+
+  if (usersPref <= 30 && usersPref >= 0) {
+    console.log("userpref here", usersPref);
+    localStorage.setItem(`colors_${usersPref}`, JSON.stringify(colors));
   }
 }
 
