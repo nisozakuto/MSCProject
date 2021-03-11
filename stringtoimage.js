@@ -62,6 +62,7 @@ function clearYourColorsDOM() {
   if (document.getElementById("iAmDoneButton")) {
     document.getElementById("iAmDoneButton").disabled = false;
   }
+  //Load the selected image
 }
 
 function emtpyColors() {
@@ -129,19 +130,6 @@ function addingTheColor(number1, hex, number2) {
 
 // let definedColor;
 
-function pElement(colorPickerValue, number1, number2) {
-  const myColorNamelabel = document.createElement("p");
-  myColorNamelabel.innerText = "Color HEX is:";
-  definedColor.append(myColorNamelabel);
-
-  if (number2) {
-    myColorNamelabel.innerText += ` ${colorPickerValue} and the color: ${number1} to ${number2}`;
-  } else {
-    myColorNamelabel.innerText +=
-      " " + colorPickerValue + " and the color: " + number1;
-  }
-}
-
 function createDOMForTheColor(number1, colorPickerValue, number2) {
   const definedColor = document.createElement("div");
   //CHANGE myString in the future
@@ -149,8 +137,6 @@ function createDOMForTheColor(number1, colorPickerValue, number2) {
   userscolors.append(definedColor);
 
   if (singleColor.checked == true) {
-    // pElement(colorPickerValue, number1);
-
     const myColorNamelabel = document.createElement("p");
     myColorNamelabel.innerText = "Color HEX is:";
     definedColor.append(myColorNamelabel);
@@ -177,7 +163,6 @@ function createDOMForTheColor(number1, colorPickerValue, number2) {
       missingColorFunction();
     });
   } else if (rangeColor.checked == true) {
-    // pElement(colorPickerValue, number1, number2);
     const myColorNamelabel = document.createElement("p");
     myColorNamelabel.innerText = "Color HEX is:";
     definedColor.append(myColorNamelabel);
@@ -291,6 +276,12 @@ function calcImageHeight(stringLength, rowLength) {
   return imageHeight;
 }
 
+function isColorInvert(ctx) {
+  if (isInvert) {
+    ctx.filter = "invert(1)";
+  }
+}
+
 const createPicture = async (rowLength) => {
   // const createPicture = async (rowLength) => {
   calcImageHeight(myCodeArray.length, rowLength);
@@ -312,13 +303,9 @@ const createPicture = async (rowLength) => {
 
     canvas.style.border = "1px solid black";
     var ctx = canvas.getContext("2d");
-    if (isInvert) {
-      ctx.filter = "invert(1)";
-    }
-
+    isColorInvert(ctx);
     // ADDING PIXELS
     for (let i = 0; i < myCodeArray.length; i++) {
-      // await sleep(50);
       column -= pixelSize;
       ctx.fillStyle = colors[myCodeArray[i]];
       ctx.fillRect(column, line, pixelSize, pixelSize);
@@ -331,10 +318,7 @@ const createPicture = async (rowLength) => {
     column = line = 0;
     canvas.style.border = "1px solid black";
     var ctx = canvas.getContext("2d");
-    if (isInvert) {
-      ctx.filter = "invert(1)";
-    }
-
+    isColorInvert(ctx);
     //ADDING PIXELS
     for (let i = 0; i < myCodeArray.length; i++) {
       // await sleep(50);
@@ -393,7 +377,8 @@ function getMyCanvasFunction() {
   mycanvas = document.querySelectorAll("canvas");
 }
 
-const roll = async () => {
+// const roll = async () => {
+function roll() {
   //First Check is passed range
   // console.log(`isPassedRange${isPassedRange} isThereString${isThereString}`);
 
@@ -436,7 +421,7 @@ const roll = async () => {
 
     //Create pictures
     for (let index = startWidthValue; index <= endWidthValue; index++) {
-      await sleep(50);
+      // await sleep(50);
       createPicture(index);
       imageNumberForThePage++;
       if (index < endWidthValue)
@@ -488,7 +473,7 @@ const roll = async () => {
   } else {
     alert("Speak with the developer");
   }
-};
+}
 
 const tryme = async () => {
   getMyCanvasFunction();
