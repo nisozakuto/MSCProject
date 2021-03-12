@@ -35,7 +35,7 @@ let colors = [],
   mycanvas,
   canvasWidth = 100, //DONT CHANGE THIS VALUE
   canvasHeigth = 100, //DONT CHANGE THIS VALUE
-  imageNumberForThePage,
+  imageNumberForThePage = 1,
   isCountingZeros = false,
   startWidth = document.getElementById("startWidth"),
   endWidth = document.getElementById("endWidth"),
@@ -63,6 +63,7 @@ function clearYourColorsDOM() {
     document.getElementById("iAmDoneButton").disabled = false;
   }
   //Load the selected image
+  imageNumberForThePage = 1;
 }
 
 function emtpyColors() {
@@ -342,7 +343,6 @@ const createPicture = async (rowLength) => {
 };
 
 function downloadFunction(index, startWidthValueForDownload) {
-  console.log(index);
   getMyCanvasFunction();
   calcImageHeight(myCodeArray.length, startWidthValueForDownload);
   var downloadUrl = mycanvas[index].toDataURL("image/png");
@@ -350,9 +350,9 @@ function downloadFunction(index, startWidthValueForDownload) {
   a.href = downloadUrl;
   a.target = "_parent";
   if ("download" in a) {
-    a.download = `File_${
-      index + 1
-    }_Width:${startWidthValueForDownload}_Height_${imageHeight}`;
+    a.download = `File_${index + 1}_Width:${
+      mycanvas[index].width
+    }_Height_${imageHeight}`;
   }
   (document.body || document.documentElement).appendChild(a);
   if (a.click) {
@@ -417,7 +417,6 @@ function roll() {
     alert("There is no string");
   } else if (isPassedRange && isThereString) {
     zeroCheck();
-    imageNumberForThePage = 1;
 
     //Create pictures
     for (let index = startWidthValue; index <= endWidthValue; index++) {
@@ -427,14 +426,6 @@ function roll() {
       if (index < endWidthValue)
         statusText.innerText = `Drawing pictures. Currently at ${index}`;
       else statusText.innerText = `Finished`;
-
-      // setTimeout(() => {
-      //   createPicture(index);
-      //   imageNumberForThePage++;
-      //   if (index < endWidthValue)
-      //     statusText.innerText = `Drawing pictures. Currently at ${index}`;
-      //   else statusText.innerText = `Finished`;
-      // }, 1000);
     }
 
     //Start creating download links
