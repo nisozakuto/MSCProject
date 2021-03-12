@@ -1,14 +1,18 @@
-const http = require("http");
+const express = require("express")();
+const app = express;
+const { Canvas } = require("canvas-constructor");
+// const canvas = require("canvas");
 
-const hostname = "127.0.0.1";
-const port = 3000;
+app.get("/image", async (req, res) => {
+  let image = new Canvas(300, 300)
+    .setColor("#FF7FF7FF")
+    .printRectangle(5, 5, 260, 260)
+    .setColor("#117FF7FF")
+    .printText("hello", 10, 10)
+    .toBuffer();
 
-const server = http.createServer((req, res) => {
-  res.statusCode = 200;
-  res.setHeader("Content-Type", "text/plain");
-  res.end("Hello World");
+  res.set({ "Content-Type": "image/png" });
+  res.send(image);
 });
 
-server.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
-});
+app.listen(8080);
