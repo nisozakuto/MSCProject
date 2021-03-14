@@ -178,14 +178,15 @@ function createDOMForTheColor(number1, colorPickerValue, number2) {
     if (singleColor.checked == true) {
       delete colors[number1];
       delete `colors_${document.getElementById("colorPrefs").value}`[number1];
+      deleteButtonFunctionsToCall(definedColor);
     }
     if (rangeColor.checked == true) {
       for (let index = number1; index <= number2; index++) {
         delete colors[index];
         delete `colors_${document.getElementById("colorPrefs").value}`[index];
+        deleteButtonFunctionsToCall(definedColor);
       }
     }
-    deleteButtonFunctionsToCall(definedColor);
   });
 }
 
