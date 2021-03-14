@@ -128,6 +128,7 @@ function addingTheColor(number1, hex, number2) {
       }
   }
 }
+
 function createColorDiv(colorPickerValue, definedColor) {
   const colorDiv = document.createElement("div");
   colorDiv.style.backgroundColor = colorPickerValue;
@@ -154,7 +155,7 @@ function deleteButtonFunctionsToCall(definedColor) {
 
 function createDOMForTheColor(number1, colorPickerValue, number2) {
   //CHANGE myString in the future
-  console.log("Created via delete Button Function");
+  console.log("Created via createDOMForTheColor");
   const definedColor = document.createElement("div");
   definedColor.id = myString;
   userscolors.append(definedColor);
@@ -167,6 +168,7 @@ function createDOMForTheColor(number1, colorPickerValue, number2) {
     myColorNamelabel.innerText +=
       " " + colorPickerValue + " and the color: " + number1;
   }
+
   if (rangeColor.checked == true) {
     myColorNamelabel.innerText += ` ${colorPickerValue} and the color: ${number1} to ${number2}`;
   }
