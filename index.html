@@ -3,7 +3,8 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title></title>
+    <title>MSC -- String to Image</title>
+    <link rel="shortcut icon" type="image/jpg" href="/favicon-32x32.png" />
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="./style.css" />
@@ -19,7 +20,6 @@
       <section id="inputsSection">
         <div id="inputDiv1">
           <h2>Settings</h2>
-
           <aside id="addColorSection" class="center">
             <div class="decisioning">
               <input
@@ -42,7 +42,7 @@
               <div class="addANewColor">
                 <input id="colorNumber1" type="number" value="1" min="0" />
                 <input id="colorNumber2" type="number" value="1" min="0" />
-                <button onclick="addAColor()" type="submit">Add</button>
+                <button onclick="add()" type="submit">Add</button>
               </div>
             </div>
             <div id="inverseCheckbox" class="checkbox">
@@ -84,9 +84,7 @@
             </button>
             <p id="setWidthText">Set Width is:</p>
           </aside>
-
           <hr />
-
           <div>
             <h3 id="statusText"></h3>
           </div>

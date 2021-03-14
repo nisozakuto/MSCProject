@@ -18,12 +18,19 @@ let colors = [],
   myCodeArray = [],
   colorNames = [],
   missingColors = [],
+  stringColorCheck = [],
+  myColors = {},
   myString = "niso",
   pixelSize = 1, //DONT CHANGE THIS VALUE
+  canvasWidth = 100, //DONT CHANGE THIS VALUE
+  canvasHeigth = 100, //DONT CHANGE THIS VALUE
+  startWidth = document.getElementById("startWidth"),
+  endWidth = document.getElementById("endWidth"),
+  setWidthText = document.getElementById("setWidthText"),
+  imageNumberForThePage = 1,
   canIAddTheRange = true,
   canIAddThisSingle = true,
   countstartWidthValue,
-  endWidthValue,
   isPassedRange = false,
   isThereString = false,
   isSavedColorsLoaded = false,
@@ -31,20 +38,14 @@ let colors = [],
   isInverse = false,
   isInvert = false,
   isThereMissingColor = false,
+  iAmDone = true,
+  isCountingZeros = false,
+  endWidthValue,
+  code,
   amountOfZeros,
   mycanvas,
-  canvasWidth = 100, //DONT CHANGE THIS VALUE
-  canvasHeigth = 100, //DONT CHANGE THIS VALUE
-  imageNumberForThePage = 1,
-  isCountingZeros = false,
-  startWidth = document.getElementById("startWidth"),
-  endWidth = document.getElementById("endWidth"),
-  setWidthText = document.getElementById("setWidthText"),
   currentColorSet,
-  myColors = {},
-  imageHeight,
-  iAmDone = true,
-  stringColorCheck = [];
+  imageHeight;
 
 document.onreadystatechange = function () {
   if (document.readyState !== "complete") {
@@ -70,7 +71,6 @@ function emtpyColors() {
 }
 
 function missingColorFunction() {
-  console.log(stringColorCheck);
   missingColors = [];
   for (number of stringColorCheck) {
     if (colors[number] == null) {
@@ -86,45 +86,32 @@ function missingColorFunction() {
 function clearResults() {
   alert("Clearing the results");
   document.getElementsByClassName("imagePrint")[0].innerHTML = "";
-  emtpyColors;
+  emtpyColors();
   if (document.getElementById("downloadButtons").innerHTML != undefined)
     document.getElementById("downloadButtons").innerHTML = "";
   clearYourColorsDOM();
   statusText = "";
 }
 
-function addColor(number1, hex) {
-  number1 = parseInt(number1, 10);
-  if (!colors[number1] || colors[number1] != null) {
-    colors[number1] = hex;
-    return;
-  } else {
-    alert("this exists");
-    canIAddThisSingle = false;
-    return;
-  }
-}
-
-function addingTheColor(number1, hex, number2) {
-  console.log("add the color Func", number2);
+function addColor(number1, hex, number2) {
   if (number2 == undefined) {
-    // Adding only one color
-    console.log("add one pic", number1);
-    addColor(number1, hex);
+    console.log("Adding only one color", number1); // Adding only one color
+    number1 = parseInt(number1, 10);
+    if (!colors[number1] || colors[number1] != null) {
+      colors[number1] = hex;
+      return;
+    } else {
+      alert("this exists");
+      canIAddThisSingle = false;
+      return;
+    }
   } else if (number2) {
     canIAddTheRange = true;
-    // Adding a range of colors
-    console.log("add range of pic");
+    console.log("Adding a range of colors"); // Adding a range of colors
     for (let i = number1; i <= number2; i++) {
-      if (colors[i] != undefined || colors[i] != "") {
-        canIAddTheRange = false;
-      }
+      console.log("Adding: ", i);
+      colors[number1] = hex;
     }
-    if (canIAddTheRange)
-      for (let i = number1; i <= number2; i++) {
-        console.log("ekleniyor", i);
-        addColor(i, hex);
-      }
   }
 }
 
@@ -201,57 +188,62 @@ function zeroCheck() {
   breakString();
 }
 
-//RANGE OF COLOR START
-function addARangeOfColor() {
-  let firstNumber = parseInt(document.getElementById("colorNumber1").value, 10);
-  let secondNumber = parseInt(
-    document.getElementById("colorNumber2").value,
+// ADD A COLOR
+function addASingleColor() {
+  console.log("========== Adding a color ==========");
+  let chosenColorNumber = parseInt(
+    document.getElementById("colorNumber1").value,
     10
   );
-  if (firstNumber >= secondNumber) {
-    alert("Second number must be bigger than the first one");
-  } else if (secondNumber > firstNumber) {
-    console.log(`Lets add this range ${secondNumber} to ${firstNumber}`);
-    for (let i = firstNumber; i <= secondNumber; i++) {
-      if (colors[i] != undefined) {
-        alert(`${i} is already added to your colors`);
-        return;
-      }
-    }
-    if (canIAddTheRange) {
-      for (let i = firstNumber; i <= secondNumber; i++) {
-        addingTheColor(i, colorPicker.value);
-      }
-      createDOMForTheColor(firstNumber, colorPicker.value, secondNumber);
-    }
+  if (canIAddThisSingle && !colors[chosenColorNumber]) {
+    // addingTheColor(chosenColorNumber, colorPicker.value);
+    addColor(chosenColorNumber, colorPicker.value);
+    createDOMForTheColor(chosenColorNumber, colorPicker.value);
+  } else {
+    alert("This color is already in your list");
   }
-} //RANGE OF COLOR END
+} // ADD A COLOR FINISHED
 
-// ADD A COLOR
-function addAColor() {
-  if (singleColor.checked == true) {
-    console.log("========== Adding a color ==========");
-    let chosenColorNumber = parseInt(
+function add() {
+  if (singleColor.checked) {
+    addASingleColor();
+  } else if (rangeColor.checked) {
+    canIAddTheRange = true;
+    let firstNumber = parseInt(
       document.getElementById("colorNumber1").value,
       10
     );
-    if (canIAddThisSingle && !colors[chosenColorNumber]) {
-      addingTheColor(chosenColorNumber, colorPicker.value);
-      createDOMForTheColor(chosenColorNumber, colorPicker.value);
-    } else {
-      alert("This color is already in your list");
+    let secondNumber = parseInt(
+      document.getElementById("colorNumber2").value,
+      10
+    );
+    if (firstNumber >= secondNumber) {
+      alert("Second number must be bigger than the first one");
+    } else if (secondNumber > firstNumber) {
+      console.log(`Lets add this range ${secondNumber} to ${firstNumber}`);
+      for (let i = firstNumber; i <= secondNumber; i++) {
+        if (colors[i] != undefined) {
+          alert(`${i} is already added to your colors`);
+          canIAddTheRange = false;
+          return;
+        }
+      }
+
+      if (canIAddTheRange) {
+        for (let i = firstNumber; i <= secondNumber; i++) {
+          addColor(i, colorPicker.value);
+        }
+        createDOMForTheColor(firstNumber, colorPicker.value, secondNumber);
+      }
     }
-  } else if (rangeColor.checked == true) {
-    console.log("add a range");
-    addARangeOfColor();
   }
   zeroCheck();
   missingColorFunction();
-} // ADD A COLOR FINISHED
+}
 
 function breakString() {
   amountOfZeros = 0;
-  let code = document.getElementById("string").value;
+  code = document.getElementById("string").value;
   myCodeArray = code.split(/\n/);
 
   if (!isCountingZeros) {
@@ -742,6 +734,7 @@ function lastUpdatedFunction() {
   xhttp.open("GET", "https://api.github.com/users/nisozakuto/repos", true);
   xhttp.send();
 }
+
 function init() {
   inverseCheckbox.checked = true;
   singleColor.checked = true;
