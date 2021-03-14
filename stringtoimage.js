@@ -62,8 +62,7 @@ function clearYourColorsDOM() {
   if (document.getElementById("iAmDoneButton")) {
     document.getElementById("iAmDoneButton").disabled = false;
   }
-  //Load the selected image
-  imageNumberForThePage = 1;
+  imageNumberForThePage = 1; //Load the selected image
 }
 
 function emtpyColors() {
@@ -129,12 +128,9 @@ function addingTheColor(number1, hex, number2) {
   }
 }
 
-// let definedColor;
-
 function createDOMForTheColor(number1, colorPickerValue, number2) {
   const definedColor = document.createElement("div");
-  //CHANGE myString in the future
-  definedColor.id = myString;
+  definedColor.id = myString; //CHANGE myString in the future
   userscolors.append(definedColor);
 
   if (singleColor.checked == true) {
@@ -229,8 +225,7 @@ function addARangeOfColor() {
       createDOMForTheColor(firstNumber, colorPicker.value, secondNumber);
     }
   }
-}
-//RANGE OF COLOR END
+} //RANGE OF COLOR END
 
 // ADD A COLOR
 function addAColor() {
@@ -252,8 +247,7 @@ function addAColor() {
   }
   zeroCheck();
   missingColorFunction();
-}
-// ADD A COLOR FINISHED
+} // ADD A COLOR FINISHED
 
 function breakString() {
   amountOfZeros = 0;
@@ -291,8 +285,6 @@ const createPicture = async (rowLength) => {
   canvasNumberh2.id = "canvasH2";
 
   let canvas = document.createElement("canvas");
-  // canvas.width = canvasWidth;
-  // canvas.height = canvasHeigth;
 
   canvas.width = rowLength;
   canvas.height = imageHeight;
@@ -322,7 +314,6 @@ const createPicture = async (rowLength) => {
     isColorInvert(ctx);
     //ADDING PIXELS
     for (let i = 0; i < myCodeArray.length; i++) {
-      // await sleep(50);
       ctx.fillStyle = colors[myCodeArray[i]];
       ctx.fillRect(column, line, pixelSize, pixelSize);
       column += pixelSize;
@@ -379,12 +370,8 @@ function getMyCanvasFunction() {
 
 // const roll = async () => {
 function roll() {
-  //First Check is passed range
-  // console.log(`isPassedRange${isPassedRange} isThereString${isThereString}`);
-
-  //Create a function to check the missing number 1)When string changes 2)When a color is added
-  //Adjust the isThereMissingColor Var
-  // if (isThereMissingColor) {
+  //First Check is passed range -->> console.log(`isPassedRange${isPassedRange} isThereString${isThereString}`);
+  //Create a function to check the missing number 1)When string changes 2)When a color is added --> Adjust the isThereMissingColor variable
   checkIsThereString();
 
   if (isThereMissingColor) {
@@ -409,7 +396,6 @@ function roll() {
       )}`
     );
     return;
-    // alert("There is a missing, color: ", missingColorsString);
   }
   if (!isPassedRange) {
     alert("Set the range");
@@ -420,7 +406,6 @@ function roll() {
 
     //Create pictures
     for (let index = startWidthValue; index <= endWidthValue; index++) {
-      // await sleep(50);
       createPicture(index);
       imageNumberForThePage++;
       if (index < endWidthValue)
@@ -455,8 +440,7 @@ function roll() {
               downloadButton.disabled = true;
             });
           }
-          //Set the width to default:
-          document.getElementById("iAmDoneButton").disabled = true;
+          document.getElementById("iAmDoneButton").disabled = true; //Set the width to default:
         }
       });
       mainButtons.appendChild(iAmDoneButton);
@@ -579,8 +563,7 @@ rangeColor.addEventListener("click", () => {
     singleColor.checked = false;
   }
   document.getElementById("colorNumber2").disabled = false;
-});
-//RADIO BUTTONS END
+}); //RADIO BUTTONS END
 
 // RANGE SET
 function setRangeWidth() {
@@ -619,8 +602,7 @@ function singleDownload() {
     canvasToDownload - 1,
     startWidthValue + canvasToDownload - 1
   );
-}
-// RANGE SET FINISHED
+} // RANGE SET FINISHED
 
 function checkInverse() {
   if (inverseCheckbox.checked) isInverse = true;
@@ -776,9 +758,7 @@ function init() {
   }
 
   loadColorNames();
-
-  //Load Color1's colors
-  getColorsFunction(1);
+  getColorsFunction(1); //Load Color1's colors
   lastUpdatedFunction();
 }
 

@@ -1,23 +1,34 @@
-const express = require("express");
-const app = express();
-const { Canvas } = require("canvas-constructor");
-const canvas = require("canvas");
+const express = require("express")();
 
-app.get("/", async (req, res) => {
-  let image,
-    x = 0,
-    y = 0,
-    color;
+const app = express;
 
-  image = new Canvas(550, 600)
-    .setColor("#AF7FF4FF")
-    .printRectangle(x, y, 12, 12)
-    .toBuffer();
+const { createCanvas, loadImage } = require("canvas");
+const canvas = createCanvas(200, 200);
+const ctx = canvas.getContext("2d");
 
-  console.log(image);
+app.get("/image", async (req, res) => {
+  ctx.font = "30px Impact";
+  ctx.rotate(0.1);
+  ctx.fillText("Awesome!", 50, 100);
 
-  res.set({ "Content-Type": "image/png" }); //setting content type as png image!
-  res.send(image); //sending the image!
+  // Draw line under text
+  var text = ctx.measureText("Awesome!");
+  ctx.strokeStyle = "rgba(0,0,0,0.5)";
+  ctx.beginPath();
+  ctx.lineTo(50, 102);
+  ctx.lineTo(50 + text.width, 102);
+  ctx.stroke();
+
+  // Draw cat with lime helmet
+  loadImage("./home.png").then((image) => {
+    ctx.drawImage(image, 50, 0, 70, 70);
+    // console.log('<img src="' + canvas.toDataURL() + '" />');
+  });
+
+  res.write('<img src="' + canvas + '" />');
+
+  //   res.set({ "Content-Type": "image/png" });
+  //   res.send(canvas);
 });
 
-app.listen(8080); //deploying the app in localhost with port 8080
+app.listen(8080);
