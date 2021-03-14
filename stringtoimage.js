@@ -1,4 +1,5 @@
 //https://www.geeksforgeeks.org/how-to-show-page-loading-div-until-the-page-has-finished-loading/
+// TEST
 const userscolors = document.getElementById("userscolors");
 const getColorsFromStorageButton = document.getElementById(
   "getColorsFromStorage"
