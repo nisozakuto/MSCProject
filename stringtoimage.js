@@ -379,10 +379,10 @@ function roll() {
       0,
       missingColorsString.length - 1
     );
-    console.log(
-      missingColorsString,
-      missingColorsString.slice(0, missingColorsString.length - 1)
-    );
+    // console.log(
+    //   missingColorsString,
+    //   missingColorsString.slice(0, missingColorsString.length - 1)
+    // );
     alert(
       `Missing colors are: ${missingColorsString.slice(
         0,
