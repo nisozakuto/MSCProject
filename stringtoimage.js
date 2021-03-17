@@ -364,7 +364,6 @@ function getMyCanvasFunction() {
 
 // const roll = async () => {
 function roll() {
-  //First Check is passed range -->> console.log(`isPassedRange${isPassedRange} isThereString${isThereString}`);
   //Create a function to check the missing number 1)When string changes 2)When a color is added --> Adjust the isThereMissingColor variable
   checkIsThereString();
 
@@ -379,10 +378,6 @@ function roll() {
       0,
       missingColorsString.length - 1
     );
-    // console.log(
-    //   missingColorsString,
-    //   missingColorsString.slice(0, missingColorsString.length - 1)
-    // );
     alert(
       `Missing colors are: ${missingColorsString.slice(
         0,
