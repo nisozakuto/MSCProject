@@ -11,7 +11,6 @@ const rangeSelection = document.getElementById("rangeSelection");
 const textArea = document.querySelector("textarea");
 const singleColor = document.getElementById("singleColor");
 const rangeColor = document.getElementById("rangeOfColor");
-const statusText = document.getElementById("statusText");
 const colorPrefSaveInput = document.getElementById("colorPrefInput");
 
 let colors = [],
@@ -27,6 +26,7 @@ let colors = [],
   startWidth = document.getElementById("startWidth"),
   endWidth = document.getElementById("endWidth"),
   setWidthText = document.getElementById("setWidthText"),
+  statusText = document.getElementById("statusText"),
   imageNumberForThePage = 1,
   canIAddTheRange = true,
   canIAddThisSingle = true,
@@ -85,6 +85,7 @@ function missingColorFunction() {
 
 function clearResults() {
   alert("Clearing the results");
+  isThereMissingColor = false;
   document.getElementsByClassName("imagePrint")[0].innerHTML = "";
   emtpyColors();
   if (document.getElementById("downloadButtons").innerHTML != undefined)
