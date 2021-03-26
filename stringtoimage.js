@@ -394,12 +394,37 @@ function roll() {
     zeroCheck();
 
     //Create pictures
-    for (let index = startWidthValue; index <= endWidthValue; index++) {
-      createPicture(index);
-      imageNumberForThePage++;
-      if (index < endWidthValue)
+    // for (let index = startWidthValue; index <= endWidthValue; index++) {
+    //   createPicture(index);
+    //   imageNumberForThePage++;
+    //   if (index < endWidthValue)
+    //     statusText.innerText = `Drawing pictures. Currently at ${index}`;
+    //   else statusText.innerText = `Finished`;
+    // }
+
+    nonBlockingIncrement(endWidthValue, function (currentI, done) {
+      if (done) {
+        console.log("0 incremented to " + currentI);
+        statusText.innerText = `Finished`;
+      }
+    });
+
+    //define the slow function; this would normally be a server call
+    function nonBlockingIncrement(n, callback) {
+      var index = startWidthValue;
+      function loop() {
+        console.log(index);
+        createPicture(index);
         statusText.innerText = `Drawing pictures. Currently at ${index}`;
-      else statusText.innerText = `Finished`;
+        if (index < n) {
+          index++;
+          callback(index, false);
+          (window.requestAnimationFrame || window.setTimeout)(loop);
+        } else {
+          callback(index, true);
+        }
+      }
+      loop();
     }
 
     //Start creating download links
@@ -656,36 +681,65 @@ function setStringLengthText(length) {
   stringLength.innerText = `String's length: ${length}`;
 }
 
-textArea.addEventListener("input", (event) => {
-  setTimeout(() => {
-    breakString();
-    document.getElementById("foundZeros").innerText = `Found 0s: ${parseInt(
-      amountOfZeros
-    )}`;
+function readTheString() {
+  breakString();
+  document.getElementById("foundZeros").innerText = `Found 0s: ${parseInt(
+    amountOfZeros
+  )}`;
 
-    setStringLengthText(myCodeArray.length);
+  setStringLengthText(myCodeArray.length);
 
-    stringColorCheck = [];
+  stringColorCheck = [];
 
-    for (color of myCodeArray) {
-      if (!stringColorCheck.includes(color)) {
-        stringColorCheck.push(color);
-      }
+  for (color of myCodeArray) {
+    if (!stringColorCheck.includes(color)) {
+      stringColorCheck.push(color);
     }
-    console.log(stringColorCheck, colors);
+  }
+  console.log(stringColorCheck, colors);
 
-    missingColorFunction();
+  missingColorFunction();
 
+  checkIsThereString();
+  if (isThereString) {
     checkIsThereString();
-    if (isThereString) {
-      checkIsThereString();
-      setStringLengthText(myCodeArray.length);
-    }
-    if (!isThereString) {
-      setStringLengthText(0);
-    }
-  }, 300);
-});
+    setStringLengthText(myCodeArray.length);
+  }
+  if (!isThereString) {
+    setStringLengthText(0);
+  }
+}
+
+// textArea.addEventListener("input", (event) => {
+//   setTimeout(() => {
+//     breakString();
+//     document.getElementById("foundZeros").innerText = `Found 0s: ${parseInt(
+//       amountOfZeros
+//     )}`;
+
+//     setStringLengthText(myCodeArray.length);
+
+//     stringColorCheck = [];
+
+//     for (color of myCodeArray) {
+//       if (!stringColorCheck.includes(color)) {
+//         stringColorCheck.push(color);
+//       }
+//     }
+//     console.log(stringColorCheck, colors);
+
+//     missingColorFunction();
+
+//     checkIsThereString();
+//     if (isThereString) {
+//       checkIsThereString();
+//       setStringLengthText(myCodeArray.length);
+//     }
+//     if (!isThereString) {
+//       setStringLengthText(0);
+//     }
+//   }, 300);
+// });
 
 rangeSelection.addEventListener("click", () => {
   checkRangeOrSinglePicture();
