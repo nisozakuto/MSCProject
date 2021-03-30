@@ -638,11 +638,20 @@ function selectFunction() {
 function loadColorNames() {
   const colorNamesOl = document.getElementById("colorNamesOl");
   colorNamesOl.innerHTML = "";
+
   colorNames.map((e, index) => {
     if (index != 0 && e != null) {
       const colorNameLi = document.createElement("li");
       colorNameLi.innerText = `${index} - ${e}`;
       colorNamesOl.append(colorNameLi);
+      const deleteButton = document.createElement("button");
+      deleteButton.innerText = "x";
+      colorNameLi.append(deleteButton);
+      deleteButton.addEventListener("click", () => {
+        colorNameLi.remove();
+        colorNames[index] = null;
+        localStorage.setItem("colorNames", JSON.stringify(colorNames));
+      });
     }
   });
 }
@@ -651,6 +660,7 @@ function colorNameSaveButton() {
   let colorName = document.getElementById("colorName").value;
   let colorNameIndex = document.getElementById("colorNames").value;
   let result = true;
+  console.log(colorNameIndex);
   if (colorNames[colorNameIndex]) {
     result = confirm("You are about to override the name");
   }

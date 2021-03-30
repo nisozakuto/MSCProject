@@ -295,6 +295,11 @@ justify-content: center;
 }
 
 
+/* COLOR NAME AREA */
+#colorNamesOl button{
+margin-left: 5px;}
+
+
 #linkText{
     margin: 0 auto; 
 }
