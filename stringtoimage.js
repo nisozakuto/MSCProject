@@ -405,7 +405,7 @@ function roll() {
 
     nonBlockingIncrement(endWidthValue, function (currentI, done) {
       if (done) {
-        console.log("0 incremented to " + currentI);
+        console.log("incremented to " + currentI);
         statusText.innerText = `Finished`;
       }
     });
@@ -414,11 +414,11 @@ function roll() {
     function nonBlockingIncrement(n, callback) {
       var index = startWidthValue;
       function loop() {
-        console.log(index);
         createPicture(index);
         statusText.innerText = `Drawing pictures. Currently at ${index}`;
         if (index < n) {
           index++;
+          imageNumberForThePage++;
           callback(index, false);
           (window.requestAnimationFrame || window.setTimeout)(loop);
         } else {
