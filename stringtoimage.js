@@ -12,6 +12,7 @@ const textArea = document.querySelector("textarea");
 const singleColor = document.getElementById("singleColor");
 const rangeColor = document.getElementById("rangeOfColor");
 const colorPrefSaveInput = document.getElementById("colorPrefInput");
+const colorPrefs = document.getElementById("colorPrefs");
 
 let colors = [],
   invertedColors = [],
@@ -90,9 +91,12 @@ function clearResults() {
   isThereMissingColor = false;
   document.getElementsByClassName("imagePrint")[0].innerHTML = "";
   emtpyColors();
+
   if (document.getElementById("downloadButtons").innerHTML != undefined)
     document.getElementById("downloadButtons").innerHTML = "";
   clearYourColorsDOM();
+  getColorsFunction(document.getElementById("colorPrefs").value);
+
   statusText = "";
 }
 
@@ -282,8 +286,6 @@ const createPicture = async (rowLength) => {
 
   let line, column;
 
-  console.log(invertedColors);
-
   if (isInverse) {
     (line = 0), (column = rowLength);
 
@@ -361,6 +363,12 @@ function getMyCanvasFunction() {
   mycanvas = document.querySelectorAll("canvas");
 }
 
+function invertColorsFunction() {
+  for (let i = 0; i < colors.length; i++) {
+    if (colors[i] != null) invertedColors[i] = invertColor(colors[i]);
+  }
+}
+
 // const roll = async () => {
 function roll() {
   isThereColors = false;
@@ -389,10 +397,8 @@ function roll() {
   }
 
   for (color of colors) {
-    console.log("for loop");
     if (color != null) isThereColors = true;
   }
-  console.log("for loop finished");
 
   if (!isPassedRange) {
     alert("Set the range");
@@ -419,9 +425,7 @@ function roll() {
       }
     });
 
-    for (let i = 0; i < colors.length; i++) {
-      if (colors[i] != null) invertedColors[i] = invertColor(colors[i]);
-    }
+    invertColorsFunction();
 
     //define the slow function; this would normally be a server call
     function nonBlockingIncrement(n, callback) {
@@ -502,6 +506,7 @@ function getColorsFunction(number) {
   myColors = {};
   isSavedColorsLoaded = true;
   clearYourColorsDOM();
+  invertColorsFunction();
 
   if (localStorage.getItem(`colors_${number}`) == null) {
     colors.length = 0;
@@ -732,37 +737,7 @@ function padZero(str, len) {
   return (zeros + str).slice(-len);
 }
 
-// function readTheString() {
-//   breakString();
-//   document.getElementById("foundZeros").innerText = `Found 0s: ${parseInt(
-//     amountOfZeros
-//   )}`;
-
-//   setStringLengthText(myCodeArray.length);
-
-//   stringColorCheck = [];
-
-//   for (color of myCodeArray) {
-//     if (!stringColorCheck.includes(color)) {
-//       stringColorCheck.push(color);
-//     }
-//   }
-//   console.log(stringColorCheck, colors);
-
-//   missingColorFunction();
-
-//   checkIsThereString();
-//   if (isThereString) {
-//     checkIsThereString();
-//     setStringLengthText(myCodeArray.length);
-//   }
-//   if (!isThereString) {
-//     setStringLengthText(0);
-//   }
-// }
-
 textArea.addEventListener("keydown", (event) => {
-  console.log("changed", event);
   setTimeout(() => {
     breakString();
     document.getElementById("foundZeros").innerText = `Found 0s: ${parseInt(
