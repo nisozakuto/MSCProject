@@ -14,6 +14,7 @@ const rangeColor = document.getElementById("rangeOfColor");
 const colorPrefSaveInput = document.getElementById("colorPrefInput");
 
 let colors = [],
+  invertedColors = [],
   myCodeArray = [],
   colorNames = [],
   missingColors = [],
@@ -266,12 +267,6 @@ function calcImageHeight(stringLength, rowLength) {
   return imageHeight;
 }
 
-function isColorInvert(ctx) {
-  if (isInvert) {
-    ctx.filter = "invert(1)";
-  }
-}
-
 const createPicture = async (rowLength) => {
   // const createPicture = async (rowLength) => {
   calcImageHeight(myCodeArray.length, rowLength);
@@ -291,11 +286,11 @@ const createPicture = async (rowLength) => {
 
     canvas.style.border = "1px solid black";
     var ctx = canvas.getContext("2d");
-    isColorInvert(ctx);
     // ADDING PIXELS
     for (let i = 0; i < myCodeArray.length; i++) {
       column -= pixelSize;
-      ctx.fillStyle = colors[myCodeArray[i]];
+      if (isInvert) ctx.fillStyle = invertedColors[myCodeArray[i]];
+      else ctx.fillStyle = colors[myCodeArray[i]];
       ctx.fillRect(column, line, pixelSize, pixelSize);
       if (column <= 0) {
         line += pixelSize;
@@ -306,10 +301,10 @@ const createPicture = async (rowLength) => {
     column = line = 0;
     canvas.style.border = "1px solid black";
     var ctx = canvas.getContext("2d");
-    isColorInvert(ctx);
     //ADDING PIXELS
     for (let i = 0; i < myCodeArray.length; i++) {
-      ctx.fillStyle = colors[myCodeArray[i]];
+      if (isInvert) ctx.fillStyle = invertedColors[myCodeArray[i]];
+      else ctx.fillStyle = colors[myCodeArray[i]];
       ctx.fillRect(column, line, pixelSize, pixelSize);
       column += pixelSize;
 
@@ -409,6 +404,13 @@ function roll() {
         statusText.innerText = `Finished`;
       }
     });
+
+    for (let i = 0; i < colors.length; i++) {
+      console.log(colors[i]);
+      console.log(invertColor(colors[i]));
+      if (colors[i] != null) invertedColors[i] = invertColor(colors[i]);
+    }
+    console.log(invertedColors);
 
     //define the slow function; this would normally be a server call
     function nonBlockingIncrement(n, callback) {
@@ -690,6 +692,31 @@ document.getElementById("colorPrefs").addEventListener("change", () => {
 function setStringLengthText(length) {
   let stringLength = document.getElementById("stringLength");
   stringLength.innerText = `String's length: ${length}`;
+}
+
+function invertColor(hex) {
+  if (hex.indexOf("#") === 0) {
+    hex = hex.slice(1);
+  }
+  // convert 3-digit hex to 6-digits.
+  if (hex.length === 3) {
+    hex = hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2];
+  }
+  if (hex.length !== 6) {
+    throw new Error("Invalid HEX color.");
+  }
+  // invert color components
+  var r = (255 - parseInt(hex.slice(0, 2), 16)).toString(16),
+    g = (255 - parseInt(hex.slice(2, 4), 16)).toString(16),
+    b = (255 - parseInt(hex.slice(4, 6), 16)).toString(16);
+  // pad each with zeros and return
+  return "#" + padZero(r) + padZero(g) + padZero(b);
+}
+
+function padZero(str, len) {
+  len = len || 2;
+  var zeros = new Array(len).join("0");
+  return (zeros + str).slice(-len);
 }
 
 // function readTheString() {
