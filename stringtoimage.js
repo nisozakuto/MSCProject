@@ -408,11 +408,8 @@ function roll() {
     });
 
     for (let i = 0; i < colors.length; i++) {
-      console.log(colors[i]);
-      console.log(invertColor(colors[i]));
       if (colors[i] != null) invertedColors[i] = invertColor(colors[i]);
     }
-    console.log(invertedColors);
 
     //define the slow function; this would normally be a server call
     function nonBlockingIncrement(n, callback) {
