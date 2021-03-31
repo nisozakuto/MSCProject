@@ -31,6 +31,7 @@ let colors = [],
   imageNumberForThePage = 1,
   canIAddTheRange = true,
   canIAddThisSingle = true,
+  isThereColors = false,
   countstartWidthValue,
   isPassedRange = false,
   isThereString = false,
@@ -362,6 +363,8 @@ function getMyCanvasFunction() {
 
 // const roll = async () => {
 function roll() {
+  isThereColors = false;
+  // isThereMissingColor = false;
   //Create a function to check the missing number 1)When string changes 2)When a color is added --> Adjust the isThereMissingColor variable
   checkIsThereString();
 
@@ -384,13 +387,22 @@ function roll() {
     );
     return;
   }
+
+  for (color of colors) {
+    console.log("for loop");
+    if (color != null) isThereColors = true;
+  }
+  console.log("for loop finished");
+
   if (!isPassedRange) {
     alert("Set the range");
   } else if (!isThereString) {
     alert("There is no string");
+  } else if (!isThereColors) {
+    alert("There are no colors");
   } else if (isPassedRange && isThereString) {
     zeroCheck();
-
+    console.log("starting");
     //Create pictures
     // for (let index = startWidthValue; index <= endWidthValue; index++) {
     //   createPicture(index);
@@ -702,7 +714,7 @@ function invertColor(hex) {
     if (hex.length === 3) {
       hex = hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2];
     }
-    if (hex.length == 6) {
+    if (hex.length != 6) {
       console.log(hex, "PROBLEM");
     }
     // invert color components
@@ -749,7 +761,8 @@ function padZero(str, len) {
 //   }
 // }
 
-textArea.addEventListener("input", (event) => {
+textArea.addEventListener("keydown", (event) => {
+  console.log("changed", event);
   setTimeout(() => {
     breakString();
     document.getElementById("foundZeros").innerText = `Found 0s: ${parseInt(
