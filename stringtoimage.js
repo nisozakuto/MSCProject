@@ -364,6 +364,7 @@ function getMyCanvasFunction() {
 }
 
 function invertColorsFunction() {
+  console.log("invert colors called");
   for (let i = 0; i < colors.length; i++) {
     if (colors[i] != null) invertedColors[i] = invertColor(colors[i]);
   }
@@ -396,6 +397,8 @@ function roll() {
     return;
   }
 
+  invertColorsFunction();
+
   for (color of colors) {
     if (color != null) isThereColors = true;
   }
@@ -408,15 +411,6 @@ function roll() {
     alert("There are no colors");
   } else if (isPassedRange && isThereString) {
     zeroCheck();
-    console.log("starting");
-    //Create pictures
-    // for (let index = startWidthValue; index <= endWidthValue; index++) {
-    //   createPicture(index);
-    //   imageNumberForThePage++;
-    //   if (index < endWidthValue)
-    //     statusText.innerText = `Drawing pictures. Currently at ${index}`;
-    //   else statusText.innerText = `Finished`;
-    // }
 
     nonBlockingIncrement(endWidthValue, function (currentI, done) {
       if (done) {
@@ -425,17 +419,15 @@ function roll() {
       }
     });
 
-    invertColorsFunction();
-
     //define the slow function; this would normally be a server call
     function nonBlockingIncrement(n, callback) {
       var index = startWidthValue;
       function loop() {
         createPicture(index);
+        imageNumberForThePage++;
         statusText.innerText = `Drawing pictures. Currently at ${index}`;
         if (index < n) {
           index++;
-          imageNumberForThePage++;
           callback(index, false);
           (window.requestAnimationFrame || window.setTimeout)(loop);
         } else {
