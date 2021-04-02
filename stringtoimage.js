@@ -288,7 +288,6 @@ const createPicture = async (rowLength) => {
 
   if (isInverse) {
     (line = 0), (column = rowLength);
-
     canvas.style.border = "1px solid black";
     var ctx = canvas.getContext("2d");
     // ADDING PIXELS
@@ -423,7 +422,17 @@ function roll() {
     function nonBlockingIncrement(n, callback) {
       var index = startWidthValue;
       function loop() {
-        createPicture(index);
+        if (isInvert) {
+          createPicture(index);
+          console.log("here");
+          isInvert = !isInvert;
+        }
+        if (!isInvert) {
+          console.log("entered else");
+          createPicture(index);
+          isInvert = !isInvert;
+        }
+
         imageNumberForThePage++;
         statusText.innerText = `Drawing pictures. Currently at ${index}`;
         if (index < n) {
