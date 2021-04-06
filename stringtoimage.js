@@ -433,10 +433,10 @@ function roll() {
         if (isInvert) {
           createPicture(index, twoImagesDiv);
           isInvert = !isInvert;
-        }
-        if (!isInvert) {
           createPicture(index, twoImagesDiv);
           isInvert = !isInvert;
+        } else {
+          createPicture(index, twoImagesDiv);
         }
 
         imageNumberForThePage++;
