@@ -272,18 +272,16 @@ function calcImageHeight(stringLength, rowLength) {
   return imageHeight;
 }
 
-const createPicture = async (rowLength) => {
+function createPicture(rowLength, twoImagesDiv) {
   // const createPicture = async (rowLength) => {
   calcImageHeight(myCodeArray.length, rowLength);
   let canvasNumberh2 = document.createElement("h2");
   canvasNumberh2.innerText = `Image number: ${imageNumberForThePage} & Width is: ${rowLength} & Height is: ${imageHeight}`;
   canvasNumberh2.id = "canvasH2";
 
-  let canvas = document.createElement("canvas");
-
+  const canvas = document.createElement("canvas");
   canvas.width = rowLength;
   canvas.height = imageHeight;
-
   let line, column;
 
   if (isInverse) {
@@ -293,8 +291,11 @@ const createPicture = async (rowLength) => {
     // ADDING PIXELS
     for (let i = 0; i < myCodeArray.length; i++) {
       column -= pixelSize;
-      if (isInvert) ctx.fillStyle = invertedColors[myCodeArray[i]];
-      else ctx.fillStyle = colors[myCodeArray[i]];
+      if (isInvert) {
+        ctx.fillStyle = invertedColors[myCodeArray[i]];
+      } else {
+        ctx.fillStyle = colors[myCodeArray[i]];
+      }
       ctx.fillRect(column, line, pixelSize, pixelSize);
       if (column <= 0) {
         line += pixelSize;
@@ -307,11 +308,13 @@ const createPicture = async (rowLength) => {
     var ctx = canvas.getContext("2d");
     //ADDING PIXELS
     for (let i = 0; i < myCodeArray.length; i++) {
-      if (isInvert) ctx.fillStyle = invertedColors[myCodeArray[i]];
-      else ctx.fillStyle = colors[myCodeArray[i]];
+      if (isInvert) {
+        ctx.fillStyle = invertedColors[myCodeArray[i]];
+      } else {
+        ctx.fillStyle = colors[myCodeArray[i]];
+      }
       ctx.fillRect(column, line, pixelSize, pixelSize);
       column += pixelSize;
-
       if (i >= rowLength && i % rowLength == 0) {
         line += pixelSize;
         column = 0;
@@ -322,10 +325,13 @@ const createPicture = async (rowLength) => {
   //These two lines are same for both inverse and normal
   const imagePrint = document.getElementsByClassName("imagePrint");
   imagePrint[0].append(canvasNumberh2);
-  imagePrint[0].append(canvas);
+  // imagePrint[0].append(canvasNumberh2);
+  // imagePrint[0].append(canvas);
+  twoImagesDiv.append(canvas);
+  imagePrint[0].append(twoImagesDiv);
   document.querySelector("#loader").style.display = "none";
   document.querySelector("body").style.visibility = "visible";
-};
+}
 
 function downloadFunction(index, startWidthValueForDownload) {
   getMyCanvasFunction();
@@ -422,14 +428,14 @@ function roll() {
     function nonBlockingIncrement(n, callback) {
       var index = startWidthValue;
       function loop() {
+        const twoImagesDiv = document.createElement("div");
+
         if (isInvert) {
-          createPicture(index);
-          console.log("here");
+          createPicture(index, twoImagesDiv);
           isInvert = !isInvert;
         }
         if (!isInvert) {
-          console.log("entered else");
-          createPicture(index);
+          createPicture(index, twoImagesDiv);
           isInvert = !isInvert;
         }
 

@@ -95,10 +95,8 @@ article{
     margin: 0 3em ;
 }
 
-.imagePrint{
-    /* display: flex;
-    flex-wrap: wrap;
-    flex-direction: column; */
+.imagePrint div canvas{
+    margin:0 10px;
 }
 
 /* inputsSection STARTS */
