@@ -32,7 +32,7 @@ let colors = [],
   imageNumberForThePage = 1,
   canIAddTheRange = true,
   canIAddThisSingle = true,
-  isThereColors = false,
+  areThereColors = false,
   countstartWidthValue,
   isPassedRange = false,
   isThereString = false,
@@ -377,7 +377,7 @@ function invertColorsFunction() {
 
 // const roll = async () => {
 function roll() {
-  isThereColors = false;
+  areThereColors = false;
   // isThereMissingColor = false;
   //Create a function to check the missing number 1)When string changes 2)When a color is added --> Adjust the isThereMissingColor variable
   checkIsThereString();
@@ -405,14 +405,14 @@ function roll() {
   invertColorsFunction();
 
   for (color of colors) {
-    if (color != null) isThereColors = true;
+    if (color != null) areThereColors = true;
   }
 
   if (!isPassedRange) {
     alert("Set the range");
   } else if (!isThereString) {
     alert("There is no string");
-  } else if (!isThereColors) {
+  } else if (!areThereColors) {
     alert("There are no colors");
   } else if (isPassedRange && isThereString) {
     zeroCheck();
