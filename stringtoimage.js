@@ -417,9 +417,17 @@ function roll() {
   } else if (isPassedRange && isThereString) {
     zeroCheck();
 
+    // for (let index = startWidthValue; index <= endWidthValue; index++) {
+    //   const twoImagesDiv = document.createElement("div");
+    //   createPicture(index, twoImagesDiv);
+    //   imageNumberForThePage++;
+    //   if (index < endWidthValue)
+    //     statusText.innerText = `Drawing pictures. Currently at ${index}`;
+    //   else statusText.innerText = `Finished`;
+    // }
+
     nonBlockingIncrement(endWidthValue, function (currentI, done) {
       if (done) {
-        console.log("incremented to " + currentI);
         statusText.innerText = `Finished`;
       }
     });
@@ -427,28 +435,29 @@ function roll() {
     //define the slow function; this would normally be a server call
     function nonBlockingIncrement(n, callback) {
       var index = startWidthValue;
+
       function loop() {
-        const twoImagesDiv = document.createElement("div");
-
-        if (isInvert) {
-          createPicture(index, twoImagesDiv);
-          isInvert = !isInvert;
-          createPicture(index, twoImagesDiv);
-          isInvert = !isInvert;
-        } else {
-          createPicture(index, twoImagesDiv);
-        }
-
-        imageNumberForThePage++;
-        statusText.innerText = `Drawing pictures. Currently at ${index}`;
         if (index < n) {
           index++;
+          const twoImagesDiv = document.createElement("div");
+          if (isInvert) {
+            createPicture(index, twoImagesDiv);
+            isInvert = !isInvert;
+            createPicture(index, twoImagesDiv);
+            isInvert = !isInvert;
+          } else {
+            createPicture(index, twoImagesDiv);
+          }
+
+          imageNumberForThePage++;
+          statusText.innerText = `Drawing pictures. Currently at ${index}`;
           callback(index, false);
           (window.requestAnimationFrame || window.setTimeout)(loop);
         } else {
           callback(index, true);
         }
       }
+
       loop();
     }
 
