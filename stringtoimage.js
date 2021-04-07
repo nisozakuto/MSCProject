@@ -417,49 +417,49 @@ function roll() {
   } else if (isPassedRange && isThereString) {
     zeroCheck();
 
-    // for (let index = startWidthValue; index <= endWidthValue; index++) {
-    //   const twoImagesDiv = document.createElement("div");
-    //   createPicture(index, twoImagesDiv);
-    //   imageNumberForThePage++;
-    //   if (index < endWidthValue)
-    //     statusText.innerText = `Drawing pictures. Currently at ${index}`;
-    //   else statusText.innerText = `Finished`;
-    // }
-
-    nonBlockingIncrement(endWidthValue, function (currentI, done) {
-      if (done) {
-        statusText.innerText = `Finished`;
-      }
-    });
-
-    //define the slow function; this would normally be a server call
-    function nonBlockingIncrement(n, callback) {
-      var index = startWidthValue;
-
-      function loop() {
-        if (index < n) {
-          index++;
-          const twoImagesDiv = document.createElement("div");
-          if (isInvert) {
-            createPicture(index, twoImagesDiv);
-            isInvert = !isInvert;
-            createPicture(index, twoImagesDiv);
-            isInvert = !isInvert;
-          } else {
-            createPicture(index, twoImagesDiv);
-          }
-
-          imageNumberForThePage++;
-          statusText.innerText = `Drawing pictures. Currently at ${index}`;
-          callback(index, false);
-          (window.requestAnimationFrame || window.setTimeout)(loop);
-        } else {
-          callback(index, true);
-        }
-      }
-
-      loop();
+    for (let index = startWidthValue; index <= endWidthValue; index++) {
+      const twoImagesDiv = document.createElement("div");
+      createPicture(index, twoImagesDiv);
+      imageNumberForThePage++;
+      if (index < endWidthValue)
+        statusText.innerText = `Drawing pictures. Currently at ${index}`;
+      else statusText.innerText = `Finished`;
     }
+
+    // nonBlockingIncrement(endWidthValue, function (currentI, done) {
+    //   if (done) {
+    //     statusText.innerText = `Finished`;
+    //   }
+    // });
+
+    // //define the slow function; this would normally be a server call
+    // function nonBlockingIncrement(n, callback) {
+    //   var index = startWidthValue;
+
+    //   function loop() {
+    //     if (index < n) {
+    //       index++;
+    //       const twoImagesDiv = document.createElement("div");
+    //       if (isInvert) {
+    //         createPicture(index, twoImagesDiv);
+    //         isInvert = !isInvert;
+    //         createPicture(index, twoImagesDiv);
+    //         isInvert = !isInvert;
+    //       } else {
+    //         createPicture(index, twoImagesDiv);
+    //       }
+
+    //       imageNumberForThePage++;
+    //       statusText.innerText = `Drawing pictures. Currently at ${index}`;
+    //       callback(index, false);
+    //       (window.requestAnimationFrame || window.setTimeout)(loop);
+    //     } else {
+    //       callback(index, true);
+    //     }
+    //   }
+
+    //   loop();
+    // }
 
     //Start creating download links
     let resultAmount = endWidthValue - startWidthValue;
@@ -753,7 +753,7 @@ function padZero(str, len) {
   return (zeros + str).slice(-len);
 }
 
-textArea.addEventListener("keydown", (event) => {
+function textAreaFunction() {
   setTimeout(() => {
     breakString();
     document.getElementById("foundZeros").innerText = `Found 0s: ${parseInt(
@@ -782,6 +782,14 @@ textArea.addEventListener("keydown", (event) => {
       setStringLengthText(0);
     }
   }, 300);
+}
+
+textArea.addEventListener("paste", (event) => {
+  textAreaFunction();
+});
+
+textArea.addEventListener("keydown", (event) => {
+  textAreaFunction();
 });
 
 rangeSelection.addEventListener("click", () => {
