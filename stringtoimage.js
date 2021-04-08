@@ -256,7 +256,7 @@ function breakString() {
   myCodeArray = code.split(/\n/);
 
   if (!isCountingZeros) {
-    for (var i = 0; i < myCodeArray.length; i++) {
+    for (let i = 0; i < myCodeArray.length; i++) {
       if (myCodeArray[i] === "0") {
         amountOfZeros++;
         myCodeArray.splice(i, 1);
@@ -287,7 +287,7 @@ function createPicture(rowLength, twoImagesDiv) {
   if (isInverse) {
     (line = 0), (column = rowLength);
     canvas.style.border = "1px solid black";
-    var ctx = canvas.getContext("2d");
+    let ctx = canvas.getContext("2d");
     // ADDING PIXELS
     for (let i = 0; i < myCodeArray.length; i++) {
       column -= pixelSize;
@@ -305,7 +305,7 @@ function createPicture(rowLength, twoImagesDiv) {
   } else {
     column = line = 0;
     canvas.style.border = "1px solid black";
-    var ctx = canvas.getContext("2d");
+    let ctx = canvas.getContext("2d");
     //ADDING PIXELS
     for (let i = 0; i < myCodeArray.length; i++) {
       if (isInvert) {
@@ -322,6 +322,9 @@ function createPicture(rowLength, twoImagesDiv) {
     }
   }
 
+  if (isInvert) {
+    canvas.id = "invert";
+  }
   //These two lines are same for both inverse and normal
   const imagePrint = document.getElementsByClassName("imagePrint");
   imagePrint[0].append(canvasNumberh2);
@@ -336,15 +339,16 @@ function createPicture(rowLength, twoImagesDiv) {
 function downloadFunction(index, startWidthValueForDownload) {
   getMyCanvasFunction();
   calcImageHeight(myCodeArray.length, startWidthValueForDownload);
-  var downloadUrl = mycanvas[index].toDataURL("image/png");
-  var a = document.createElement("a");
+  let downloadUrl = mycanvas[index].toDataURL("image/png");
+  let a = document.createElement("a");
   a.href = downloadUrl;
   a.target = "_parent";
   if ("download" in a) {
-    a.download = `File_${index + 1}_Width:${
-      mycanvas[index].width
-    }_Height_${imageHeight}`;
+    a.download = `File_${index}_Width:${mycanvas[index].width}_Height_${imageHeight}`;
   }
+  console.log("mycanvas[index].width", mycanvas[index].width);
+  if (mycanvas[index].id) a.download += " " + mycanvas[index].id;
+
   (document.body || document.documentElement).appendChild(a);
   if (a.click) {
     a.click(); // The click method is supported by most browsers.
@@ -366,6 +370,7 @@ function checkIsThereString() {
 }
 function getMyCanvasFunction() {
   mycanvas = document.querySelectorAll("canvas");
+  console.log("Amount of canvases: ", mycanvas.length);
 }
 
 function invertColorsFunction() {
@@ -417,49 +422,50 @@ function roll() {
   } else if (isPassedRange && isThereString) {
     zeroCheck();
 
-    for (let index = startWidthValue; index <= endWidthValue; index++) {
-      const twoImagesDiv = document.createElement("div");
-      createPicture(index, twoImagesDiv);
-      imageNumberForThePage++;
-      if (index < endWidthValue)
-        statusText.innerText = `Drawing pictures. Currently at ${index}`;
-      else statusText.innerText = `Finished`;
-    }
-
-    // nonBlockingIncrement(endWidthValue, function (currentI, done) {
-    //   if (done) {
-    //     statusText.innerText = `Finished`;
-    //   }
-    // });
-
-    // //define the slow function; this would normally be a server call
-    // function nonBlockingIncrement(n, callback) {
-    //   var index = startWidthValue;
-
-    //   function loop() {
-    //     if (index < n) {
-    //       index++;
-    //       const twoImagesDiv = document.createElement("div");
-    //       if (isInvert) {
-    //         createPicture(index, twoImagesDiv);
-    //         isInvert = !isInvert;
-    //         createPicture(index, twoImagesDiv);
-    //         isInvert = !isInvert;
-    //       } else {
-    //         createPicture(index, twoImagesDiv);
-    //       }
-
-    //       imageNumberForThePage++;
-    //       statusText.innerText = `Drawing pictures. Currently at ${index}`;
-    //       callback(index, false);
-    //       (window.requestAnimationFrame || window.setTimeout)(loop);
-    //     } else {
-    //       callback(index, true);
-    //     }
-    //   }
-
-    //   loop();
+    // for (let index = startWidthValue; index <= endWidthValue; index++) {
+    //   const twoImagesDiv = document.createElement("div");
+    //   createPicture(index, twoImagesDiv);
+    //   imageNumberForThePage++;
+    //   if (index < endWidthValue)
+    //     statusText.innerText = `Drawing pictures. Currently at ${index}`;
+    //   else statusText.innerText = `Finished`;
     // }
+
+    nonBlockingIncrement(endWidthValue, function (currentI, done) {
+      if (done) {
+        statusText.innerText = `Finished`;
+      }
+    });
+
+    // define the slow function; this would normally be a server call
+    function nonBlockingIncrement(n, callback) {
+      let rowLength = startWidthValue;
+
+      function loop() {
+        if (rowLength < n) {
+          const twoImagesDiv = document.createElement("div");
+          if (isInvert) {
+            createPicture(rowLength, twoImagesDiv);
+            isInvert = !isInvert;
+            createPicture(rowLength, twoImagesDiv);
+            isInvert = !isInvert;
+          } else {
+            createPicture(rowLength, twoImagesDiv);
+          }
+
+          rowLength++;
+          imageNumberForThePage++;
+
+          statusText.innerText = `Drawing pictures. Currently at ${rowLength}`;
+          callback(rowLength, false);
+          (window.requestAnimationFrame || window.setTimeout)(loop);
+        } else {
+          callback(rowLength, true);
+        }
+      }
+
+      loop();
+    }
 
     //Start creating download links
     let resultAmount = endWidthValue - startWidthValue;
@@ -502,9 +508,9 @@ const tryme = async () => {
   getMyCanvasFunction();
   let startWidthValueForDownload = startWidthValue;
 
-  for (let index = 0; index < mycanvas.length; index++) {
+  for (let index = 1; index < mycanvas.length + 1; index++) {
     await sleep(400);
-    downloadFunction(index, startWidthValueForDownload);
+    downloadFunction(index - 1, startWidthValueForDownload);
     startWidthValueForDownload++;
   }
 };
@@ -659,10 +665,10 @@ function checkRangeOrSinglePicture() {
 
 function selectFunction() {
   for (let index = 1; index <= 30; index++) {
-    var option = "<option value='" + index + "'>Color " + index + "</option>";
+    let option = "<option value='" + index + "'>Color " + index + "</option>";
     option.value = `color_${index}`;
     document.getElementById("colorPrefs").innerHTML += option;
-    var colorNameOption =
+    let colorNameOption =
       "<option value='" + index + "'>Color Name" + index + "</option>";
     option.value = `color_name_${index}`;
     document.getElementById("colorNames").innerHTML += colorNameOption;
@@ -739,7 +745,7 @@ function invertColor(hex) {
       console.log(hex, "PROBLEM");
     }
     // invert color components
-    var r = (255 - parseInt(hex.slice(0, 2), 16)).toString(16),
+    let r = (255 - parseInt(hex.slice(0, 2), 16)).toString(16),
       g = (255 - parseInt(hex.slice(2, 4), 16)).toString(16),
       b = (255 - parseInt(hex.slice(4, 6), 16)).toString(16);
     // pad each with zeros and return
@@ -749,7 +755,7 @@ function invertColor(hex) {
 
 function padZero(str, len) {
   len = len || 2;
-  var zeros = new Array(len).join("0");
+  let zeros = new Array(len).join("0");
   return (zeros + str).slice(-len);
 }
 
@@ -805,7 +811,7 @@ invertCheckbox.addEventListener("change", () => {
 });
 
 function lastUpdatedFunction() {
-  var xhttp = new XMLHttpRequest();
+  let xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
       let repos = JSON.parse(this.responseText);
