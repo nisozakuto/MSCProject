@@ -33,7 +33,6 @@ let colors = [],
   canIAddTheRange = true,
   canIAddThisSingle = true,
   areThereColors = false,
-  countstartWidthValue,
   isPassedRange = false,
   isThereString = false,
   isSavedColorsLoaded = false,
@@ -43,6 +42,7 @@ let colors = [],
   isThereMissingColor = false,
   iAmDone = true,
   isCountingZeros = false,
+  countstartWidthValue,
   endWidthValue,
   code,
   amountOfZeros,
@@ -97,7 +97,7 @@ function clearResults() {
   clearYourColorsDOM();
   getColorsFunction(document.getElementById("colorPrefs").value);
 
-  statusText = "";
+  statusText.innerText = "";
 }
 
 function addColor(number1, hex, number2) {
@@ -273,6 +273,7 @@ function calcImageHeight(stringLength, rowLength) {
 }
 
 function createPicture(rowLength, twoImagesDiv) {
+  console.log("Create Picture Func started");
   // const createPicture = async (rowLength) => {
   calcImageHeight(myCodeArray.length, rowLength);
   let canvasNumberh2 = document.createElement("h2");
@@ -334,6 +335,7 @@ function createPicture(rowLength, twoImagesDiv) {
   imagePrint[0].append(twoImagesDiv);
   document.querySelector("#loader").style.display = "none";
   document.querySelector("body").style.visibility = "visible";
+  console.log("Create Picture Func ended");
 }
 
 function downloadFunction(index, startWidthValueForDownload) {
@@ -344,10 +346,12 @@ function downloadFunction(index, startWidthValueForDownload) {
   a.href = downloadUrl;
   a.target = "_parent";
   if ("download" in a) {
-    a.download = `File_${index}_Width:${mycanvas[index].width}_Height_${imageHeight}`;
+    a.download = `File_${index + 1}_Width:${
+      mycanvas[index].width
+    }_Height_${imageHeight}`;
   }
-  console.log("mycanvas[index].width", mycanvas[index].width);
-  if (mycanvas[index].id) a.download += " " + mycanvas[index].id;
+
+  if (mycanvas[index].id) a.download += "-" + mycanvas[index].id;
 
   (document.body || document.documentElement).appendChild(a);
   if (a.click) {
@@ -507,11 +511,10 @@ function roll() {
 const tryme = async () => {
   getMyCanvasFunction();
   let startWidthValueForDownload = startWidthValue;
-
-  for (let index = 1; index < mycanvas.length + 1; index++) {
+  for (let index = 0; index < mycanvas.length; index++) {
     await sleep(400);
-    downloadFunction(index - 1, startWidthValueForDownload);
-    startWidthValueForDownload++;
+    downloadFunction(index, startWidthValueForDownload);
+    // startWidthValueForDownload++;
   }
 };
 
