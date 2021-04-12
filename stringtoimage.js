@@ -829,6 +829,7 @@ function lastUpdatedFunction() {
 
 function init() {
   inverseCheckbox.checked = true;
+  invertCheckbox.checked = true;
   singleColor.checked = true;
   document.getElementById("colorNumber2").disabled = true;
   createImagesButton.disabled = true;
