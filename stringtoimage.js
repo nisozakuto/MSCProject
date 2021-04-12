@@ -43,6 +43,7 @@ let colors = [],
   iAmDone = true,
   isCountingZeros = false,
   countstartWidthValue,
+  dwnldCounter,
   endWidthValue,
   code,
   amountOfZeros,
@@ -338,20 +339,18 @@ function createPicture(rowLength, twoImagesDiv) {
   console.log("Create Picture Func ended");
 }
 
-function downloadFunction(index, startWidthValueForDownload) {
+function downloadFunction(index, canbedeleted) {
   getMyCanvasFunction();
-  calcImageHeight(myCodeArray.length, startWidthValueForDownload);
+  calcImageHeight(myCodeArray.length, mycanvas[index].width);
   let downloadUrl = mycanvas[index].toDataURL("image/png");
   let a = document.createElement("a");
   a.href = downloadUrl;
   a.target = "_parent";
+  if (mycanvas[index].id != "invert") dwnldCounter++;
   if ("download" in a) {
-    a.download = `File_${index + 1}_Width:${
-      mycanvas[index].width
-    }_Height_${imageHeight}`;
+    a.download = `File_${dwnldCounter}_Width:${mycanvas[index].width}_Height_${imageHeight}`;
   }
-
-  if (mycanvas[index].id) a.download += "-" + mycanvas[index].id;
+  if (mycanvas[index].id == "invert") a.download += "-" + mycanvas[index].id;
 
   (document.body || document.documentElement).appendChild(a);
   if (a.click) {
@@ -374,7 +373,6 @@ function checkIsThereString() {
 }
 function getMyCanvasFunction() {
   mycanvas = document.querySelectorAll("canvas");
-  console.log("Amount of canvases: ", mycanvas.length);
 }
 
 function invertColorsFunction() {
@@ -449,10 +447,10 @@ function roll() {
         if (rowLength < n) {
           const twoImagesDiv = document.createElement("div");
           if (isInvert) {
-            createPicture(rowLength, twoImagesDiv);
             isInvert = !isInvert;
             createPicture(rowLength, twoImagesDiv);
             isInvert = !isInvert;
+            createPicture(rowLength, twoImagesDiv);
           } else {
             createPicture(rowLength, twoImagesDiv);
           }
@@ -509,10 +507,11 @@ function roll() {
 }
 
 const tryme = async () => {
+  dwnldCounter = 0;
   getMyCanvasFunction();
   let startWidthValueForDownload = startWidthValue;
   for (let index = 0; index < mycanvas.length; index++) {
-    await sleep(400);
+    await sleep(500);
     downloadFunction(index, startWidthValueForDownload);
     // startWidthValueForDownload++;
   }
