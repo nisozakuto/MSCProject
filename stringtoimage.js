@@ -275,7 +275,7 @@ function calcImageHeight(stringLength, rowLength) {
 function createPicture(rowLength, twoImagesDiv) {
   calcImageHeight(myCodeArray.length, rowLength);
   let canvasNumberh2 = document.createElement("h2");
-  if ((inverseCheckbox.checked && !isInvert) || !inverseCheckbox.checked)
+  if ((invertCheckbox.checked && !isInvert) || !invertCheckbox.checked)
     canvasNumberh2.innerText = `Image number: ${imageNumberForThePage} & Width is: ${rowLength} & Height is: ${imageHeight}`;
   canvasNumberh2.id = "canvasH2";
 
@@ -830,6 +830,7 @@ function lastUpdatedFunction() {
 function init() {
   inverseCheckbox.checked = true;
   invertCheckbox.checked = true;
+  checkInvert();
   singleColor.checked = true;
   document.getElementById("colorNumber2").disabled = true;
   createImagesButton.disabled = true;
