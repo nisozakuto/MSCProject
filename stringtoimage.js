@@ -206,7 +206,6 @@ function addASingleColor() {
     10
   );
   if (canIAddThisSingle && !colors[chosenColorNumber]) {
-    // addingTheColor(chosenColorNumber, colorPicker.value);
     addColor(chosenColorNumber, colorPicker.value);
     createDOMForTheColor(chosenColorNumber, colorPicker.value);
   } else {
@@ -274,11 +273,10 @@ function calcImageHeight(stringLength, rowLength) {
 }
 
 function createPicture(rowLength, twoImagesDiv) {
-  console.log("Create Picture Func started");
-  // const createPicture = async (rowLength) => {
   calcImageHeight(myCodeArray.length, rowLength);
   let canvasNumberh2 = document.createElement("h2");
-  canvasNumberh2.innerText = `Image number: ${imageNumberForThePage} & Width is: ${rowLength} & Height is: ${imageHeight}`;
+  if ((inverseCheckbox.checked && !isInvert) || !inverseCheckbox.checked)
+    canvasNumberh2.innerText = `Image number: ${imageNumberForThePage} & Width is: ${rowLength} & Height is: ${imageHeight}`;
   canvasNumberh2.id = "canvasH2";
 
   const canvas = document.createElement("canvas");
@@ -330,13 +328,10 @@ function createPicture(rowLength, twoImagesDiv) {
   //These two lines are same for both inverse and normal
   const imagePrint = document.getElementsByClassName("imagePrint");
   imagePrint[0].append(canvasNumberh2);
-  // imagePrint[0].append(canvasNumberh2);
-  // imagePrint[0].append(canvas);
   twoImagesDiv.append(canvas);
   imagePrint[0].append(twoImagesDiv);
   document.querySelector("#loader").style.display = "none";
   document.querySelector("body").style.visibility = "visible";
-  console.log("Create Picture Func ended");
 }
 
 function downloadFunction(index, canbedeleted) {
