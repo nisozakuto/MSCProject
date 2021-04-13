@@ -439,7 +439,7 @@ function roll() {
       let rowLength = startWidthValue;
 
       function loop() {
-        if (rowLength < n) {
+        if (rowLength < n + 1) {
           const twoImagesDiv = document.createElement("div");
           if (isInvert) {
             isInvert = !isInvert;
