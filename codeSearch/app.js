@@ -30,6 +30,8 @@ const posts = [
 ];
 app.set("view engine", "ejs");
 
+app.use(express.static(__dirname + '/public'));
+
 app.get("/", (req, res) => {
   let output = 0;
 
@@ -38,7 +40,7 @@ app.get("/", (req, res) => {
     console.log(output);
   }
   //   res.json(output);
-  res.render("home", { output: output });
+  res.render("index", { output: output });
 });
 
 app.get("/getNumber", function (req, res) {
