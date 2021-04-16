@@ -41,6 +41,12 @@ app.get("/", (req, res) => {
   res.render("home", { output: output });
 });
 
+app.get("/getNumber", function (req, res) {
+  let number = req.query.number;
+  number = number * number;
+  res.send("Number: " + number);
+});
+
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
 });
