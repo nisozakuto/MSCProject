@@ -55,7 +55,8 @@ app.get("/getNumber", function (req, res) {
 
   console.table(myData)
 
-  res.send("Number: " + myData);
+  res.render("getNumber", { myData: myData });
+  // res.send("Number: " + myData);
 });
 
 app.listen(port, () => {
