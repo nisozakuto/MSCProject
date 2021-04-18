@@ -28,7 +28,13 @@ margin-bottom: 30px;
   
   header a{
     text-decoration: none;
-  }
-
-  
+  }  
   /* HEADER END*/
+
+  main
+  {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  }

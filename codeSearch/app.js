@@ -45,8 +45,17 @@ app.get("/", (req, res) => {
 
 app.get("/getNumber", function (req, res) {
   let number = req.query.number;
-  number = number * number;
-  res.send("Number: " + number);
+  let myArray = []
+  myArray = number.split('\r\n')
+
+  let myData = []
+  myArray.forEach(element => {
+    myData.push([element, 0])
+  });
+
+  console.table(myData)
+
+  res.send("Number: " + myData);
 });
 
 app.listen(port, () => {

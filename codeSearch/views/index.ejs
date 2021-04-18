@@ -1,14 +1,20 @@
 <%- include('./partials/boilerplate') %> 
 <%- include('./partials/nav') %>
-
-<div class="list-group">
+<main>
+  <div class="list-group">
   <h4 class="list-group-item-heading"><%= output %></h4>
 </div>
 <form method="GET" action="/getNumber">
   <div class="right-pane">
-    <input type="number" id="number" name="number" />
+    <label>Source</label>
+    <textarea  id="number"  name="number" cols="7" rows="10"></textarea>
+    <label>Target</label>
+    <textarea  id="target"  name="target" cols="7" rows="10"></textarea>
   </div>
   <div class="submit-name">
-    <input type="submit" value="get the number" />
+    <input type="submit" value="Check Forwards" />
+    <input type="submit" value="Check Backwards" />
+    <input type="submit" value="Check All variations" />
   </div>
 </form>
+</main>
