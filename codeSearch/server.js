@@ -60,6 +60,6 @@ app.get("/getNumber", function (req, res) {
   // res.send("Number: " + myData);
 });
 
-app.listen(port, () => {
+app.listen(PORT, () => {
   console.log(`Example app listening at http://localhost:${PORT}`);
 });
