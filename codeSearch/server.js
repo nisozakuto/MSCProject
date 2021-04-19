@@ -1,6 +1,7 @@
 const express = require("express");
+
 const app = express();
-const port = 3000;
+const PORT = process.env.PORT || 3000;
 let myInput = [1, 3];
 const posts = [
   {
@@ -30,7 +31,7 @@ const posts = [
 ];
 app.set("view engine", "ejs");
 
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + "/public"));
 
 app.get("/", (req, res) => {
   let output = 0;
@@ -45,20 +46,20 @@ app.get("/", (req, res) => {
 
 app.get("/getNumber", function (req, res) {
   let number = req.query.number;
-  let myArray = []
-  myArray = number.split('\r\n')
+  let myArray = [];
+  myArray = number.split("\r\n");
 
-  let myData = []
-  myArray.forEach(element => {
-    myData.push([element, 0])
+  let myData = [];
+  myArray.forEach((element) => {
+    myData.push([element, 0]);
   });
 
-  console.table(myData)
+  console.table(myData);
 
   res.render("getNumber", { myData: myData });
   // res.send("Number: " + myData);
 });
 
 app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
+  console.log(`Example app listening at http://localhost:${PORT}`);
 });
