@@ -36,27 +36,37 @@ app.use(express.static(__dirname + "/public"));
 app.get("/", (req, res) => {
   let output = 0;
 
-  for (let i = 0; i < myInput.length; i++) {
-    output += myInput[i];
-    console.log(output);
-  }
-  //   res.json(output);
   res.render("index", { output: output });
 });
 
 app.get("/getNumber", function (req, res) {
-  let number = req.query.number;
-  let myArray = [];
-  myArray = number.split("\r\n");
+  let source = req.query.source;
+  let target = req.query.target;
+  let incrementLower = req.query.incrementLower
+  let incremenetUpper = req.query.incremenetUpper
 
+  let sourceArray = [];
+  sourceArray = source.split("\r\n");
+
+  let targetArray = [];
+  targetArray = target.split("\r\n");
+
+  let results = []
   let myData = [];
-  myArray.forEach((element) => {
-    myData.push([element, 0]);
-  });
+  let didFind = false
+  
+  for(let i = incrementLower; i<=incremenetUpper; i++)
+  {
+    console.log(`Checking incrememnt ${i}`)
+    for(let j = 0; j<sourceArray.length; j++)
+    {
+      console.log(`sourceArray[j]=> ${sourceArray[j]}`)
+      
+    }
+  }
+ 
 
-  console.table(myData);
-
-  res.render("getNumber", { myData: myData });
+  res.render("getNumber", { myData: didFind });
   // res.send("Number: " + myData);
 });
 
