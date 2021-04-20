@@ -61,7 +61,31 @@ app.get("/getNumber", function (req, res) {
     for(let j = 0; j<sourceArray.length; j++)
     {
       console.log(`sourceArray[j]=> ${sourceArray[j]}`)
-      
+      if(sourceArray[j] == targetArray[0])
+      {
+        for(let k = 0; k<targetArray.length; k++)
+        {
+          console.log(`K ==> ${k}`)
+          console.log(`J ==> ${j}`)
+
+          console.log(`${sourceArray[j+(k*i)]} == ${targetArray[k]}`)
+          if(sourceArray[j+(k*i)] == targetArray[k])
+          {
+            didFind= true
+            console.log("did find setting true")
+          }
+          
+          else {
+            console.log("breaking loop")
+            didFind = false
+            break
+          }
+        }
+        if(didFind)
+        {
+          //Change the values for the corresponding items here
+        }
+      }
     }
   }
  

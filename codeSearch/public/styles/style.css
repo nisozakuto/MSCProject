@@ -38,3 +38,20 @@ margin-bottom: 30px;
   align-items: center;
 
   }
+
+  /* FORM START */
+  #mainForm{
+    display: flex;
+    flex-direction: column;
+  }
+  .right-pane{
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 2em;
+    align-items: center;
+    justify-content: space-around;
+  }
+  .right-pane textarea{
+    max-width: 50px;
+  }
+  /* FORM END */
