@@ -1,34 +1,11 @@
 const express = require("express");
-
 const app = express();
+
 const PORT = process.env.PORT || 3000;
-let myInput = [1, 3];
-const posts = [
-  {
-    id: 1,
-    author: "John",
-    title: "Templating with EJS",
-    body: "Blog post number 1",
-  },
-  {
-    id: 2,
-    author: "Drake",
-    title: "Express: Starting from the Bottom",
-    body: "Blog post number 2",
-  },
-  {
-    id: 3,
-    author: "Emma",
-    title: "Streams",
-    body: "Blog post number 3",
-  },
-  {
-    id: 4,
-    author: "Cody",
-    title: "Events",
-    body: "Blog post number 4",
-  },
-];
+
+var bodyParser = require("body-parser");
+app.use(bodyParser.urlencoded({ extended: false }));
+
 app.set("view engine", "ejs");
 
 app.use(express.static(__dirname + "/public"));
@@ -39,13 +16,14 @@ app.get("/", (req, res) => {
   res.render("index", { output: output });
 });
 
-app.get("/getNumber", function (req, res) {
-  let source = req.query.source;
-  let target = req.query.target;
-  let incrementLower = req.query.incrementLower
-  let incremenetUpper = req.query.incremenetUpper
+app.post("/getNumber", function (req, res) {
+  let source = req.body.source;
+  let target = req.body.target;
+  let incrementLower = req.body.incrementLower
+  let incremenetUpper = req.body.incremenetUpper
 
   let sourceArray = [];
+  console.log(source)
   sourceArray = source.split("\r\n");
 
   let targetArray = [];
@@ -89,9 +67,7 @@ app.get("/getNumber", function (req, res) {
     }
   }
  
-
   res.render("getNumber", { myData: didFind });
-  // res.send("Number: " + myData);
 });
 
 app.listen(PORT, () => {
