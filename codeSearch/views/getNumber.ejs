@@ -2,7 +2,22 @@
 <%- include('./partials/nav') %>
 <main>
   <div class="list-group">
-  <h4 class="list-group-item-heading"><%= myData %></h4>
+  <h4 class="list-group-item-heading"><%=  %></h4>
 </div>
+
+
+<table>
+  <tr>
+     <th>Index</th><th>Number</th><th>Result</th>
+  </tr>
+
+  <% for (var i = 0; i < myData.length; /* I save the data in a variable 'quotation', I don't know how you named your variable  */  i++) { %>
+   <tr>
+     <td><%= i %></td>
+     <td><%= myData[i][0] %></td>
+     <td><%= myData[i][1] %></td>
+   </tr>    
+  <% } %>
+</table>
 
 </main>

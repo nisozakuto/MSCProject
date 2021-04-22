@@ -75,11 +75,9 @@ app.post("/getNumber", function (req, res) {
           {
             console.log(j+(k*i))
             console.log(results[j+(k*i)][0])
-            results[j+(k*i)][1] = results[j+(k*i)][0]
-            
+            results[j+(k*i)][1] = results[j+(k*i)][0] 
             // results[[j+(k*i)][0]] = sourceArray[j+(k*i)]
             console.table(results);
-
           }
           //Change the values for the corresponding items here
           didFind = false
@@ -90,7 +88,7 @@ app.post("/getNumber", function (req, res) {
   console.table(results);
 
  
-  res.render("getNumber", { myData: didFind });
+  res.render("getNumber", { myData: results });
 });
 
 app.listen(PORT, () => {
