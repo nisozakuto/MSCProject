@@ -23,7 +23,6 @@ app.post("/getNumber", function (req, res) {
   let incremenetUpper = req.body.incremenetUpper
 
   let sourceArray = [];
-  console.log(source)
   sourceArray = source.split("\r\n");
 
   let targetArray = [];
@@ -33,12 +32,18 @@ app.post("/getNumber", function (req, res) {
   let myData = [];
   let didFind = false
   
+  for(let j = 0; j<sourceArray.length; j++)
+  {
+    results.push([sourceArray[j],0])
+  }
+  console.table(results);
+
   for(let i = incrementLower; i<=incremenetUpper; i++)
   {
     console.log(`Checking incrememnt ${i}`)
     for(let j = 0; j<sourceArray.length; j++)
     {
-      console.log(`sourceArray[j]=> ${sourceArray[j]}`)
+      console.log(`sourceArray[${j}] => ${sourceArray[j]}`)
       if(sourceArray[j] == targetArray[0])
       {
         for(let k = 0; k<targetArray.length; k++)
@@ -59,13 +64,31 @@ app.post("/getNumber", function (req, res) {
             break
           }
         }
+        //Better way is ==> create a temp array and then merge it with the main one
+        console.log('========')
         if(didFind)
         {
+          console.table(results);
+
+          console.log('===IN IF=====')
+          for(let k = 0; k<targetArray.length; k++)
+          {
+            console.log(j+(k*i))
+            console.log(results[j+(k*i)][0])
+            results[j+(k*i)][1] = results[j+(k*i)][0]
+            
+            // results[[j+(k*i)][0]] = sourceArray[j+(k*i)]
+            console.table(results);
+
+          }
           //Change the values for the corresponding items here
+          didFind = false
         }
       }
     }
   }
+  console.table(results);
+
  
   res.render("getNumber", { myData: didFind });
 });
