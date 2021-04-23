@@ -55,7 +55,7 @@ app.post("/getNumber", function (req, res) {
             didFind= true
             console.log("did find setting true")
             //Adding the values to temp array
-            temp[j+(k*i)][1] = temp[j+(k*i)][0] 
+            // temp[j+(k*i)][1] = temp[j+(k*i)][0] 
           }
           
           else {
