@@ -28,9 +28,7 @@ app.post("/getNumber", function (req, res) {
   let targetArray = [];
   targetArray = target.split("\r\n");
 
-  let results = []
-  let myData = [];
-  let didFind = false
+  let results = [], temp = [], didFind = false
   
   for(let j = 0; j<sourceArray.length; j++)
   {
@@ -56,6 +54,8 @@ app.post("/getNumber", function (req, res) {
           {
             didFind= true
             console.log("did find setting true")
+            //Adding the values to temp array
+            temp[j+(k*i)][1] = temp[j+(k*i)][0] 
           }
           
           else {
@@ -68,8 +68,8 @@ app.post("/getNumber", function (req, res) {
         console.log('========')
         if(didFind)
         {
+          //If Did Frind == true --> merge the temp values to results array.
           console.table(results);
-
           console.log('===IN IF=====')
           for(let k = 0; k<targetArray.length; k++)
           {
