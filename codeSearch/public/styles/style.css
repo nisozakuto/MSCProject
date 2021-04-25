@@ -31,19 +31,25 @@ margin-bottom: 30px;
   }  
   /* HEADER END*/
 
-  main
+  section
   {
   display: flex;
   flex-direction: column;
-  align-items: center;
-
   }
 
   /* FORM START */
   #mainForm{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: center;
   }
+  #Checkboxes
+{
+display: flex;
+flex-direction: column;
+vertical-align: middle
+}
+
   .right-pane{
     display: flex;
     flex-direction: column;
