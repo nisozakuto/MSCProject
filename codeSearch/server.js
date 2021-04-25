@@ -73,9 +73,13 @@ app.post("/getNumber", function (req, res) {
           console.log('===IN IF=====')
           for(let k = 0; k<targetArray.length; k++)
           {
+            //1,000,002 --> Show why it is 1,000,002 -- It was 2 and it was 9 
+            //4th column - There was a skip of 2s and skip of 9. Target in this exmaple is 4 and 6
             console.log(j+(k*i))
             console.log(results[j+(k*i)][0])
             results[j+(k*i)][1] = results[j+(k*i)][0] 
+            results[j+(k*i)][1] = i
+
             // results[[j+(k*i)][0]] = sourceArray[j+(k*i)]
             console.table(results);
           }
