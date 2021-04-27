@@ -10,7 +10,7 @@
      <th>Index</th><th>Number</th><th>Result</th>
   </tr>
 
-  <% for (var i = 0; i < myData.length; /* I save the data in a variable 'quotation', I don't know how you named your variable  */  i++) { %>
+  <% for (var i = 0; i < myData.length; i++) { %>
    <tr>
      <td><%= i %></td>
      <td><%= myData[i][0] %></td>
@@ -18,4 +18,8 @@
    </tr>    
   <% } %>
 </table>
+<% for (let i = 0; i<notes.length; i++) { %>
+<p><%= notes[i] %> </p>
+<% } %>
+
 </main>
