@@ -127,7 +127,8 @@ app.post("/getNumber", function (req, res) {
   }
   // console.table(results);
 
-  res.render("getNumber", { myData: results, notes });
+  res.render("getNumber", { results, notes });
+  // res.render("getNumber", { myData: results });
 });
 
 app.listen(PORT, () => {

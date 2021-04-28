@@ -1,25 +1,20 @@
-<%- include('./partials/boilerplate') %> 
-<%- include('./partials/nav') %>
+<%- include('./partials/boilerplate') %> <%- include('./partials/nav') %>
 <main>
   <div class="list-group">
-  <h4 class="list-group-item-heading"><%= myData.length %></h4>
-</div>
+    <h4 class="list-group-item-heading"><%= results.length %></h4>
+  </div>
 
-<table>
-  <tr>
-     <th>Index</th><th>Number</th><th>Result</th>
-  </tr>
+  <table>
+    <tr>
+      <th>Index</th>
+      <th>Number</th>
+      <th>Result</th>
+    </tr>
 
-  <% for (var i = 0; i < myData.length; i++) { %>
-   <tr>
-     <td><%= i %></td>
-     <td><%= myData[i][0] %></td>
-     <td><%= myData[i][1] %></td>
-   </tr>    
-  <% } %>
-</table>
-<% for (let i = 0; i<notes.length; i++) { %>
-<p><%= notes[i] %> </p>
-<% } %>
-
+    <% for (var i = 0; i < results.length; i++) { %>
+    <tr>
+      <td><%= i %> <%= results[i][0] %> <%= results[i][1] %></td>
+    </tr>
+    <% } %>
+  </table>
 </main>
