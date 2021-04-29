@@ -1,4 +1,5 @@
 const express = require("express");
+const excel = require("exceljs");
 const app = express();
 
 const PORT = process.env.PORT || 3000;
@@ -16,7 +17,6 @@ app.use(express.static(__dirname + "/public"));
 
 app.get("/", (req, res) => {
   let output = 0;
-
   res.render("index", { output: output });
 });
 
@@ -125,9 +125,28 @@ app.post("/getNumber", function (req, res) {
       }
     }
   }
-  // console.table(results);
+  console.table(results);
 
-  res.render("getNumber", { results, notes });
+  const jsonResults = JSON.parse(JSON.stringify(results));
+
+  let workbook = new excel.Workbook();
+  let worksheet = workbook.addWorksheet("Results");
+  worksheet.columns = [
+    { header: "Number", key: "testKey", width: 30 },
+    { header: "Result", key: "resultTest", width: 30 },
+  ];
+  worksheet.addRows(jsonResults);
+  res.setHeader(
+    "Content-Type",
+    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+  );
+  res.setHeader("Content-Disposition", `attachment; filename= customer.xlsx`);
+
+  return workbook.xlsx.write(res).then(function () {
+    res.status(200).end();
+  });
+
+  // res.send(results);
   // res.render("getNumber", { myData: results });
 });
 

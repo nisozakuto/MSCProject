@@ -45,6 +45,11 @@ main {
   align-items: center;
 }
 
+#getNumbers {
+  display: flex;
+  flex-direction: row;
+}
+
 /* FORM START */
 #mainForm {
   display: flex;

@@ -2,19 +2,43 @@
 <main>
   <form method="POST" action="/getNumber" id="mainForm">
     <section class="left-pane">
-      <label>Enter numbers for search<input type="target" id="target" name="target" /></label>
-      <label>Enter minimum skip size<input type="number" id="incrementLower" name="incrementLower" /></label>
-      <label>Enter maximum skip size<input type="number" id="incremenetUpper" name="incremenetUpper" /></label>         
+      <label
+        >Enter numbers for search<input type="target" id="target" name="target"
+      /></label>
+      <label
+        >Enter minimum skip size<input
+          type="number"
+          id="incrementLower"
+          name="incrementLower"
+      /></label>
+      <label
+        >Enter maximum skip size<input
+          type="number"
+          id="incremenetUpper"
+          name="incremenetUpper"
+      /></label>
 
       <div id="Checkboxes">
-        <label><input type="checkbox" id="forward" name="forward"/>Forward Incremenets</label>
-        <label for="reverse"><input type="checkbox" id="reverse" name="reverse">Reverse Incremenets</label>
-        <label for="forward"><input type="checkbox" id="all-variations" name="all-variations">All variations</label>
+        <label
+          ><input type="checkbox" id="forward" name="forward" />Forward
+          Incremenets</label
+        >
+        <label for="reverse"
+          ><input type="checkbox" id="reverse" name="reverse" />Reverse
+          Incremenets</label
+        >
+        <label for="forward"
+          ><input
+            type="checkbox"
+            id="all-variations"
+            name="all-variations"
+          />All variations</label
+        >
       </div>
-
     </section>
     <section class="right-pane">
-      <label>Source</label><textarea id="source" name="source" cols="7" rows="10"></textarea>
+      <label>Source</label
+      ><textarea id="source" name="source" cols="7" rows="10"></textarea>
       <input type="submit" value="Search" id="searchButton" />
     </section>
   </form>
