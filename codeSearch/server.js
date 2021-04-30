@@ -15,6 +15,11 @@ app.set("view engine", "ejs");
 
 app.use(express.static(__dirname + "/public"));
 
+app.use((req, res, next) => {
+  res.locals.niso = [12, 12];
+  next();
+});
+
 app.get("/", (req, res) => {
   let output = 0;
   res.render("index", { output: output });
@@ -125,10 +130,20 @@ app.post("/getNumber", function (req, res) {
       }
     }
   }
-  console.table(results);
+  // console.table(results);
 
+  // console.table("RES", res);
+
+  // res.locals.results = "klsjd";
+  // next();
+  res.render("getNumber", { results, notes });
+  // res.send(results);
+});
+
+app.post("/downloadResults", function (req, res) {
+  console.log(res);
+  const results = req.locals.results;
   const jsonResults = JSON.parse(JSON.stringify(results));
-
   let workbook = new excel.Workbook();
   let worksheet = workbook.addWorksheet("Results");
   worksheet.columns = [
@@ -136,6 +151,7 @@ app.post("/getNumber", function (req, res) {
     { header: "Result", key: "resultTest", width: 30 },
   ];
   worksheet.addRows(jsonResults);
+
   res.setHeader(
     "Content-Type",
     "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
@@ -145,9 +161,6 @@ app.post("/getNumber", function (req, res) {
   return workbook.xlsx.write(res).then(function () {
     res.status(200).end();
   });
-
-  // res.send(results);
-  // res.render("getNumber", { myData: results });
 });
 
 app.listen(PORT, () => {
