@@ -127,27 +127,25 @@ app.post("/getNumber", function (req, res) {
   }
   console.table(results);
 
-  const jsonResults = JSON.parse(JSON.stringify(results));
+  res.send({ results: results, notes });
+  // const jsonResults = JSON.parse(JSON.stringify(results));
 
-  let workbook = new excel.Workbook();
-  let worksheet = workbook.addWorksheet("Results");
-  worksheet.columns = [
-    { header: "Number", key: "testKey", width: 30 },
-    { header: "Result", key: "resultTest", width: 30 },
-  ];
-  worksheet.addRows(jsonResults);
-  res.setHeader(
-    "Content-Type",
-    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-  );
-  res.setHeader("Content-Disposition", `attachment; filename= customer.xlsx`);
+  // let workbook = new excel.Workbook();
+  // let worksheet = workbook.addWorksheet("Results");
+  // worksheet.columns = [
+  //   { header: "Number", key: "testKey", width: 30 },
+  //   { header: "Result", key: "resultTest", width: 30 },
+  // ];
+  // worksheet.addRows(jsonResults);
+  // res.setHeader(
+  //   "Content-Type",
+  //   "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+  // );
+  // res.setHeader("Content-Disposition", `attachment; filename= customer.xlsx`);
 
-  return workbook.xlsx.write(res).then(function () {
-    res.status(200).end();
-  });
-
-  // res.send(results);
-  // res.render("getNumber", { myData: results });
+  // return workbook.xlsx.write(res).then(function () {
+  //   res.status(200).end();
+  // });
 });
 
 app.listen(PORT, () => {
