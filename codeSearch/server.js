@@ -5,10 +5,18 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 var bodyParser = require("body-parser");
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(
+  bodyParser.urlencoded({
+    extended: false,
+  })
+);
 // app.use(bodyParser.json());
 app.use(
-  bodyParser.json({ limit: "500mb", parameterLimit: 600000, extended: true })
+  bodyParser.json({
+    limit: "500mb",
+    parameterLimit: 600000,
+    extended: true,
+  })
 );
 
 app.set("view engine", "ejs");
@@ -17,7 +25,9 @@ app.use(express.static(__dirname + "/public"));
 
 app.get("/", (req, res) => {
   let output = 0;
-  res.render("index", { output: output });
+  res.render("index", {
+    output: output,
+  });
 });
 
 app.post("/getNumber", function (req, res) {
@@ -47,6 +57,7 @@ app.post("/getNumber", function (req, res) {
     incrememntValue <= incremenetUpper;
     incrememntValue++
   ) {
+    console.log(`Increment ${incrememntValue}`);
     //Going through the source indexes
     for (let sourceIndex = 0; sourceIndex < sourceArray.length; sourceIndex++) {
       if (sourceArray[sourceIndex] == targetArray[0]) {
@@ -75,18 +86,12 @@ app.post("/getNumber", function (req, res) {
           ) {
             //1,000,002 --> Show why it is 1,000,002 -- It was 2 and it was 9
             //4th column - There was a skip of 2s and skip of 9. Target in this exmaple is 4 and 6
-            // console.log(sourceIndex+(targetCounter*incrememntValue))
-            // console.log(results[sourceIndex+(targetCounter*incrememntValue)][0])
-            // console.log(`${sourceArray[sourceIndex+(targetCounter*incrememntValue)]} == ${targetArray[targetCounter]}`)
-            // results[j+(k*i)][1] = results[j+(k*i)][0]
+            console.table(results);
+
             if (
               results[sourceIndex + targetCounter * incrememntValue][1] != 0
             ) {
-              notes.push(
-                `Index ${incrememntValue} had: ${
-                  results[sourceIndex + targetCounter * incrememntValue][1]
-                } \r\n`
-              );
+              notes.push(`Index ${sourceIndex} had: ${incrememntValue}`);
               if (
                 results[sourceIndex + targetCounter * incrememntValue][1] <
                 1000000
@@ -94,9 +99,6 @@ app.post("/getNumber", function (req, res) {
                 results[
                   sourceIndex + targetCounter * incrememntValue
                 ][1] = 1000001;
-                notes.push(
-                  `Index ${incrememntValue} had: ${incrememntValue} \r\n`
-                );
               }
 
               if (
@@ -125,9 +127,17 @@ app.post("/getNumber", function (req, res) {
       }
     }
   }
-  console.table(results);
 
-  res.send({ results: results, notes });
+  notes.sort();
+  console.table(notes);
+
+  // console.log(resultsToDisplay);
+  res.render("getNumber", {
+    results: results,
+    notes: notes,
+  });
+  // res.send({ results: results, notes });
+
   // const jsonResults = JSON.parse(JSON.stringify(results));
 
   // let workbook = new excel.Workbook();
