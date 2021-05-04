@@ -6,7 +6,7 @@ const PORT = process.env.PORT || 3000;
 
 var bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: false, }));
-app.use(bodyParser.json({ limit: "500mb", parameterLimit: 600000, extended: true, }));
+app.use(bodyParser.json({ limit: "50mb", parameterLimit: 1000000, extended: true, }));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 
@@ -25,7 +25,6 @@ app.post("/getNumber", function (req, res) {
 
   let targetArray = [];
   targetArray = target.split(",");
-  console.log(req);
   let results = [],
     temp = [],
     didFind = false;
@@ -56,7 +55,7 @@ app.post("/getNumber", function (req, res) {
           for (let targetCounter = 0; targetCounter < targetArray.length; targetCounter++) {
             //1,000,002 --> Show why it is 1,000,002 -- It was 2 and it was 9
             //4th column - There was a skip of 2s and skip of 9. Target in this exmaple is 4 and 6
-            console.table(results);
+            // console.table(results);
 
             if (results[sourceIndex + targetCounter * incrememntValue][1] != 0) {
               // notes.push(`Index ${sourceIndex} had: ${incrememntValue}`);
@@ -71,7 +70,7 @@ app.post("/getNumber", function (req, res) {
               }
             }
             else {
-              console.log(`Incr: ${incrememntValue} - Settting value to results[${sourceIndex + targetCounter * incrememntValue}]`);
+              // console.log(`Incr: ${incrememntValue} - Settting value to results[${sourceIndex + targetCounter * incrememntValue}]`);
               results[sourceIndex + targetCounter * incrememntValue][1] = incrememntValue;
             }
 
