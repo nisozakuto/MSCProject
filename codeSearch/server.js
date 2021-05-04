@@ -63,7 +63,7 @@ app.post("/getNumber", function (req, res) {
           }
         }
         if (didFind) {
-          n           for (let targetCounter = 0; targetCounter < targetArray.length; targetCounter++) {
+          for (let targetCounter = 0; targetCounter < targetArray.length; targetCounter++) {
             //1,000,002 --> Show why it is 1,000,002 -- It was 2 and it was 9
             //4th column - There was a skip of 2s and skip of 9. Target in this exmaple is 4 and 6
             // console.table(results);
