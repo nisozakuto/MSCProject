@@ -39,8 +39,78 @@ window.onload = function () {
   }
 
   checkCanSearch();
- 
+  let amountOfZeros,isCountingZeros
+  let myCodeArray = []
+  let code
+  const textArea = document.querySelector("textarea");
+
+  
+
+function checkIsThereString() {
+  if (myCodeArray.length >= 0) {
+    isThereString = true;
+  }
+  if (myCodeArray.length == 1 && myCodeArray[0] == "") {
+    isThereString = false;
+  }
+}
+
+function setStringLengthText(length) {
+  let stringLength = document.getElementById("stringLength");
+  stringLength.innerText = `String's length: ${length}`;
+}
+
+function breakString() {
+  amountOfZeros = 0;
+  code = document.getElementById("source").value;
+  myCodeArray = code.split(/\n/);
+
+  if (!isCountingZeros) {
+    for (let i = 0; i < myCodeArray.length; i++) {
+      if (myCodeArray[i] === "0") {
+        amountOfZeros++;
+        myCodeArray.splice(i, 1);
+        i--;
+      }
+    }
+  }
+  setStringLengthText(myCodeArray.length);
+}
+
+function textAreaFunction() {
+  setTimeout(() => {
+    breakString();
+    document.getElementById("foundZeros").innerText = `Found 0s: ${parseInt(
+      amountOfZeros
+    )}`;
+
+    setStringLengthText(myCodeArray.length);
+
+    stringColorCheck = [];
+
+    checkIsThereString();
+    if (isThereString) {
+      checkIsThereString();
+      setStringLengthText(myCodeArray.length);
+    }
+    if (!isThereString) {
+      setStringLengthText(0);
+    }
+  }, 300);
+}
+
+
+textArea.addEventListener("paste", (event) => {
+  textAreaFunction();
+});
+
+textArea.addEventListener("keydown", (event) => {
+  textAreaFunction();
+});
 };
+
+
+
 
 function lastUpdatedFunction() {
   let xhttp = new XMLHttpRequest();
