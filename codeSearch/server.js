@@ -7,8 +7,8 @@ const PORT = process.env.PORT || 3000;
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 
-app.use(express.json({ limit: '50mb' }));
-app.use(express.urlencoded({ limit: '50mb' }));
+app.use(express.json({ limit: '500mb' }));
+app.use(express.urlencoded({ limit: '500mb' }));
 
 
 app.get("/", (req, res) => {
@@ -63,8 +63,7 @@ app.post("/getNumber", function (req, res) {
           }
         }
         if (didFind) {
-          //If Did Frind == true --> merge the temp values to results array.
-          for (let targetCounter = 0; targetCounter < targetArray.length; targetCounter++) {
+          n           for (let targetCounter = 0; targetCounter < targetArray.length; targetCounter++) {
             //1,000,002 --> Show why it is 1,000,002 -- It was 2 and it was 9
             //4th column - There was a skip of 2s and skip of 9. Target in this exmaple is 4 and 6
             // console.table(results);
