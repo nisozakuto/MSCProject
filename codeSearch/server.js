@@ -35,13 +35,12 @@ app.post("/getNumber", function (req, res) {
   let target = req.body.target;
   let incrementLower = req.body.incrementLower;
   let incremenetUpper = req.body.incremenetUpper;
-  let notes = [];
   let sourceArray = [];
   sourceArray = source.split("\r\n");
 
   let targetArray = [];
   targetArray = target.split(",");
-
+  console.log(req);
   let results = [],
     temp = [],
     didFind = false;
@@ -91,7 +90,10 @@ app.post("/getNumber", function (req, res) {
             if (
               results[sourceIndex + targetCounter * incrememntValue][1] != 0
             ) {
-              notes.push(`Index ${sourceIndex} had: ${incrememntValue}`);
+              // notes.push(`Index ${sourceIndex} had: ${incrememntValue}`);
+              results[
+                sourceIndex + targetCounter * incrememntValue
+              ][2] = `Index ${sourceIndex} had: ${incrememntValue}`;
               if (
                 results[sourceIndex + targetCounter * incrememntValue][1] <
                 1000000
@@ -128,34 +130,38 @@ app.post("/getNumber", function (req, res) {
     }
   }
 
-  notes.sort();
-  console.table(notes);
-
-  // console.log(resultsToDisplay);
-  res.render("getNumber", {
-    results: results,
-    notes: notes,
-  });
-  // res.send({ results: results, notes });
-
-  // const jsonResults = JSON.parse(JSON.stringify(results));
-
-  // let workbook = new excel.Workbook();
-  // let worksheet = workbook.addWorksheet("Results");
-  // worksheet.columns = [
-  //   { header: "Number", key: "testKey", width: 30 },
-  //   { header: "Result", key: "resultTest", width: 30 },
-  // ];
-  // worksheet.addRows(jsonResults);
-  // res.setHeader(
-  //   "Content-Type",
-  //   "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-  // );
-  // res.setHeader("Content-Disposition", `attachment; filename= customer.xlsx`);
-
-  // return workbook.xlsx.write(res).then(function () {
-  //   res.status(200).end();
+  // res.render("getNumber", {
+  //   results: results,
   // });
+
+  const jsonResults = JSON.parse(JSON.stringify(results));
+  let workbook = new excel.Workbook();
+  let worksheet = workbook.addWorksheet("Results");
+  worksheet.columns = [
+    { header: "Number", key: "testKey", width: 30 },
+    { header: "Result", key: "resultTest", width: 30 },
+  ];
+  worksheet.addRows(jsonResults);
+  res.setHeader(
+    "Content-Type",
+    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+  );
+  // let date = ("0" + new Date().getDate()).slice(-2);
+  let date_ob = new Date();
+  let date = date_ob.getDate();
+  let month = date_ob.getMonth() + 1;
+  let year = date_ob.getFullYear();
+  let hours = date_ob.getHours();
+  let minutes = date_ob.getMinutes();
+  let seconds = date_ob.getSeconds();
+  res.setHeader(
+    "Content-Disposition",
+    `attachment; filename= CodeSearchResults-${year}${month}${date}-${hours}${minutes}${seconds}.xlsx`
+  );
+
+  return workbook.xlsx.write(res).then(function () {
+    res.status(200).end();
+  });
 });
 
 app.listen(PORT, () => {

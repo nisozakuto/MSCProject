@@ -47,7 +47,6 @@ main {
 
 #getNumbers {
   display: flex;
-  flex-direction: row;
 }
 
 /* FORM START */
@@ -85,3 +84,9 @@ main {
 }
 
 /* FORM END */
+
+
+/* FOOTER */
+footer{
+  text-align: center;
+}
