@@ -17,6 +17,17 @@ app.get("/", (req, res) => {
 });
 
 app.post("/getNumber", function (req, res) {
+  // let date = ("0" + new Date().getDate()).slice(-2);
+  let date_ob = new Date();
+  let date = date_ob.getDate();
+  let month = date_ob.getMonth() + 1;
+  let year = date_ob.getFullYear();
+  let hours = date_ob.getHours();
+  let minutes = date_ob.getMinutes();
+  let seconds = date_ob.getSeconds();
+
+
+  console.log(`Get Number is running ${year}${month}${date}-${hours}${minutes}${seconds}`)
   let source = req.body.source;
   let target = req.body.target;
   let incrementLower = req.body.incrementLower;
@@ -111,14 +122,7 @@ app.post("/getNumber", function (req, res) {
     "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
   );
 
-  // let date = ("0" + new Date().getDate()).slice(-2);
-  let date_ob = new Date();
-  let date = date_ob.getDate();
-  let month = date_ob.getMonth() + 1;
-  let year = date_ob.getFullYear();
-  let hours = date_ob.getHours();
-  let minutes = date_ob.getMinutes();
-  let seconds = date_ob.getSeconds();
+
   res.setHeader(
     "Content-Disposition",
     `attachment; filename= CodeSearchResults-${year}${month}${date}-${hours}${minutes}${seconds}.xlsx`
