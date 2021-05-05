@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Code Search</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="/reset.css" />
+    <link rel="stylesheet" href="/style.css" />
+    <script src="/script.js""></script>
+    <script src='/objectexporter.min.js'></script>
+
+  </head>
+  <body>
+    <div class="page">
+      <header>
+        <div class="header-container">
+          <div class="logo"><a href="/">Code Search JS</a></div>
+        </div>
+        <nav class="menu">
+          <ul>
+            <li class="nav_links"><a href="/">Home</a></li>
+            <li class="nav_links"><a href="/">#</a></li>
+            <li class="nav_links"><a href="/">#</a></li>
+            <li class="nav_links"><a href="/">#</a></li>
+          </ul>
+        </nav>
+      </header>
+
+      <main>
+          <section class="left-pane">
+            <label
+              >Enter numbers for search<input
+                type="target"
+                id="target"
+                name="target"
+            /></label>
+            <label
+              >Enter minimum skip size<input
+                type="number"
+                id="incrementLower"
+                name="incrementLower"
+            /></label>
+            <label
+              >Enter maximum skip size<input
+                type="number"
+                id="incremenetUpper"
+                name="incremenetUpper"
+            /></label>
+
+            <div id="Checkboxes">
+              <label
+                ><input type="checkbox" id="forward" name="forward" />Forward
+                Incremenets</label
+              >
+              <label for="reverse"
+                ><input type="checkbox" id="reverse" name="reverse" />Reverse
+                Incremenets</label
+              >
+              <label for="forward"
+                ><input
+                  type="checkbox"
+                  id="all-variations"
+                  name="all-variations"
+                />All variations</label
+              >
+            </div>
+          </section>
+          <section class="right-pane">
+            <label>Source</label
+            ><textarea id="source" name="source" cols="7" rows="10"></textarea>
+       
+            <button onclick="search()" type="submit"  id="searchButton" >Search</button>
+
+          </section>
+        <p id="stringLength">String Length</p>
+        <p id="foundZeros">Found 0s</p>
+      </main>
+
+      <footer>MSC Project</footer>
+    </div>
+  </body>
+</html>
