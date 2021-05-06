@@ -12,18 +12,20 @@ let didFind = false
 let amountOfZeros
 
 function calculateRows() {
-    amountOfZeros = 0;
-    let sourceValue = source.value
-    sourceArray = sourceValue.split(/\n/);
-    for (let i = 0; i < sourceArray.length; i++) {
-        if (sourceArray[i] === "0") {
-            amountOfZeros++;
+    setTimeout(() => {
+        amountOfZeros = 0;
+        let sourceValue = source.value
+        sourceArray = sourceValue.split(/\n/);
+        for (let i = 0; i < sourceArray.length; i++) {
+            if (sourceArray[i] === "0") {
+                amountOfZeros++;
+            }
         }
-    }
-    stringLength.innerText = `String's length: ${sourceArray.length}`;
-    document.getElementById("foundZeros").innerText = `Found 0s: ${parseInt(
-        amountOfZeros
-    )}`;
+        stringLength.innerText = `String's length: ${sourceArray.length}`;
+        document.getElementById("foundZeros").innerText = `Found 0s: ${parseInt(
+            amountOfZeros
+        )}`;
+    }, 300);
 }
 
 source.addEventListener("paste", (event) => {
