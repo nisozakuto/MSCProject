@@ -50,14 +50,15 @@ function search() {
                     for (let targetCounter = 0; targetCounter < targetArray.length; targetCounter++) {
                         //1,000,002 --> Show why it is 1,000,002 -- It was 2 and it was 9
                         //4th column - There was a skip of 2s and skip of 9. Target in this exmaple is 4 and 6
-                        // console.table(results);
-                        if (results[sourceIndex + targetCounter * incrememntValue][2] != undefined)
-                            results[sourceIndex + targetCounter * incrememntValue][2] = `Index ${sourceIndex} had: ${incrememntValue}`;
+                        console.log(results[sourceIndex + targetCounter * incrememntValue][1])
+                        console.log("UF", results[sourceIndex + targetCounter * incrememntValue][2], sourceIndex + targetCounter * incrememntValue)
+                        if (results[sourceIndex + targetCounter * incrememntValue][2] == undefined) { results[sourceIndex + targetCounter * incrememntValue][2] = `Index ${sourceIndex} skip of: ${incrememntValue} ` }
+                        else {
+                            results[sourceIndex + targetCounter * incrememntValue][2] += `Index ${sourceIndex} skip of: ${incrememntValue} `
+                        }
 
                         if (results[sourceIndex + targetCounter * incrememntValue][1] != 0) {
                             // notes.push(`Index ${sourceIndex} had: ${incrememntValue}`);
-                            results[sourceIndex + targetCounter * incrememntValue][2] += `Index ${sourceIndex} had: ${incrememntValue}`;
-
 
                             if (results[sourceIndex + targetCounter * incrememntValue][1] < 1000000) {
                                 results[sourceIndex + targetCounter * incrememntValue][1] = 1000001;
@@ -84,9 +85,9 @@ function search() {
     objectExporter({
         exportable: results, // The dataset to be exported form an array of objects, it can also be the DOM name for exporting DOM to html
         type: 'csv', // The type of exportable e.g. csv, xls or pdf
-        headers: [{ name: 'Index', alias: 'Source', flex: 30 },
-        { name: 'Result', alias: 'Results', flex: 30 },
-        { name: 'Note', alias: 'Notes', flex: 30 }],
+        headers: [{ name: 'Source', alias: 'Source', flex: 30 },
+        { name: 'Result', alias: 'Result', flex: 30 },
+        { name: 'Note', alias: 'Note', flex: 30 }],
         fileName: `${year}${month}${date}-${hours}${minutes}${seconds}`, // The name of the file which will be exported without the extension.
         // headerStyle: , // The style which needs to be applied to the column headers
         // cellStyle: <cssStyle>, // The style which needs to be applied to each of the cells excluding the headers
