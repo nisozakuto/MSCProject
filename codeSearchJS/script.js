@@ -7,7 +7,7 @@ const searchButton = document.getElementById('searchButton')
 let source = document.getElementById('source')
 let stringLength = document.getElementById('stringLength')
 
-let sourceArray = [], targetArray = [], results = []
+let sourceArray = [], targetArray = [], results
 let didFind = false
 let amountOfZeros
 
@@ -38,6 +38,7 @@ source.addEventListener("keydown", (event) => {
 
 
 function search() {
+    results = []
     let date_ob = new Date();
     let date = date_ob.getDate();
     let month = date_ob.getMonth() + 1;
@@ -57,6 +58,11 @@ function search() {
     for (let j = 0; j < sourceArray.length; j++) {
         results.push([j, sourceArray[j], 0]);
     }
+
+    console.log("Source Array Length", sourceArray.length)
+    console.log("targetArray Array Length", sourceArray.length)
+
+
 
     for (let incrememntValue = incrementLower; incrememntValue <= incremenetUpper; incrememntValue++) {
         // console.log(`Increment ${ incrememntValue }`);
@@ -120,7 +126,7 @@ function search() {
             { name: 'Source', alias: 'Source', flex: 30 },
             { name: 'Result', alias: 'Result', flex: 30 },
             { name: 'Note', alias: 'Note', flex: 90 }],
-        fileName: `${year} ${month} ${date} - ${hours} ${minutes} ${seconds} `, // The name of the file which will be exported without the extension.
+        fileName: `Code Search Report ${year} ${month} ${date} - ${hours} ${minutes} ${seconds} `, // The name of the file which will be exported without the extension.
         // headerStyle: , // The style which needs to be applied to the column headers
         // cellStyle: <cssStyle>, // The style which needs to be applied to each of the cells excluding the headers
         sheetName: 'SheetName', // The sheet name containing the exported exportables
@@ -129,6 +135,8 @@ function search() {
         // repeatHeader: <boolean>, // The table header repeat parameter
         // columnSeparator: <char|string> // The expected column column separator in csv export
     })
+
+    console.log("Result Length: ", results.length)
 
 }
 
