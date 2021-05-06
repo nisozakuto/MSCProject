@@ -2,7 +2,7 @@ const incrementLower = document.getElementById('incrementLower')
 const incremenetUpper = document.getElementById('incremenetUpper')
 const forward = document.getElementById('forward')
 const reverse = document.getElementById('reverse')
-const checkbox = document.getElementById('checkbox')
+const allVariations = document.getElementById('all-variations')
 const searchButton = document.getElementById('searchButton')
 let source = document.getElementById('source')
 let stringLength = document.getElementById('stringLength')
@@ -11,29 +11,40 @@ let sourceArray = [], targetArray = [], results
 let didFind = false
 let amountOfZeros
 
-forwardCheckbox.addEventListener("change", () => {
+forward.addEventListener("change", () => {
     checkCanSearch();
-    if (forwardCheckbox.checked && allvariationsCheckbox.checked) {
-        allvariationsCheckbox.checked = false;
+    if (forward.checked && allVariations.checked) {
+        allVariations.checked = false;
     }
 });
 
-reverseCheckbox.addEventListener("change", () => {
+reverse.addEventListener("change", () => {
     checkCanSearch();
-    if (reverseCheckbox.checked && allvariationsCheckbox.checked) {
-        allvariationsCheckbox.checked = false;
+    if (reverse.checked && allVariations.checked) {
+        allVariations.checked = false;
     }
 });
 
-allvariationsCheckbox.addEventListener("change", () => {
+allVariations.addEventListener("change", () => {
     checkCanSearch();
-    if (allvariationsCheckbox.checked) {
-        if (forwardCheckbox.checked || reverseCheckbox.checked) {
-            forwardCheckbox.checked = false;
-            reverseCheckbox.checked = false;
+    if (allVariations.checked) {
+        if (forward.checked || reverse.checked) {
+            forward.checked = false;
+            reverse.checked = false;
         }
     }
 })
+
+function checkCanSearch() {
+    if (
+        forward.checked ||
+        reverse.checked ||
+        allVariations.checked
+    ) {
+        searchButton.disabled = false;
+    } else searchButton.disabled = true;
+}
+
 
 function calculateRows() {
     setTimeout(() => {
@@ -186,6 +197,8 @@ function lastUpdatedFunction() {
 
 function init() {
     lastUpdatedFunction()
+    checkCanSearch();
+
 }
 
 init()
