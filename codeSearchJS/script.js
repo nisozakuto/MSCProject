@@ -5,12 +5,25 @@ const reverse = document.getElementById('reverse')
 const checkbox = document.getElementById('checkbox')
 const searchButton = document.getElementById('searchButton')
 let source = document.getElementById('source')
-
+let stringLength = document.getElementById('stringLength')
 
 let sourceArray = [], targetArray = [], results = []
-let didFind = false;
+let didFind = false
+let amountOfZeros
 
 function calculateRows() {
+    amountOfZeros = 0;
+    let sourceValue = source.value
+    sourceArray = sourceValue.split(/\n/);
+    for (let i = 0; i < sourceArray.length; i++) {
+        if (sourceArray[i] === "0") {
+            amountOfZeros++;
+        }
+    }
+    stringLength.innerText = `String's length: ${sourceArray.length}`;
+    document.getElementById("foundZeros").innerText = `Found 0s: ${parseInt(
+        amountOfZeros
+    )}`;
 }
 
 source.addEventListener("paste", (event) => {
@@ -32,12 +45,12 @@ function search() {
     let seconds = date_ob.getSeconds();
 
 
-    const source = document.getElementById('source').value
+    let sourceValue = source.value
     const target = document.getElementById('target').value
     const incrementLower = document.getElementById('incrementLower').value
     const incremenetUpper = document.getElementById('incremenetUpper').value
 
-    sourceArray = source.split(/\n/);
+    // sourceArray = sourceValue.split(/\n/); Calculating above
     targetArray = target.split(",");
 
     for (let j = 0; j < sourceArray.length; j++) {
