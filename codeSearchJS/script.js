@@ -4,10 +4,23 @@ const forward = document.getElementById('forward')
 const reverse = document.getElementById('reverse')
 const checkbox = document.getElementById('checkbox')
 const searchButton = document.getElementById('searchButton')
+let source = document.getElementById('source')
 
 
 let sourceArray = [], targetArray = [], results = []
 let didFind = false;
+
+function calculateRows() {
+}
+
+source.addEventListener("paste", (event) => {
+    calculateRows();
+});
+
+source.addEventListener("keydown", (event) => {
+    calculateRows();
+});
+
 
 function search() {
     let date_ob = new Date();
@@ -104,11 +117,6 @@ function search() {
     })
 
 }
-// buttonclick
-
-
-console.table(results)
-
 
 function init() {
 
