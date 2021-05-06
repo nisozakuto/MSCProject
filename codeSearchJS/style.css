@@ -49,6 +49,7 @@ header {
     display: flex;
     justify-items: center;
     align-items: center;
+    justify-content: space-around;
   }
   
   #getNumbers {
@@ -82,7 +83,7 @@ header {
     flex-direction: column;
     padding-bottom: 2em;
     align-items: center;
-    flex-grow: 1
+    /* flex-grow: 1 */
   }
   
   .right-pane textarea {

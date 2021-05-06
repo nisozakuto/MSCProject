@@ -44,13 +44,12 @@ function search() {
     let minutes = date_ob.getMinutes();
     let seconds = date_ob.getSeconds();
 
-
     let sourceValue = source.value
     const target = document.getElementById('target').value
     const incrementLower = document.getElementById('incrementLower').value
     const incremenetUpper = document.getElementById('incremenetUpper').value
 
-    // sourceArray = sourceValue.split(/\n/); Calculating above
+    sourceArray = sourceValue.split(/\n/);
     targetArray = target.split(",");
 
     for (let j = 0; j < sourceArray.length; j++) {
@@ -58,7 +57,7 @@ function search() {
     }
 
     for (let incrememntValue = incrementLower; incrememntValue <= incremenetUpper; incrememntValue++) {
-        // console.log(`Increment ${incrememntValue}`);
+        // console.log(`Increment ${ incrememntValue }`);
         //Going through the source indexes
         for (let sourceIndex = 0; sourceIndex < sourceArray.length; sourceIndex++) {
             if (sourceArray[sourceIndex] == targetArray[0]) {
@@ -79,15 +78,15 @@ function search() {
                         //4th column - There was a skip of 2s and skip of 9. Target in this exmaple is 4 and 6
                         // console.log(results[sourceIndex + targetCounter * incrememntValue][1])
                         // console.log("UF", results[sourceIndex + targetCounter * incrememntValue][2], sourceIndex + targetCounter * incrememntValue)
-                        console.log('results[targetCounter][sourceIndex + targetCounter * incrememntValue][2]', results[targetCounter])
+                        // console.log('results[targetCounter][sourceIndex + targetCounter * incrememntValue][2]', results[targetCounter])
 
                         if (results[targetCounter, sourceIndex + targetCounter * incrememntValue][3] == undefined) { results[targetCounter, sourceIndex + targetCounter * incrememntValue][3] = `Index ${sourceIndex} skip of: ${incrememntValue} ` }
                         else {
-                            results[targetCounter, sourceIndex + targetCounter * incrememntValue][3] += `Index ${sourceIndex} skip of: ${incrememntValue} `
+                            results[targetCounter, sourceIndex + targetCounter * incrememntValue][3] += `/ Index ${sourceIndex} skip of: ${incrememntValue} `
                         }
 
                         if (results[targetCounter, sourceIndex + targetCounter * incrememntValue][2] != 0) {
-                            // notes.push(`Index ${sourceIndex} had: ${incrememntValue}`);
+                            // notes.push(`Index ${ sourceIndex } had: ${ incrememntValue }`);
                             if (results[targetCounter, sourceIndex + targetCounter * incrememntValue][2] < 1000000) {
                                 results[targetCounter, sourceIndex + targetCounter * incrememntValue][2] = 1000001;
                             }
@@ -97,11 +96,11 @@ function search() {
                             }
                         }
                         else {
-                            // console.log(`Incr: ${incrememntValue} - Settting value to results[${sourceIndex + targetCounter * incrememntValue}]`);
+                            // console.log(`Incr: ${ incrememntValue } - Settting value to results[${ sourceIndex + targetCounter * incrememntValue}]`);
                             results[targetCounter, sourceIndex + targetCounter * incrememntValue][2] = incrememntValue;
                         }
 
-                        console.table(results)
+                        // console.table(results)
                         // results[[j+(k*i)][0]] = sourceArray[j+(k*i)]
                         // console.table("Line 92",results);
                     }
@@ -118,8 +117,8 @@ function search() {
             { name: 'Index', alias: 'Index', flex: 30 },
             { name: 'Source', alias: 'Source', flex: 30 },
             { name: 'Result', alias: 'Result', flex: 30 },
-            { name: 'Note', alias: 'Note', flex: 30 }],
-        fileName: `${year}${month}${date}-${hours}${minutes}${seconds}`, // The name of the file which will be exported without the extension.
+            { name: 'Note', alias: 'Note', flex: 90 }],
+        fileName: `${year} ${month} ${date} - ${hours} ${minutes} ${seconds} `, // The name of the file which will be exported without the extension.
         // headerStyle: , // The style which needs to be applied to the column headers
         // cellStyle: <cssStyle>, // The style which needs to be applied to each of the cells excluding the headers
         sheetName: 'SheetName', // The sheet name containing the exported exportables
