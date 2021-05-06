@@ -11,6 +11,30 @@ let sourceArray = [], targetArray = [], results
 let didFind = false
 let amountOfZeros
 
+forwardCheckbox.addEventListener("change", () => {
+    checkCanSearch();
+    if (forwardCheckbox.checked && allvariationsCheckbox.checked) {
+        allvariationsCheckbox.checked = false;
+    }
+});
+
+reverseCheckbox.addEventListener("change", () => {
+    checkCanSearch();
+    if (reverseCheckbox.checked && allvariationsCheckbox.checked) {
+        allvariationsCheckbox.checked = false;
+    }
+});
+
+allvariationsCheckbox.addEventListener("change", () => {
+    checkCanSearch();
+    if (allvariationsCheckbox.checked) {
+        if (forwardCheckbox.checked || reverseCheckbox.checked) {
+            forwardCheckbox.checked = false;
+            reverseCheckbox.checked = false;
+        }
+    }
+})
+
 function calculateRows() {
     setTimeout(() => {
         amountOfZeros = 0;
