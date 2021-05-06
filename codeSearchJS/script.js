@@ -107,65 +107,116 @@ function search() {
         results.push([j, sourceArray[j], 0]);
     }
 
-    console.log("Source Array Length", sourceArray.length)
-    console.log("targetArray Array Length", sourceArray.length)
-
-
-
-    for (let incrememntValue = incrementLower; incrememntValue <= incremenetUpper; incrememntValue++) {
-        // console.log(`Increment ${ incrememntValue }`);
-        //Going through the source indexes
-        for (let sourceIndex = 0; sourceIndex < sourceArray.length; sourceIndex++) {
-            if (sourceArray[sourceIndex] == targetArray[0]) {
-                for (let targetCounter = 0; targetCounter < targetArray.length; targetCounter++) {
-                    if (sourceArray[sourceIndex + targetCounter * incrememntValue] == targetArray[targetCounter]) {
-                        didFind = true;
-                        //TO DO Adding the values to temp array
-                    }
-                    else {
-                        didFind = false;
-                        break;
-                    }
-                }
-                if (didFind) {
+    if (isForward) {
+        for (let incrememntValue = incrementLower; incrememntValue <= incremenetUpper; incrememntValue++) {
+            //Going through the source indexes
+            for (let sourceIndex = 0; sourceIndex < sourceArray.length; sourceIndex++) {
+                if (sourceArray[sourceIndex] == targetArray[0]) {
                     for (let targetCounter = 0; targetCounter < targetArray.length; targetCounter++) {
-
-                        //1,000,002 --> Show why it is 1,000,002 -- It was 2 and it was 9
-                        //4th column - There was a skip of 2s and skip of 9. Target in this exmaple is 4 and 6
-                        // console.log(results[sourceIndex + targetCounter * incrememntValue][1])
-                        // console.log("UF", results[sourceIndex + targetCounter * incrememntValue][2], sourceIndex + targetCounter * incrememntValue)
-                        // console.log('results[targetCounter][sourceIndex + targetCounter * incrememntValue][2]', results[targetCounter])
-
-                        if (results[targetCounter, sourceIndex + targetCounter * incrememntValue][3] == undefined) { results[targetCounter, sourceIndex + targetCounter * incrememntValue][3] = `Index ${sourceIndex} skip of: ${incrememntValue} ` }
-                        else {
-                            results[targetCounter, sourceIndex + targetCounter * incrememntValue][3] += `/ Index ${sourceIndex} skip of: ${incrememntValue} `
-                        }
-
-                        if (results[targetCounter, sourceIndex + targetCounter * incrememntValue][2] != 0) {
-                            // notes.push(`Index ${ sourceIndex } had: ${ incrememntValue }`);
-                            if (results[targetCounter, sourceIndex + targetCounter * incrememntValue][2] < 1000000) {
-                                results[targetCounter, sourceIndex + targetCounter * incrememntValue][2] = 1000001;
-                            }
-
-                            if (results[targetCounter, sourceIndex + targetCounter * incrememntValue][2] > 1000000) {
-                                results[targetCounter, sourceIndex + targetCounter * incrememntValue][2] += 1;
-                            }
+                        if (sourceArray[sourceIndex + targetCounter * incrememntValue] == targetArray[targetCounter]) {
+                            didFind = true;
+                            //TO DO Adding the values to temp array
                         }
                         else {
-                            // console.log(`Incr: ${ incrememntValue } - Settting value to results[${ sourceIndex + targetCounter * incrememntValue}]`);
-                            results[targetCounter, sourceIndex + targetCounter * incrememntValue][2] = incrememntValue;
+                            didFind = false;
+                            break;
                         }
-
-                        // console.table(results)
-                        // results[[j+(k*i)][0]] = sourceArray[j+(k*i)]
-                        // console.table("Line 92",results);
                     }
-                    //Change the values for the corresponding items here
-                    didFind = false;
+                    if (didFind) {
+                        for (let targetCounter = 0; targetCounter < targetArray.length; targetCounter++) {
+
+                            //1,000,002 --> Show why it is 1,000,002 -- It was 2 and it was 9
+                            //4th column - There was a skip of 2s and skip of 9. Target in this exmaple is 4 and 6
+                            // console.log(results[sourceIndex + targetCounter * incrememntValue][1])
+                            // console.log("UF", results[sourceIndex + targetCounter * incrememntValue][2], sourceIndex + targetCounter * incrememntValue)
+                            // console.log('results[targetCounter][sourceIndex + targetCounter * incrememntValue][2]', results[targetCounter])
+
+                            if (results[targetCounter, sourceIndex + targetCounter * incrememntValue][3] == undefined) { results[targetCounter, sourceIndex + targetCounter * incrememntValue][3] = `Index ${sourceIndex} skip of: ${incrememntValue} ` }
+                            else {
+                                results[targetCounter, sourceIndex + targetCounter * incrememntValue][3] += `/ Index ${sourceIndex} skip of: ${incrememntValue} `
+                            }
+
+                            if (results[targetCounter, sourceIndex + targetCounter * incrememntValue][2] != 0) {
+                                // notes.push(`Index ${ sourceIndex } had: ${ incrememntValue }`);
+                                if (results[targetCounter, sourceIndex + targetCounter * incrememntValue][2] < 1000000) {
+                                    results[targetCounter, sourceIndex + targetCounter * incrememntValue][2] = 1000001;
+                                }
+
+                                if (results[targetCounter, sourceIndex + targetCounter * incrememntValue][2] > 1000000) {
+                                    results[targetCounter, sourceIndex + targetCounter * incrememntValue][2] += 1;
+                                }
+                            }
+                            else {
+                                // console.log(`Incr: ${ incrememntValue } - Settting value to results[${ sourceIndex + targetCounter * incrememntValue}]`);
+                                results[targetCounter, sourceIndex + targetCounter * incrememntValue][2] = incrememntValue;
+                            }
+
+                            // console.table(results)
+                            // results[[j+(k*i)][0]] = sourceArray[j+(k*i)]
+                            // console.table("Line 92",results);
+                        }
+                        //Change the values for the corresponding items here
+                        didFind = false;
+                    }
                 }
             }
         }
     }
+    if (isReverse) {
+        for (let incrememntValue = incrementLower; incrememntValue <= incremenetUpper; incrememntValue++) {
+            for (let sourceIndex = sourceArray.length; sourceIndex > 0; sourceIndex--) {
+                if (sourceArray[sourceIndex] == targetArray[0]) {
+                    for (let targetCounter = 0; targetCounter < targetArray.length; targetCounter++) {
+                        if (sourceArray[sourceIndex - targetCounter * incrememntValue] == targetArray[targetCounter]) {
+                            didFind = true;
+                            //TO DO Adding the values to temp array
+                        }
+                        else {
+                            didFind = false;
+                            break;
+                        }
+                    }
+                    console.table(results)
+                    if (didFind) {
+                        for (let targetCounter = 0; targetCounter < targetArray.length; targetCounter++) {
+                            //1,000,002 --> Show why it is 1,000,002 -- It was 2 and it was 9
+                            //4th column - There was a skip of 2s and skip of 9. Target in this exmaple is 4 and 6
+                            // console.log(results[sourceIndex + targetCounter * incrememntValue][1])
+                            // console.log("UF", results[sourceIndex + targetCounter * incrememntValue][2], sourceIndex + targetCounter * incrememntValue)
+                            // console.log('results[targetCounter][sourceIndex + targetCounter * incrememntValue][2]', results[targetCounter])
+
+                            if (results[targetCounter, sourceIndex - targetCounter * incrememntValue][3] == undefined) { results[targetCounter, sourceIndex - targetCounter * incrememntValue][3] = `Index ${sourceIndex} skip of: -${incrememntValue} ` }
+                            else {
+                                results[targetCounter, sourceIndex - targetCounter * incrememntValue][3] += `/ Index ${sourceIndex} skip of: -${incrememntValue} `
+                            }
+
+                            if (results[targetCounter, sourceIndex - targetCounter * incrememntValue][2] != 0) {
+                                // notes.push(`Index ${ sourceIndex } had: ${ incrememntValue }`);
+                                if (results[targetCounter, sourceIndex - targetCounter * incrememntValue][2] < 1000000) {
+                                    results[targetCounter, sourceIndex - targetCounter * incrememntValue][2] = 1000001;
+                                }
+
+                                if (results[targetCounter, sourceIndex - targetCounter * incrememntValue][2] > 1000000) {
+                                    results[targetCounter, sourceIndex - targetCounter * incrememntValue][2] += 1;
+                                }
+                            }
+                            else {
+                                // console.log(`Incr: ${ incrememntValue } - Settting value to results[${ sourceIndex + targetCounter * incrememntValue}]`);
+                                results[targetCounter, sourceIndex - targetCounter * incrememntValue][2] = incrememntValue;
+                            }
+
+                            // console.table(results)
+                            // results[[j+(k*i)][0]] = sourceArray[j+(k*i)]
+                            // console.table("Line 92",results);
+                        }
+                        //Change the values for the corresponding items here
+                        didFind = false;
+                    }
+                }
+            }
+        }
+    }
+
     objectExporter({
         exportable: results, // The dataset to be exported form an array of objects, it can also be the DOM name for exporting DOM to html
         type: 'csv', // The type of exportable e.g. csv, xls or pdf
