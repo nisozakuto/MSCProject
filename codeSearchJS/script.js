@@ -8,32 +8,9 @@ let source = document.getElementById('source')
 let stringLength = document.getElementById('stringLength')
 
 let sourceArray = [], targetArray = [], results
-let didFind = false
+let didFind = false, isForward, isReverse, isAllVariations
 let amountOfZeros
 
-forward.addEventListener("change", () => {
-    checkCanSearch();
-    if (forward.checked && allVariations.checked) {
-        allVariations.checked = false;
-    }
-});
-
-reverse.addEventListener("change", () => {
-    checkCanSearch();
-    if (reverse.checked && allVariations.checked) {
-        allVariations.checked = false;
-    }
-});
-
-allVariations.addEventListener("change", () => {
-    checkCanSearch();
-    if (allVariations.checked) {
-        if (forward.checked || reverse.checked) {
-            forward.checked = false;
-            reverse.checked = false;
-        }
-    }
-})
 
 function checkCanSearch() {
     if (
@@ -44,6 +21,42 @@ function checkCanSearch() {
         searchButton.disabled = false;
     } else searchButton.disabled = true;
 }
+
+function setVariable() {
+    isForward = isReverse = isAllVariations = false
+    if (forward.checked) isForward = true
+    if (reverse.checked) isReverse = true
+    if (allVariations.checked) isAllVariations = true
+}
+
+forward.addEventListener("change", () => {
+    checkCanSearch();
+    if (forward.checked && allVariations.checked) {
+        allVariations.checked = false;
+    }
+    setVariable()
+});
+
+reverse.addEventListener("change", () => {
+    checkCanSearch();
+    if (reverse.checked && allVariations.checked) {
+        allVariations.checked = false;
+    }
+    setVariable()
+
+});
+
+allVariations.addEventListener("change", () => {
+    checkCanSearch();
+    if (allVariations.checked) {
+        if (forward.checked || reverse.checked) {
+            forward.checked = false;
+            reverse.checked = false;
+        }
+    }
+    setVariable()
+
+})
 
 
 function calculateRows() {
