@@ -216,6 +216,12 @@ function search() {
         }
     }
 
+
+    for (let j = 0; j < results.length; j++) {
+        // console.log(results[j][0])
+        results[j][0] += 1
+    }
+
     objectExporter({
         exportable: results, // The dataset to be exported form an array of objects, it can also be the DOM name for exporting DOM to html
         type: 'csv', // The type of exportable e.g. csv, xls or pdf
