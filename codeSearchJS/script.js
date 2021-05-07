@@ -9,8 +9,7 @@ let stringLength = document.getElementById('stringLength')
 
 let sourceArray = [], targetArray = [], results
 let didFind = false, isForward, isReverse, isAllVariations
-let amountOfZeros
-
+let amountOfZeros, tempSourceIndex
 
 function checkCanSearch() {
     if (
@@ -43,7 +42,6 @@ reverse.addEventListener("change", () => {
         allVariations.checked = false;
     }
     setVariable()
-
 });
 
 allVariations.addEventListener("change", () => {
@@ -57,7 +55,6 @@ allVariations.addEventListener("change", () => {
     setVariable()
 
 })
-
 
 function calculateRows() {
     setTimeout(() => {
@@ -83,7 +80,6 @@ source.addEventListener("paste", (event) => {
 source.addEventListener("keydown", (event) => {
     calculateRows();
 });
-
 
 function search() {
     results = []
@@ -130,10 +126,11 @@ function search() {
                             // console.log(results[sourceIndex + targetCounter * incrememntValue][1])
                             // console.log("UF", results[sourceIndex + targetCounter * incrememntValue][2], sourceIndex + targetCounter * incrememntValue)
                             // console.log('results[targetCounter][sourceIndex + targetCounter * incrememntValue][2]', results[targetCounter])
-
-                            if (results[targetCounter, sourceIndex + targetCounter * incrememntValue][3] == undefined) { results[targetCounter, sourceIndex + targetCounter * incrememntValue][3] = `Row ${sourceIndex} skip of: ${incrememntValue} ` }
+                            tempSourceIndex = sourceIndex + 1
+                            console.log(tempSourceIndex, sourceIndex)
+                            if (results[targetCounter, sourceIndex + targetCounter * incrememntValue][3] == undefined) { results[targetCounter, sourceIndex + targetCounter * incrememntValue][3] = `Row ${tempSourceIndex} skip of: ${incrememntValue} ` }
                             else {
-                                results[targetCounter, sourceIndex + targetCounter * incrememntValue][3] += `/ Row ${sourceIndex} skip of: ${incrememntValue} `
+                                results[targetCounter, sourceIndex + targetCounter * incrememntValue][3] += `/ Row ${tempSourceIndex} skip of: ${incrememntValue} `
                             }
 
                             if (results[targetCounter, sourceIndex + targetCounter * incrememntValue][2] != 0) {
@@ -150,10 +147,7 @@ function search() {
                                 // console.log(`Incr: ${ incrememntValue } - Settting value to results[${ sourceIndex + targetCounter * incrememntValue}]`);
                                 results[targetCounter, sourceIndex + targetCounter * incrememntValue][2] = incrememntValue;
                             }
-
-                            // console.table(results)
                             // results[[j+(k*i)][0]] = sourceArray[j+(k*i)]
-                            // console.table("Line 92",results);
                         }
                         //Change the values for the corresponding items here
                         didFind = false;
@@ -176,18 +170,14 @@ function search() {
                             break;
                         }
                     }
-                    console.table(results)
                     if (didFind) {
                         for (let targetCounter = 0; targetCounter < targetArray.length; targetCounter++) {
                             //1,000,002 --> Show why it is 1,000,002 -- It was 2 and it was 9
                             //4th column - There was a skip of 2s and skip of 9. Target in this exmaple is 4 and 6
-                            // console.log(results[sourceIndex + targetCounter * incrememntValue][1])
-                            // console.log("UF", results[sourceIndex + targetCounter * incrememntValue][2], sourceIndex + targetCounter * incrememntValue)
-                            // console.log('results[targetCounter][sourceIndex + targetCounter * incrememntValue][2]', results[targetCounter])
-
-                            if (results[targetCounter, sourceIndex - targetCounter * incrememntValue][3] == undefined) { results[targetCounter, sourceIndex - targetCounter * incrememntValue][3] = `Row ${sourceIndex} skip of: -${incrememntValue} ` }
+                            tempSourceIndex = sourceIndex + 1
+                            if (results[targetCounter, sourceIndex - targetCounter * incrememntValue][3] == undefined) { results[targetCounter, sourceIndex - targetCounter * incrememntValue][3] = `Row ${tempSourceIndex} skip of: -${incrememntValue} ` }
                             else {
-                                results[targetCounter, sourceIndex - targetCounter * incrememntValue][3] += `/ Row ${sourceIndex} skip of: -${incrememntValue} `
+                                results[targetCounter, sourceIndex - targetCounter * incrememntValue][3] += `/ Row ${tempSourceIndex} skip of: -${incrememntValue} `
                             }
 
                             if (results[targetCounter, sourceIndex - targetCounter * incrememntValue][2] != 0) {
@@ -204,9 +194,6 @@ function search() {
                                 // console.log(`Incr: ${ incrememntValue } - Settting value to results[${ sourceIndex + targetCounter * incrememntValue}]`);
                                 results[targetCounter, sourceIndex - targetCounter * incrememntValue][2] = -incrememntValue;
                             }
-                            // console.table(results)
-                            // results[[j+(k*i)][0]] = sourceArray[j+(k*i)]
-                            // console.table("Line 92",results);
                         }
                         //Change the values for the corresponding items here
                         didFind = false;
@@ -218,7 +205,6 @@ function search() {
 
 
     for (let j = 0; j < results.length; j++) {
-        // console.log(results[j][0])
         results[j][0] += 1
     }
 
