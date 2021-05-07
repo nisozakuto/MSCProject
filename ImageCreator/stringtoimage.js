@@ -226,6 +226,7 @@ function add() {
       document.getElementById("colorNumber2").value,
       10
     );
+
     if (firstNumber >= secondNumber) {
       alert("Second number must be bigger than the first one");
     } else if (secondNumber > firstNumber) {
