@@ -64,6 +64,15 @@ header {
     width: 50vw;
   }
   
+  #release-notes
+  {
+align-items: flex-start;
+  }
+
+  #release-notes ol , #release-notes  ul{
+  list-style: disc;
+}
+
   #Checkboxes {
     display: flex;
     flex-direction: column;

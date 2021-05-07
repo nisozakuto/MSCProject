@@ -12,9 +12,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="./reset.css" />
     <link rel="stylesheet" href="./style.css" />
-
   </head>
-  
+
   <body>
     <div class="page">
       <header>
@@ -23,65 +22,69 @@
         </div>
         <nav class="menu">
           <ul>
-            <li class="nav_links"><a href="https://nisozakuto.github.io/MSCProject/codeSearchJS/">Home</a></li>           
+            <li class="nav_links">
+              <a href="https://nisozakuto.github.io/MSCProject/codeSearchJS/"
+                >Home</a
+              >
+            </li>
           </ul>
         </nav>
       </header>
 
       <main>
-          <section class="left-pane">
-            <label
-              >Enter numbers for search<input
-                type="target"
-                id="target"
-                name="target"
-            /></label>
-            <label
-              >Enter minimum skip size<input
-                type="number"
-                id="incrementLower"
-                name="incrementLower"
-            /></label>
-            <label
-              >Enter maximum skip size<input
-                type="number"
-                id="incremenetUpper"
-                name="incremenetUpper"
-            /></label>
+        <section class="left-pane">
+          <label
+            >Enter numbers for search<input
+              type="target"
+              id="target"
+              name="target"
+          /></label>
+          <label
+            >Enter minimum skip size<input
+              type="number"
+              id="incrementLower"
+              name="incrementLower"
+          /></label>
+          <label
+            >Enter maximum skip size<input
+              type="number"
+              id="incremenetUpper"
+              name="incremenetUpper"
+          /></label>
 
-            <div id="Checkboxes">
-              <label
-                ><input type="checkbox" id="forward" name="forward" />Forward
-                Incremenets</label
-              >
-              <label for="reverse"
-                ><input type="checkbox" id="reverse" name="reverse" />Reverse
-                Incremenets</label
-              >
-              <label for="forward"
-                ><input
-                  type="checkbox"
-                  id="all-variations"
-                  name="all-variations"
-                />All variations</label
-              >
-            </div>
-            
-          </section>
-          <section class="right-pane">
-            <label>Source</label
-            ><textarea id="source" name="source" cols="7" rows="10"></textarea>
-       
-            <button onclick="search()" type="submit"  id="searchButton" >Search</button>
-            <p id="stringLength">String Length</p>
-            <p id="foundZeros">Found 0s</p>
-          </section>
-     
+          <div id="Checkboxes">
+            <label
+              ><input type="checkbox" id="forward" name="forward" />Forward
+              Incremenets</label
+            >
+            <label for="reverse"
+              ><input type="checkbox" id="reverse" name="reverse" />Reverse
+              Incremenets</label
+            >
+            <label for="forward"
+              ><input
+                type="checkbox"
+                id="all-variations"
+                name="all-variations"
+              />All variations</label
+            >
+          </div>
+        </section>
+        <section class="right-pane">
+          <label>Source</label
+          ><textarea id="source" name="source" cols="7" rows="10"></textarea>
+
+          <button onclick="search()" type="submit" id="searchButton">
+            Search
+          </button>
+          <p id="stringLength">String Length</p>
+          <p id="foundZeros">Found 0s</p>
+        </section>
       </main>
 
       <footer>MSC Project</footer>
     </div>
-    <script src="./script.js""></script>
-    <script src='./objectexporter.min.js'></script>
+    <script src="./script.js"></script>
+    <script src="./objectexporter.min.js"></script>
   </body>
 </html>
