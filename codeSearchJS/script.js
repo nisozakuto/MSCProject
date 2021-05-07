@@ -202,9 +202,8 @@ function search() {
                             }
                             else {
                                 // console.log(`Incr: ${ incrememntValue } - Settting value to results[${ sourceIndex + targetCounter * incrememntValue}]`);
-                                results[targetCounter, sourceIndex - targetCounter * incrememntValue][2] = incrememntValue;
+                                results[targetCounter, sourceIndex - targetCounter * incrememntValue][2] = -incrememntValue;
                             }
-
                             // console.table(results)
                             // results[[j+(k*i)][0]] = sourceArray[j+(k*i)]
                             // console.table("Line 92",results);
@@ -234,9 +233,7 @@ function search() {
         // repeatHeader: <boolean>, // The table header repeat parameter
         // columnSeparator: <char|string> // The expected column column separator in csv export
     })
-
     console.log("Result Length: ", results.length)
-
 }
 
 function lastUpdatedFunction() {
@@ -262,7 +259,6 @@ function lastUpdatedFunction() {
 function init() {
     lastUpdatedFunction()
     checkCanSearch();
-
 }
 
 init()
