@@ -131,9 +131,9 @@ function search() {
                             // console.log("UF", results[sourceIndex + targetCounter * incrememntValue][2], sourceIndex + targetCounter * incrememntValue)
                             // console.log('results[targetCounter][sourceIndex + targetCounter * incrememntValue][2]', results[targetCounter])
 
-                            if (results[targetCounter, sourceIndex + targetCounter * incrememntValue][3] == undefined) { results[targetCounter, sourceIndex + targetCounter * incrememntValue][3] = `Index ${sourceIndex} skip of: ${incrememntValue} ` }
+                            if (results[targetCounter, sourceIndex + targetCounter * incrememntValue][3] == undefined) { results[targetCounter, sourceIndex + targetCounter * incrememntValue][3] = `Row ${sourceIndex} skip of: ${incrememntValue} ` }
                             else {
-                                results[targetCounter, sourceIndex + targetCounter * incrememntValue][3] += `/ Index ${sourceIndex} skip of: ${incrememntValue} `
+                                results[targetCounter, sourceIndex + targetCounter * incrememntValue][3] += `/ Row ${sourceIndex} skip of: ${incrememntValue} `
                             }
 
                             if (results[targetCounter, sourceIndex + targetCounter * incrememntValue][2] != 0) {
@@ -185,9 +185,9 @@ function search() {
                             // console.log("UF", results[sourceIndex + targetCounter * incrememntValue][2], sourceIndex + targetCounter * incrememntValue)
                             // console.log('results[targetCounter][sourceIndex + targetCounter * incrememntValue][2]', results[targetCounter])
 
-                            if (results[targetCounter, sourceIndex - targetCounter * incrememntValue][3] == undefined) { results[targetCounter, sourceIndex - targetCounter * incrememntValue][3] = `Index ${sourceIndex} skip of: -${incrememntValue} ` }
+                            if (results[targetCounter, sourceIndex - targetCounter * incrememntValue][3] == undefined) { results[targetCounter, sourceIndex - targetCounter * incrememntValue][3] = `Row ${sourceIndex} skip of: -${incrememntValue} ` }
                             else {
-                                results[targetCounter, sourceIndex - targetCounter * incrememntValue][3] += `/ Index ${sourceIndex} skip of: -${incrememntValue} `
+                                results[targetCounter, sourceIndex - targetCounter * incrememntValue][3] += `/ Row ${sourceIndex} skip of: -${incrememntValue} `
                             }
 
                             if (results[targetCounter, sourceIndex - targetCounter * incrememntValue][2] != 0) {
@@ -226,10 +226,10 @@ function search() {
         exportable: results, // The dataset to be exported form an array of objects, it can also be the DOM name for exporting DOM to html
         type: 'csv', // The type of exportable e.g. csv, xls or pdf
         headers: [
-            { name: 'Index', alias: 'Index', flex: 30 },
+            { name: 'Rows', alias: 'Rows', flex: 30 },
             { name: 'Source', alias: 'Source', flex: 30 },
-            { name: 'Result', alias: 'Result', flex: 30 },
-            { name: 'Note', alias: 'Note', flex: 90 }],
+            { name: 'Results', alias: 'Results', flex: 30 },
+            { name: 'Notes', alias: 'Notes', flex: 90 }],
         fileName: `Code Search Report ${year} ${month} ${date} - ${hours} ${minutes} ${seconds} `, // The name of the file which will be exported without the extension.
         // headerStyle: , // The style which needs to be applied to the column headers
         // cellStyle: <cssStyle>, // The style which needs to be applied to each of the cells excluding the headers
