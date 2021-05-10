@@ -80,9 +80,7 @@ source.addEventListener("paste", (event) => {
 source.addEventListener("keydown", (event) => {
     calculateRows();
 });
-function functionFinishedConsole(functionName) {
-    console.log(`${functionName} finished`)
-}
+
 
 function search() {
     results = []
@@ -107,14 +105,10 @@ function search() {
     }
 
     if (isForward) {
-        var t0 = performance.now()
         for (let incrememntValue = incrementLower; incrememntValue <= incremenetUpper; incrememntValue++) {
             //Going through the source indexes
-            var t1 = performance.now()
             for (let sourceIndex = 0; sourceIndex < sourceArray.length; sourceIndex++) {
-                var t2 = performance.now()
                 if (sourceArray[sourceIndex] == targetArray[0]) {
-                    var t3 = performance.now()
                     for (let targetCounter = 0; targetCounter < targetArray.length; targetCounter++) {
                         if (sourceArray[sourceIndex + targetCounter * incrememntValue] == targetArray[targetCounter]) {
                             didFind = true;
@@ -125,9 +119,6 @@ function search() {
                             break;
                         }
                     }
-                    var t4 = performance.now()
-                    console.log("Target Counter Timing", t4 - t3)
-                    functionFinishedConsole(targetArray)
                     if (didFind) {
                         for (let targetCounter = 0; targetCounter < targetArray.length; targetCounter++) {
 
@@ -137,7 +128,6 @@ function search() {
                             // console.log("UF", results[sourceIndex + targetCounter * incrememntValue][2], sourceIndex + targetCounter * incrememntValue)
                             // console.log('results[targetCounter][sourceIndex + targetCounter * incrememntValue][2]', results[targetCounter])
                             tempSourceIndex = sourceIndex + 1
-                            console.log(tempSourceIndex, sourceIndex)
                             if (results[targetCounter, sourceIndex + targetCounter * incrememntValue][3] == undefined) { results[targetCounter, sourceIndex + targetCounter * incrememntValue][3] = `Row ${tempSourceIndex} skip of: ${incrememntValue} ` }
                             else {
                                 results[targetCounter, sourceIndex + targetCounter * incrememntValue][3] += `/ Row ${tempSourceIndex} skip of: ${incrememntValue} `
@@ -164,13 +154,7 @@ function search() {
                     }
                 }
             }
-            var t5 = performance.now()
-            console.log("Target Counter Timing", t5 - t2)
-            functionFinishedConsole(sourceIndex)
         }
-        var t6 = performance.now()
-        console.log("Target Counter Timing", t6 - t1)
-        functionFinishedConsole(incrememntValue)
     }
 
     if (isReverse) {
@@ -187,7 +171,6 @@ function search() {
                             break;
                         }
                     }
-                    functionFinishedConsole(targetArray)
                     if (didFind) {
                         for (let targetCounter = 0; targetCounter < targetArray.length; targetCounter++) {
                             //1,000,002 --> Show why it is 1,000,002 -- It was 2 and it was 9
@@ -218,9 +201,8 @@ function search() {
                     }
                 }
             }
-            functionFinishedConsole(sourceIndex)
+
         }
-        functionFinishedConsole(incrememntValue)
     }
 
 
