@@ -9,7 +9,8 @@ const invertCheckbox = document.getElementById("checkboxForInvert");
 const zeroStatus = document.getElementById("isCountingZeros");
 const rangeSelection = document.getElementById("rangeSelection");
 // if (document.querySelector("textarea")) { const textArea = document.querySelector("textarea"); }
-const textArea = document.getElementById("string");
+const textArea = document.querySelector("textarea")
+// const textArea = document.getElementById("string");
 const singleColor = document.getElementById("singleColor");
 const rangeColor = document.getElementById("rangeOfColor");
 const colorPrefSaveInput = document.getElementById("colorPrefInput");
@@ -255,7 +256,7 @@ function add() {
 function breakString() {
   amountOfZeros = 0;
   code = document.getElementById("string").value;
-  myCodeArray = code.split(" ");
+  myCodeArray = code.split(/\n/);
 
   if (!isCountingZeros) {
     for (let i = 0; i < myCodeArray.length; i++) {
@@ -774,10 +775,8 @@ function textAreaFunction() {
         stringColorCheck.push(color);
       }
     }
-    console.log(stringColorCheck, colors);
-
+    // console.log(stringColorCheck, colors);
     missingColorFunction();
-
     checkIsThereString();
     if (isThereString) {
       checkIsThereString();
