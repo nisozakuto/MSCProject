@@ -105,7 +105,7 @@ function clearResults() {
 
 function addColor(number1, hex, number2) {
   if (number2 == undefined) {
-    console.log("Adding only one color", number1); // Adding only one color
+    // console.log("Adding only one color", number1); // Adding only one color
     number1 = parseInt(number1, 10);
     if (!colors[number1] || colors[number1] != null) {
       colors[number1] = hex;

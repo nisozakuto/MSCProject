@@ -210,23 +210,34 @@ function search() {
         results[j][0] += 1
     }
 
-    objectExporter({
-        exportable: results, // The dataset to be exported form an array of objects, it can also be the DOM name for exporting DOM to html
-        type: 'csv', // The type of exportable e.g. csv, xls or pdf
-        headers: [
-            { name: 'Rows', alias: 'Rows', flex: 30 },
-            { name: 'Source', alias: 'Source', flex: 30 },
-            { name: 'Results', alias: 'Results', flex: 30 },
-            { name: 'Notes', alias: 'Notes', flex: 90 }],
-        fileName: `Code Search Report ${year} ${month} ${date} - ${hours} ${minutes} ${seconds} `, // The name of the file which will be exported without the extension.
-        // headerStyle: , // The style which needs to be applied to the column headers
-        // cellStyle: <cssStyle>, // The style which needs to be applied to each of the cells excluding the headers
-        sheetName: 'SheetName', // The sheet name containing the exported exportables
-        documentTitle: 'Title', // The document title which should be added to the printable
-        // documentTitleStyle: <cssStyle>, // The style which can be applied to the document header
-        // repeatHeader: <boolean>, // The table header repeat parameter
-        // columnSeparator: <char|string> // The expected column column separator in csv export
-    })
+    let csvContent = "data:text/csv;charset=utf-8,"
+        + results.map(e => e.join(",")).join("\n");
+
+    var encodedUri = encodeURI(csvContent);
+    var link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", "my_data.csv");
+    document.body.appendChild(link); // Required for FF
+
+    link.click();
+
+    // objectExporter({
+    //     exportable: results, // The dataset to be exported form an array of objects, it can also be the DOM name for exporting DOM to html
+    //     type: 'csv', // The type of exportable e.g. csv, xls or pdf
+    //     headers: [
+    //         { name: 'Rows', alias: 'Rows', flex: 30 },
+    //         { name: 'Source', alias: 'Source', flex: 30 },
+    //         { name: 'Results', alias: 'Results', flex: 30 },
+    //         { name: 'Notes', alias: 'Notes', flex: 90 }],
+    //     fileName: `Code Search Report ${year} ${month} ${date} - ${hours} ${minutes} ${seconds} `, // The name of the file which will be exported without the extension.
+    //     // headerStyle: , // The style which needs to be applied to the column headers
+    //     // cellStyle: <cssStyle>, // The style which needs to be applied to each of the cells excluding the headers
+    //     sheetName: 'SheetName', // The sheet name containing the exported exportables
+    //     documentTitle: 'Title', // The document title which should be added to the printable
+    //     // documentTitleStyle: <cssStyle>, // The style which can be applied to the document header
+    //     // repeatHeader: <boolean>, // The table header repeat parameter
+    //     // columnSeparator: <char|string> // The expected column column separator in csv export
+    // })
     console.log("Result Length: ", results.length)
 }
 
