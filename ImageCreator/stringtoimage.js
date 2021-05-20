@@ -258,8 +258,7 @@ function breakString() {
   code = document.getElementById("string").value;
   myCodeArray = code.split(/\n/);
 
-  // if (!isCountingZeros) {
-  if (false) {
+  if (!isCountingZeros) {
     for (let i = 0; i < myCodeArray.length; i++) {
       if (myCodeArray[i] === "0") {
         amountOfZeros++;
