@@ -121,7 +121,7 @@ function search() {
                     }
                     if (didFind) {
                         for (let targetCounter = 0; targetCounter < targetArray.length; targetCounter++) {
-
+                            console.log(`target Array length`, targetArray.length)
                             //1,000,002 --> Show why it is 1,000,002 -- It was 2 and it was 9
                             //4th column - There was a skip of 2s and skip of 9. Target in this exmaple is 4 and 6
                             // console.log(results[sourceIndex + targetCounter * incrememntValue][1])
@@ -205,8 +205,64 @@ function search() {
         }
     }
 
-    if (allVariations) {
-        findpermutate(targetArray)
+    if (isAllVariations) {
+        let foundPermutations = findpermutate(targetArray)
+        foundPermutations.forEach(element => {
+            console.log(element)
+            for (let incrememntValue = incrementLower; incrememntValue <= incremenetUpper; incrememntValue++) {
+                //Going through the source indexes
+                for (let sourceIndex = 0; sourceIndex < sourceArray.length; sourceIndex++) {
+                    if (sourceArray[sourceIndex] == element[0]) {
+                        for (let targetCounter = 0; targetCounter < element.length; targetCounter++) {
+                            if (sourceArray[sourceIndex + targetCounter * incrememntValue] == element[targetCounter]) {
+                                didFind = true;
+                                //TO DO Adding the values to temp array
+                            }
+                            else {
+                                didFind = false;
+                                break;
+                            }
+                        }
+                        if (didFind) {
+                            for (let targetCounter = 0; targetCounter < element.length; targetCounter++) {
+
+                                //1,000,002 --> Show why it is 1,000,002 -- It was 2 and it was 9
+                                //4th column - There was a skip of 2s and skip of 9. Target in this exmaple is 4 and 6
+                                // console.log(results[sourceIndex + targetCounter * incrememntValue][1])
+                                // console.log("UF", results[sourceIndex + targetCounter * incrememntValue][2], sourceIndex + targetCounter * incrememntValue)
+                                // console.log('results[targetCounter][sourceIndex + targetCounter * incrememntValue][2]', results[targetCounter])
+                                tempSourceIndex = sourceIndex + 1
+                                if (results[targetCounter, sourceIndex + targetCounter * incrememntValue][3] == undefined) { results[targetCounter, sourceIndex + targetCounter * incrememntValue][3] = `Row ${tempSourceIndex} skip of: ${incrememntValue} ` }
+                                else {
+                                    results[targetCounter, sourceIndex + targetCounter * incrememntValue][3] += `/ Row ${tempSourceIndex} skip of: ${incrememntValue} `
+                                }
+
+                                if (results[targetCounter, sourceIndex + targetCounter * incrememntValue][2] != 0) {
+                                    // notes.push(`Index ${ sourceIndex } had: ${ incrememntValue }`);
+                                    if (results[targetCounter, sourceIndex + targetCounter * incrememntValue][2] < 1000000) {
+                                        results[targetCounter, sourceIndex + targetCounter * incrememntValue][2] = 1000001;
+                                    }
+
+                                    if (results[targetCounter, sourceIndex + targetCounter * incrememntValue][2] > 1000000) {
+                                        results[targetCounter, sourceIndex + targetCounter * incrememntValue][2] += 1;
+                                    }
+                                }
+                                else {
+                                    // console.log(`Incr: ${ incrememntValue } - Settting value to results[${ sourceIndex + targetCounter * incrememntValue}]`);
+                                    results[targetCounter, sourceIndex + targetCounter * incrememntValue][2] = incrememntValue;
+                                }
+                                // results[[j+(k*i)][0]] = sourceArray[j+(k*i)]
+                            }
+                            //Change the values for the corresponding items here
+                            didFind = false;
+                        }
+                    }
+                }
+            }
+        });
+
+
+
     }
 
     for (let j = 0; j < results.length; j++) {
@@ -269,11 +325,7 @@ function findpermutate(targetArray) {
             permutationResults.push(permutedArray);
         }
     }
-
-    console.log(permutationResults)
-
     return permutationResults
-
 }
 
 function init() {
