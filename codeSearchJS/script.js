@@ -94,8 +94,8 @@ function search() {
 
     let sourceValue = source.value
     const target = document.getElementById('target').value
-    const incrementLower = document.getElementById('incrementLower').value
-    const incremenetUpper = document.getElementById('incremenetUpper').value
+    const incrementLower = parseInt(document.getElementById('incrementLower').value)
+    const incremenetUpper = parseInt(document.getElementById('incremenetUpper').value)
 
     sourceArray = sourceValue.split(/\n/);
     targetArray = target.split(",");
@@ -105,7 +105,9 @@ function search() {
     }
 
     if (isForward) {
+        console.log(`incrementlower ${incrementLower} upper ${incremenetUpper}`)
         for (let incrememntValue = incrementLower; incrememntValue <= incremenetUpper; incrememntValue++) {
+            console.log(`Increment value ${incrememntValue}`)
             //Going through the source indexes
             for (let sourceIndex = 0; sourceIndex < sourceArray.length; sourceIndex++) {
                 if (sourceArray[sourceIndex] == targetArray[0]) {
@@ -121,7 +123,7 @@ function search() {
                     }
                     if (didFind) {
                         for (let targetCounter = 0; targetCounter < targetArray.length; targetCounter++) {
-                            console.log(`target Array length`, targetArray.length)
+                            // console.log(`target Array length`, targetArray.length)
                             //1,000,002 --> Show why it is 1,000,002 -- It was 2 and it was 9
                             //4th column - There was a skip of 2s and skip of 9. Target in this exmaple is 4 and 6
                             // console.log(results[sourceIndex + targetCounter * incrememntValue][1])
