@@ -205,11 +205,13 @@ function search() {
         }
     }
 
+    if (allVariations) {
+        findpermutate(targetArray)
+    }
 
     for (let j = 0; j < results.length; j++) {
         results[j][0] += 1
     }
-
 
 
     objectExporter({
@@ -229,7 +231,6 @@ function search() {
         // repeatHeader: <boolean>, // The table header repeat parameter
         // columnSeparator: <char|string> // The expected column column separator in csv export
     })
-    console.log("Result Length: ", results.length)
 }
 
 function lastUpdatedFunction() {
@@ -250,6 +251,29 @@ function lastUpdatedFunction() {
     };
     xhttp.open("GET", "https://api.github.com/users/nisozakuto/repos", true);
     xhttp.send();
+}
+
+function findpermutate(targetArray) {
+
+    let permutationResults = []
+
+    if (targetArray.length === 0) return [];
+    if (targetArray.length === 1) return [targetArray];
+
+    for (let i = 0; i < targetArray.length; i++) {
+        const currentNum = targetArray[i];
+        const remainingNums = targetArray.slice(0, i).concat(targetArray.slice(i + 1));
+        const remainingNumsPermuted = findpermutate(remainingNums);
+        for (let j = 0; j < remainingNumsPermuted.length; j++) {
+            const permutedArray = [currentNum].concat(remainingNumsPermuted[j])
+            permutationResults.push(permutedArray);
+        }
+    }
+
+    console.log(permutationResults)
+
+    return permutationResults
+
 }
 
 function init() {
