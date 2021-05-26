@@ -105,9 +105,7 @@ function search() {
     }
 
     if (isForward) {
-        console.log(`incrementlower ${incrementLower} upper ${incremenetUpper}`)
         for (let incrememntValue = incrementLower; incrememntValue <= incremenetUpper; incrememntValue++) {
-            console.log(`Increment value ${incrememntValue}`)
             //Going through the source indexes
             for (let sourceIndex = 0; sourceIndex < sourceArray.length; sourceIndex++) {
                 if (sourceArray[sourceIndex] == targetArray[0]) {
@@ -210,7 +208,6 @@ function search() {
     if (isAllVariations) {
         let foundPermutations = findpermutate(targetArray)
         foundPermutations.forEach(element => {
-            console.log(element)
             for (let incrememntValue = incrementLower; incrememntValue <= incremenetUpper; incrememntValue++) {
                 //Going through the source indexes
                 for (let sourceIndex = 0; sourceIndex < sourceArray.length; sourceIndex++) {
@@ -311,10 +308,15 @@ function lastUpdatedFunction() {
     xhttp.send();
 }
 
+const equals = (a, b) =>
+    a.length === b.length &&
+    a.every((v, i) => v === b[i]);
+
+
 function findpermutate(targetArray) {
 
     let permutationResults = []
-
+    let dupeChecker = false
     if (targetArray.length === 0) return [];
     if (targetArray.length === 1) return [targetArray];
 
@@ -324,9 +326,16 @@ function findpermutate(targetArray) {
         const remainingNumsPermuted = findpermutate(remainingNums);
         for (let j = 0; j < remainingNumsPermuted.length; j++) {
             const permutedArray = [currentNum].concat(remainingNumsPermuted[j])
-            permutationResults.push(permutedArray);
+
+            permutationResults.forEach(element => {
+                if (equals(element, permutedArray))
+                    dupeChecker = true
+            });
+            if (!dupeChecker)
+                permutationResults.push(permutedArray);
         }
     }
+
     return permutationResults
 }
 
