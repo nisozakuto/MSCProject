@@ -51,6 +51,11 @@ header {
     align-items: center;
     justify-content: space-around;
   }
+
+  #progressSection{
+    position: absolute;
+    top:10%;
+  }
   
   #getNumbers {
     display: flex;

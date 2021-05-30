@@ -81,6 +81,11 @@ source.addEventListener("keydown", (event) => {
     calculateRows();
 });
 
+const infoText = document.getElementById("progressInfo")
+
+function info(info, number) {
+    infoText.innerText = `${info} at ${number}`
+}
 
 function search() {
     results = []
@@ -107,6 +112,7 @@ function search() {
     if (isForward) {
         for (let incrememntValue = incrementLower; incrememntValue <= incremenetUpper; incrememntValue++) {
             //Going through the source indexes
+            info("Skip Number", incrememntValue)
             for (let sourceIndex = 0; sourceIndex < sourceArray.length; sourceIndex++) {
                 if (sourceArray[sourceIndex] == targetArray[0]) {
                     for (let targetCounter = 0; targetCounter < targetArray.length; targetCounter++) {
