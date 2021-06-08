@@ -83,8 +83,8 @@ source.addEventListener("keydown", (event) => {
 
 const infoText = document.getElementById("progressInfo")
 
-function info(info, number) {
-    infoText.innerText = `${info} at ${number}`
+function info(info, number, upperLimit) {
+    infoText.innerText = `${info} at ${number}/${upperLimit}`
 }
 
 function search() {
@@ -112,7 +112,7 @@ function search() {
     if (isForward) {
         for (let incrememntValue = incrementLower; incrememntValue <= incremenetUpper; incrememntValue++) {
             //Going through the source indexes
-            info("Skip Number", incrememntValue)
+            info("Skip Number", incrememntValue, incremenetUpper)
             for (let sourceIndex = 0; sourceIndex < sourceArray.length; sourceIndex++) {
                 if (sourceArray[sourceIndex] == targetArray[0]) {
                     for (let targetCounter = 0; targetCounter < targetArray.length; targetCounter++) {
@@ -165,6 +165,7 @@ function search() {
 
     if (isReverse) {
         for (let incrememntValue = incrementLower; incrememntValue <= incremenetUpper; incrememntValue++) {
+            info("Skip Number", incrememntValue, incremenetUpper)
             for (let sourceIndex = sourceArray.length; sourceIndex > 0; sourceIndex--) {
                 if (sourceArray[sourceIndex] == targetArray[0]) {
                     for (let targetCounter = 0; targetCounter < targetArray.length; targetCounter++) {
@@ -215,8 +216,10 @@ function search() {
         let foundPermutations = findpermutate(targetArray)
         foundPermutations.forEach(element => {
             for (let incrememntValue = incrementLower; incrememntValue <= incremenetUpper; incrememntValue++) {
+                info("Skip Number", incrememntValue, incremenetUpper)
                 //Going through the source indexes
                 for (let sourceIndex = 0; sourceIndex < sourceArray.length; sourceIndex++) {
+
                     if (sourceArray[sourceIndex] == element[0]) {
                         for (let targetCounter = 0; targetCounter < element.length; targetCounter++) {
                             if (sourceArray[sourceIndex + targetCounter * incrememntValue] == element[targetCounter]) {
