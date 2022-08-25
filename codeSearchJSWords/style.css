@@ -1,0 +1,118 @@
+/* HEADER START*/
+header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    padding: 10px;
+    box-shadow: 0 3px 15px -6px black;
+    margin-bottom: 30px;
+  }
+  
+  header a {
+    text-decoration: none;
+  }
+  
+  nav ul {
+    display: flex;
+  }
+  
+  header nav ul li a {
+    text-transform: uppercase;
+  }
+  
+  header li {
+    text-transform: uppercase;
+    padding: 10px;
+    letter-spacing: 1px;
+  }
+  
+  header a {
+    text-decoration: none;
+  }
+  
+  /* HEADER END*/
+  
+  
+  .page{
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  }
+  
+  section {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  main {
+    flex: 1;
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    justify-content: space-around;
+  }
+
+  #progressSection{
+    position: absolute;
+    top:10%;
+  }
+  
+  #getNumbers {
+    display: flex;
+  }
+  
+  /* FORM START */
+  #mainForm {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 50vw;
+  }
+  
+  #release-notes
+  {
+align-items: flex-start;
+  }
+
+  #release-notes ol , #release-notes  ul{
+  list-style: disc;
+}
+
+  #Checkboxes {
+    display: flex;
+    flex-direction: column;
+    vertical-align: middle
+  }
+  
+  .left-pane label {
+    margin: 3px 0;
+  }
+  
+  .left-pane label input {
+    margin-left: 9px;
+  }
+  
+  .right-pane {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 2em;
+    align-items: center;
+    /* flex-grow: 1 */
+  }
+  
+  .right-pane textarea {
+    max-width: 50px;
+  }
+  
+  #individualLabel{
+    display: block;
+  }
+
+  /* FORM END */
+  
+  
+  /* FOOTER */
+  footer{
+  
+    text-align: center;
+  }
