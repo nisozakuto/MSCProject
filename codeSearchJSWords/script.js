@@ -37,6 +37,9 @@ forward.addEventListener("change", () => {
     setVariable()
 });
 
+
+
+
 reverse.addEventListener("change", () => {
     checkCanSearch();
     if (reverse.checked && allVariations.checked) {
@@ -398,9 +401,7 @@ function addTheCheckboxes() {
             input.name = textForGroups[i][j]
             label.appendChild(input)
         }
-
     }
-
 }
 
 function init() {
@@ -416,6 +417,18 @@ function init() {
 
         }
     })
+
+    const checkboxes = document.querySelectorAll(' input[type=checkbox]');
+
+    var myFunction = function () {
+        // var attribute = this.getAttribute("data-myattribute");
+
+        console.log(this.id);
+    };
+
+    for (let i = 0; i < checkboxes.length; i++) {
+        checkboxes[i].addEventListener('click', myFunction, false);
+    }
 
 }
 
