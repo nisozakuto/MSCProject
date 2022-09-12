@@ -116,3 +116,11 @@ align-items: flex-start;
   
     text-align: center;
   }
+
+
+
+
+  #listbox
+  {
+    margin: 0 50px 50px 50px;
+  }
